@@ -1,3 +1,7 @@
+# Artem-pizza
+
+This project create site for invent and create your own pizza.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

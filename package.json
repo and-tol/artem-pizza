@@ -1,11 +1,12 @@
 {
   "name": "artem-pizza",
+  "description": "Website project for creating your own pizza",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.5",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "@testing-library/react": "^11.1.1",
+    "@testing-library/user-event": "^12.2.0",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.19.3",
     "@types/react": "^16.9.55",
