@@ -1,7 +1,5 @@
 // Core
 import React, { Component } from 'react';
-// Img
-
 
 type CheckboxFieldProps = {
   value: string;
@@ -25,6 +23,14 @@ export class CheckboxField extends Component<
     };
   }
 
+  handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    const target = event.target;
+
+    this.setState({
+      isChecked: target.checked,
+    });
+  }
+
   render() {
     const { value, name, url, price } = this.props;
     const { isChecked } = this.state;
@@ -38,8 +44,8 @@ export class CheckboxField extends Component<
           <input
             type='checkbox'
             name={name}
-            value={value}
             checked={isChecked}
+            onChange={this.handleInputChange}
           />
         </div>
       </div>
