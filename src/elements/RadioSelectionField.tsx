@@ -5,7 +5,9 @@ type RadioSelectionFieldProps = {
   name: string;
   value: string;
 };
-type RadioSelectionFieldState = {};
+type RadioSelectionFieldState = {
+  isChecked: boolean;
+};
 
 export class RadioSelectionField extends Component<
   RadioSelectionFieldProps,
@@ -13,6 +15,8 @@ export class RadioSelectionField extends Component<
 > {
   constructor(props: RadioSelectionFieldProps) {
     super(props);
+
+    this.state = { isChecked: false };
   }
 
   render() {
@@ -21,7 +25,12 @@ export class RadioSelectionField extends Component<
     return (
       <div>
         <label>
-          <input type='radio' name={name} value={value} />
+          <input
+            type='radio'
+            name={name}
+            value={value}
+            checked={this.state.isChecked}
+          />
           {value}
         </label>
       </div>
