@@ -1,3 +1,4 @@
-import { RadioSelectionField } from './RadioSelectionField'
+import { RadioSelectionField } from './RadioSelectionField';
+import { SelectionField } from './SelectionField';
 
-export { RadioSelectionField}
+export { RadioSelectionField, SelectionField };
