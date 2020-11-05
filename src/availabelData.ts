@@ -5,44 +5,119 @@
 // type PizzaVegetables= { vegetable: string,name:'string' };
 // type PizzaMeat = { meat: string, name: 'string' };
 
-type PizzaParams = {param: string,name:'string'}
+type PizzaParamsRadio = { value: string; name: string };
+type PizzaParamsCheckbox = {
+  value: string;
+  name: string;
+  url: string;
+  price: number;
+};
 
 interface AvailabelData {
-  pizzaSize: PizzaParams[];
-  pizzaDough: PizzaParams[];
-  pizzaSauce: PizzaParams[];
-  pizzaCheese: PizzaParams[];
-  pizzaVegetables: PizzaParams[];
-  pizzaMeat: PizzaParams[];
+  pizzaSize: PizzaParamsRadio[];
+  pizzaDough: PizzaParamsRadio[];
+  pizzaSauce: PizzaParamsRadio[];
+  pizzaCheese: PizzaParamsCheckbox[];
+  pizzaVegetables: PizzaParamsCheckbox[];
+  pizzaMeat: PizzaParamsCheckbox[];
 }
 
 export const availabelData: AvailabelData = Object.freeze({
          pizzaSize: [
-           { param: '30', name: 'size30' },
-           { param: '35', name: 'size35' },
+           { value: '30', name: 'size30' },
+           { value: '35', name: 'size35' },
          ],
          pizzaDough: [
-           { param: 'Тонкое', name: 'thinDough' },
-           { param: 'Пышное', name: 'puffyDough' },
+           { value: 'Тонкое', name: 'thinDough' },
+           { value: 'Пышное', name: 'puffyDough' },
          ],
          pizzaSauce: [
-           { param: 'Томатный', name:'tomatoSauce'},
-           { param: 'Белый', name:'whiteSauce'},
-           { param: 'Острый', name:'spicySauce'},
+           { value: 'Томатный', name: 'tomatoSauce' },
+           { value: 'Белый', name: 'whiteSauce' },
+           { value: 'Острый', name: 'spicySauce' },
          ],
          pizzaCheese: [
-           { param: 'Моцарелла', name:'Cheese'},
-           { param: 'Чеддер', name:'Cheese'},
-           { param: 'Дор Блю', name:'Cheese'},
+           {
+             value: 'Моцарелла',
+             name: 'Cheese',
+             url: '/img/mozarella.png',
+             price: 29,
+           },
+           {
+             value: 'Чеддер',
+             name: 'Cheese',
+             url: '/img/cheddar.png',
+             price: 29,
+           },
+           {
+             value: 'Дор Блю',
+             name: 'Cheese',
+             url: '/img/dor-blue.png',
+             price: 29,
+           },
          ],
          pizzaVegetables: [
-           { param: 'помидор', name:'tomatoVegetable'},
-           { param: 'грибы', name:'mushroomVegetable'},
-           { param: 'перец', name:'peperVegetable'},
+           {
+             value: 'Помидор',
+             name: 'tomatoVegetable',
+             url: '/img/tomato.png',
+             price: 29,
+           },
+           {
+             value: 'Грибы',
+             name: 'mushroomsVegetable',
+             url: '/img/mushrooms.png',
+             price: 29,
+           },
+           {
+             value: 'Перец',
+             name: 'pepperVegetable',
+             url: '/img/pepper.png',
+             price: 29,
+           },
+           {
+             value: 'Ананасы',
+             name: 'pineappleVegetable',
+             url: '/img/pineapple.png',
+             price: 29,
+           },
+           {
+             value: 'Оливки',
+             name: 'olivesVegetable',
+             url: '/img/olives.png',
+             price: 29,
+           },
+           {
+             value: 'Лук',
+             name: 'onionVegetable',
+             url: '/img/onion.png',
+             price: 29,
+           },
+           {
+             value: 'Брокколи',
+             name: 'broccoliVegetable',
+             url: '/img/broccoli.png',
+             price: 29,
+           },
          ],
          pizzaMeat: [
-           { param: 'бекон', name:'baconMeat'},
-           { param: 'пепперони', name:'pepperoniMeat'},
-           { param: 'бекон', name:'hamMeat'},
+           {
+             value: 'Бекон',
+             name: 'baconMeat',
+             url: '/img/bacon.png',
+             price: 29,
+           },
+           {
+             value: 'Пепперони',
+             name: 'pepperoniMeat',
+             url: '/img/pepperoni.png',
+             price: 29,
+           },
+           {
+             value: 'Ветчина',
+             name: 'hamMeat',
+             url: '/img/ham.png',
+             price: 29,
+           },
          ],
        });

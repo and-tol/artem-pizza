@@ -1,9 +1,13 @@
 // Core
 import React, { Component } from 'react';
+// Img
+
 
 type CheckboxFieldProps = {
-  name: string;
   value: string;
+  name: string;
+  url: string;
+  price: number;
 };
 type CheckboxFieldState = {
   isChecked: boolean;
@@ -16,23 +20,29 @@ export class CheckboxField extends Component<
   constructor(props: CheckboxFieldProps) {
     super(props);
 
-    state: {
-      isChecked: false;
-    }
+    this.state = {
+      isChecked: false,
+    };
   }
 
   render() {
-    const { name, value } = this.props;
+    const { value, name, url, price } = this.props;
+    const { isChecked } = this.state;
 
     return (
-      <label>
-        <input
-          type='checkbox'
-          name={name}
-          value={value}
-          checked={this.state.isChecked}
-        />
-      </label>
+      <div>
+        <img src={process.env.PUBLIC_URL + url} alt={value} width='64' />
+        <p>{value}</p>
+        <div>
+          <p>{price} ₽</p>
+          <input
+            type='checkbox'
+            name={name}
+            value={value}
+            checked={isChecked}
+          />
+        </div>
+      </div>
     );
   }
 }

@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 // InterfaceData
 import { availabelData } from './availabelData';
 // Components
-import { RadioSelectionField } from './elements';
-import { SelectionField } from './elements';
+import { RadioSelectionField, SelectionField, CheckboxField } from './elements';
 
 type ConfiguratorState = {};
 type ConfiguratorProps = {};
@@ -18,13 +17,20 @@ export class Configurator extends Component<
   }
 
   render() {
-    const { pizzaSize, pizzaDough, pizzaSauce } = availabelData;
+    const {
+      pizzaSize,
+      pizzaDough,
+      pizzaSauce,
+      pizzaCheese,
+      pizzaVegetables,
+      pizzaMeat,
+    } = availabelData;
 
     const pizzaSizeJSX = (
       <>
         <p>Размер</p>
-        {pizzaSize.map(({ size, name }) => {
-          return <RadioSelectionField key={name} name={name} value={size} />;
+        {pizzaSize.map(({ value, name }) => {
+          return <RadioSelectionField key={name} name={name} value={value} />;
         })}
       </>
     );
@@ -32,8 +38,8 @@ export class Configurator extends Component<
     const pizzaDoughJSX = (
       <>
         <p>Тесто</p>
-        {pizzaDough.map(({ dough, name }) => {
-          return <RadioSelectionField key={name} name={name} value={dough} />;
+        {pizzaDough.map(({ value, name }) => {
+          return <RadioSelectionField key={name} name={name} value={value} />;
         })}
       </>
     );
@@ -41,8 +47,58 @@ export class Configurator extends Component<
     const pizzaSauceJSX = (
       <>
         <p>Выберите соус</p>
-        {pizzaSauce.map(({ sauce }) => {
-          return <SelectionField key={sauce} value={sauce} />;
+        {pizzaSauce.map(({ value, name }) => {
+          return <SelectionField key={name} value={value} />;
+        })}
+      </>
+    );
+
+    const pizzaCheeseJSX = (
+      <>
+        <p>Добавьте сыр</p>
+        {pizzaCheese.map(({ value, name, url, price }) => {
+          return (
+            <CheckboxField
+              key={name}
+              value={value}
+              name={name}
+              url={url}
+              price={price}
+            />
+          );
+        })}
+      </>
+    );
+
+    const pizzaVegetablesJSX = (
+      <>
+        <p>Добавьте овощи</p>
+        {pizzaVegetables.map(({ value, name, url, price }) => {
+          return (
+            <CheckboxField
+              key={name}
+              value={value}
+              name={name}
+              url={url}
+              price={price}
+            />
+          );
+        })}
+        </>
+    )
+    const pizzaMeatJSX = (
+      <>
+        <p>Добавьте овощи</p>
+        {pizzaMeat.map(({ value, name, url, price }) => {
+          return (
+            <CheckboxField
+              key={name}
+              value={value}
+              name={name}
+              url={url}
+              price={price}
+            />
+          );
         })}
       </>
     );
@@ -52,6 +108,9 @@ export class Configurator extends Component<
         <div>{pizzaSizeJSX}</div>
         <div>{pizzaDoughJSX}</div>
         <div>{pizzaSauceJSX}</div>
+        <div>{pizzaCheeseJSX}</div>
+        <div>{pizzaVegetablesJSX}</div>
+        <div>{pizzaMeatJSX}</div>
       </section>
     );
   }
