@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
+// Components
+import {Configurator} from './Configurator'
 
-const App: FC = function () {
+export const App: FC = function () {
   return (
     <div>
-      Hello React!
+      <Configurator />
     </div>
   );
 };
