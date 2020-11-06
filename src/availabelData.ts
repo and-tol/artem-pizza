@@ -39,19 +39,19 @@ export const availabelData: AvailabelData = Object.freeze({
   pizzaCheese: [
     {
       value: 'Моцарелла',
-      name: 'Cheese',
+      name: 'mozarellaCheese',
       url: '/img/products/mozarella.png',
       price: 29,
     },
     {
       value: 'Чеддер',
-      name: 'Cheese',
+      name: 'cheddarCheese',
       url: '/img/products/cheddar.png',
       price: 29,
     },
     {
       value: 'Дор Блю',
-      name: 'Cheese',
+      name: 'dorblueCheese',
       url: '/img/products/dor-blue.png',
       price: 29,
     },
