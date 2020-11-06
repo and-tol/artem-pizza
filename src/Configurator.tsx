@@ -27,14 +27,6 @@ export class Configurator extends Component<
       pizzaMeat,
     } = availabelData;
 
-    // const pizzaSizeJSX = (
-    //   <>
-    //     <p>Размер</p>
-    //     {pizzaSize.map(({ value, name }) => {
-    //       return <RadioSelectionField key={name} name={name} value={value} />;
-    //     })}
-    //   </>
-    // );
 
     const pizzaSizeJSX = (
       <RadioGroup data={pizzaSize} title='Размер' nameGroup='size' />

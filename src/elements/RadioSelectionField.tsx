@@ -15,9 +15,6 @@ export class RadioSelectionField extends Component<
   RadioSelectionFieldProps,
   RadioSelectionFieldState
 > {
-  constructor(props: RadioSelectionFieldProps) {
-    super(props);
-  }
 
   render() {
     const { name, value, checked, onChangeValue } = this.props;

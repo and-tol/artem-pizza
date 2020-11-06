@@ -21,6 +21,7 @@ export class CheckboxField extends Component<
     this.state = {
       isChecked: false,
     };
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {

@@ -51,7 +51,7 @@ export const availabelData: AvailabelData = Object.freeze({
     },
     {
       value: 'Дор Блю',
-      name: 'dorblueCheese',
+      name: 'dornameblueCheese',
       url: '/img/products/dor-blue.png',
       price: 29,
     },
