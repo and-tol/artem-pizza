@@ -1,9 +1,11 @@
+// Core
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 type RadioSelectionFieldProps = {
   name: string;
   value: string;
+  checked: boolean;
+  onChangeValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 type RadioSelectionFieldState = {
   isChecked: boolean;
@@ -15,12 +17,10 @@ export class RadioSelectionField extends Component<
 > {
   constructor(props: RadioSelectionFieldProps) {
     super(props);
-
-    this.state = { isChecked: false };
   }
 
   render() {
-    const { name, value } = this.props;
+    const { name, value, checked, onChangeValue } = this.props;
 
     return (
       <div>
@@ -29,7 +29,8 @@ export class RadioSelectionField extends Component<
             type='radio'
             name={name}
             value={value}
-            checked={this.state.isChecked}
+            checked={checked}
+            onChange={onChangeValue}
           />
           {value}
         </label>

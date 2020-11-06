@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { availabelData } from './availabelData';
 // Components
 import { RadioSelectionField, SelectionField, CheckboxField } from './elements';
+import { RadioGroup } from './components';
 
 type ConfiguratorState = {};
 type ConfiguratorProps = {};
@@ -26,23 +27,30 @@ export class Configurator extends Component<
       pizzaMeat,
     } = availabelData;
 
-    const pizzaSizeJSX = (
-      <>
-        <p>Размер</p>
-        {pizzaSize.map(({ value, name }) => {
-          return <RadioSelectionField key={name} name={name} value={value} />;
-        })}
-      </>
-    );
+    // const pizzaSizeJSX = (
+    //   <>
+    //     <p>Размер</p>
+    //     {pizzaSize.map(({ value, name }) => {
+    //       return <RadioSelectionField key={name} name={name} value={value} />;
+    //     })}
+    //   </>
+    // );
 
     const pizzaDoughJSX = (
-      <>
-        <p>Тесто</p>
-        {pizzaDough.map(({ value, name }) => {
-          return <RadioSelectionField key={name} name={name} value={value} />;
-        })}
-      </>
+      <RadioGroup
+        data={pizzaDough}
+        title='Тесто'
+        nameGroup='dough' />
     );
+
+    // const pizzaDoughJSX2 = (
+    //   <>
+    //     <p>Тесто</p>
+    //     {pizzaDough.map(({ value, name }) => {
+    //       return <RadioSelectionField key={name} name={name} value={value} />;
+    //     })}
+    //   </>
+    // );
 
     const pizzaSauceJSX = (
       <>
@@ -84,8 +92,8 @@ export class Configurator extends Component<
             />
           );
         })}
-        </>
-    )
+      </>
+    );
     const pizzaMeatJSX = (
       <>
         <p>Добавьте овощи</p>
@@ -105,7 +113,7 @@ export class Configurator extends Component<
 
     return (
       <section>
-        <div>{pizzaSizeJSX}</div>
+        {/* <div>{pizzaSizeJSX}</div> */}
         <div>{pizzaDoughJSX}</div>
         <div>{pizzaSauceJSX}</div>
         <div>{pizzaCheeseJSX}</div>
