@@ -36,29 +36,15 @@ export class Configurator extends Component<
     //   </>
     // );
 
+    const pizzaSizeJSX = (
+      <RadioGroup data={pizzaSize} title='Размер' nameGroup='size' />
+    );
     const pizzaDoughJSX = (
-      <RadioGroup
-        data={pizzaDough}
-        title='Тесто'
-        nameGroup='dough' />
+      <RadioGroup data={pizzaDough} title='Тесто' nameGroup='dough' />
     );
 
-    // const pizzaDoughJSX2 = (
-    //   <>
-    //     <p>Тесто</p>
-    //     {pizzaDough.map(({ value, name }) => {
-    //       return <RadioSelectionField key={name} name={name} value={value} />;
-    //     })}
-    //   </>
-    // );
-
     const pizzaSauceJSX = (
-      <>
-        <p>Выберите соус</p>
-        {pizzaSauce.map(({ value, name }) => {
-          return <SelectionField key={name} value={value} />;
-        })}
-      </>
+      <RadioGroup data={pizzaSauce} title='Выберите соус' nameGroup='sauce' />
     );
 
     const pizzaCheeseJSX = (
@@ -113,9 +99,9 @@ export class Configurator extends Component<
 
     return (
       <section>
-        {/* <div>{pizzaSizeJSX}</div> */}
-        <div>{pizzaDoughJSX}</div>
-        <div>{pizzaSauceJSX}</div>
+        {pizzaSizeJSX}
+        {pizzaDoughJSX}
+        {pizzaSauceJSX}
         <div>{pizzaCheeseJSX}</div>
         <div>{pizzaVegetablesJSX}</div>
         <div>{pizzaMeatJSX}</div>
