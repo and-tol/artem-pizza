@@ -17,6 +17,11 @@ export class Configurator extends Component<
     super(props);
   }
 
+  getSelectedIngredient(event: React.SyntheticEvent): void {
+    const target = event.target;
+    console.log('target', target);
+  }
+
   render() {
     const {
       pizzaSize,
@@ -26,7 +31,6 @@ export class Configurator extends Component<
       pizzaVegetables,
       pizzaMeat,
     } = availabelData;
-
 
     const pizzaSizeJSX = (
       <RadioGroup data={pizzaSize} title='Размер' nameGroup='size' />
@@ -49,6 +53,7 @@ export class Configurator extends Component<
             name={name}
             url={url}
             price={price}
+            getSelectedIngredient={this.getSelectedIngredient}
           />
         ))}
       </>

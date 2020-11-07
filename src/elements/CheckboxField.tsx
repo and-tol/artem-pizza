@@ -6,6 +6,7 @@ type CheckboxFieldProps = {
   name: string;
   url: string;
   price: number;
+  getSelectedIngredient?: (event: React.SyntheticEvent)=>void
 };
 type CheckboxFieldState = {
   isChecked: boolean;
