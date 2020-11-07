@@ -4,7 +4,7 @@ import {Configurator} from './Configurator'
 
 export const App: FC = function () {
   return (
-    <div>
+    <div style={{ display: 'flex', justifyContent:'center' }}>
       <Configurator />
     </div>
   );

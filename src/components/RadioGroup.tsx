@@ -35,20 +35,32 @@ export class RadioGroup extends Component<RadioGroupProps, RadioGroupState> {
     const { data, title, nameGroup } = this.props;
 
     return (
-      <div>
-        <p>{title}</p>
+      <fieldset style={{width: '300px', maxWidth: '300px'}}>
+        <legend>{title}</legend>
         {data.map(({ value, name }, i) => {
           return (
-            <RadioSelectionField
-              key={name}
-              name={nameGroup}
-              value={value}
-              checked={this.state.value === value}
-              onChangeValue={this.onChangeValue}
-            />
+            <div key={name} style={{ display: 'inline-block' }}>
+              <label style={{margin: '10px'}} >
+                <input
+                  type='radio'
+                  name={nameGroup}
+                  value={value}
+                  checked={this.state.value === value}
+                  onChange={this.onChangeValue}
+                />
+                {/* <RadioSelectionField
+                  key={name}
+                  name={nameGroup}
+                  value={value}
+                  checked={this.state.value === value}
+                  onChangeValue={this.onChangeValue}
+                /> */}
+                {value}
+              </label>
+            </div>
           );
         })}
-      </div>
+      </fieldset>
     );
   }
 }
