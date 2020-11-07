@@ -1,9 +1,8 @@
 // Core
 import React, { Component } from 'react';
 // Types
-import { PizzaParamsRadio } from '../availabelData';
-// Components
-import { RadioSelectionField } from '../elements/index';
+import { PizzaParamsRadio } from '../../../availabelData';
+
 
 type RadioGroupProps = {
   data: Array<PizzaParamsRadio>;
@@ -48,13 +47,6 @@ export class RadioGroup extends Component<RadioGroupProps, RadioGroupState> {
                   checked={this.state.value === value}
                   onChange={this.onChangeValue}
                 />
-                {/* <RadioSelectionField
-                  key={name}
-                  name={nameGroup}
-                  value={value}
-                  checked={this.state.value === value}
-                  onChangeValue={this.onChangeValue}
-                /> */}
                 {value}
               </label>
             </div>

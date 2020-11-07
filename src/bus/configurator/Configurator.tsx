@@ -1,9 +1,9 @@
 // Core
 import React, { Component } from 'react';
 // InterfaceData
-import { availabelData } from './availabelData';
+import { availabelData } from '../../availabelData';
 // Components
-import { CheckboxField } from './elements';
+import { CheckboxField } from './components';
 import { RadioGroup } from './components';
 
 type ConfiguratorState = {};

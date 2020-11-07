@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 // Components
-import {Configurator} from './Configurator'
+import { Configurator } from './bus/configurator';
 
-export const App: FC = function () {
+export const App: FC = function() {
   return (
-    <div style={{ display: 'flex', justifyContent:'center' }}>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Configurator />
     </div>
   );
