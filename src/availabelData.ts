@@ -66,7 +66,7 @@ export const availabelData: AvailabelData = Object.freeze({
     {
       value: 'Грибы',
       name: 'mushroomsVegetable',
-      url: '/img/products/mushrooms.png',
+      url: '/img/products/mashrooms.png',
       price: 29,
     },
     {

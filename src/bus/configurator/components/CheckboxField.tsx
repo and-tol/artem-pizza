@@ -1,56 +1,40 @@
 // Core
-import React, { Component } from 'react';
+import React, { FC, useState } from 'react';
 
 type CheckboxFieldProps = {
   value: string;
   name: string;
   url: string;
   price: number;
-  getSelectedIngredient?: (event: React.SyntheticEvent)=>void
-};
-type CheckboxFieldState = {
-  isChecked: boolean;
+  getSelectedIngredient?: (event: React.SyntheticEvent) => void;
 };
 
-export class CheckboxField extends Component<
-  CheckboxFieldProps,
-  CheckboxFieldState
-> {
-  constructor(props: CheckboxFieldProps) {
-    super(props);
+export const CheckboxField: FC<CheckboxFieldProps> = props => {
+  const [isChecked, setIsChecked] = useState(false);
 
-    this.state = {
-      isChecked: false,
-    };
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     const target = event.target;
 
-    this.setState({
-      isChecked: target.checked,
-    });
-  }
+    setIsChecked(target.checked);
+  };
 
-  render() {
-    const { value, name, url, price } = this.props;
-    const { isChecked } = this.state;
+  const { value, name, url, price } = props;
 
-    return (
+  return (
+    <div>
+      <img src={process.env.PUBLIC_URL + url} alt={value} width='64' />
+      <p>{value}</p>
       <div>
-        <img src={process.env.PUBLIC_URL + url} alt={value} width='64' />
-        <p>{value}</p>
-        <div>
-          <p>{price} ₽</p>
-          <input
-            type='checkbox'
-            name={name}
-            checked={isChecked}
-            onChange={this.handleInputChange}
-          />
-        </div>
+        <p>{price} ₽</p>
+        <input
+          type='checkbox'
+          name={name}
+          checked={isChecked}
+          onChange={handleInputChange}
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
