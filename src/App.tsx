@@ -9,5 +9,3 @@ export const App: FC = function() {
     </div>
   );
 };
-
-export default App;

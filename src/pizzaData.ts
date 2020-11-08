@@ -1,28 +1,21 @@
-// type PizzaSize = { size: string; name: string };
-// type PizzaDough = { dough: string; name: string };
-// type PizzaSauce = { sauce: string,name:'string' };
-// type PizzaCheese = { cheese: string,name:'string' };
-// type PizzaVegetables= { vegetable: string,name:'string' };
-// type PizzaMeat = { meat: string, name: 'string' };
-
-export type PizzaParamsRadio = { value: string; name: string };
-export type PizzaParamsCheckbox = {
+export type PizzaOptions = { value: string; name: string; price?: number };
+export type PizzaIngredients = {
   value: string;
   name: string;
   url: string;
   price: number;
 };
 
-interface AvailabelData {
-  pizzaSize: PizzaParamsRadio[];
-  pizzaDough: PizzaParamsRadio[];
-  pizzaSauce: PizzaParamsRadio[];
-  pizzaCheese: PizzaParamsCheckbox[];
-  pizzaVegetables: PizzaParamsCheckbox[];
-  pizzaMeat: PizzaParamsCheckbox[];
+interface PizzaData {
+  pizzaSize: PizzaOptions[];
+  pizzaDough: PizzaOptions[];
+  pizzaSauce: PizzaOptions[];
+  pizzaCheese: PizzaIngredients[];
+  pizzaVegetables: PizzaIngredients[];
+  pizzaMeat: PizzaIngredients[];
 }
 
-export const availabelData: AvailabelData = Object.freeze({
+export const pizzaData: PizzaData = Object.freeze({
   pizzaSize: [
     { value: '30', name: 'size30', price: 200 },
     { value: '35', name: 'size35', price: 250 },

@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
+import React, { FC } from 'react';
 
 type ButtonProps = {
-   children?: React.ReactNode
-}
-type ButtonState = {
-  title: string;
-  price?: number;
-}
+  children?: React.ReactNode;
 
-export class Button extends Component<ButtonProps, ButtonState> {}
+};
+
+
+export const Button = (props: React.PropsWithChildren<ButtonProps>) => {
+  const { children } = props;
+
+  return (
+    <>
+      <button onClick={console.log}>{children}</button>
+    </>
+  );
+};
