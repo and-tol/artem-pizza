@@ -22,17 +22,6 @@ export const Configurator: FC = () => {
   //   console.log('target', target);
   // };
 
-  const pizzaSizeJSX = (
-    <PizzaOption data={pizzaSize} title='Размер' nameGroup='size' />
-  );
-  const pizzaDoughJSX = (
-    <PizzaOption data={pizzaDough} title='Тесто' nameGroup='dough' />
-  );
-
-  const pizzaSauceJSX = (
-    <PizzaOption data={pizzaSauce} title='Выберите соус' nameGroup='sauce' />
-  );
-
 
   return (
     <section>
