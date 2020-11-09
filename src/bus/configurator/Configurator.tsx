@@ -1,9 +1,9 @@
 // Core
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 // PizzaData
 import { pizzaData } from '../../pizzaData';
 // Components
-import { CheckboxField, PizzaOption, PizzaIngredient } from './components';
+import { PizzaOption, PizzaIngredient } from './components';
 
 
 
@@ -22,12 +22,28 @@ export const Configurator: FC = () => {
   //   console.log('target', target);
   // };
 
+  // Options
+
+  const [selectedValueSize, setValueSize] = useState(pizzaSize[0].value);
+
+  const onChangeValueSize = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setValueSize(value);
+  };
+
+  console.log('selectedValueSize>>>>', selectedValueSize)
 
   return (
     <section>
-      <PizzaOption legend='Размер' data={pizzaSize} nameGroup='size' />
-      <PizzaOption legend='Тесто' data={pizzaDough} nameGroup='dough' />
-      <PizzaOption legend='Выберите соус' data={pizzaSauce} nameGroup='sauce' />
+      <PizzaOption
+        legend='Размер'
+        data={pizzaSize}
+        selectedValue={selectedValueSize}
+        nameGroup='size'
+        onChangeValue={onChangeValueSize}
+      />
+      {/* <PizzaOption legend='Тесто' data={pizzaDough} nameGroup='dough' /> */}
+      {/* <PizzaOption legend='Выберите соус' data={pizzaSauce} nameGroup='sauce' /> */}
       <PizzaIngredient legend='Добавьте сыр' pizzaData={pizzaCheese} />
       <PizzaIngredient legend='Добавьте овощи' pizzaData={pizzaVegetables} />
       <PizzaIngredient legend='Добавьте мясо' pizzaData={pizzaMeat} />

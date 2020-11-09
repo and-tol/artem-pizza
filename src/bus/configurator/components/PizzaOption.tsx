@@ -7,19 +7,22 @@ type PizzaOptionProps = {
   data: Array<PizzaOptions>;
   legend: string;
   nameGroup: string;
+  selectedValue: string;
+  onChangeValue(event: React.ChangeEvent<HTMLInputElement>): void
 };
 
 /**
  * Component render options of the pizza with radio buttons
  */
 export const PizzaOption: FC<PizzaOptionProps> = props => {
-  const { data, legend, nameGroup } = props;
-  const [selectedValue, setValue] = useState(data[0].value);
+  const { data, legend, nameGroup, onChangeValue, selectedValue } = props;
 
-  const onChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setValue(value);
-  };
+  // const [selectedValue, setValue] = useState(data[0].value);
+
+  // const onChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const value = event.target.value;
+  //   setValue(value);
+  // };
 
   return (
     <fieldset style={{ width: '300px', maxWidth: '300px' }}>
