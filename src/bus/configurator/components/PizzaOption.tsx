@@ -5,7 +5,7 @@ import { PizzaOptions } from '../../../pizzaData';
 
 type PizzaOptionProps = {
   data: Array<PizzaOptions>;
-  title: string;
+  legend: string;
   nameGroup: string;
 };
 
@@ -13,7 +13,7 @@ type PizzaOptionProps = {
  * Component render options of the pizza with radio buttons
  */
 export const PizzaOption: FC<PizzaOptionProps> = props => {
-  const { data, title, nameGroup } = props;
+  const { data, legend, nameGroup } = props;
   const [selectedValue, setValue] = useState(data[0].value);
 
   const onChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +23,7 @@ export const PizzaOption: FC<PizzaOptionProps> = props => {
 
   return (
     <fieldset style={{ width: '300px', maxWidth: '300px' }}>
-      <legend>{title}</legend>
+      <legend>{legend}</legend>
       {data.map(({ value, name }) => {
         return (
           <div key={name} style={{ display: 'inline-block' }}>

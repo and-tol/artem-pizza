@@ -25,9 +25,9 @@ export const Configurator: FC = () => {
 
   return (
     <section>
-      <PizzaOption data={pizzaSize} title='Размер' nameGroup='size' />
-      <PizzaOption data={pizzaDough} title='Тесто' nameGroup='dough' />
-      <PizzaOption data={pizzaSauce} title='Выберите соус' nameGroup='sauce' />
+      <PizzaOption legend='Размер' data={pizzaSize} nameGroup='size' />
+      <PizzaOption legend='Тесто' data={pizzaDough} nameGroup='dough' />
+      <PizzaOption legend='Выберите соус' data={pizzaSauce} nameGroup='sauce' />
       <PizzaIngredient legend='Добавьте сыр' pizzaData={pizzaCheese} />
       <PizzaIngredient legend='Добавьте овощи' pizzaData={pizzaVegetables} />
       <PizzaIngredient legend='Добавьте мясо' pizzaData={pizzaMeat} />
