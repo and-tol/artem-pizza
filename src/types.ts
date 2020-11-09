@@ -1,3 +1,4 @@
+export type PizzaSize = { value: string; name: string; price: number };
 export type PizzaOptions = { value: string; name: string; price?: number };
 export type PizzaIngredients = {
   value: string;
@@ -7,10 +8,21 @@ export type PizzaIngredients = {
 };
 
 export interface PizzaData {
-  pizzaSize: PizzaOptions[];
+  pizzaSize: PizzaSize[];
   pizzaDough: PizzaOptions[];
   pizzaSauce: PizzaOptions[];
   pizzaCheese: PizzaIngredients[];
   pizzaVegetables: PizzaIngredients[];
   pizzaMeat: PizzaIngredients[];
+}
+
+export interface PizzaOrder {
+  pizzaName: string;
+  size: string;
+  dough: string;
+  sauce: string;
+  cheese: string[];
+  vegetables: string[];
+  meat: string[];
+  // price: number;
 }

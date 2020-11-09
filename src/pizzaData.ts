@@ -1,5 +1,5 @@
 // Types
-import { PizzaOptions, PizzaIngredients, PizzaData } from './types';
+import { PizzaData, PizzaOrder } from './types';
 
 export const pizzaData: PizzaData = Object.freeze({
   pizzaSize: [
@@ -100,3 +100,15 @@ export const pizzaData: PizzaData = Object.freeze({
     },
   ],
 });
+
+export const START_PRICE = pizzaData.pizzaSize[0].price;
+
+export const pizzaOrder: PizzaOrder = {
+  pizzaName: 'Ленивая Маргарита',
+  size: '30',
+  dough: 'Тонкое',
+  sauce: 'Томатный',
+  cheese: [],
+  vegetables: [],
+  meat: [],
+};

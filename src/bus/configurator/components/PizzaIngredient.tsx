@@ -6,11 +6,11 @@ import {CheckboxField} from './CheckboxField'
 import { PizzaIngredients } from '../../../types';
 type PizzaIngredientProps = {
   legend: string;
-  pizzaData: PizzaIngredients[];
+  data: PizzaIngredients[];
 };
 
 export const PizzaIngredient: FC<PizzaIngredientProps> = props => {
-  const { legend, pizzaData } = props;
+  const { legend, data } = props;
 
   const ingredientTempStyles = {
     checks: {
@@ -29,7 +29,7 @@ export const PizzaIngredient: FC<PizzaIngredientProps> = props => {
       <fieldset style={ingredientTempStyles.block}>
         <legend>{legend}</legend>
         <div style={ingredientTempStyles.checks}>
-          {pizzaData.map(({ value, name, url, price }) => (
+          {data.map(({ value, name, url, price }) => (
             <CheckboxField
               key={name}
               value={value}
