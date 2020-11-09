@@ -62,6 +62,20 @@ export const Configurator: FC = () => {
     }));
   };
 
+  // Pizza Sauce
+  const [selectedValueSauce, setValueSauce] = useState(pizzaSauce[0].value);
+
+  const onChangeValueSauce = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setValueSauce(value);
+
+    const selected = pizzaSauce.filter(el => el.value === value)[0];
+    setOrder(prevPizzaOrder => ({
+      ...prevPizzaOrder,
+      sauce: selected.value,
+    }));
+  };
+
   console.log('order>>>>', order);
 
   return (
@@ -80,7 +94,13 @@ export const Configurator: FC = () => {
         nameGroup='dough'
         onChangeValue={onChangeValueDough}
       />
-      {/* <PizzaOption legend='Выберите соус' data={pizzaSauce} nameGroup='sauce' /> */}
+      <PizzaOption
+        legend='Выберите соус'
+        data={pizzaSauce}
+        selectedValue={selectedValueSauce}
+        nameGroup='sauce'
+        onChangeValue={onChangeValueSauce}
+      />
       <PizzaIngredient legend='Добавьте сыр' data={pizzaCheese} />
       <PizzaIngredient legend='Добавьте овощи' data={pizzaVegetables} />
       <PizzaIngredient legend='Добавьте мясо' data={pizzaMeat} />
