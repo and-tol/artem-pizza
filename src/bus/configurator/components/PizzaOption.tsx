@@ -1,7 +1,7 @@
 // Core
 import React, { FC, useState } from 'react';
 // Types
-import { PizzaOptions } from '../../../pizzaData';
+import { PizzaOptions } from '../../../types';
 
 type PizzaOptionProps = {
   data: Array<PizzaOptions>;

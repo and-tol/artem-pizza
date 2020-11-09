@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 // Components
 import {CheckboxField} from './CheckboxField'
 // Types
-import { PizzaIngredients } from '../../../pizzaData';
+import { PizzaIngredients } from '../../../types';
 type PizzaIngredientProps = {
   legend: string;
   pizzaData: PizzaIngredients[];

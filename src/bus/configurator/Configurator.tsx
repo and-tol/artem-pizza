@@ -31,8 +31,6 @@ export const Configurator: FC = () => {
     setValueSize(value);
   };
 
-  console.log('selectedValueSize>>>>', selectedValueSize)
-
   return (
     <section>
       <PizzaOption
