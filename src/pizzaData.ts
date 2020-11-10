@@ -30,7 +30,7 @@ export const pizzaData: PizzaData = Object.freeze({
     },
     {
       value: 'Дор Блю',
-      name: 'dornameblueCheese',
+      name: 'dorblueCheese',
       url: '/img/products/dor-blue.png',
       price: 29,
     },
@@ -109,6 +109,10 @@ export const pizzaOrder: PizzaOrder = {
   dough: 'Тонкое',
   sauce: 'Томатный',
   cheese: [],
+  // cheese: [
+  //   { 'Моцарелла': false },
+  //   { 'Чеддер': false },
+  //   { 'Дор Блю': false }],
   vegetables: [],
   meat: [],
 };

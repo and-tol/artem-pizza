@@ -1,17 +1,39 @@
 // Core
 import React, { FC, useState } from 'react';
-// Types
-import { PizzaOrder, PizzaData } from '../../types';
 // PizzaData
 import { pizzaData, pizzaOrder, START_PRICE } from '../../pizzaData';
+// Types
+import { PizzaData, PizzaOrder } from '../../types';
 // Components
-import { PizzaOption, PizzaIngredient } from './components';
+import { CheckboxField, PizzaOption } from './components';
+// Styles
+const ingredientTempStyles = {
+  checks: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '6px',
+  },
+  block: {
+    width: '300px',
+    maxWidth: '300px',
+  },
+};
 
 const getPizzaPrice = (order: PizzaOrder, pizzaData: PizzaData) => {
   let price = 0;
   price += pizzaData.pizzaSize.filter(el => el.value === order.size)[0].price;
 
   return price;
+};
+
+// Item deleting
+const deleteItem = (data: string[], value: string) => {
+
+  const idx: number = data.findIndex(el => el === value);
+
+  const newData = [...data.slice(0, idx), ...data.slice(idx + 1)];
+
+  return newData;
 };
 
 export const Configurator: FC = () => {
@@ -76,6 +98,30 @@ export const Configurator: FC = () => {
     }));
   };
 
+  // Pizza Cheese
+
+  const selectCheese = (name: string, isChecked: boolean): void => {
+    const selected = [pizzaCheese.filter(el => el.name === name)[0].value];
+    // const selected = pizzaCheese.filter(el => el.name === name)[0].value;
+
+    if (isChecked) {
+      setOrder(prevPizzaOrder => ({
+        ...prevPizzaOrder,
+        cheese: [...prevPizzaOrder.cheese, ...selected],
+      }));
+    } else {
+      // setOrder(prevPizzaOrder => ({
+      //   ...prevPizzaOrder,
+      //   cheese: [...deleteItem(prevPizzaOrder.cheese, selected2)],
+      // }));
+
+      setOrder(prevPizzaOrder => ({
+        ...prevPizzaOrder,
+        cheese: [...prevPizzaOrder.cheese.filter(el => !selected.includes(el))],
+      }));
+    }
+  };
+
   console.log('order>>>>', order);
 
   return (
@@ -101,9 +147,30 @@ export const Configurator: FC = () => {
         nameGroup='sauce'
         onChangeValue={onChangeValueSauce}
       />
-      <PizzaIngredient legend='Добавьте сыр' data={pizzaCheese} />
-      <PizzaIngredient legend='Добавьте овощи' data={pizzaVegetables} />
-      <PizzaIngredient legend='Добавьте мясо' data={pizzaMeat} />
+      {/* <PizzaIngredient
+        legend='Добавьте сыр'
+        data={pizzaCheese}
+        selectCheese={selectCheese}
+      /> */}
+      <fieldset style={ingredientTempStyles.block}>
+        <legend>'Добавьте сыр'</legend>
+        <div style={ingredientTempStyles.checks}>
+          {pizzaCheese.map(({ value, name, url, price }) => (
+            <>
+              <CheckboxField
+                key={name}
+                value={value}
+                price={price}
+                name={name}
+                url={url}
+                selectCheese={selectCheese}
+              />
+            </>
+          ))}
+        </div>
+      </fieldset>
+      {/* <PizzaIngredient legend='Добавьте овощи' data={pizzaVegetables} />
+      <PizzaIngredient legend='Добавьте мясо' data={pizzaMeat} /> */}
 
       <button>Заказать за {pizzaPrice} рублей</button>
     </section>

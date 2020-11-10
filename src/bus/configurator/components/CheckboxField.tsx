@@ -1,5 +1,5 @@
 // Core
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
 type CheckboxFieldProps = {
   value: string;
@@ -7,9 +7,12 @@ type CheckboxFieldProps = {
   url: string;
   price: number;
   getSelectedIngredient?: (event: React.SyntheticEvent) => void;
+  selectCheese(name: string, isChecked: boolean): void
 };
 
 export const CheckboxField: FC<CheckboxFieldProps> = props => {
+  const { value, name, url, price, selectCheese } = props;
+
   const [isChecked, setIsChecked] = useState(false);
 
   const handleInputChange = (
@@ -18,13 +21,16 @@ export const CheckboxField: FC<CheckboxFieldProps> = props => {
     const target = event.target;
 
     setIsChecked(target.checked);
+    selectCheese(target.name, isChecked);
   };
 
-  const { value, name, url, price } = props;
+  useEffect(() => {
+    selectCheese(name, isChecked);
+  }, [isChecked]);
 
   return (
     <div>
-      <img src={process.env.PUBLIC_URL + url} alt={value} width='64' />
+      {/* <img src={process.env.PUBLIC_URL + url} alt={value} width='64' /> */}
       <p>{value}</p>
       <div>
         <p>{price} ₽</p>
@@ -32,7 +38,10 @@ export const CheckboxField: FC<CheckboxFieldProps> = props => {
           type='checkbox'
           name={name}
           checked={isChecked}
-          onChange={handleInputChange}
+          onChange={(e) => {
+            handleInputChange(e);
+            // selectCheese(name, isChecked);
+          }}
         />
       </div>
     </div>

@@ -1,27 +1,35 @@
 // Core
-import React, { FC } from 'react';
-// Components
-import {CheckboxField} from './CheckboxField'
+import React, { FC, useState } from 'react';
 // Types
 import { PizzaIngredients } from '../../../types';
 type PizzaIngredientProps = {
   legend: string;
   data: PizzaIngredients[];
+  selectCheese(event: React.ChangeEvent<HTMLInputElement>): void
+};
+const ingredientTempStyles = {
+  checks: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '6px',
+  },
+  block: {
+    width: '300px',
+    maxWidth: '300px',
+  },
 };
 
 export const PizzaIngredient: FC<PizzaIngredientProps> = props => {
-  const { legend, data } = props;
+  const { legend, data, selectCheese } = props;
 
-  const ingredientTempStyles = {
-    checks: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      padding: '6px',
-    },
-    block: {
-      width: '300px',
-      maxWidth: '300px',
-    },
+  const [selectName, setSelectName] = useState('');
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    const target = event.target;
+
+    setSelectName(target.name);
   };
 
   return (
@@ -30,13 +38,23 @@ export const PizzaIngredient: FC<PizzaIngredientProps> = props => {
         <legend>{legend}</legend>
         <div style={ingredientTempStyles.checks}>
           {data.map(({ value, name, url, price }) => (
-            <CheckboxField
-              key={name}
-              value={value}
-              name={name}
-              url={url}
-              price={price}
-            />
+            <div key={name}>
+              {/* <img src={process.env.PUBLIC_URL + url} alt={value} width='64' /> */}
+              <p>{value}</p>
+              <div>
+                <p>{price} ₽</p>
+                <input
+                  type='checkbox'
+                  name={name}
+                  checked={selectName===name}
+                  onChange={(e) => {
+                    handleInputChange(e)
+                    selectCheese(e)
+                  }}
+                  // onChange={handleInputChange}
+                />
+              </div>
+            </div>
           ))}
         </div>
       </fieldset>

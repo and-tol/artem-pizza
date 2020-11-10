@@ -16,11 +16,14 @@ export interface PizzaData {
   pizzaMeat: PizzaIngredients[];
 }
 
+// export type PizzaIngredientsOrder = { [value: string]: boolean };
+
 export interface PizzaOrder {
   pizzaName: string;
   size: string;
   dough: string;
   sauce: string;
+  // cheese: PizzaIngredientsOrder[];
   cheese: string[];
   vegetables: string[];
   meat: string[];
