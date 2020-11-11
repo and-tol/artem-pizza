@@ -1,6 +1,6 @@
 # Artem-pizza
 
-This project create site for invent and create your own pizza.
+This project is a website to create and order your own pizza
 
 # Getting Started with Create React App
 

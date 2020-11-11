@@ -1,13 +1,13 @@
-// Core
+
 import React, { FC, useState } from 'react';
-// PizzaData
-import { pizzaData, pizzaOrder, START_PRICE } from '../../pizzaData';
-// Types
+
+import { pizzaData, DEFAULT_PIZZA_ORDER, START_PRICE } from '../../pizzaData';
+
 import { PizzaData, PizzaOrder } from '../../types';
-// Components
+
 import { CheckboxField, PizzaOption } from './components';
-// Styles
-const ingredientTempStyles = {
+
+const ingredientStyles = {
   checks: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -46,7 +46,7 @@ export const Configurator: FC = () => {
     pizzaMeat,
   } = pizzaData;
 
-  const [order, setOrder] = useState(pizzaOrder);
+  const [order, setOrder] = useState(DEFAULT_PIZZA_ORDER);
 
   // const getSelectedIngredient = (event: React.SyntheticEvent) => {
   //   const target = event.target;
@@ -152,9 +152,9 @@ export const Configurator: FC = () => {
         data={pizzaCheese}
         selectCheese={selectCheese}
       /> */}
-      <fieldset style={ingredientTempStyles.block}>
+      <fieldset style={ingredientStyles.block}>
         <legend>'Добавьте сыр'</legend>
-        <div style={ingredientTempStyles.checks}>
+        <div style={ingredientStyles.checks}>
           {pizzaCheese.map(({ value, name, url, price }) => (
             <>
               <CheckboxField

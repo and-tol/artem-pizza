@@ -1,7 +1,7 @@
-// Core
+
 import React, { FC } from 'react';
-// Types
 import { PizzaOptions } from '../../../types';
+
 
 type PizzaOptionProps = {
   data: Array<PizzaOptions>;

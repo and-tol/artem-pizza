@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-// Components
 import { Configurator } from './bus/configurator';
+
 
 export const App: FC = function() {
   return (

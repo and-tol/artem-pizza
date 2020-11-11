@@ -1,5 +1,5 @@
-// Core
-import React, { FC, useState, useEffect } from 'react';
+
+import React, { FC, useEffect, useState } from 'react';
 
 type CheckboxFieldProps = {
   value: string;

@@ -1,13 +1,13 @@
-// Core
+
 import React, { FC, useState } from 'react';
-// Types
 import { PizzaIngredients } from '../../../types';
+
 type PizzaIngredientProps = {
   legend: string;
   data: PizzaIngredients[];
   selectCheese(event: React.ChangeEvent<HTMLInputElement>): void
 };
-const ingredientTempStyles = {
+const ingredientStyles = {
   checks: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -34,9 +34,9 @@ export const PizzaIngredient: FC<PizzaIngredientProps> = props => {
 
   return (
     <>
-      <fieldset style={ingredientTempStyles.block}>
+      <fieldset style={ingredientStyles.block}>
         <legend>{legend}</legend>
-        <div style={ingredientTempStyles.checks}>
+        <div style={ingredientStyles.checks}>
           {data.map(({ value, name, url, price }) => (
             <div key={name}>
               {/* <img src={process.env.PUBLIC_URL + url} alt={value} width='64' /> */}
