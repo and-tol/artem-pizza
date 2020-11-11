@@ -1,11 +1,11 @@
 
 import React, { FC, useState } from 'react';
-
-import { pizzaData, DEFAULT_PIZZA_ORDER, START_PRICE } from '../../pizzaData';
-
+import { DEFAULT_PIZZA_ORDER, pizzaData, START_PRICE } from '../../pizzaData';
 import { PizzaData, PizzaOrder } from '../../types';
-
 import { CheckboxField, PizzaOption } from './components';
+
+
+
 
 const ingredientStyles = {
   checks: {
@@ -155,14 +155,14 @@ export const Configurator: FC = () => {
       <fieldset style={ingredientStyles.block}>
         <legend>'Добавьте сыр'</legend>
         <div style={ingredientStyles.checks}>
-          {pizzaCheese.map(({ value, name, url, price }) => (
+          {pizzaCheese.map(({ value, name, img, price }) => (
             <>
               <CheckboxField
                 key={name}
                 value={value}
                 price={price}
                 name={name}
-                url={url}
+                img={img}
                 selectCheese={selectCheese}
               />
             </>

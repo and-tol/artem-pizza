@@ -37,9 +37,9 @@ export const PizzaIngredient: FC<PizzaIngredientProps> = props => {
       <fieldset style={ingredientStyles.block}>
         <legend>{legend}</legend>
         <div style={ingredientStyles.checks}>
-          {data.map(({ value, name, url, price }) => (
+          {data.map(({ value, name, img, price }) => (
             <div key={name}>
-              {/* <img src={process.env.PUBLIC_URL + url} alt={value} width='64' /> */}
+              {/* <img src={process.env.PUBLIC_URL + img} alt={value} width='64' /> */}
               <p>{value}</p>
               <div>
                 <p>{price} ₽</p>

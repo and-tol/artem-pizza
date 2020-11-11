@@ -3,7 +3,7 @@ export type PizzaOptions = { value: string; name: string; price?: number };
 export type PizzaIngredients = {
   value: string;
   name: string;
-  url: string;
+  img: string;
   price: number;
 };
 
