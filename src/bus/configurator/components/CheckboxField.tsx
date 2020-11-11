@@ -1,4 +1,3 @@
-
 import React, { FC, useEffect, useState } from 'react';
 
 type CheckboxFieldProps = {
@@ -6,26 +5,21 @@ type CheckboxFieldProps = {
   name: string;
   img: string;
   price: number;
-  getSelectedIngredient?: (event: React.SyntheticEvent) => void;
-  selectCheese(name: string, isChecked: boolean): void
+  // selectedIngredient?: (event: React.SyntheticEvent) => void;
+  selectedIngredient: (name: string, isChecked: boolean, price: number) => void;
 };
 
 export const CheckboxField: FC<CheckboxFieldProps> = props => {
-  const { value, name, img, price, selectCheese } = props;
+  const { value, name, img, price,  selectedIngredient } = props;
 
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    const target = event.target;
-
-    setIsChecked(target.checked);
-    selectCheese(target.name, isChecked);
+  const handleInputChange = (): void => {
+    setIsChecked(!isChecked);
   };
 
   useEffect(() => {
-    selectCheese(name, isChecked);
+    selectedIngredient(value, isChecked, price);
   }, [isChecked]);
 
   return (
@@ -37,11 +31,9 @@ export const CheckboxField: FC<CheckboxFieldProps> = props => {
         <input
           type='checkbox'
           name={name}
+          value={value}
           checked={isChecked}
-          onChange={(e) => {
-            handleInputChange(e);
-            // selectCheese(name, isChecked);
-          }}
+          onChange={handleInputChange}
         />
       </div>
     </div>

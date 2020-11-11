@@ -100,7 +100,7 @@ export const pizzaData: PizzaData = Object.freeze({
   ],
 });
 
-export const START_PRICE = pizzaData.pizzaSize[0].price;
+export const START_PRICE: number = pizzaData.pizzaSize[0].price;
 
 export const DEFAULT_PIZZA_ORDER: PizzaOrder = {
   pizzaName: 'Ленивая Маргарита',
@@ -108,15 +108,8 @@ export const DEFAULT_PIZZA_ORDER: PizzaOrder = {
   dough: 'Тонкое',
   sauce: 'Томатный',
   cheese: [],
-  // cheese: [
-  //   { 'Моцарелла': false },
-  //   { 'Чеддер': false },
-  //   { 'Дор Блю': false }],
   vegetables: [],
   meat: [],
+  ingredients: [],
+  price: START_PRICE,
 };
-
-// cheese: [
-//   { 'mozarella': false },
-//   { 'cheddar': false },
-//   { 'dorblue': false }],

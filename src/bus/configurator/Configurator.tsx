@@ -1,11 +1,7 @@
-
 import React, { FC, useState } from 'react';
 import { DEFAULT_PIZZA_ORDER, pizzaData, START_PRICE } from '../../pizzaData';
 import { PizzaData, PizzaOrder } from '../../types';
 import { CheckboxField, PizzaOption } from './components';
-
-
-
 
 const ingredientStyles = {
   checks: {
@@ -19,16 +15,15 @@ const ingredientStyles = {
   },
 };
 
-const getPizzaPrice = (order: PizzaOrder, pizzaData: PizzaData) => {
-  let price = 0;
-  price += pizzaData.pizzaSize.filter(el => el.value === order.size)[0].price;
+// const getPizzaPrice = (order: PizzaOrder, pizzaData: PizzaData) => {
+//   let price = 0;
+//   let price += pizzaData.pizzaSize.filter(el => el.value === order.size)[0].price;
 
-  return price;
-};
+//   return price;
+// };
 
 // Item deleting
 const deleteItem = (data: string[], value: string) => {
-
   const idx: number = data.findIndex(el => el === value);
 
   const newData = [...data.slice(0, idx), ...data.slice(idx + 1)];
@@ -46,79 +41,74 @@ export const Configurator: FC = () => {
     pizzaMeat,
   } = pizzaData;
 
-  const [order, setOrder] = useState(DEFAULT_PIZZA_ORDER);
-
-  // const getSelectedIngredient = (event: React.SyntheticEvent) => {
-  //   const target = event.target;
-  //   console.log('target', target);
-  // };
+  const [order, setOrder] = useState<PizzaOrder>(DEFAULT_PIZZA_ORDER);
 
   // Order
-  const [pizzaPrice, setPizzaPrice] = useState(START_PRICE);
+  const [pizzaPrice, setPizzaPrice] = useState<number>(START_PRICE);
 
   // Pizza Size
-  const [selectedValueSize, setValueSize] = useState(pizzaSize[0].value);
+  const [selectedValueSize, setValueSize] = useState<string>(
+    pizzaSize[0].value
+  );
 
   const onChangeValueSize = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setValueSize(value);
 
     const selected = pizzaSize.filter(el => el.value === value)[0];
-    setOrder(prevPizzaOrder => ({
-      ...prevPizzaOrder,
+    setOrder({
+      ...order,
       size: selected.value,
-    }));
+    });
   };
 
   // Pizza Dough
-  const [selectedValueDough, setValueDough] = useState(pizzaDough[0].value);
+  const [selectedValueDough, setValueDough] = useState<string>(
+    pizzaDough[0].value
+  );
 
   const onChangeValueDough = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setValueDough(value);
 
     const selected = pizzaDough.filter(el => el.value === value)[0];
-    setOrder(prevPizzaOrder => ({
-      ...prevPizzaOrder,
+    setOrder({
+      ...order,
       dough: selected.value,
-    }));
+    });
   };
 
   // Pizza Sauce
-  const [selectedValueSauce, setValueSauce] = useState(pizzaSauce[0].value);
+  const [selectedValueSauce, setValueSauce] = useState<string>(
+    pizzaSauce[0].value
+  );
 
   const onChangeValueSauce = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setValueSauce(value);
 
     const selected = pizzaSauce.filter(el => el.value === value)[0];
-    setOrder(prevPizzaOrder => ({
-      ...prevPizzaOrder,
+    setOrder({
+      ...order,
       sauce: selected.value,
-    }));
+    });
   };
-
-  // Pizza Cheese
-
-  const selectCheese = (name: string, isChecked: boolean): void => {
-    const selected = [pizzaCheese.filter(el => el.name === name)[0].value];
-    // const selected = pizzaCheese.filter(el => el.name === name)[0].value;
-
+  // ======
+  const selectedIngredient = (
+    name: string,
+    isChecked: boolean,
+    price: number
+  ) => {
     if (isChecked) {
-      setOrder(prevPizzaOrder => ({
-        ...prevPizzaOrder,
-        cheese: [...prevPizzaOrder.cheese, ...selected],
-      }));
+      setOrder({
+        ...order,
+        ingredients: [...order.ingredients, name],
+      });
     } else {
-      // setOrder(prevPizzaOrder => ({
-      //   ...prevPizzaOrder,
-      //   cheese: [...deleteItem(prevPizzaOrder.cheese, selected2)],
-      // }));
-
-      setOrder(prevPizzaOrder => ({
-        ...prevPizzaOrder,
-        cheese: [...prevPizzaOrder.cheese.filter(el => !selected.includes(el))],
-      }));
+      setOrder({
+        ...order,
+        ingredients: [...order.ingredients.filter(el => !name.includes(el))],
+      });
     }
   };
 
@@ -127,6 +117,7 @@ export const Configurator: FC = () => {
   return (
     <section>
       <PizzaOption
+        key={'size'}
         legend='Размер'
         data={pizzaSize}
         selectedValue={selectedValueSize}
@@ -134,6 +125,7 @@ export const Configurator: FC = () => {
         onChangeValue={onChangeValueSize}
       />
       <PizzaOption
+        key={'dough'}
         legend='Тесто'
         data={pizzaDough}
         selectedValue={selectedValueDough}
@@ -141,18 +133,15 @@ export const Configurator: FC = () => {
         onChangeValue={onChangeValueDough}
       />
       <PizzaOption
+        key={'sauce'}
         legend='Выберите соус'
         data={pizzaSauce}
         selectedValue={selectedValueSauce}
         nameGroup='sauce'
         onChangeValue={onChangeValueSauce}
       />
-      {/* <PizzaIngredient
-        legend='Добавьте сыр'
-        data={pizzaCheese}
-        selectCheese={selectCheese}
-      /> */}
-      <fieldset style={ingredientStyles.block}>
+
+      <fieldset key={'cheese'} style={ingredientStyles.block}>
         <legend>'Добавьте сыр'</legend>
         <div style={ingredientStyles.checks}>
           {pizzaCheese.map(({ value, name, img, price }) => (
@@ -163,7 +152,7 @@ export const Configurator: FC = () => {
                 price={price}
                 name={name}
                 img={img}
-                selectCheese={selectCheese}
+                selectedIngredient={selectedIngredient}
               />
             </>
           ))}

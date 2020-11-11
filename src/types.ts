@@ -27,5 +27,6 @@ export interface PizzaOrder {
   cheese: string[];
   vegetables: string[];
   meat: string[];
-  // price: number;
+  ingredients: string[];
+  price: number;
 }
