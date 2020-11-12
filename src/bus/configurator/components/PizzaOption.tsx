@@ -1,7 +1,5 @@
-
 import React, { FC } from 'react';
 import { PizzaOptions } from '../../../types';
-
 
 type PizzaOptionProps = {
   data: Array<PizzaOptions>;
@@ -16,13 +14,6 @@ type PizzaOptionProps = {
  */
 export const PizzaOption: FC<PizzaOptionProps> = props => {
   const { data, legend, nameGroup, onChangeValue, selectedValue } = props;
-
-  // const [selectedValue, setValue] = useState(data[0].value);
-
-  // const onChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const value = event.target.value;
-  //   setValue(value);
-  // };
 
   return (
     <fieldset style={{ width: '300px', maxWidth: '300px' }}>

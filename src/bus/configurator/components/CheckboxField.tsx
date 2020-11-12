@@ -1,25 +1,28 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, useRef } from 'react';
 
 type CheckboxFieldProps = {
   value: string;
   name: string;
   img: string;
   price: number;
-  // selectedIngredient?: (event: React.SyntheticEvent) => void;
   selectedIngredient: (name: string, isChecked: boolean, price: number) => void;
 };
 
 export const CheckboxField: FC<CheckboxFieldProps> = props => {
-  const { value, name, img, price,  selectedIngredient } = props;
+  const { value, name, img, price, selectedIngredient } = props;
 
   const [isChecked, setIsChecked] = useState(false);
+  const firstUpdate = useRef(true);
 
   const handleInputChange = (): void => {
     setIsChecked(!isChecked);
   };
 
   useEffect(() => {
-    selectedIngredient(value, isChecked, price);
+    if (!firstUpdate.current) {
+      selectedIngredient(value, isChecked, price);
+    }
+    firstUpdate.current = false;
   }, [isChecked]);
 
   return (

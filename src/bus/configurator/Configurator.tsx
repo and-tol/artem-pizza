@@ -1,6 +1,6 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { DEFAULT_PIZZA_ORDER, pizzaData, START_PRICE } from '../../pizzaData';
-import { PizzaData, PizzaOrder } from '../../types';
+import { PizzaOrder } from '../../types';
 import { CheckboxField, PizzaOption } from './components';
 
 const ingredientStyles = {
@@ -15,22 +15,6 @@ const ingredientStyles = {
   },
 };
 
-// const getPizzaPrice = (order: PizzaOrder, pizzaData: PizzaData) => {
-//   let price = 0;
-//   let price += pizzaData.pizzaSize.filter(el => el.value === order.size)[0].price;
-
-//   return price;
-// };
-
-// Item deleting
-const deleteItem = (data: string[], value: string) => {
-  const idx: number = data.findIndex(el => el === value);
-
-  const newData = [...data.slice(0, idx), ...data.slice(idx + 1)];
-
-  return newData;
-};
-
 export const Configurator: FC = () => {
   const {
     pizzaSize,
@@ -43,8 +27,8 @@ export const Configurator: FC = () => {
 
   const [order, setOrder] = useState<PizzaOrder>(DEFAULT_PIZZA_ORDER);
 
-  // Order
-  const [pizzaPrice, setPizzaPrice] = useState<number>(START_PRICE);
+  // Order totalPrice
+    const refPrice = useRef<number>(START_PRICE);
 
   // Pizza Size
   const [selectedValueSize, setValueSize] = useState<string>(
@@ -56,10 +40,13 @@ export const Configurator: FC = () => {
     setValueSize(value);
 
     const selected = pizzaSize.filter(el => el.value === value)[0];
+
     setOrder({
       ...order,
       size: selected.value,
+      totalPrice: order.totalPrice - refPrice.current + selected.price,
     });
+    refPrice.current = selected.price;
   };
 
   // Pizza Dough
@@ -93,7 +80,7 @@ export const Configurator: FC = () => {
       sauce: selected.value,
     });
   };
-  // ======
+  // ====== //
   const selectedIngredient = (
     name: string,
     isChecked: boolean,
@@ -103,11 +90,13 @@ export const Configurator: FC = () => {
       setOrder({
         ...order,
         ingredients: [...order.ingredients, name],
+        totalPrice: order.totalPrice + price,
       });
     } else {
       setOrder({
         ...order,
         ingredients: [...order.ingredients.filter(el => !name.includes(el))],
+        totalPrice: order.totalPrice - price,
       });
     }
   };
@@ -161,7 +150,7 @@ export const Configurator: FC = () => {
       {/* <PizzaIngredient legend='Добавьте овощи' data={pizzaVegetables} />
       <PizzaIngredient legend='Добавьте мясо' data={pizzaMeat} /> */}
 
-      <button>Заказать за {pizzaPrice} рублей</button>
+      <button>Заказать за {order.totalPrice} рублей</button>
     </section>
   );
 };

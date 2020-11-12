@@ -111,5 +111,5 @@ export const DEFAULT_PIZZA_ORDER: PizzaOrder = {
   vegetables: [],
   meat: [],
   ingredients: [],
-  price: START_PRICE,
+  totalPrice: START_PRICE,
 };
