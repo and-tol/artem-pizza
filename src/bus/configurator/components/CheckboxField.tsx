@@ -12,7 +12,7 @@ export const CheckboxField: FC<CheckboxFieldProps> = props => {
   const { value, name, img, price, selectedIngredient } = props;
 
   const [isChecked, setIsChecked] = useState(false);
-  const firstUpdate = useRef(true);
+  const firstUpdate = useRef<boolean>(true);
 
   const handleInputChange = (): void => {
     setIsChecked(!isChecked);

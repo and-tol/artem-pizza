@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState } from 'react';
 import { DEFAULT_PIZZA_ORDER, pizzaData, START_PRICE } from '../../pizzaData';
-import { PizzaOrder } from '../../types';
+import { PizzaOrder,PizzaOptions } from '../../types';
 import { CheckboxField, PizzaOption } from './components';
 
 const ingredientStyles = {
@@ -80,6 +80,7 @@ export const Configurator: FC = () => {
       sauce: selected.value,
     });
   };
+
   // ====== //
   const selectedIngredient = (
     name: string,
@@ -147,8 +148,42 @@ export const Configurator: FC = () => {
           ))}
         </div>
       </fieldset>
-      {/* <PizzaIngredient legend='Добавьте овощи' data={pizzaVegetables} />
-      <PizzaIngredient legend='Добавьте мясо' data={pizzaMeat} /> */}
+
+      <fieldset key={'vegetables'} style={ingredientStyles.block}>
+        <legend>'Добавьте овощи'</legend>
+        <div style={ingredientStyles.checks}>
+          {pizzaVegetables.map(({ value, name, img, price }) => (
+            <>
+              <CheckboxField
+                key={name}
+                value={value}
+                price={price}
+                name={name}
+                img={img}
+                selectedIngredient={selectedIngredient}
+              />
+            </>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset key={'meat'} style={ingredientStyles.block}>
+        <legend>'Добавьте мясо'</legend>
+        <div style={ingredientStyles.checks}>
+          {pizzaMeat.map(({ value, name, img, price }) => (
+            <>
+              <CheckboxField
+                key={name}
+                value={value}
+                price={price}
+                name={name}
+                img={img}
+                selectedIngredient={selectedIngredient}
+              />
+            </>
+          ))}
+        </div>
+      </fieldset>
 
       <button>Заказать за {order.totalPrice} рублей</button>
     </section>
