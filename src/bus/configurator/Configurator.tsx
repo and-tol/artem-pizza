@@ -1,7 +1,8 @@
 import React, { FC, useRef, useState } from 'react';
 import { DEFAULT_PIZZA_ORDER, pizzaData, START_PRICE } from '../../pizzaData';
-import { PizzaOrder,PizzaOptions } from '../../types';
+import { PizzaOrder } from '../../types';
 import { CheckboxField, PizzaOption } from './components';
+import { Order } from './Order';
 
 const ingredientStyles = {
   checks: {
@@ -28,7 +29,7 @@ export const Configurator: FC = () => {
   const [order, setOrder] = useState<PizzaOrder>(DEFAULT_PIZZA_ORDER);
 
   // Order totalPrice
-    const refPrice = useRef<number>(START_PRICE);
+  const refPrice = useRef<number>(START_PRICE);
 
   // Pizza Size
   const [selectedValueSize, setValueSize] = useState<string>(
@@ -46,6 +47,7 @@ export const Configurator: FC = () => {
       size: selected.value,
       totalPrice: order.totalPrice - refPrice.current + selected.price,
     });
+
     refPrice.current = selected.price;
   };
 
@@ -59,6 +61,7 @@ export const Configurator: FC = () => {
     setValueDough(value);
 
     const selected = pizzaDough.filter(el => el.value === value)[0];
+    
     setOrder({
       ...order,
       dough: selected.value,
@@ -81,7 +84,7 @@ export const Configurator: FC = () => {
     });
   };
 
-  // ====== //
+  // ==== Ingredients Sesect ==== //
   const selectedIngredient = (
     name: string,
     isChecked: boolean,
@@ -102,90 +105,100 @@ export const Configurator: FC = () => {
     }
   };
 
-  console.log('order>>>>', order);
+  // ==== Show Order ====
+  const [isShowOrder, setIsShowOrder] = useState(false);
+  const showOrder = () => {
+    setIsShowOrder(!isShowOrder);
+  };
 
   return (
-    <section>
-      <PizzaOption
-        key={'size'}
-        legend='Размер'
-        data={pizzaSize}
-        selectedValue={selectedValueSize}
-        nameGroup='size'
-        onChangeValue={onChangeValueSize}
-      />
-      <PizzaOption
-        key={'dough'}
-        legend='Тесто'
-        data={pizzaDough}
-        selectedValue={selectedValueDough}
-        nameGroup='dough'
-        onChangeValue={onChangeValueDough}
-      />
-      <PizzaOption
-        key={'sauce'}
-        legend='Выберите соус'
-        data={pizzaSauce}
-        selectedValue={selectedValueSauce}
-        nameGroup='sauce'
-        onChangeValue={onChangeValueSauce}
-      />
+    <div>
+      {!isShowOrder && (
+        <section>
+          <PizzaOption
+            key={'size'}
+            legend='Размер'
+            data={pizzaSize}
+            selectedValue={selectedValueSize}
+            nameGroup='size'
+            onChangeValue={onChangeValueSize}
+          />
+          <PizzaOption
+            key={'dough'}
+            legend='Тесто'
+            data={pizzaDough}
+            selectedValue={selectedValueDough}
+            nameGroup='dough'
+            onChangeValue={onChangeValueDough}
+          />
+          <PizzaOption
+            key={'sauce'}
+            legend='Выберите соус'
+            data={pizzaSauce}
+            selectedValue={selectedValueSauce}
+            nameGroup='sauce'
+            onChangeValue={onChangeValueSauce}
+          />
 
-      <fieldset key={'cheese'} style={ingredientStyles.block}>
-        <legend>'Добавьте сыр'</legend>
-        <div style={ingredientStyles.checks}>
-          {pizzaCheese.map(({ value, name, img, price }) => (
-            <>
-              <CheckboxField
-                key={name}
-                value={value}
-                price={price}
-                name={name}
-                img={img}
-                selectedIngredient={selectedIngredient}
-              />
-            </>
-          ))}
-        </div>
-      </fieldset>
+          <fieldset key={'cheese'} style={ingredientStyles.block}>
+            <legend>'Добавьте сыр'</legend>
+            <div style={ingredientStyles.checks}>
+              {pizzaCheese.map(({ value, name, img, price }) => (
+                <>
+                  <CheckboxField
+                    key={name}
+                    value={value}
+                    price={price}
+                    name={name}
+                    img={img}
+                    selectedIngredient={selectedIngredient}
+                  />
+                </>
+              ))}
+            </div>
+          </fieldset>
 
-      <fieldset key={'vegetables'} style={ingredientStyles.block}>
-        <legend>'Добавьте овощи'</legend>
-        <div style={ingredientStyles.checks}>
-          {pizzaVegetables.map(({ value, name, img, price }) => (
-            <>
-              <CheckboxField
-                key={name}
-                value={value}
-                price={price}
-                name={name}
-                img={img}
-                selectedIngredient={selectedIngredient}
-              />
-            </>
-          ))}
-        </div>
-      </fieldset>
+          <fieldset key={'vegetables'} style={ingredientStyles.block}>
+            <legend>'Добавьте овощи'</legend>
+            <div style={ingredientStyles.checks}>
+              {pizzaVegetables.map(({ value, name, img, price }) => (
+                <>
+                  <CheckboxField
+                    key={name}
+                    value={value}
+                    price={price}
+                    name={name}
+                    img={img}
+                    selectedIngredient={selectedIngredient}
+                  />
+                </>
+              ))}
+            </div>
+          </fieldset>
 
-      <fieldset key={'meat'} style={ingredientStyles.block}>
-        <legend>'Добавьте мясо'</legend>
-        <div style={ingredientStyles.checks}>
-          {pizzaMeat.map(({ value, name, img, price }) => (
-            <>
-              <CheckboxField
-                key={name}
-                value={value}
-                price={price}
-                name={name}
-                img={img}
-                selectedIngredient={selectedIngredient}
-              />
-            </>
-          ))}
-        </div>
-      </fieldset>
-
-      <button>Заказать за {order.totalPrice} рублей</button>
-    </section>
+          <fieldset key={'meat'} style={ingredientStyles.block}>
+            <legend>'Добавьте мясо'</legend>
+            <div style={ingredientStyles.checks}>
+              {pizzaMeat.map(({ value, name, img, price }) => (
+                <>
+                  <CheckboxField
+                    key={name}
+                    value={value}
+                    price={price}
+                    name={name}
+                    img={img}
+                    selectedIngredient={selectedIngredient}
+                  />
+                </>
+              ))}
+            </div>
+          </fieldset>
+          <button onClick={showOrder}>
+            Заказать за {order.totalPrice} руб.
+          </button>
+        </section>
+      )}
+      {isShowOrder && <Order order={order} />}
+    </div>
   );
 };
