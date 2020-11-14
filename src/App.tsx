@@ -25,27 +25,103 @@ function App() {
         <fieldset>
           <legend>Тесто</legend>
           <label>
-            <input type='radio' name='size' value='thin' />
+            <input type='radio' name='dough' value='thin' />
             Тонкое
           </label>
           <label>
-            <input type='radio' name='size' value='puffy' />
+            <input type='radio' name='dough' value='puffy' />
             Пышное
           </label>
         </fieldset>
         <fieldset>
-          <legend>Соус</legend>
+          <legend>Выберите соус</legend>
           <label>
-            <input type='radio' name='size' value='tomato' />
+            <input type='radio' name='sauce' value='tomato' />
             Томатный
           </label>
           <label>
-            <input type='radio' name='size' value='white' />
+            <input type='radio' name='sauce' value='white' />
             Белый
           </label>
           <label>
-            <input type='radio' name='size' value='spicy' />
+            <input type='radio' name='sauce' value='spicy' />
             Острый
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>Добавьте сыр</legend>
+          <label>
+            <input type='checkbox' value='tomato' />
+            Моцарелла
+          </label>
+          <label>
+            <input type='checkbox' value='white' />
+            Чеддер
+          </label>
+          <label>
+            <input type='checkbox' value='spicy' />
+            Дор Блю
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>Добавьте овощи</legend>
+          <label>
+            <input type='checkbox' value='tomato' />
+            Моцарелла
+          </label>
+          <label>
+            <input type='checkbox' value='white' />
+            Чеддер
+          </label>
+          <label>
+            <input type='checkbox' value='spicy' />
+            Дор Блю
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>Добавьте овощи</legend>
+          <label>
+            <input type='checkbox' value='tomato' />
+            Помидор
+          </label>
+          <label>
+            <input type='checkbox' value='mushrooms' />
+            Грибы
+          </label>
+          <label>
+            <input type='checkbox' value='pepper' />
+            Перец
+          </label>
+          <label>
+            <input type='checkbox' value='pineapple' />
+            Ананасы
+          </label>
+          <label>
+            <input type='checkbox' value='olives' />
+            Оливки
+          </label>
+          <label>
+            <input type='checkbox' value='onion' />
+            Лук
+          </label>
+          <label>
+            <input type='checkbox' value='broccoli' />
+            Брокколи
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>Добавьте мясо</legend>
+          <label>
+            <input type='checkbox' value='bacon' />
+            Бекон
+          </label>
+          <label>
+            <input type='checkbox' value='pepperoni' />
+            Пепперони
+          </label>
+          <label>
+            <input type='checkbox' value='ham' />
+            Ветчина
           </label>
         </fieldset>
       </form>
