@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // const pizza = {
 //   size: ['30', '35'],
@@ -8,17 +8,24 @@ import React from 'react';
 // };
 
 function App() {
+  const [size, setSize] = useState('30')
+
+  const changeSize = (event: any) => {
+    setSize(event.target.value);
+  }
+
+
   return (
     <>
       <form>
         <fieldset>
           <legend>Размер</legend>
           <label>
-            <input type='radio' name='size' value='30' />
+            <input type='radio' name='size' value='30' onChange={changeSize} checked={size==='30'} />
             30см
           </label>
           <label>
-            <input type='radio' name='size' value='35' />
+            <input type='radio' name='size' value='35' onChange={changeSize} checked={size==='35'}/>
             35см
           </label>
         </fieldset>
