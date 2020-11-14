@@ -22,9 +22,31 @@ function App() {
   };
   // Sauce
   const [sauce, setSauce] = useState('tomato');
-const changeSauce = (event: React.ChangeEvent<HTMLInputElement>) => {
-  setSauce(event.target.value)
-}
+  const changeSauce = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSauce(event.target.value);
+  };
+  // Cheese
+  const [cheese, setCheese] = useState<string[]>([]);
+  const updateCheese = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = event.target;
+
+    if (checked) {
+      setCheese(cheese => [...cheese, value]);
+    } else {
+      setCheese(cheese => cheese.filter(c => c !== value));
+    }
+  };
+  // Vegetables
+  const [vegetables, setVegetables] = useState<string[]>([]);
+  const updateVegetables = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = event.target;
+
+    if (checked) {
+      setVegetables(vegetables => [...cheese, value]);
+    } else {
+      setVegetables(vegetables => cheese.filter(c => c !== value));
+    }
+  };
 
   return (
     <>
@@ -75,6 +97,7 @@ const changeSauce = (event: React.ChangeEvent<HTMLInputElement>) => {
             Пышное
           </label>
         </fieldset>
+        {/* Соус */}
         <fieldset>
           <legend>Выберите соус</legend>
           <label>
@@ -108,67 +131,105 @@ const changeSauce = (event: React.ChangeEvent<HTMLInputElement>) => {
             Острый
           </label>
         </fieldset>
+        {/* Сыр */}
         <fieldset>
           <legend>Добавьте сыр</legend>
           <label>
-            <input type='checkbox' value='tomato' />
+            <input
+              type='checkbox'
+              value='mozarella'
+              onChange={updateCheese}
+              checked={cheese.includes('mozarella')}
+            />
             Моцарелла
           </label>
           <label>
-            <input type='checkbox' value='white' />
+            <input
+              type='checkbox'
+              value='cheddar'
+              onChange={updateCheese}
+              checked={cheese.includes('cheddar')}
+            />
             Чеддер
           </label>
           <label>
-            <input type='checkbox' value='spicy' />
+            <input
+              type='checkbox'
+              value='dorblue'
+              onChange={updateCheese}
+              checked={cheese.includes('dorblue')}
+            />
             Дор Блю
           </label>
         </fieldset>
+        {/* Овощи */}
         <fieldset>
           <legend>Добавьте овощи</legend>
           <label>
-            <input type='checkbox' value='tomato' />
-            Моцарелла
-          </label>
-          <label>
-            <input type='checkbox' value='white' />
-            Чеддер
-          </label>
-          <label>
-            <input type='checkbox' value='spicy' />
-            Дор Блю
-          </label>
-        </fieldset>
-        <fieldset>
-          <legend>Добавьте овощи</legend>
-          <label>
-            <input type='checkbox' value='tomato' />
+            <input
+              type='checkbox'
+              value='tomato'
+              onChange={updateVegetables}
+              checked={vegetables.includes('tomato')}
+            />
             Помидор
           </label>
           <label>
-            <input type='checkbox' value='mushrooms' />
+            <input
+              type='checkbox'
+              value='mushrooms'
+              onChange={updateVegetables}
+              checked={vegetables.includes('mushrooms')}
+            />
             Грибы
           </label>
           <label>
-            <input type='checkbox' value='pepper' />
+            <input
+              type='checkbox'
+              value='pepper'
+              onChange={updateVegetables}
+              checked={vegetables.includes('pepper')}
+            />
             Перец
           </label>
           <label>
-            <input type='checkbox' value='pineapple' />
+            <input
+              type='checkbox'
+              value='pineapple'
+              onChange={updateVegetables}
+              checked={vegetables.includes('pineapple')}
+            />
             Ананасы
           </label>
           <label>
-            <input type='checkbox' value='olives' />
+            <input
+              type='checkbox'
+              value='olives'
+              onChange={updateVegetables}
+              checked={vegetables.includes('olives')}
+            />
             Оливки
           </label>
           <label>
-            <input type='checkbox' value='onion' />
+            <input
+              type='checkbox'
+              value='onion'
+              onChange={updateVegetables}
+              checked={vegetables.includes('onion')}
+            />
             Лук
           </label>
           <label>
-            <input type='checkbox' value='broccoli' />
+            <input
+              type='checkbox'
+              value='broccoli'
+              onChange={updateVegetables}
+              checked={vegetables.includes('broccoli')}
+            />
             Брокколи
           </label>
         </fieldset>
+        {/* Мясо */}
         <fieldset>
           <legend>Добавьте мясо</legend>
           <label>
