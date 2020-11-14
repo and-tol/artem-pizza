@@ -1,13 +1,29 @@
 import React from 'react';
-import './App.css';
 
-const pizza = {}
+// const pizza = {
+//   size: ['30', '35'],
+//   dough: ['Тонкое', 'Пышное'],
+//   sauce: ['Томатный', 'Белый', 'Острый'],
+//   ingredients: ['Моцарелла', 'Чеддер'],
+// };
 
 function App() {
   return (
-    <div className="App">
-
-    </div>
+    <>
+      <form>
+        <fieldset>
+          <legend>Размер</legend>
+          <label>
+            <input type='radio' name='size' value='thin' />
+            30см
+          </label>
+          <label>
+            <input type='radio' name='size' value='Puffy' />
+            35см
+          </label>
+        </fieldset>
+      </form>
+    </>
   );
 }
 
