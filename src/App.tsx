@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 
 // const pizza = {
 //   size: ['30', '35'],
@@ -8,12 +8,23 @@ import React, { useState } from 'react';
 // };
 
 function App() {
-  const [size, setSize] = useState('30')
+  // Size
+  const [size, setSize] = useState('30');
 
-  const changeSize = (event: any) => {
+  const changeSize = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSize(event.target.value);
-  }
+  };
+  // Dough
+  const [dough, setDough] = useState('thin');
 
+  const changeDough = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDough(event.target.value);
+  };
+  // Sauce
+  const [sauce, setSauce] = useState('tomato');
+const changeSauce = (event: React.ChangeEvent<HTMLInputElement>) => {
+  setSauce(event.target.value)
+}
 
   return (
     <>
@@ -21,37 +32,79 @@ function App() {
         <fieldset>
           <legend>Размер</legend>
           <label>
-            <input type='radio' name='size' value='30' onChange={changeSize} checked={size==='30'} />
+            <input
+              type='radio'
+              name='size'
+              value='30'
+              onChange={changeSize}
+              checked={size === '30'}
+            />
             30см
           </label>
           <label>
-            <input type='radio' name='size' value='35' onChange={changeSize} checked={size==='35'}/>
+            <input
+              type='radio'
+              name='size'
+              value='35'
+              onChange={changeSize}
+              checked={size === '35'}
+            />
             35см
           </label>
         </fieldset>
         <fieldset>
           <legend>Тесто</legend>
           <label>
-            <input type='radio' name='dough' value='thin' />
+            <input
+              type='radio'
+              name='dough'
+              value='thin'
+              onChange={changeDough}
+              checked={dough === 'thin'}
+            />
             Тонкое
           </label>
           <label>
-            <input type='radio' name='dough' value='puffy' />
+            <input
+              type='radio'
+              name='dough'
+              value='puffy'
+              onChange={changeDough}
+              checked={dough === 'puffy'}
+            />
             Пышное
           </label>
         </fieldset>
         <fieldset>
           <legend>Выберите соус</legend>
           <label>
-            <input type='radio' name='sauce' value='tomato' />
+            <input
+              type='radio'
+              name='sauce'
+              value='tomato'
+              onChange={changeSauce}
+              checked={sauce === 'tomato'}
+            />
             Томатный
           </label>
           <label>
-            <input type='radio' name='sauce' value='white' />
+            <input
+              type='radio'
+              name='sauce'
+              value='white'
+              onChange={changeSauce}
+              checked={sauce === 'white'}
+            />
             Белый
           </label>
           <label>
-            <input type='radio' name='sauce' value='spicy' />
+            <input
+              type='radio'
+              name='sauce'
+              value='spicy'
+              onChange={changeSauce}
+              checked={sauce === 'spicy'}
+            />
             Острый
           </label>
         </fieldset>
