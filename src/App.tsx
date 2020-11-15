@@ -42,11 +42,41 @@ function App() {
     const { value, checked } = event.target;
 
     if (checked) {
-      setVegetables(vegetables => [...cheese, value]);
+      setVegetables(vegetables => [...vegetables, value]);
     } else {
-      setVegetables(vegetables => cheese.filter(c => c !== value));
+      setVegetables(vegetables => vegetables.filter(v => v !== value));
     }
   };
+  // Meat
+  const [meat, setMeat] = useState<string[]>([]);
+  const updateMeat = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = event.target;
+
+    if (checked) {
+      setMeat(meat => [...meat, value]);
+    } else {
+      setMeat(meat => meat.filter(m => m !== value));
+    }
+  };
+
+  type PriceType = string[];
+  interface CalculateTotalPrice {
+    size: PriceType;
+    dough: PriceType;
+    sauce: PriceType;
+    cheese: PriceType;
+    vegetables: PriceType;
+    meat: PriceType;
+  }
+
+  const calculateTotalPrice = ({
+    size,
+    dough,
+    sauce,
+    cheese,
+    vegetables,
+    meat,
+  }: CalculateTotalPrice) => {};
 
   return (
     <>
@@ -233,18 +263,34 @@ function App() {
         <fieldset>
           <legend>Добавьте мясо</legend>
           <label>
-            <input type='checkbox' value='bacon' />
+            <input
+              type='checkbox'
+              value='bacon'
+              onChange={updateMeat}
+              checked={meat.includes('bacon')}
+            />
             Бекон
           </label>
           <label>
-            <input type='checkbox' value='pepperoni' />
+            <input
+              type='checkbox'
+              value='pepperoni'
+              onChange={updateMeat}
+              checked={meat.includes('pepperoni')}
+            />
             Пепперони
           </label>
           <label>
-            <input type='checkbox' value='ham' />
+            <input
+              type='checkbox'
+              value='ham'
+              onChange={updateMeat}
+              checked={meat.includes('ham')}
+            />
             Ветчина
           </label>
         </fieldset>
+        <button>Заказать за {totalPrice}руб</button>
       </form>
     </>
   );

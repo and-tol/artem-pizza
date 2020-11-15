@@ -1,5 +1,5 @@
 import { PizzaData, PizzaOrder } from './types';
-
+ 
 export const pizzaData: PizzaData = Object.freeze({
   pizzaSize: [
     { value: '30', name: 'size30', price: 200 },
