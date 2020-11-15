@@ -1,38 +1,13 @@
-export type PizzaDataWithPrice = { name: string; price: number };
-export type PizzaData = { name: string };
+import {
+  // SizeType,
+  DoughType,
+  SauceType,
+  // CheeseType,
+  // VegetablesType,
+  DataWithPriceType,
+} from './types';
 
-export interface SizeType {
-  '30': PizzaDataWithPrice;
-  '35': PizzaDataWithPrice;
-}
-export interface DoughType {
-  thin: PizzaData;
-  puffy: PizzaData;
-}
-export interface SauceType {
-  tomato: PizzaData;
-  white: PizzaData;
-  spicy: PizzaData;
-}
-export interface CheeseType {
-  mozarella: PizzaDataWithPrice;
-  cheddar: PizzaDataWithPrice;
-  dorblue: PizzaDataWithPrice;
-}
-export interface VegetablesType {
-  tomato: PizzaDataWithPrice;
-  mushrooms: PizzaDataWithPrice;
-  peper: PizzaDataWithPrice;
-  pineapple: PizzaDataWithPrice;
-  olives: PizzaDataWithPrice;
-  onion: PizzaDataWithPrice;
-  broccoli: PizzaDataWithPrice;
-  bacon: PizzaDataWithPrice;
-  pepperoni: PizzaDataWithPrice;
-  ham: PizzaDataWithPrice;
-}
-
-export const SIZE: SizeType = Object.freeze({
+export const SIZE: DataWithPriceType = Object.freeze({
   '30': { name: '30', price: 200 },
   '35': { name: '35', price: 250 },
 });
@@ -45,12 +20,12 @@ export const SAUCE: SauceType = Object.freeze({
   white: { name: 'Белый' },
   spicy: { name: 'Острый' },
 });
-export const CHEESE = Object.freeze({
+export const CHEESE: DataWithPriceType = Object.freeze({
   mozarella: { name: 'Моцарелла', price: 29 },
   cheddar: { name: 'Чеддер', price: 29 },
   dorblue: { name: 'Дор Блю', price: 29 },
 });
-export const VEGETABLES = Object.freeze({
+export const VEGETABLES: DataWithPriceType = Object.freeze({
   tomato: { name: 'Помидор', price: 29 },
   mushrooms: { name: 'Грибы', price: 29 },
   peper: { name: 'Перец', price: 29 },

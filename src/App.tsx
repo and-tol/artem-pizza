@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 
 // const pizza = {
 //   size: ['30', '35'],
@@ -78,6 +78,9 @@ function App() {
     meat,
   }: CalculateTotalPrice) => {};
 
+console.log('meat>>>', meat)
+console.log('vegetables>>>', vegetables)
+
   return (
     <>
       <form>
@@ -127,7 +130,7 @@ function App() {
             Пышное
           </label>
         </fieldset>
-        {/* Соус */}
+        {/* Sauses */}
         <fieldset>
           <legend>Выберите соус</legend>
           <label>
@@ -161,7 +164,7 @@ function App() {
             Острый
           </label>
         </fieldset>
-        {/* Сыр */}
+        {/* Cheeses */}
         <fieldset>
           <legend>Добавьте сыр</legend>
           <label>
@@ -290,7 +293,7 @@ function App() {
             Ветчина
           </label>
         </fieldset>
-        <button>Заказать за {totalPrice}руб</button>
+        {/* <button>Заказать за {totalPrice}руб</button> */}
       </form>
     </>
   );
