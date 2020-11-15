@@ -1,10 +1,8 @@
 import {
-  // SizeType,
-  DoughType,
-  SauceType,
   // CheeseType,
   // VegetablesType,
-  DataWithPriceType,
+  DataWithPriceType, DoughType,
+  SauceType
 } from './types';
 
 export const SIZE: DataWithPriceType = Object.freeze({
@@ -28,11 +26,13 @@ export const CHEESE: DataWithPriceType = Object.freeze({
 export const VEGETABLES: DataWithPriceType = Object.freeze({
   tomato: { name: 'Помидор', price: 29 },
   mushrooms: { name: 'Грибы', price: 29 },
-  peper: { name: 'Перец', price: 29 },
+  pepper: { name: 'Перец', price: 29 },
   pineapple: { name: 'Ананасы', price: 29 },
   olives: { name: 'Оливки', price: 29 },
   onion: { name: 'Лук', price: 29 },
   broccoli: { name: 'Брокколи', price: 29 },
+});
+export const MEAT: DataWithPriceType = Object.freeze({
   bacon: { name: 'Бекон', price: 29 },
   pepperoni: { name: 'Пепперони', price: 29 },
   ham: { name: 'Ветчина', price: 29 },

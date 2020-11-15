@@ -7,6 +7,8 @@ import React, { useState } from 'react';
 //   ingredients: ['Моцарелла', 'Чеддер'],
 // };
 
+import { calculateTotalPrice } from './calculateTotalPrice';
+
 function App() {
   // Size
   const [size, setSize] = useState('30');
@@ -59,27 +61,15 @@ function App() {
     }
   };
 
-  type PriceType = string[];
-  interface CalculateTotalPrice {
-    size: PriceType;
-    dough: PriceType;
-    sauce: PriceType;
-    cheese: PriceType;
-    vegetables: PriceType;
-    meat: PriceType;
-  }
-
-  const calculateTotalPrice = ({
+  const totalPrice: number = calculateTotalPrice({
     size,
-    dough,
-    sauce,
     cheese,
     vegetables,
     meat,
-  }: CalculateTotalPrice) => {};
+  });
 
-console.log('meat>>>', meat)
-console.log('vegetables>>>', vegetables)
+  console.log('meat>>>', meat);
+  console.log('vegetables>>>', vegetables);
 
   return (
     <>
@@ -293,7 +283,7 @@ console.log('vegetables>>>', vegetables)
             Ветчина
           </label>
         </fieldset>
-        {/* <button>Заказать за {totalPrice}руб</button> */}
+        <button>Заказать за {totalPrice}руб</button>
       </form>
     </>
   );

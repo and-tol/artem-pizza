@@ -26,7 +26,7 @@ export interface SauceType {
 // export interface VegetablesType {
 //   tomato: PizzaDataWithPrice;
 //   mushrooms: PizzaDataWithPrice;
-//   peper: PizzaDataWithPrice;
+//   pepper: PizzaDataWithPrice;
 //   pineapple: PizzaDataWithPrice;
 //   olives: PizzaDataWithPrice;
 //   onion: PizzaDataWithPrice;
