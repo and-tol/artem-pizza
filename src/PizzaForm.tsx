@@ -28,6 +28,8 @@ export const PizzaForm: FC<PizzaFormProps> = ({ onPizzaCreated }) => {
     setSauce(event.target.value);
   };
   // Cheese
+  const {cheese, addCheese, deleteCheese} = useIngredients<string[]>([]);
+
   const [cheese, setCheese] = useState<string[]>([]);
   const updateCheese = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;

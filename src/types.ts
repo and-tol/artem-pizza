@@ -12,15 +12,15 @@ export interface DataWithoutPriceType {
 //   '30': PizzaDataWithPrice;
 //   '35': PizzaDataWithPrice;
 // }
-export interface DoughType {
-  thin: PizzaData;
-  puffy: PizzaData;
-}
-export interface SauceType {
-  tomato: PizzaData;
-  white: PizzaData;
-  spicy: PizzaData;
-}
+// export interface DoughType {
+//   thin: PizzaData;
+//   puffy: PizzaData;
+// }
+// export interface SauceType {
+//   tomato: PizzaData;
+//   white: PizzaData;
+//   spicy: PizzaData;
+// }
 // export interface CheeseType {
 //   mozarella: PizzaDataWithPrice;
 //   cheddar: PizzaDataWithPrice;
