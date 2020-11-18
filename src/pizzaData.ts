@@ -1,19 +1,21 @@
 import {
   // CheeseType,
   // VegetablesType,
-  DataWithPriceType, DoughType,
-  SauceType
+  DataWithPriceType,
+  // DoughType,
+  // SauceType,
+  DataWithoutPriceType,
 } from './types';
 
 export const SIZE: DataWithPriceType = Object.freeze({
   '30': { name: '30', price: 200 },
   '35': { name: '35', price: 250 },
 });
-export const DOUGH: DoughType = Object.freeze({
+export const DOUGH: DataWithoutPriceType = Object.freeze({
   thin: { name: 'Тонкое' },
   puffy: { name: 'Пышное' },
 });
-export const SAUCE: SauceType = Object.freeze({
+export const SAUCE: DataWithoutPriceType = Object.freeze({
   tomato: { name: 'Томатный' },
   white: { name: 'Белый' },
   spicy: { name: 'Острый' },

@@ -4,6 +4,9 @@ export type PizzaData = { name: string };
 export interface DataWithPriceType {
   [item: string]: PizzaDataWithPrice;
 }
+export interface DataWithoutPriceType {
+  [item: string]: PizzaData;
+}
 
 // export interface SizeType {
 //   '30': PizzaDataWithPrice;
