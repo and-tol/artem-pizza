@@ -35,3 +35,12 @@ export interface SauceType {
 //   pepperoni: PizzaDataWithPrice;
 //   ham: PizzaDataWithPrice;
 // }
+
+export interface PizzaConfiguration {
+  size: string;
+  dough: string;
+  sauce: string;
+  cheese?: string[];
+  vegetables?: string[];
+  meat?: string[];
+}

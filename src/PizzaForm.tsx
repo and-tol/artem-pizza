@@ -1,26 +1,13 @@
 import React, { FC, useState } from 'react';
+// Types
+import { PizzaConfiguration } from './types';
 
 import { calculateTotalPrice } from './calculateTotalPrice';
 
-interface OnPizzaCreated {
-  size: string;
-  dough: string;
-  sauce: string;
-  cheese?: string[];
-  vegetables?: string[];
-  meat?: string[];
-}
 
 interface PizzaFormProps {
-  onPizzaCreated({
-    size,
-    dough,
-    sauce,
-    cheese,
-    vegetables,
-    meat
-  }: OnPizzaCreated): () => void;
-};
+	onPizzaCreated: (pizza: PizzaConfiguration) => void
+}
 
 export const PizzaForm: FC<PizzaFormProps> = ({ onPizzaCreated }) => {
   // Size
