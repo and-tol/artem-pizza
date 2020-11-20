@@ -6,7 +6,7 @@ import { PizzaConfiguration } from './types';
 
 function App() {
   const [pizza, setPizza] = useState<PizzaConfiguration | undefined>();
-
+console.log('pizza>>>', pizza)
   if (pizza) {
     return <PizzaOrderPreview pizza={pizza} />;
   }

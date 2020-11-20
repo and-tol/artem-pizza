@@ -27,7 +27,7 @@ export const PizzaForm: FC<PizzaFormProps> = ({ onPizzaCreated }) => {
   const changeSauce = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSauce(event.target.value);
   };
-  // ! Cheese
+  // Cheese
   const [cheese, addCheese, deleteCheese] = useIngredients([]);
 
   const updateCheese = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,25 +40,25 @@ export const PizzaForm: FC<PizzaFormProps> = ({ onPizzaCreated }) => {
     }
   };
   // Vegetables
-  const [vegetables, setVegetables] = useState<string[]>([]);
+  const [vegetables, addVegetables, deleteVegetables] = useIngredients([]);
   const updateVegetables = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
 
     if (checked) {
-      setVegetables(vegetables => [...vegetables, value]);
+      addVegetables(value);
     } else {
-      setVegetables(vegetables => vegetables.filter(v => v !== value));
+      deleteVegetables(value);
     }
   };
   // Meat
-  const [meat, setMeat] = useState<string[]>([]);
+  const [meat, addMeat, deleteMeat] = useIngredients([]);
   const updateMeat = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
 
     if (checked) {
-      setMeat(meat => [...meat, value]);
+      addMeat(value);
     } else {
-      setMeat(meat => meat.filter(m => m !== value));
+      deleteMeat(value);
     }
   };
 
