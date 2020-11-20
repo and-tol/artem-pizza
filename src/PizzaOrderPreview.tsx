@@ -16,9 +16,23 @@ export const PizzaOrderPreview: FC<PizzaOrderPreviewProps> = ({ pizza }) => {
       <p>Размер: {SIZE[size].name}см</p>
       <p>Тесто: {DOUGH[dough].name.toLowerCase()}</p>
       <p>Соус: {SAUCE[sauce].name.toLowerCase()}</p>
-      <p>Сыр: {cheese?.map(c => CHEESE[c].name.toLowerCase()).join(', ')} </p>
-      <p>Овощи: {vegetables?.map(v => VEGETABLES[v].name.toLowerCase()).join(', ')} </p>
-      <p>Мясо: {meat?.map(m => MEAT[m].name.toLowerCase()).join(', ')} </p>
+      <p>
+        {cheese?.length
+          ? `Сыр: ${cheese?.map(c => CHEESE[c].name.toLowerCase()).join(', ')}`
+          : null}
+      </p>
+      <p>
+        {vegetables?.length
+          ? `Овощи: ${vegetables
+              ?.map(v => VEGETABLES[v].name.toLowerCase())
+              .join(', ')}`
+          : null}
+      </p>
+      <p>
+        {meat?.length
+          ? `Мясо: ${meat?.map(m => MEAT[m].name.toLowerCase()).join(', ')}`
+          : null}
+      </p>
     </section>
   );
 };

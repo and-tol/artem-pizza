@@ -5,13 +5,13 @@ describe('useIngredients', () => {
   it('uses empty array as defalt value', () => {
     const { result } = renderHook(() => useIngredients([]));
 
-    expect(result.current.state).toEqual([]);
+    expect(result.current[0]).toEqual([]);
   });
   describe('with initial value', () => {
     it('uses initial value as default', () => {
       const { result } = renderHook(() => useIngredients(['1', '2', '3']));
 
-      expect(result.current.state).toEqual(['1', '2', '3']);
+      expect(result.current[0]).toEqual(['1', '2', '3']);
     });
   });
   describe('.addItem', () => {
@@ -22,7 +22,7 @@ describe('useIngredients', () => {
         result.current.addItem('test');
       });
 
-      expect(result.current.state).toEqual(['test']);
+      expect(result.current[1]).toEqual(['test']);
     });
   });
   describe('.removeItem', () => {
@@ -35,7 +35,7 @@ describe('useIngredients', () => {
         result.current.removeItem('test2');
       });
 
-      expect(result.current.state).toEqual(['test1', 'test3']);
+      expect(result.current[2]).toEqual(['test1', 'test3']);
     });
   });
 });

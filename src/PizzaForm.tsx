@@ -1,12 +1,12 @@
 import React, { FC, useState } from 'react';
 // Types
 import { PizzaConfiguration } from './types';
-
+// Hooks
+import { useIngredients } from './useIngredients';
 import { calculateTotalPrice } from './calculateTotalPrice';
 
-
 interface PizzaFormProps {
-	onPizzaCreated: (pizza: PizzaConfiguration) => void
+  onPizzaCreated: (pizza: PizzaConfiguration) => void;
 }
 
 export const PizzaForm: FC<PizzaFormProps> = ({ onPizzaCreated }) => {
@@ -27,17 +27,16 @@ export const PizzaForm: FC<PizzaFormProps> = ({ onPizzaCreated }) => {
   const changeSauce = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSauce(event.target.value);
   };
-  // Cheese
-  const {cheese, addCheese, deleteCheese} = useIngredients<string[]>([]);
+  // ! Cheese
+  const [cheese, addCheese, deleteCheese] = useIngredients([]);
 
-  const [cheese, setCheese] = useState<string[]>([]);
   const updateCheese = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
 
     if (checked) {
-      setCheese(cheese => [...cheese, value]);
+      addCheese(value);
     } else {
-      setCheese(cheese => cheese.filter(c => c !== value));
+      deleteCheese(value);
     }
   };
   // Vegetables

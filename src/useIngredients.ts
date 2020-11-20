@@ -1,6 +1,12 @@
 import { useState } from 'react';
 
-export const useIngredients = (initialValue: string[]) => {
+let UseIngredients: [
+  string[],
+  (item: string) => void,
+  (item: string) => void
+];
+
+export const useIngredients = (initialValue: string[]): typeof UseIngredients => {
   const [state, setState] = useState(initialValue || []);
 
   const addItem = (item: string) => {
@@ -10,5 +16,5 @@ export const useIngredients = (initialValue: string[]) => {
     setState(s => s.filter((storedItem: string) => storedItem !== item));
   };
 
-  return  {state, addItem, removeItem};
+  return [state, addItem, removeItem];
 };
