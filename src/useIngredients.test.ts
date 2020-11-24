@@ -17,12 +17,12 @@ describe('useIngredients', () => {
   describe('.addItem', () => {
     it('adds the item to the state array', () => {
       const { result } = renderHook(() => useIngredients([]));
-
+      console.log(result)
       act(() => {
-        result.current.addItem('test');
+        result.current[1]('test');
       });
 
-      expect(result.current[1]).toEqual(['test']);
+      expect(result.current[0]).toEqual(['test']);
     });
   });
   describe('.removeItem', () => {
@@ -32,10 +32,10 @@ describe('useIngredients', () => {
       );
 
       act(() => {
-        result.current.removeItem('test2');
+        result.current[2]('test2');
       });
 
-      expect(result.current[2]).toEqual(['test1', 'test3']);
+      expect(result.current[0]).toEqual(['test1', 'test3']);
     });
   });
 });
