@@ -9,7 +9,7 @@ interface PizzaOrderPreviewProps {
 
 export const PizzaOrderPreview: FC<PizzaOrderPreviewProps> = ({ pizza }) => {
   const { size, dough, sauce, cheese, vegetables, meat } = pizza;
-
+  console.log(pizza);
   return (
     <section>
       <h2>Ленивая Маргарита</h2>

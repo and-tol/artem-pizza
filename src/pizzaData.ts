@@ -6,8 +6,8 @@ import {
 
 export const DEFAULT_PIZZA: PizzaConfiguration = Object.freeze({
   size: '30',
-  dough: 'Тонкое',
-  sauce: 'Томатный',
+  dough: 'thin',
+  sauce: 'tomato',
 });
 
 export const SIZE: DataWithPriceType = Object.freeze({
