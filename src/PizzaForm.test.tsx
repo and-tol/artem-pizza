@@ -1,9 +1,7 @@
 import React from 'react';
 import {
   fireEvent,
-  getByText,
   render,
-  queryByText,
 } from '@testing-library/react';
 import { PizzaForm } from './PizzaForm';
 
@@ -51,7 +49,7 @@ describe('PizzaForm', () => {
       expect(getByText('Заказать за 577руб.')).toBeInTheDocument();
     });
   });
-  describe('on pizza submit ', () => {
+  describe('on pizza submit', () => {
     it('passes configurated pizza', () => {
       // Arrange
       const handleSubmit = jest.fn();
