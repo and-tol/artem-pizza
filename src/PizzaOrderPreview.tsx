@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-// Types
-import { PizzaConfiguration, DataWithPriceType } from './types';
 // Data
-import { SIZE, DOUGH, SAUCE, CHEESE, VEGETABLES, MEAT } from './pizzaData';
+import { CHEESE, DOUGH, MEAT, SAUCE, SIZE, VEGETABLES } from './pizzaData';
+// Types
+import { IngredientNameAndPriceState, PizzaConfiguration } from './types';
 interface PizzaOrderPreviewProps {
   pizza: PizzaConfiguration;
 }
@@ -12,7 +12,7 @@ export const PizzaOrderPreview: FC<PizzaOrderPreviewProps> = ({ pizza }) => {
 
   const renderText = (
     ingredients: string[],
-    data: DataWithPriceType
+    data: IngredientNameAndPriceState
   ): string => {
     return ingredients?.map(i => data[i].name.toLowerCase()).join(', ');
   };

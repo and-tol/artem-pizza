@@ -1,11 +1,11 @@
-export type PizzaDataWithPrice = { name: string; price: number };
-export type PizzaData = { name: string };
+export type NameAndPrice = { name: string; price: number };
+export type Name = { name: string };
 
-export interface DataWithPriceType {
-  [item: string]: PizzaDataWithPrice;
+export interface IngredientNameAndPriceState {
+  [item: string]: NameAndPrice;
 }
-export interface DataWithoutPriceType {
-  [item: string]: PizzaData;
+export interface IngredientNameState {
+  [item: string]: Name;
 }
 export interface PizzaConfiguration {
   size: string;
