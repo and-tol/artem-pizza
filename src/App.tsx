@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { PizzaForm } from './PizzaForm';
+import { PizzaOrderPreview } from './PizzaOrderPreview';
+// Types
+import { PizzaConfiguration } from './types';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [pizza, setPizza] = useState<PizzaConfiguration | undefined>();
+
+  if (pizza) {
+    return <PizzaOrderPreview pizza={pizza} />;
+  }
+
+  return <PizzaForm onPizzaCreated={setPizza} />;
 }
 
 export default App;

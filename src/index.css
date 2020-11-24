@@ -23,3 +23,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#root {
+  display: grid;
+  place-items: center;
+}
+
+form {
+  width: 400px
+}
