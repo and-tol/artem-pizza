@@ -8,7 +8,8 @@ import { PizzaConfiguration } from './types';
 function App() {
   const [pizza, setPizza] = useState<PizzaConfiguration>(DEFAULT_PIZZA);
 
-  if (pizza) {
+  // TODO: сначала должна быть форма, сейчас это дефолтная пицца
+  if (false) { // pizza
     return <PizzaOrderPreview pizza={pizza} />;
   }
 
