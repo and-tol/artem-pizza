@@ -6,10 +6,11 @@ import { DEFAULT_PIZZA } from './pizzaData';
 import { PizzaConfiguration } from './types';
 
 function App() {
-  const [pizza, setPizza] = useState<PizzaConfiguration>(DEFAULT_PIZZA);
+  const [pizza, setPizza] = useState<PizzaConfiguration>();
+  // const [pizza, setPizza] = useState<PizzaConfiguration>(DEFAULT_PIZZA);
 
   // TODO: сначала должна быть форма, сейчас это дефолтная пицца
-  if (false) { // pizza
+  if (pizza) { // pizza
     return <PizzaOrderPreview pizza={pizza} />;
   }
 
