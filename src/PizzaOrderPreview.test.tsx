@@ -17,7 +17,7 @@ describe('PizzaOrderPreview', () => {
         }}
       />
     );
-    // Act & Assert
+
     expect(getByText("Размер: 30см")).toBeInTheDocument()
     expect(getByText('Тесто: тонкое')).toBeInTheDocument();
     expect(getByText('Соус: томатный')).toBeInTheDocument();

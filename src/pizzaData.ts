@@ -1,31 +1,34 @@
 import {
-  // CheeseType,
-  // VegetablesType,
-  DataWithPriceType,
-  // DoughType,
-  // SauceType,
-  DataWithoutPriceType,
+  IngredientNameAndPriceState,
+  IngredientNameState,
+  PizzaConfiguration
 } from './types';
 
-export const SIZE: DataWithPriceType = Object.freeze({
+export const DEFAULT_PIZZA: PizzaConfiguration = Object.freeze({
+  size: '30',
+  dough: 'thin',
+  sauce: 'tomato',
+});
+
+export const SIZE: IngredientNameAndPriceState = Object.freeze({
   '30': { name: '30', price: 200 },
   '35': { name: '35', price: 250 },
 });
-export const DOUGH: DataWithoutPriceType = Object.freeze({
+export const DOUGH: IngredientNameState = Object.freeze({
   thin: { name: 'Тонкое' },
   puffy: { name: 'Пышное' },
 });
-export const SAUCE: DataWithoutPriceType = Object.freeze({
+export const SAUCE: IngredientNameState = Object.freeze({
   tomato: { name: 'Томатный' },
   white: { name: 'Белый' },
   spicy: { name: 'Острый' },
 });
-export const CHEESE: DataWithPriceType = Object.freeze({
+export const CHEESE: IngredientNameAndPriceState = Object.freeze({
   mozarella: { name: 'Моцарелла', price: 29 },
   cheddar: { name: 'Чеддер', price: 29 },
   dorblue: { name: 'Дор Блю', price: 29 },
 });
-export const VEGETABLES: DataWithPriceType = Object.freeze({
+export const VEGETABLES: IngredientNameAndPriceState = Object.freeze({
   tomato: { name: 'Помидор', price: 29 },
   mushrooms: { name: 'Грибы', price: 29 },
   pepper: { name: 'Перец', price: 29 },
@@ -34,7 +37,7 @@ export const VEGETABLES: DataWithPriceType = Object.freeze({
   onion: { name: 'Лук', price: 29 },
   broccoli: { name: 'Брокколи', price: 29 },
 });
-export const MEAT: DataWithPriceType = Object.freeze({
+export const MEAT: IngredientNameAndPriceState = Object.freeze({
   bacon: { name: 'Бекон', price: 29 },
   pepperoni: { name: 'Пепперони', price: 29 },
   ham: { name: 'Ветчина', price: 29 },

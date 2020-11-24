@@ -1,4 +1,6 @@
 import React, { FC, useState } from 'react';
+// Data
+import {DEFAULT_PIZZA} from './pizzaData'
 // Types
 import { PizzaConfiguration } from './types';
 // Hooks
@@ -11,19 +13,19 @@ interface PizzaFormProps {
 
 export const PizzaForm: FC<PizzaFormProps> = ({ onPizzaCreated }) => {
   // Size
-  const [size, setSize] = useState('30');
+  const [size, setSize] = useState(DEFAULT_PIZZA.size);
 
   const changeSize = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSize(event.target.value);
   };
   // Dough
-  const [dough, setDough] = useState('thin');
+  const [dough, setDough] = useState(DEFAULT_PIZZA.dough);
 
   const changeDough = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDough(event.target.value);
   };
   // Sauce
-  const [sauce, setSauce] = useState('tomato');
+  const [sauce, setSauce] = useState(DEFAULT_PIZZA.sauce);
   const changeSauce = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSauce(event.target.value);
   };
