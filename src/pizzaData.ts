@@ -1,11 +1,14 @@
 import {
-  // CheeseType,
-  // VegetablesType,
   DataWithPriceType,
-  // DoughType,
-  // SauceType,
   DataWithoutPriceType,
+  PizzaConfiguration,
 } from './types';
+
+export const DEFAULT_PIZZA: PizzaConfiguration = Object.freeze({
+  size: '30',
+  dough: 'Тонкое',
+  sauce: 'Томатный',
+});
 
 export const SIZE: DataWithPriceType = Object.freeze({
   '30': { name: '30', price: 200 },
