@@ -1,11 +1,13 @@
 import React, { FC, useState } from 'react';
+import { calculateTotalPrice } from '../calculateTotalPrice';
 // Data
-import {DEFAULT_PIZZA} from '../pizzaData'
+import { DEFAULT_PIZZA, DOUGH, SAUCE, SIZE } from '../pizzaData';
 // Types
 import { PizzaConfiguration } from '../types';
+// Components
+import { RadioGroup } from './components/RadioGroup';
 // Hooks
-import { useIngredients } from '../useIngredients';
-import { calculateTotalPrice } from '../calculateTotalPrice';
+import { useIngredients } from './hooks/useIngredients';
 
 interface PizzaFormProps {
   onPizzaCreated: (pizza: PizzaConfiguration) => void;
@@ -18,9 +20,10 @@ export const PizzaForm: FC<PizzaFormProps> = ({ onPizzaCreated }) => {
   const changeSize = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSize(event.target.value);
   };
+
   // Dough
   const [dough, setDough] = useState(DEFAULT_PIZZA.dough);
-
+  // console.log('dough', dough);
   const changeDough = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDough(event.target.value);
   };
@@ -79,86 +82,28 @@ export const PizzaForm: FC<PizzaFormProps> = ({ onPizzaCreated }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <fieldset>
-          <legend>Размер</legend>
-          <label>
-            <input
-              type='radio'
-              name='size'
-              value='30'
-              onChange={changeSize}
-              checked={size === '30'}
-            />
-            30см
-          </label>
-          <label>
-            <input
-              type='radio'
-              name='size'
-              value='35'
-              onChange={changeSize}
-              checked={size === '35'}
-            />
-            35см
-          </label>
-        </fieldset>
-        <fieldset>
-          <legend>Тесто</legend>
-          <label>
-            <input
-              type='radio'
-              name='dough'
-              value='thin'
-              onChange={changeDough}
-              checked={dough === 'thin'}
-            />
-            Тонкое
-          </label>
-          <label>
-            <input
-              type='radio'
-              name='dough'
-              value='puffy'
-              onChange={changeDough}
-              checked={dough === 'puffy'}
-            />
-            Пышное
-          </label>
-        </fieldset>
-        {/* Sauses */}
-        <fieldset>
-          <legend>Выберите соус</legend>
-          <label>
-            <input
-              type='radio'
-              name='sauce'
-              value='tomato'
-              onChange={changeSauce}
-              checked={sauce === 'tomato'}
-            />
-            Томатный
-          </label>
-          <label>
-            <input
-              type='radio'
-              name='sauce'
-              value='white'
-              onChange={changeSauce}
-              checked={sauce === 'white'}
-            />
-            Белый
-          </label>
-          <label>
-            <input
-              type='radio'
-              name='sauce'
-              value='spicy'
-              onChange={changeSauce}
-              checked={sauce === 'spicy'}
-            />
-            Острый
-          </label>
-        </fieldset>
+        <RadioGroup
+          legend='Размер'
+          name='size'
+          selected={size}
+          onChange={changeSize}
+          options={SIZE}
+        />
+        <RadioGroup
+          legend='Тесто'
+          name='dough'
+          selected={dough}
+          onChange={changeDough}
+          options={DOUGH}
+        />
+        <RadioGroup
+          legend='Выберите соус'
+          name='sauce'
+          selected={sauce}
+          onChange={changeSauce}
+          options={SAUCE}
+        />
+
         {/* Cheeses */}
         <fieldset>
           <legend>Добавьте сыр</legend>
