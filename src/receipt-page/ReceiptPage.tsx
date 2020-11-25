@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-export const ReceiptPage = params => {
+export const ReceiptPage = () => {
   return (
     <>
       <h1>Страница с чеком</h1>

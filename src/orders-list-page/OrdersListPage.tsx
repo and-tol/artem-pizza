@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const OrdersListPage = params => {
+export const OrdersListPage = () => {
   return (
     <>
       <h1>Страница со списком заказов</h1>
