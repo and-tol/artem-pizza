@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { PizzaForm } from './PizzaForm';
-import { PizzaOrderPreview } from './PizzaOrderPreview';
-import { DEFAULT_PIZZA } from './pizzaData';
+import { PizzaConfiguratorPage } from './pizza-configurator-page';
+import { PizzaOrderPreviewPage } from './pizza-order-preview-page/PizzaOrderPreviewPage';
 // Types
 import { PizzaConfiguration } from './types';
 
@@ -11,10 +10,11 @@ function App() {
 
   // TODO: сначала должна быть форма, сейчас это дефолтная пицца
   if (pizza) { // pizza
-    return <PizzaOrderPreview pizza={pizza} />;
+    return <PizzaOrderPreviewPage pizza={pizza} />;
   }
 
-  return <PizzaForm onPizzaCreated={setPizza} />;
+  // return <PizzaForm onPizzaCreated={setPizza} />;
+  return <PizzaConfiguratorPage onPizzaCreated={setPizza} />;
 }
 
 export default App;

@@ -1,12 +1,12 @@
-import React from 'react';
 import { render } from '@testing-library/react';
-import { PizzaOrderPreview } from './PizzaOrderPreview';
+import React from 'react';
+import { PizzaOrderPreviewPage } from './PizzaOrderPreviewPage';
 
-describe('PizzaOrderPreview', () => {
+describe('PizzaOrderPreviewPage', () => {
   it('renders correctly', () => {
     // Arrange
     const { getByText } = render(
-      <PizzaOrderPreview
+      <PizzaOrderPreviewPage
         pizza={{
           cheese: ['mozarella'],
           dough: 'thin',

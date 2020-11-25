@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 // Data
-import { CHEESE, DOUGH, MEAT, SAUCE, SIZE, VEGETABLES } from './pizzaData';
+import { CHEESE, DOUGH, MEAT, SAUCE, SIZE, VEGETABLES } from '../pizzaData';
 // Types
-import { IngredientNameAndPriceState, PizzaConfiguration } from './types';
-interface PizzaOrderPreviewProps {
+import { IngredientNameAndPriceState, PizzaConfiguration } from '../types';
+interface PizzaOrderPreviewPageProps {
   pizza: PizzaConfiguration;
 }
 
-export const PizzaOrderPreview: FC<PizzaOrderPreviewProps> = ({ pizza }) => {
+export const PizzaOrderPreviewPage: FC<PizzaOrderPreviewPageProps> = ({ pizza }) => {
   const { size, dough, sauce, cheese, vegetables, meat } = pizza;
 
   const renderText = (

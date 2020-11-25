@@ -1,11 +1,11 @@
 import React, { FC, useState } from 'react';
 // Data
-import {DEFAULT_PIZZA} from './pizzaData'
+import {DEFAULT_PIZZA} from '../pizzaData'
 // Types
-import { PizzaConfiguration } from './types';
+import { PizzaConfiguration } from '../types';
 // Hooks
-import { useIngredients } from './useIngredients';
-import { calculateTotalPrice } from './calculateTotalPrice';
+import { useIngredients } from '../useIngredients';
+import { calculateTotalPrice } from '../calculateTotalPrice';
 
 interface PizzaFormProps {
   onPizzaCreated: (pizza: PizzaConfiguration) => void;
