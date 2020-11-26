@@ -8,9 +8,12 @@ interface CheckboxGroupProps {
   isSelected: string[];
 }
 
-export const CheckboxGroup: FC<CheckboxGroupProps> = props => {
-  const { legend, onChange, options, isSelected } = props;
-
+export const CheckboxGroup: FC<CheckboxGroupProps> = ({
+  legend,
+  onChange,
+  options,
+  isSelected,
+}) => {
   return (
     <fieldset>
       <legend>{legend}</legend>
@@ -27,24 +30,6 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = props => {
           </label>
         );
       })}
-      {/* <label>
-        <input
-          type='checkbox'
-          value='cheddar'
-          onChange={updateCheese}
-          checked={cheese.includes('cheddar')}
-        />
-        Чеддер
-      </label>
-      <label>
-        <input
-          type='checkbox'
-          value='dorblue'
-          onChange={updateCheese}
-          checked={cheese.includes('dorblue')}
-        />
-        Дор Блю
-      </label> */}
     </fieldset>
   );
 };

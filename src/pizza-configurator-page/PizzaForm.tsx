@@ -122,104 +122,22 @@ export const PizzaForm: FC<PizzaFormProps> = ({ onPizzaCreated }) => {
           isSelected={cheese}
         />
 
-        {/* Овощи */}
-        <fieldset>
-          <legend>Добавьте овощи</legend>
-          <label>
-            <input
-              type='checkbox'
-              value='tomato'
-              onChange={updateVegetables}
-              checked={vegetables.includes('tomato')}
-            />
-            Помидор
-          </label>
-          <label>
-            <input
-              type='checkbox'
-              value='mushrooms'
-              onChange={updateVegetables}
-              checked={vegetables.includes('mushrooms')}
-            />
-            Грибы
-          </label>
-          <label>
-            <input
-              type='checkbox'
-              value='pepper'
-              onChange={updateVegetables}
-              checked={vegetables.includes('pepper')}
-            />
-            Перец
-          </label>
-          <label>
-            <input
-              type='checkbox'
-              value='pineapple'
-              onChange={updateVegetables}
-              checked={vegetables.includes('pineapple')}
-            />
-            Ананасы
-          </label>
-          <label>
-            <input
-              type='checkbox'
-              value='olives'
-              onChange={updateVegetables}
-              checked={vegetables.includes('olives')}
-            />
-            Оливки
-          </label>
-          <label>
-            <input
-              type='checkbox'
-              value='onion'
-              onChange={updateVegetables}
-              checked={vegetables.includes('onion')}
-            />
-            Лук
-          </label>
-          <label>
-            <input
-              type='checkbox'
-              value='broccoli'
-              onChange={updateVegetables}
-              checked={vegetables.includes('broccoli')}
-            />
-            Брокколи
-          </label>
-        </fieldset>
+        {/* Vegetables */}
+        <CheckboxGroup
+          legend='Добавьте овощи'
+          onChange={updateVegetables}
+          options={VEGETABLES}
+          isSelected={vegetables}
+        />
+
         {/* Meat */}
-        <fieldset>
-          <legend>Добавьте мясо</legend>
-          <label>
-            <input
-              type='checkbox'
-              value='bacon'
-              onChange={updateMeat}
-              checked={meat.includes('bacon')}
-            />
-            Бекон
-          </label>
-          <label>
-            <input
-              type='checkbox'
-              value='pepperoni'
-              onChange={updateMeat}
-              checked={meat.includes('pepperoni')}
-            />
-            Пепперони
-          </label>
-          <label>
-            <input
-              type='checkbox'
-              value='ham'
-              onChange={updateMeat}
-              checked={meat.includes('ham')}
-            />
-            Ветчина
-          </label>
-        </fieldset>
+        <CheckboxGroup
+          legend='Добавьте мясо'
+          onChange={updateMeat}
+          options={MEAT}
+          isSelected={meat}
+        />
+
         <button>Заказать за {totalPrice}руб.</button>
       </form>
     </>
