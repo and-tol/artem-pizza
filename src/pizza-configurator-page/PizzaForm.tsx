@@ -85,21 +85,21 @@ export const PizzaForm: FC<PizzaFormProps> = ({ onPizzaCreated }) => {
         <RadioGroup
           legend='Размер'
           name='size'
-          selected={size}
+          isSelected={size}
           onChange={changeSize}
           options={SIZE}
         />
         <RadioGroup
           legend='Тесто'
           name='dough'
-          selected={dough}
+          isSelected={dough}
           onChange={changeDough}
           options={DOUGH}
         />
         <RadioGroup
           legend='Выберите соус'
           name='sauce'
-          selected={sauce}
+          isSelected={sauce}
           onChange={changeSauce}
           options={SAUCE}
         />

@@ -5,18 +5,19 @@ interface RadioButtonsProps {
   legend: string;
   name: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  selected: string;
+  isSelected: string;
   options: IngredientNameAndPriceState | IngredientNameState;
 }
 
 export const RadioGroup: FC<RadioButtonsProps> = props => {
-  const { legend, name, onChange, selected, options } = props;
+  const { legend, name, onChange, isSelected, options } = props;
 
   return (
     <>
       <fieldset>
         <legend>{legend}</legend>
         {Object.entries(options).map(option => {
+
           return (
             <label key={option[0]}>
               <input
@@ -24,7 +25,7 @@ export const RadioGroup: FC<RadioButtonsProps> = props => {
                 name={name}
                 value={option[0]}
                 onChange={onChange}
-                checked={selected === option[0]}
+                checked={isSelected === option[0]}
               />
               {option[1].name}
               {name === 'size' ? 'см' : null}
