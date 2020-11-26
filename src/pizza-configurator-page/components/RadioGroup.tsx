@@ -16,22 +16,19 @@ export const RadioGroup: FC<RadioButtonsProps> = props => {
     <>
       <fieldset>
         <legend>{legend}</legend>
-        {Object.entries(options).map(option => {
-
-          return (
-            <label key={option[0]}>
-              <input
-                type='radio'
-                name={name}
-                value={option[0]}
-                onChange={onChange}
-                checked={isSelected === option[0]}
-              />
-              {option[1].name}
-              {name === 'size' ? 'см' : null}
-            </label>
-          );
-        })}
+        {Object.entries(options).map(option => (
+          <label key={option[0]}>
+            <input
+              type='radio'
+              name={name}
+              value={option[0]}
+              onChange={onChange}
+              checked={isSelected === option[0]}
+            />
+            {option[1].name}
+            {name === 'size' ? 'см' : null}
+          </label>
+        ))}
       </fieldset>
     </>
   );

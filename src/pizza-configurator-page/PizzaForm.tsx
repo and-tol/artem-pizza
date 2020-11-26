@@ -1,11 +1,21 @@
 import React, { FC, useState } from 'react';
 import { calculateTotalPrice } from '../calculateTotalPrice';
 // Data
-import { DEFAULT_PIZZA, DOUGH, SAUCE, SIZE } from '../pizzaData';
+import {
+  DEFAULT_PIZZA,
+  DOUGH,
+  SAUCE,
+  SIZE,
+  CHEESE,
+  VEGETABLES,
+  MEAT,
+} from '../pizzaData';
 // Types
 import { PizzaConfiguration } from '../types';
+import { CheckboxGroup } from './components/CheckboxGroup';
 // Components
 import { RadioGroup } from './components/RadioGroup';
+
 // Hooks
 import { useIngredients } from './hooks/useIngredients';
 
@@ -105,36 +115,13 @@ export const PizzaForm: FC<PizzaFormProps> = ({ onPizzaCreated }) => {
         />
 
         {/* Cheeses */}
-        <fieldset>
-          <legend>Добавьте сыр</legend>
-          <label>
-            <input
-              type='checkbox'
-              value='mozarella'
-              onChange={updateCheese}
-              checked={cheese.includes('mozarella')}
-            />
-            Моцарелла
-          </label>
-          <label>
-            <input
-              type='checkbox'
-              value='cheddar'
-              onChange={updateCheese}
-              checked={cheese.includes('cheddar')}
-            />
-            Чеддер
-          </label>
-          <label>
-            <input
-              type='checkbox'
-              value='dorblue'
-              onChange={updateCheese}
-              checked={cheese.includes('dorblue')}
-            />
-            Дор Блю
-          </label>
-        </fieldset>
+        <CheckboxGroup
+          legend='Добавьте сыр'
+          onChange={updateCheese}
+          options={CHEESE}
+          isSelected={cheese}
+        />
+
         {/* Овощи */}
         <fieldset>
           <legend>Добавьте овощи</legend>
