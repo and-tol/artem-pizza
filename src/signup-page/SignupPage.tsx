@@ -18,7 +18,7 @@ export const SignupPage = () => {
           </label>
         </fieldset>
         <button>Зарегистрироваться</button>
-        <Link to={book.login.url}>Страница Входа в приложение (Логина) </Link>
+        <Link to={book.login.url}>На страницу Входа в приложение (Логина) </Link>
       </form>
     </>
   );
