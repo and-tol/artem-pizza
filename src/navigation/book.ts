@@ -1,3 +1,4 @@
+import { SignupPage } from './../signup-page/SignupPage';
 // Pages
 
 
@@ -22,6 +23,9 @@ export const book = Object.freeze({
   },
   receipt: {
     url: '/receipt',
+  },
+  signup: {
+    url: '/signup'
   },
   notFound: {
     page: ""
