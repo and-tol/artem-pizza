@@ -1,8 +1,7 @@
+import { Book } from '../types';
 import { SignupPage } from './../signup-page/SignupPage';
-// Pages
 
-
-export const book = Object.freeze({
+export const book: Book = Object.freeze({
   root: {
     url: '/',
   },
@@ -25,9 +24,7 @@ export const book = Object.freeze({
     url: '/receipt',
   },
   signup: {
-    url: '/signup'
+    url: '/signup',
+    page: SignupPage,
   },
-  notFound: {
-    page: ""
-  }
 });
