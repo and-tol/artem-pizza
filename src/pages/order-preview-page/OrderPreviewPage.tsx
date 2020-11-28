@@ -5,11 +5,11 @@ import { calculateTotalPrice } from '../../calculateTotalPrice';
 import { CHEESE, DOUGH, MEAT, SAUCE, SIZE, VEGETABLES } from '../../pizzaData';
 // Types
 import { IngredientNameAndPriceState, PizzaConfiguration } from '../../types';
-interface PizzaOrderPreviewPageProps {
+interface OrderPreviewPageProps {
   pizza: PizzaConfiguration;
 }
 
-export const PizzaOrderPreviewPage: React.FC<PizzaOrderPreviewPageProps> = ({
+export const OrderPreviewPage: React.FC<OrderPreviewPageProps> = ({
   pizza,
 }) => {
   const { size, dough, sauce, cheese, vegetables, meat } = pizza;

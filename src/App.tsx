@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PizzaConfiguratorPage } from './pages/pizza-configurator-page';
-import { PizzaOrderPreviewPage } from './pages/pizza-order-preview-page/PizzaOrderPreviewPage';
+import { OrderPreviewPage } from './pages/order-preview-page';
+import { DEFAULT_PIZZA } from './pizzaData';
 // Types
 import { PizzaConfiguration } from './types';
-import { DEFAULT_PIZZA } from './pizzaData';
 
 function App() {
   const [pizza, setPizza] = useState<PizzaConfiguration>(DEFAULT_PIZZA);
@@ -17,7 +17,7 @@ function App() {
   if (render.current) {
     return <PizzaConfiguratorPage onPizzaCreated={setPizza} />;
   }
-  return <PizzaOrderPreviewPage pizza={pizza} />;
+  return <OrderPreviewPage pizza={pizza} />;
 }
 
 export default App;
