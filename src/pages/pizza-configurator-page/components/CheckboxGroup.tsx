@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IngredientNameAndPriceState, IngredientNameState } from '../../types';
+import { IngredientNameAndPriceState, IngredientNameState } from '../../../types';
 
 interface CheckboxGroupProps {
   legend: string;

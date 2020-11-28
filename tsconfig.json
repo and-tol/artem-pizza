@@ -21,6 +21,6 @@
     "jsx": "react"
   },
   "include": [
-    "src",
+    "src", "temp/book copy.ts",
   ]
 }

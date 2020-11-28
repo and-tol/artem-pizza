@@ -1,5 +1,4 @@
 import { Book } from '../types';
-import { SignupPage } from './../signup-page/SignupPage';
 
 export const book: Book = Object.freeze({
   root: {
@@ -25,6 +24,5 @@ export const book: Book = Object.freeze({
   },
   signup: {
     url: '/signup',
-    page: SignupPage,
   },
 });

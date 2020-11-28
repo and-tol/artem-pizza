@@ -1,5 +1,5 @@
-import React, { FC, useState } from 'react';
-import { calculateTotalPrice } from '../calculateTotalPrice';
+import React, { useState } from 'react';
+import { calculateTotalPrice } from '../../calculateTotalPrice';
 // Data
 import {
   DEFAULT_PIZZA,
@@ -9,9 +9,9 @@ import {
   CHEESE,
   VEGETABLES,
   MEAT,
-} from '../pizzaData';
+} from '../../pizzaData';
 // Types
-import { PizzaConfiguration } from '../types';
+import { PizzaConfiguration } from '../../types';
 import { CheckboxGroup } from './components/CheckboxGroup';
 // Components
 import { RadioGroup } from './components/RadioGroup';
@@ -23,7 +23,7 @@ interface PizzaFormProps {
   onPizzaCreated: (pizza: PizzaConfiguration) => void;
 }
 
-export const PizzaForm: FC<PizzaFormProps> = ({ onPizzaCreated }) => {
+export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
   // Size
   const [size, setSize] = useState(DEFAULT_PIZZA.size);
 
@@ -33,7 +33,6 @@ export const PizzaForm: FC<PizzaFormProps> = ({ onPizzaCreated }) => {
 
   // Dough
   const [dough, setDough] = useState(DEFAULT_PIZZA.dough);
-  // console.log('dough', dough);
   const changeDough = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDough(event.target.value);
   };

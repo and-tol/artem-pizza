@@ -13,9 +13,9 @@ export interface PizzaConfiguration {
   size: string;
   dough: string;
   sauce: string;
-  cheese?: string[];
-  vegetables?: string[];
-  meat?: string[];
+  cheese: string[];
+  vegetables: string[];
+  meat: string[];
 }
 
 export type Page = {
@@ -23,9 +23,10 @@ export type Page = {
     | string
     | H.LocationDescriptorObject<unknown>
     | ((location: H.Location<unknown>) => H.LocationDescriptor<unknown>);
-  page?: () => JSX.Element;
+  // page?: <T>({}: T) => JSX.Element;
 };
 
 export interface Book {
   [item: string]: Page;
 }
+

@@ -1,18 +1,10 @@
+import { TotalPrice } from './types';
 import { SIZE, CHEESE, VEGETABLES, MEAT } from './pizzaData';
 
-type CalculateTotalPriceType = {
-  size: string;
-  cheese: string[];
-  vegetables: string[];
-  meat: string[];
-};
 
-export const calculateTotalPrice = ({
-  size,
-  cheese,
-  vegetables,
-  meat
-}: CalculateTotalPriceType): number => {
+export const calculateTotalPrice = (pizza: TotalPrice): number => {
+  const { size, cheese, vegetables, meat } = pizza;
+
   const sizePrice: number = SIZE[size].price;
 
   const cheesePrice: number = cheese.reduce(
@@ -26,7 +18,7 @@ export const calculateTotalPrice = ({
   );
 
   const meatPrice: number = meat.reduce(
-    (price: number, meat: string) => price +MEAT[meat].price,
+    (price: number, meat: string) => price + MEAT[meat].price,
     0
   );
 
