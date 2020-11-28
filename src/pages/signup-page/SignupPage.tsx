@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { book } from '../../navigation/book';
+import { book } from '../../../temp/book';
 
 export const SignupPage = () => {
   return (
