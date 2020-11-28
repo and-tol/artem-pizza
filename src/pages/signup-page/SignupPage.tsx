@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { book } from '../../../temp/book';
 
 export const SignupPage = () => {
   return (
@@ -18,7 +17,7 @@ export const SignupPage = () => {
           </label>
         </fieldset>
         <button>Зарегистрироваться</button>
-        <Link to={book.login.url}>На страницу Входа в приложение (Логина) </Link>
+        <Link to="/login">На страницу Входа в приложение (Логина) </Link>
       </form>
     </>
   );
