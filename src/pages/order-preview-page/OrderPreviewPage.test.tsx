@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { MemoryRouter, Router } from 'react-router-dom';
 import { OrderPreviewPage } from './OrderPreviewPage';
 import { createMemoryHistory } from 'history';
