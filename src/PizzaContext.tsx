@@ -1,24 +1,19 @@
-import React, {
-  createContext,
-  PropsWithChildren,
-  useContext,
-  useState,
-} from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { DEFAULT_PIZZA } from './pizzaData';
 import { PizzaConfiguration } from './types';
 
-interface PizzaContextI {
-  pizza: PizzaConfiguration;
-  setPizza: React.Dispatch<React.SetStateAction<PizzaConfiguration>>;
+export interface PizzaContextI {
+  pizza?: PizzaConfiguration;
+  setPizza?: React.Dispatch<React.SetStateAction<PizzaConfiguration>>;
 }
 
-interface Props {
+interface PropsPizzaProvider {
   children: React.ReactNode;
 }
 
-const PizzaContext = createContext<PizzaContextI | null>(null);
+const PizzaContext = createContext<PizzaContextI>({});
 
-export const PizzaProvider = (props: Props) => {
+export const PizzaProvider = (props: PropsPizzaProvider) => {
   const [pizza, setPizza] = useState(DEFAULT_PIZZA);
 
   return (

@@ -1,19 +1,27 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { PizzaForm } from './PizzaForm';
-// Types
+import { usePizza } from '../../PizzaContext';
+import { useHistory } from 'react-router-dom';
 import { PizzaConfiguration } from '../../types';
 
-interface PizzaConfiguratorPageProps {
-  onPizzaCreated: (pizza: PizzaConfiguration) => void;
-}
+/**
+ * @param _usePizzaHook simplifies context testing
+ */
+export const PizzaConfiguratorPage = ({ _usePizzaHook = usePizza }) => {
+  const { setPizza } = _usePizzaHook();
+  const history = useHistory();
 
-export const PizzaConfiguratorPage = ({
-  onPizzaCreated,
-}: PizzaConfiguratorPageProps) => {
+  const onPizzaChange = (pizza: PizzaConfiguration): void => {
+    if (setPizza) {
+      setPizza(pizza);
+      history.push('/order-preview');
+    }
+  };
+
   return (
     <>
       <h1>Страница кофигуратора пиццы</h1>
-      <PizzaForm onPizzaCreated={onPizzaCreated} />
+      <PizzaForm onPizzaCreated={onPizzaChange} />
     </>
   );
 };

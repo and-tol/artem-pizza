@@ -19,8 +19,8 @@ import { RadioGroup } from './components/RadioGroup';
 // Hooks
 import { useIngredients } from './hooks/useIngredients';
 
-interface PizzaFormProps {
-  onPizzaCreated: (pizza: PizzaConfiguration) => void;
+export interface PizzaFormProps {
+  onPizzaCreated?: (pizza: PizzaConfiguration) => void;
 }
 
 export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
@@ -85,7 +85,9 @@ export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    onPizzaCreated({ size, dough, sauce, cheese, vegetables, meat });
+    if (onPizzaCreated) {
+      onPizzaCreated({ size, dough, sauce, cheese, vegetables, meat });
+    }
   };
 
   return (

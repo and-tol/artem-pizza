@@ -1,5 +1,3 @@
-import * as H from 'history';
-
 export type NameAndPrice = { name: string; price: number };
 export type Name = { name: string };
 
@@ -17,16 +15,12 @@ export interface PizzaConfiguration {
   vegetables: string[];
   meat: string[];
 }
-
-export type Page = {
-  url:
-    | string
-    | H.LocationDescriptorObject<unknown>
-    | ((location: H.Location<unknown>) => H.LocationDescriptor<unknown>);
-  // page?: <T>({}: T) => JSX.Element;
-};
-
-export interface Book {
-  [item: string]: Page;
+// FIXME: усовершенствовать типы
+export interface TotalPrice {
+  size: string;
+  dough?: string;
+  sauce?: string;
+  cheese: string[];
+  vegetables: string[];
+  meat: string[];
 }
-
