@@ -1,16 +1,16 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { CheckoutPage } from './CheckoutPage';
+import { ReceiptPage } from './ReceiptPage';
 
-describe('CheckoutPage', () => {
+describe('ReceiptPage', () => {
   it('renders correctly', () => {
     const { getByText } = render(
       <MemoryRouter>
-        <CheckoutPage />
+        <ReceiptPage />
       </MemoryRouter>
-    )
+    );
 
-    expect(getByText(/оформления заказа/i)).toBeInTheDocument()
+    expect(getByText('Страница с чеком')).toBeInTheDocument();
   });
 });

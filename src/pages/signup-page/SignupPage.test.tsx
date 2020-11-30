@@ -1,30 +1,29 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import { MemoryRouter, Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { LoginPage } from './LoginPage';
+import { MemoryRouter, Router } from 'react-router-dom';
+import { SignupPage } from './SignupPage';
 
-describe('LoginPage', () => {
+describe('SignupPage', () => {
   it('renders correctly', () => {
     const { getByRole } = render(
       <MemoryRouter>
-        <LoginPage />
+        <SignupPage />
       </MemoryRouter>
     );
 
     expect(getByRole('button')).toBeInTheDocument();
   });
-  it('navigation to "/signup"', () => {
+  it('navigation to "/login"', () => {
     const history = createMemoryHistory();
-
     const { getByRole } = render(
       <Router history={history}>
-        <LoginPage />
+        <SignupPage />
       </Router>
     );
 
     fireEvent.click(getByRole('link'));
 
-    expect(history.location.pathname).toEqual('/signup');
+    expect(history.location.pathname).toEqual('/login');
   });
 });
