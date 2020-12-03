@@ -1,12 +1,11 @@
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { render } from '@testing-library/react';
-import { PizzaOrderPreview } from './PizzaOrderPreview';
+import { OrderPreview } from './OrderPreview';
 
-describe('PizzaOrderPreview', () => {
+describe('OrderPreview', () => {
   it('renders correctly', () => {
-    // Arrange
     const { getByText } = render(
-      <PizzaOrderPreview
+      <OrderPreview
         pizza={{
           cheese: ['mozarella'],
           dough: 'thin',
@@ -17,8 +16,9 @@ describe('PizzaOrderPreview', () => {
         }}
       />
     );
-    // Act & Assert
-    expect(getByText("Размер: 30см")).toBeInTheDocument()
+    screen.debug();
+
+    expect(getByText('Размер: 30см')).toBeInTheDocument();
     expect(getByText('Тесто: тонкое')).toBeInTheDocument();
     expect(getByText('Соус: томатный')).toBeInTheDocument();
     expect(getByText('Сыр: моцарелла')).toBeInTheDocument();
