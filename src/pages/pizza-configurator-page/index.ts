@@ -1,1 +1,1 @@
-export  * from './PizzaConfiguratorPage'
+export * from './PizzaConfiguratorPage';
