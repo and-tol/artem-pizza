@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { calculateTotalPrice } from '../../calculateTotalPrice';
 // Data
 import {
@@ -24,6 +25,8 @@ export interface PizzaFormProps {
 }
 
 export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
+  // const {register, handleSubmit} = useForm()
+
   // Size
   const [size, setSize] = useState(DEFAULT_PIZZA.size);
 
@@ -90,10 +93,17 @@ export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
     }
   };
 
+  // const onSubmit = handleSubmit(data => {
+  //   if (onPizzaCreated) {
+  //     onPizzaCreated({ size, dough, sauce, cheese, vegetables, meat });
+  //   }
+  // })
+
   return (
     <>
       <form onSubmit={handleSubmit}>
         <RadioGroup
+          // register={register}
           legend='Размер'
           name='size'
           isSelected={size}

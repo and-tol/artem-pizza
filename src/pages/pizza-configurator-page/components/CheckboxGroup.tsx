@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { IngredientNameAndPriceState, IngredientNameState } from '../../../types';
 
-interface CheckboxGroupProps {
+interface CheckboxGroupProps  {
+  // register: () => void;
   legend: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   options: IngredientNameAndPriceState | IngredientNameState;
@@ -9,6 +10,7 @@ interface CheckboxGroupProps {
 }
 
 export const CheckboxGroup: FC<CheckboxGroupProps> = ({
+  // register,
   legend,
   onChange,
   options,
@@ -21,6 +23,7 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = ({
         return (
           <label key={option[0]}>
             <input
+              // ref={register}
               type='checkbox'
               value={option[0]}
               onChange={onChange}
