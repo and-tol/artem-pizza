@@ -15,7 +15,7 @@ export interface PizzaConfiguration {
   vegetables: string[];
   meat: string[];
 }
-// FIXME: усовершенствовать типы
+
 export interface TotalPrice {
   size: string;
   dough?: string;
