@@ -18,6 +18,27 @@ export interface PizzaConfiguration {
   meat: string[];
 }
 
+// export interface TotalPrice {
+//   size: string;
+//   dough?: string;
+//   sauce?: string;
+//   bacon: boolean;
+//   broccoli: boolean;
+//   cheddar: boolean;
+//   dorblue: boolean;
+//   ham: boolean;
+//   mozarella: boolean;
+//   mushrooms: boolean;
+//   olives: boolean;
+//   onion: boolean;
+//   pepper: boolean;
+//   pepperoni: boolean;
+//   pineapple: boolean;
+//   tomato: boolean;
+// }
+
+
+
 export interface TotalPrice {
   size: string;
   dough?: string;
@@ -27,7 +48,7 @@ export interface TotalPrice {
   meat: string[];
 }
 
-
+// React Hook Form
 export type RegisterOptions = Partial<{
   required: Message | ValidationRule<boolean>;
   min: ValidationRule<number | string>;

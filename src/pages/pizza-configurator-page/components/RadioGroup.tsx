@@ -1,16 +1,20 @@
 import React, { FC } from 'react';
-import { IngredientNameAndPriceState, IngredientNameState } from '../../../types';
+import {
+  IngredientNameAndPriceState,
+  IngredientNameState,
+  refType,
+} from '../../../types';
 
 interface RadioButtonsProps {
+  register: refType;
   legend: string;
   name: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  isSelected: string;
+
   options: IngredientNameAndPriceState | IngredientNameState;
 }
 
 export const RadioGroup: FC<RadioButtonsProps> = props => {
-  const { legend, name, onChange, isSelected, options } = props;
+  const { register, legend, name, options } = props;
 
   return (
     <>
@@ -19,11 +23,11 @@ export const RadioGroup: FC<RadioButtonsProps> = props => {
         {Object.entries(options).map(option => (
           <label key={option[0]}>
             <input
+              ref={register}
               type='radio'
               name={name}
               value={option[0]}
-              onChange={onChange}
-              checked={isSelected === option[0]}
+
             />
             {option[1].name}
             {name === 'size' ? 'см' : null}
