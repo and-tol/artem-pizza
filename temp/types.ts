@@ -30,3 +30,11 @@ export interface PizzaOrder {
   ingredients: string[];
   totalPrice: number;
 }
+
+
+      const mockTypingEvent: Partial<BaseSyntheticEvent> = {
+        target: { value: 'test' },
+      };
+
+
+
