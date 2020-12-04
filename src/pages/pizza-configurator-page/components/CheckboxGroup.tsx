@@ -1,20 +1,21 @@
 import React, { FC } from 'react';
-import { IngredientNameAndPriceState, IngredientNameState } from '../../../types';
+import {
+  IngredientNameAndPriceState,
+  IngredientNameState,
+  refType,
+} from '../../../types';
 
-interface CheckboxGroupProps  {
-  // register: () => void;
+
+interface CheckboxGroupProps {
+  register: refType;
   legend: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   options: IngredientNameAndPriceState | IngredientNameState;
-  isSelected: string[];
 }
 
 export const CheckboxGroup: FC<CheckboxGroupProps> = ({
-  // register,
+  register,
   legend,
-  onChange,
   options,
-  isSelected,
 }) => {
   return (
     <fieldset>
@@ -23,11 +24,9 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = ({
         return (
           <label key={option[0]}>
             <input
-              // ref={register}
+              ref={register}
               type='checkbox'
               value={option[0]}
-              onChange={onChange}
-              checked={isSelected.includes(option[0])}
             />
             {option[1].name}
           </label>

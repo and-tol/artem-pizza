@@ -1,3 +1,5 @@
+import { Message, ValidationRule, Validate } from 'react-hook-form';
+
 export type NameAndPrice = { name: string; price: number };
 export type Name = { name: string };
 
@@ -24,3 +26,21 @@ export interface TotalPrice {
   vegetables: string[];
   meat: string[];
 }
+
+
+export type RegisterOptions = Partial<{
+  required: Message | ValidationRule<boolean>;
+  min: ValidationRule<number | string>;
+  max: ValidationRule<number | string>;
+  maxLength: ValidationRule<number | string>;
+  minLength: ValidationRule<number | string>;
+  pattern: ValidationRule<RegExp>;
+  validate: Validate | Record<string, Validate>;
+}>;
+
+export type refType =
+  | string
+  | ((instance: HTMLInputElement | null) => void)
+  | React.RefObject<HTMLInputElement>
+  | null
+  | undefined;

@@ -25,7 +25,7 @@ export interface PizzaFormProps {
 }
 
 export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
-  // const {register, handleSubmit} = useForm()
+  const { register, handleSubmit, watch } = useForm();
 
   // Size
   const [size, setSize] = useState(DEFAULT_PIZZA.size);
@@ -79,6 +79,9 @@ export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
     }
   };
 
+  const values = watch()
+  console.log('values>>>>', values)
+
   const totalPrice: number = calculateTotalPrice({
     size,
     cheese,
@@ -86,22 +89,23 @@ export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
     meat,
   });
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    if (onPizzaCreated) {
-      onPizzaCreated({ size, dough, sauce, cheese, vegetables, meat });
-    }
-  };
-
-  // const onSubmit = handleSubmit(data => {
+  // const handleSubmit = (event: React.FormEvent) => {
+  //   event.preventDefault();
   //   if (onPizzaCreated) {
   //     onPizzaCreated({ size, dough, sauce, cheese, vegetables, meat });
   //   }
-  // })
+  // };
+
+  const onSubmit = handleSubmit(data => {
+    console.log('data>>>>', data);
+    if (onPizzaCreated) {
+      onPizzaCreated({ size, dough, sauce, cheese, vegetables, meat });
+    }
+  });
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <RadioGroup
           // register={register}
           legend='Размер'
@@ -128,25 +132,22 @@ export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
         {/* Cheeses */}
         <CheckboxGroup
           legend='Добавьте сыр'
-          onChange={updateCheese}
           options={CHEESE}
-          isSelected={cheese}
+          register={register}
         />
 
         {/* Vegetables */}
         <CheckboxGroup
           legend='Добавьте овощи'
-          onChange={updateVegetables}
           options={VEGETABLES}
-          isSelected={vegetables}
+          register={register}
         />
 
         {/* Meat */}
         <CheckboxGroup
           legend='Добавьте мясо'
-          onChange={updateMeat}
           options={MEAT}
-          isSelected={meat}
+          register={register}
         />
 
         <button>Заказать за {totalPrice}руб.</button>
