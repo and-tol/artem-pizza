@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, BaseSyntheticEvent } from 'react';
+import React from 'react';
 import { fireEvent, render, waitFor, screen } from '@testing-library/react';
 import { MemoryRouter, Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
@@ -33,14 +33,33 @@ describe('LoginPage', () => {
     expect(history.location.pathname).toEqual('/signup');
   });
 
+  describe('disabled button becomes anabled', () => {
+    it('does input value to email and password', async () => {
+
+      const { getByLabelText, getByRole } = render(
+        <MemoryRouter>
+          <LoginPage />
+        </MemoryRouter>
+      );
+
+      fireEvent.change(getByLabelText('Э-почта'), {
+        target: { value: 'test@mail.com' },
+      });
+      fireEvent.change(getByLabelText('Пароль'), {
+        target: { value: '123456' },
+      });
+
+      await (await waitFor(() => expect(getByRole("button")).not.toBeDisabled()));
+    })
+  });
+
   describe('with valid input', () => {
-    it.todo('not display error when value is valid')
-  })
+    it.todo('not display error when value is valid');
+  });
 
   describe('errors to email input', () => {
     it.todo('renders email validation errors');
     it.todo('renders email required errors');
-
   });
   describe('with invalid password', () => {
     it.todo('renders password validation errors');

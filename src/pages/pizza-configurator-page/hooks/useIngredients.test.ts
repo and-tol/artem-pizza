@@ -17,7 +17,7 @@ describe('useIngredients', () => {
   describe('.addItem', () => {
     it('adds the item to the state array', () => {
       const { result } = renderHook(() => useIngredients([]));
-      console.log(result)
+      
       act(() => {
         result.current[1]('test');
       });

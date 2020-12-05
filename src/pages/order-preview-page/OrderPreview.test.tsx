@@ -16,7 +16,6 @@ describe('OrderPreview', () => {
         }}
       />
     );
-    screen.debug();
 
     expect(getByText('Размер: 30см')).toBeInTheDocument();
     expect(getByText('Тесто: тонкое')).toBeInTheDocument();

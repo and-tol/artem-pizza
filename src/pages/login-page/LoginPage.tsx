@@ -24,7 +24,6 @@ export const LoginPage = () => {
     console.log(data);
   });
 
-  // console.log(errors)
   return (
     <>
       <h1>Авторизация</h1>
