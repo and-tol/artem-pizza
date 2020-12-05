@@ -17,7 +17,6 @@ import { PizzaConfiguration } from '../../types';
 import { CheckboxGroup } from './components/CheckboxGroup';
 import { RadioGroup } from './components/RadioGroup';
 
-
 export interface PizzaFormProps {
   onPizzaCreated?: (pizza: PizzaConfiguration) => void;
 }
@@ -30,7 +29,7 @@ export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
   const values = watch();
   const totalPrice: number = calculateTotalPrice(values);
 
-  const onSubmit = handleSubmit((data: PizzaConfiguration) => {
+  const onSubmit = handleSubmit((values: PizzaConfiguration) => {
     if (onPizzaCreated) {
       onPizzaCreated(values);
     }
