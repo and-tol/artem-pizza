@@ -2,16 +2,15 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import { RadioGroup } from './RadioGroup';
 
+const register = jest.fn();
+
 describe('RadioGroup', () => {
   it('renders correctly', () => {
-    // Arrange
-    const onChange = jest.fn();
     const { getByRole } = render(
       <RadioGroup
+        register={register}
         legend='Тест'
         name='test'
-        onChange={onChange}
-        isSelected='test2'
         options={{ thin: { name: 'Тонкое' } }}
       />
     );
@@ -19,36 +18,12 @@ describe('RadioGroup', () => {
     expect(getByRole('radio')).toBeInTheDocument();
   });
 
-  it('checked default radiobutton', () => {
-    // Arrange
-    const onChange = jest.fn();
-    render(
-      <RadioGroup
-        legend='Тест'
-        name='test'
-        onChange={onChange}
-        isSelected='thin'
-        options={{
-          thin: { name: 'Тонкое' },
-          puffy: { name: 'Пышное' },
-        }}
-      />
-    );
-
-    const radiobutton = screen.getByRole('radio', { checked: true });
-
-    expect(radiobutton).toBeInTheDocument();
-  });
-
-  it('calls correct function on click', () => {
-    // Arrange
-    const onChange = jest.fn();
+  it('calls method register on click', () => {
     const { getByLabelText } = render(
       <RadioGroup
+        register={register}
         legend='Тест'
         name='test'
-        onChange={onChange}
-        isSelected='thin'
         options={{
           thin: { name: 'Тонкое' },
           puffy: { name: 'Пышное' },
@@ -56,10 +31,8 @@ describe('RadioGroup', () => {
       />
     );
 
-    // Act
     fireEvent.click(getByLabelText('Пышное'));
 
-    // Assert
-    expect(onChange).toHaveBeenCalled();
+    expect(register).toHaveBeenCalled();
   });
 });
