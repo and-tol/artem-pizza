@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
@@ -7,16 +7,24 @@ type Profile = {
   password: string;
 };
 
-let isDisabled = true;
-
 export const LoginPage = () => {
-  const { register, handleSubmit, errors } = useForm<Profile>();
+  const { register, handleSubmit, errors, watch } = useForm<Profile>();
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  const watchEmail = watch('email');
+  const watchPassword = watch('password');
+
+  useEffect(() => {
+    if (watchEmail && watchPassword) {
+      setIsDisabled(false);
+    }
+  }, [watchEmail, watchPassword]);
 
   const onSubmit = handleSubmit(data => {
     console.log(data);
   });
 
-  console.log(errors)
+  // console.log(errors)
   return (
     <>
       <h1>Авторизация</h1>
@@ -30,7 +38,6 @@ export const LoginPage = () => {
               type='text'
               name='email'
             />
-            {/* {errors.email?.type === 'required' && <div>Это обязательное поле</div>} */}
           </label>
           <label htmlFor='password'>
             Пароль
@@ -40,7 +47,6 @@ export const LoginPage = () => {
               type='password'
               name='password'
             />
-            {/* {errors.password?.type === 'required'  && <div>Это обязательное поле</div>} */}
           </label>
         </fieldset>
         <button type='submit' disabled={isDisabled}>
