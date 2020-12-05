@@ -27,7 +27,7 @@ export interface TotalPrice {
   meat: string[];
 }
 
-
+// React Hook Form register
 export type RegisterOptions = Partial<{
   required: Message | ValidationRule<boolean>;
   min: ValidationRule<number | string>;

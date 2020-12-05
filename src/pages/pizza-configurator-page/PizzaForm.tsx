@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { calculateTotalPrice } from '../../calculateTotalPrice';
 // Data
@@ -13,93 +13,25 @@ import {
 } from '../../pizzaData';
 // Types
 import { PizzaConfiguration } from '../../types';
-import { CheckboxGroup } from './components/CheckboxGroup';
 // Components
+import { CheckboxGroup } from './components/CheckboxGroup';
 import { RadioGroup } from './components/RadioGroup';
-
-// Hooks
-import { useIngredients } from './hooks/useIngredients';
 
 export interface PizzaFormProps {
   onPizzaCreated?: (pizza: PizzaConfiguration) => void;
 }
 
 export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
-  const { register, handleSubmit, watch } = useForm();
-
-  // Size
-  const [size, setSize] = useState(DEFAULT_PIZZA.size);
-
-  const changeSize = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSize(event.target.value);
-  };
-
-  // Dough
-  const [dough, setDough] = useState(DEFAULT_PIZZA.dough);
-  const changeDough = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDough(event.target.value);
-  };
-  // Sauce
-  const [sauce, setSauce] = useState(DEFAULT_PIZZA.sauce);
-  const changeSauce = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSauce(event.target.value);
-  };
-  // Cheese
-  const [cheese, addCheese, deleteCheese] = useIngredients([]);
-
-  const updateCheese = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = event.target;
-
-    if (checked) {
-      addCheese(value);
-    } else {
-      deleteCheese(value);
-    }
-  };
-  // Vegetables
-  const [vegetables, addVegetables, deleteVegetables] = useIngredients([]);
-  const updateVegetables = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = event.target;
-
-    if (checked) {
-      addVegetables(value);
-    } else {
-      deleteVegetables(value);
-    }
-  };
-  // Meat
-  const [meat, addMeat, deleteMeat] = useIngredients([]);
-  const updateMeat = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = event.target;
-
-    if (checked) {
-      addMeat(value);
-    } else {
-      deleteMeat(value);
-    }
-  };
-
-  const values = watch()
-  console.log('values>>>>', values)
-
-  const totalPrice: number = calculateTotalPrice({
-    size,
-    cheese,
-    vegetables,
-    meat,
+  const { register, handleSubmit, watch } = useForm<PizzaConfiguration>({
+    defaultValues: DEFAULT_PIZZA,
   });
 
-  // const handleSubmit = (event: React.FormEvent) => {
-  //   event.preventDefault();
-  //   if (onPizzaCreated) {
-  //     onPizzaCreated({ size, dough, sauce, cheese, vegetables, meat });
-  //   }
-  // };
+  const values = watch();
+  const totalPrice: number = calculateTotalPrice(values);
 
-  const onSubmit = handleSubmit(data => {
-    console.log('data>>>>', data);
+  const onSubmit = handleSubmit((values: PizzaConfiguration) => {
     if (onPizzaCreated) {
-      onPizzaCreated({ size, dough, sauce, cheese, vegetables, meat });
+      onPizzaCreated(values);
     }
   });
 
@@ -107,47 +39,43 @@ export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
     <>
       <form onSubmit={onSubmit}>
         <RadioGroup
-          // register={register}
+          register={register}
           legend='Размер'
           name='size'
-          isSelected={size}
-          onChange={changeSize}
           options={SIZE}
         />
         <RadioGroup
+          register={register}
           legend='Тесто'
           name='dough'
-          isSelected={dough}
-          onChange={changeDough}
           options={DOUGH}
         />
         <RadioGroup
+          register={register}
           legend='Выберите соус'
           name='sauce'
-          isSelected={sauce}
-          onChange={changeSauce}
           options={SAUCE}
         />
 
-        {/* Cheeses */}
         <CheckboxGroup
           legend='Добавьте сыр'
           options={CHEESE}
           register={register}
+          name='cheese'
         />
 
-        {/* Vegetables */}
         <CheckboxGroup
           legend='Добавьте овощи'
           options={VEGETABLES}
           register={register}
+          name='vegetables'
         />
 
-        {/* Meat */}
         <CheckboxGroup
           legend='Добавьте мясо'
           options={MEAT}
           register={register}
+          name='meat'
         />
 
         <button>Заказать за {totalPrice}руб.</button>
