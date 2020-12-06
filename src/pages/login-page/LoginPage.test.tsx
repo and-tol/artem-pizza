@@ -1,9 +1,8 @@
 import React from 'react';
-import { fireEvent, render, waitFor, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter, Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { LoginPage } from './LoginPage';
-import { act } from '@testing-library/react-hooks';
 
 // const mockLogin = jest.fn((email, password) => {
 //   return Promise.resolve({ email, password });
@@ -34,7 +33,7 @@ describe('LoginPage', () => {
   });
 
   describe('disabled button becomes abled', () => {
-    it('does input value to email and password',  () => {
+    it('does input value to email and password', () => {
       const { getByLabelText, getByRole } = render(
         <MemoryRouter>
           <LoginPage />
@@ -48,10 +47,9 @@ describe('LoginPage', () => {
         target: { value: '123456' },
       });
 
-      screen.debug()
+      screen.debug();
 
       expect(getByRole('button').getAttribute('disabled')).toBe(null);
-
     });
   });
 
