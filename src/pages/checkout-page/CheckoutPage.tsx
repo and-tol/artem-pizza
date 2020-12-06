@@ -1,6 +1,42 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+const normalizeCardNumber = (value: string): string => {
+  return (
+    value
+      .replace(/\s/g, '')
+      .match(/.{1,4}/g)
+      ?.join(' ')
+      .substr(0, 19) || ''
+  );
+};
+
+type FormValues = {
+  address: string;
+  porch: string;
+  flow: string;
+  flat: string;
+  cardNumber: string;
+  year: string;
+  CVV: string;
+  cardName: string;
+};
+
+const schema = yup.object().shape({
+  address: yup.string().required('Это обязательное поле'),
+});
 
 export const CheckoutPage = () => {
+  const { register, handleSubmit, errors, setValue } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = handleSubmit(data => {
+    console.log(data);
+  });
+
   return (
     <>
       <h1>Оформление заказа</h1>
@@ -13,43 +49,76 @@ export const CheckoutPage = () => {
         <p>420 руб.</p>
       </section>
       <section>
-        <form>
+        <form onSubmit={onSubmit}>
           <fieldset>
             <legend>Адрес доставки</legend>
             <label htmlFor='address'>
-              <input id='address' type='text' placeholder='Введите адрес' />
+              <input
+                ref={register}
+                name='address'
+                id='address'
+                type='text'
+                placeholder='Введите адрес'
+              />
+              <div>{errors.address?.message}</div>
             </label>
             <div>
               <label htmlFor='porch'>
                 подъезд
-                <input id='porch' type='tel' />
+                <input ref={register} name='porch' id='porch' type='tel' />
               </label>
               <label htmlFor='flow'>
                 этаж
-                <input id='flow' type='tel' />
+                <input ref={register} name='flow' id='flow' type='tel' />
               </label>
               <label htmlFor='flat'>
                 квартира
-                <input id='flat' type='tel' />
+                <input ref={register} name='flat' id='flat' type='tel' />
               </label>
             </div>
           </fieldset>
           <fieldset>
             <legend>Данные для оплаты</legend>
-            <label htmlFor='card-number'>
-              <input id='card-number' type='tel' placeholder='Номер карты' />
+            <label htmlFor='cardNumber'>
+              <input
+                ref={register}
+                name='cardNumber'
+                id='cardNumber'
+                type='tel'
+                inputMode='numeric'
+                autoComplete='cc-number'
+                placeholder='Номер карты'
+                onChange={e => {
+                  const { value } = e.target;
+                  setValue('cardNumber', normalizeCardNumber(value));
+                }}
+              />
             </label>
             <div>
               <label htmlFor='year'>
-                <input id='year' type='tel' placeholder='MM/YYYY' />
+                <input
+                  ref={register}
+                  name='year'
+                  id='year'
+                  type='tel'
+                  placeholder='MM/YYYY'
+                />
               </label>
               <label htmlFor='CVV'>
-                <input id='CVV' type='tel' placeholder='CVV' />
+                <input
+                  ref={register}
+                  name='CVV'
+                  id='CVV'
+                  type='tel'
+                  placeholder='CVV'
+                />
               </label>
             </div>
-            <label htmlFor='card-name'>
+            <label htmlFor='cardName'>
               <input
-                id='card-name'
+                ref={register}
+                name='cardName'
+                id='cardName'
                 type='text'
                 placeholder='Имя как на карте'
               />
