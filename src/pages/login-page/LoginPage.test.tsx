@@ -33,24 +33,26 @@ describe('LoginPage', () => {
     expect(history.location.pathname).toEqual('/signup');
   });
 
-  describe('disabled button becomes anabled', () => {
-    it('does input value to email and password', async () => {
-
+  describe('disabled button becomes abled', () => {
+    it('does input value to email and password',  () => {
       const { getByLabelText, getByRole } = render(
         <MemoryRouter>
           <LoginPage />
         </MemoryRouter>
       );
 
-      fireEvent.change(getByLabelText('Э-почта'), {
+      fireEvent.input(getByLabelText('Э-почта'), {
         target: { value: 'test@mail.com' },
       });
-      fireEvent.change(getByLabelText('Пароль'), {
+      fireEvent.input(getByLabelText('Пароль'), {
         target: { value: '123456' },
       });
 
-      await (await waitFor(() => expect(getByRole("button")).not.toBeDisabled()));
-    })
+      screen.debug()
+
+      expect(getByRole('button').getAttribute('disabled')).toBe(null);
+
+    });
   });
 
   describe('with valid input', () => {

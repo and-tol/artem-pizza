@@ -5,8 +5,8 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 type FormValues = {
-  email: string | undefined;
-  password: string | undefined;
+  email: string ;
+  password: string ;
 };
 
 const schema = yup.object().shape({
@@ -46,7 +46,7 @@ export const SignupPage = () => {
         <fieldset>
           <label htmlFor='email'>
             Э-почта
-            <input ref={register} id='email' type='text' name='login' />
+            <input ref={register} id='email' type='text' name='email' />
             <div>{errors.email?.message}</div>
           </label>
           <label htmlFor='password'>
@@ -60,7 +60,9 @@ export const SignupPage = () => {
             <div>{errors.password?.message}</div>
           </label>
         </fieldset>
-        <button disabled={isDisabled}>Зарегистрироваться</button>
+        <button type='submit' disabled={isDisabled}>
+          Зарегистрироваться
+        </button>
         <Link to='/login'>На страницу Входа в приложение (Логина) </Link>
       </form>
     </>
