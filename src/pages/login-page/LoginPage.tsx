@@ -47,19 +47,21 @@ export const LoginPage = () => {
             Э-почта
             <input
               id='email'
-              ref={register({ required: true })}
+              ref={register}
               type='text'
               name='email'
             />
+            <div>{errors.email?.message }</div>
           </label>
           <label htmlFor='password'>
             Пароль
             <input
               id='password'
-              ref={register({ required: true })}
+              ref={register}
               type='password'
               name='password'
             />
+            <div>{errors.password?.message }</div>
           </label>
         </fieldset>
         <button type='submit' disabled={isDisabled}>
