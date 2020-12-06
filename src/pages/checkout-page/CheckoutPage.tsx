@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+var valid = require('card-validator');
+
+console.log(valid);
 
 const normalizeCardNumber = (value: string): string => {
   return (
@@ -29,9 +32,25 @@ const schema = yup.object().shape({
 });
 
 export const CheckoutPage = () => {
-  const { register, handleSubmit, errors, setValue } = useForm<FormValues>({
+  const {
+    register,
+    handleSubmit,
+    errors,
+    setValue,
+    watch,
+  } = useForm<FormValues>({
     resolver: yupResolver(schema),
   });
+  const [cardType, setCardType] = useState<string | null>(null);
+
+  const watchCardNumber = watch('cardNumber');
+  let numberValidation = valid.number(watchCardNumber);
+
+  useEffect(() => {
+    if (numberValidation.card) {
+      setCardType(numberValidation.card.type);
+    }
+  }, [watchCardNumber]);
 
   const onSubmit = handleSubmit(data => {
     console.log(data);
@@ -93,6 +112,7 @@ export const CheckoutPage = () => {
                   setValue('cardNumber', normalizeCardNumber(value));
                 }}
               />
+              {cardType && <span>{cardType}</span>}
             </label>
             <div>
               <label htmlFor='year'>
