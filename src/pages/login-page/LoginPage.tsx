@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-type Profile = {
-  email: string;
-  password: string;
+type FormValues = {
+  email: string | undefined;
+  password: string | undefined;
 };
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Неверный адрес электронной почты')
+    .required('Это обязательное поле'),
+  password: yup
+    .string()
+    .min(6, 'Длина пароля должна быть не менее шести символов')
+    .required('Это обязательное поле'),
+});
 
 export const LoginPage = () => {
-  const { register, handleSubmit, errors, watch } = useForm<Profile>();
+  const { register, handleSubmit, errors, watch } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+  });
   const [isDisabled, setIsDisabled] = useState(true);
 
   const watchEmail = watch('email');
