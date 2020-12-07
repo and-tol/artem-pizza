@@ -21,6 +21,6 @@
     "jsx": "react"
   },
   "include": [
-    "src", "temp/LoginPage.test copy.tsx",
+    "src",
   ]
 }
