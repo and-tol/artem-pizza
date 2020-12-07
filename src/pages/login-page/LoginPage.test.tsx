@@ -1,12 +1,9 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import { MemoryRouter, Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { LoginPage } from './LoginPage';
-
-// const mockLogin = jest.fn((email, password) => {
-//   return Promise.resolve({ email, password });
-// });
 
 describe('LoginPage', () => {
   it('renders correctly', () => {
@@ -57,12 +54,31 @@ describe('LoginPage', () => {
     it.todo('not display error when value is valid');
   });
 
-  describe('errors to email input', () => {
-    it.todo('renders email validation errors');
-    it.todo('renders email required errors');
-  });
+  describe('with invalid email input', () => {
+    it.todo('renders the email validation errors');
+    
   describe('with invalid password', () => {
-    it.todo('renders password validation errors');
-    it.todo('renders password required errors');
+    it('renders password validation errors', async () => {
+      const { getByRole, getByLabelText, getByText, container } = render(
+        <MemoryRouter>
+          <LoginPage />
+        </MemoryRouter>
+      );
+
+      fireEvent.input(getByLabelText('Э-почта'), {
+        target: { value: 'test@mail.com' },
+      });
+      fireEvent.input(getByLabelText('Пароль'), {
+        target: { value: '123' },
+      });
+
+      await act(async () => {
+        fireEvent.submit(getByRole('button'));
+      });
+
+      expect(
+        getByText('Длина пароля должна быть не менее шести символов')
+      ).toBeInTheDocument();
+    });
   });
 });

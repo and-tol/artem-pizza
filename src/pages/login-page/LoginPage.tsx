@@ -11,12 +11,10 @@ type FormValues = {
 const schema = yup.object().shape({
   email: yup
     .string()
-    .email('Неверный адрес электронной почты')
-    .required('Это обязательное поле'),
+    .email('Неверный адрес электронной почты'),
   password: yup
     .string()
     .min(6, 'Длина пароля должна быть не менее шести символов')
-    .required('Это обязательное поле'),
 });
 
 export const LoginPage = () => {
