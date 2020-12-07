@@ -4,8 +4,6 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 var valid = require('card-validator');
 
-console.log(valid);
-
 const normalizeCardNumber = (value: string): string => {
   return (
     value
@@ -53,7 +51,8 @@ export const CheckoutPage = () => {
   }, [watchCardNumber]);
 
   const onSubmit = handleSubmit(data => {
-    console.log(data);
+    console.log("data>>>>", data);
+    // return data
   });
 
   return (
@@ -65,7 +64,7 @@ export const CheckoutPage = () => {
           30 см на толстом тесте• Томатный соус • Моцарелла • Томаты • Бекон
         </p>
         <hr />
-        <p>420 руб.</p>
+        <p>600 руб.</p>
       </section>
       <section>
         <form onSubmit={onSubmit}>
@@ -144,6 +143,19 @@ export const CheckoutPage = () => {
               />
             </label>
           </fieldset>
+          <section>
+            <p>
+              Стоимость заказа <span>420 руб.</span>
+            </p>
+            <p>
+              Доставка <span>180 руб.</span>
+            </p>
+            <hr />
+            <p>
+              К оплате <span>600 руб.</span>
+            </p>
+            <button>Оплатить 600 руб.</button>
+          </section>
         </form>
         <p>
           Доставим пиццу в течение часа или вернем деньги. Артем слов на ветер
