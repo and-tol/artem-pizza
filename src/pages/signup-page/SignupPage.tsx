@@ -5,19 +5,15 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 type FormValues = {
-  email: string ;
-  password: string ;
+  email: string;
+  password: string;
 };
 
 const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email('Неверный адрес электронной почты')
-    .required('Это обязательное поле'),
+  email: yup.string().email('Неверный адрес электронной почты'),
   password: yup
     .string()
-    .min(6, 'Длина пароля должна быть не менее шести символов')
-    .required('Это обязательное поле'),
+    .min(6, 'Длина пароля должна быть не менее шести символов'),
 });
 
 export const SignupPage = () => {

@@ -7,12 +7,14 @@ import { LoginPage } from './LoginPage';
 
 describe('LoginPage', () => {
   it('renders correctly', () => {
-    const { getByRole } = render(
+    const { getByRole,getByLabelText } = render(
       <MemoryRouter>
         <LoginPage />
       </MemoryRouter>
     );
 
+    expect(getByLabelText('Э-почта')).toBeInTheDocument();
+    expect(getByLabelText('Пароль')).toBeInTheDocument();
     expect(getByRole('button')).toBeInTheDocument();
   });
   it('navigation to "/signup"', () => {
@@ -44,8 +46,6 @@ describe('LoginPage', () => {
         target: { value: '123456' },
       });
 
-      screen.debug();
-
       expect(getByRole('button').getAttribute('disabled')).toBe(null);
     });
   });
@@ -56,7 +56,7 @@ describe('LoginPage', () => {
 
   describe('with invalid email input', () => {
     it.todo('renders the email validation errors');
-    
+
   describe('with invalid password', () => {
     it('renders password validation errors', async () => {
       const { getByRole, getByLabelText, getByText, container } = render(

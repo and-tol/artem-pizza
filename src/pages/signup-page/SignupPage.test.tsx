@@ -2,18 +2,22 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { MemoryRouter, Router } from 'react-router-dom';
+import { act } from 'react-dom/test-utils';
 import { SignupPage } from './SignupPage';
 
 describe('SignupPage', () => {
   it('renders correctly', () => {
-    const { getByRole } = render(
+    const { getByRole, getByLabelText } = render(
       <MemoryRouter>
         <SignupPage />
       </MemoryRouter>
     );
 
+    expect(getByLabelText('Э-почта')).toBeInTheDocument();
+    expect(getByLabelText('Пароль')).toBeInTheDocument();
     expect(getByRole('button')).toBeInTheDocument();
   });
+
   it('navigation to "/login"', () => {
     const history = createMemoryHistory();
     const { getByRole } = render(
@@ -41,7 +45,7 @@ describe('SignupPage', () => {
       fireEvent.input(getByLabelText('Пароль'), {
         target: { value: '123456' },
       });
-      // TODO: ? почему тест не проходит с методом change
+      
       expect(getByRole('button').getAttribute('disabled')).toBe(null);
     });
   });
@@ -52,10 +56,31 @@ describe('SignupPage', () => {
 
   describe('errors to email input', () => {
     it.todo('renders email validation errors');
-    it.todo('renders email required errors');
   });
   describe('with invalid password', () => {
-    it.todo('renders password validation errors');
-    it.todo('renders password required errors');
+    describe('with invalid password', () => {
+      it('renders password validation errors', async () => {
+        const { getByRole, getByLabelText, getByText, container } = render(
+          <MemoryRouter>
+            <SignupPage />
+          </MemoryRouter>
+        );
+
+        fireEvent.input(getByLabelText('Э-почта'), {
+          target: { value: 'test@mail.com' },
+        });
+        fireEvent.input(getByLabelText('Пароль'), {
+          target: { value: '123' },
+        });
+
+        await act(async () => {
+          fireEvent.submit(getByRole('button'));
+        });
+
+        expect(
+          getByText('Длина пароля должна быть не менее шести символов')
+        ).toBeInTheDocument();
+      });
+    });
   });
 });
