@@ -2,6 +2,7 @@ import {
   IngredientNameAndPriceState,
   IngredientNameState,
   PizzaConfiguration,
+  IngredientNameAndCaseState,
 } from './types';
 
 export const DEFAULT_PIZZA: PizzaConfiguration = Object.freeze({
@@ -17,7 +18,7 @@ export const SIZE: IngredientNameAndPriceState = Object.freeze({
   '30': { name: '30', price: 200 },
   '35': { name: '35', price: 250 },
 });
-export const DOUGH: IngredientNameState = Object.freeze({
+export const DOUGH: IngredientNameAndCaseState = Object.freeze({
   thin: { name: 'Тонкое', case: 'тонком' },
   puffy: { name: 'Пышное', case: 'пышном' },
 });

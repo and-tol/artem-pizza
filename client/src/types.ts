@@ -2,12 +2,16 @@ import { Message, ValidationRule, Validate } from 'react-hook-form';
 
 export type NameAndPrice = { name: string; price: number };
 export type Name = { name: string };
+export type NameAndCase = { name: string, case: string };
 
 export interface IngredientNameAndPriceState {
   [item: string]: NameAndPrice;
 }
 export interface IngredientNameState {
   [item: string]: Name;
+}
+export interface IngredientNameAndCaseState {
+  [item: string]: NameAndCase;
 }
 export interface PizzaConfiguration {
   size: string;
