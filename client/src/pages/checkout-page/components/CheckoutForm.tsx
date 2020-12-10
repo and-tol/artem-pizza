@@ -1,13 +1,13 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 // Helpers
 import { calculateTotalPrice } from '../../../calculateTotalPrice';
-// Types
-import { PizzaConfiguration } from '../../../types';
 // Data
 import { PIZZA_DELIVERY } from '../../../pizzaData';
+// Types
+import { PizzaConfiguration } from '../../../types';
 var valid = require('card-validator');
 
 const normalizeCardNumber = (value: string): string => {
@@ -59,7 +59,7 @@ export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
     // return data
   });
 
-  const orderPrice = calculateTotalPrice(pizza = defaultPizza);
+  const orderPrice = calculateTotalPrice((pizza = defaultPizza));
 
   return (
     <>

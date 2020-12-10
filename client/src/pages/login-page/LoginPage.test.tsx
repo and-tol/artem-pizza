@@ -1,8 +1,8 @@
+import { fireEvent, render } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { MemoryRouter, Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 import { LoginPage } from './LoginPage';
 
 describe('LoginPage', () => {
@@ -32,8 +32,8 @@ describe('LoginPage', () => {
     expect(history.location.pathname).toEqual('/signup');
   });
 
-  describe('disabled button becomes abled', () => {
-    it('does input value to email and password', () => {
+  describe('disabled button becomes enabled', () => {
+    it('enables submitting when email and password were provided', () => {
       const { getByLabelText, getByRole } = render(
         <MemoryRouter>
           <LoginPage />

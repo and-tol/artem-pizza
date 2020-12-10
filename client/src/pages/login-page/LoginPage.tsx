@@ -8,6 +8,7 @@ type FormValues = {
   email: string | undefined;
   password: string | undefined;
 };
+
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -23,14 +24,14 @@ export const LoginPage = () => {
   });
   const [isDisabled, setIsDisabled] = useState(true);
 
-  const watchEmail = watch('email');
-  const watchPassword = watch('password');
+  const email = watch('email');
+  const password = watch('password');
 
   useEffect(() => {
-    if (watchEmail && watchPassword) {
+    if (email && password) {
       setIsDisabled(false);
     }
-  }, [watchEmail, watchPassword]);
+  }, [email, password]);
 
   const onSubmit = handleSubmit(data => {
     console.log(data);

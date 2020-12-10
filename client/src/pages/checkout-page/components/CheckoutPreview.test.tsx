@@ -1,21 +1,20 @@
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { render, screen} from '@testing-library/react';
 import { CheckoutPreview } from './CheckoutPreview';
 
 describe('CheckoutPreview', () => {
   it('renders correctly', () => {
     render(
       <CheckoutPreview
-        pizza=
-        {{
+        pizza={{
           cheese: ['mozarella'],
           dough: 'thin',
           meat: ['bacon'],
           sauce: 'tomato',
           size: '30',
           vegetables: ['tomato'],
-        }}>
-      </CheckoutPreview>
+        }}
+      ></CheckoutPreview>
     );
 
     expect(screen.getByText('30')).toBeInTheDocument();

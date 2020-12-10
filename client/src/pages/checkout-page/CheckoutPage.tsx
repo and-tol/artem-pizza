@@ -2,10 +2,9 @@ import React from 'react';
 // Context
 import { usePizza } from '../../PizzaContext';
 // Data
-import {DEFAULT_PIZZA} from '../../pizzaData'
+import { DEFAULT_PIZZA } from '../../pizzaData';
 // Components
-import { CheckoutPreview } from './components';
-import { CheckoutForm } from './components';
+import { CheckoutForm, CheckoutPreview } from './components';
 
 export const CheckoutPage = () => {
   const { pizza } = usePizza();
