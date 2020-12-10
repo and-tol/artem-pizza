@@ -4,7 +4,6 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 var valid = require('card-validator');
 
-
 const normalizeCardNumber = (value: string): string => {
   return (
     value
@@ -16,14 +15,14 @@ const normalizeCardNumber = (value: string): string => {
 };
 
 type FormValues = {
-  address: string,
-  porch: string,
-  flow: string,
-  flat: string,
-  cardNumber: string,
-  year: string,
-  CVV: string,
-  cardName: string,
+  address: string;
+  porch: string;
+  flow: string;
+  flat: string;
+  cardNumber: string;
+  year: string;
+  CVV: string;
+  cardName: string;
 };
 
 const schema = yup.object().shape({
@@ -31,12 +30,15 @@ const schema = yup.object().shape({
 });
 
 export const CheckoutForm = () => {
-  const { register, handleSubmit, errors, setValue, watch } =
-    useForm <
-    FormValues >
-    {
-      resolver: yupResolver(schema),
-    };
+  const {
+    register,
+    handleSubmit,
+    errors,
+    setValue,
+    watch,
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+  });
 
   const сardNumber = watch('cardNumber');
   let numberValidation = valid.number(сardNumber);
