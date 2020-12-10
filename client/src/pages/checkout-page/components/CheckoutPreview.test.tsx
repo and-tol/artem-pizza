@@ -18,10 +18,11 @@ describe('CheckoutPreview', () => {
       </CheckoutPreview>
     );
 
-    // const size = screen.findByText('30')
-
-    // console.log('screen', size);
-
     expect(screen.getByText('30')).toBeInTheDocument();
+    expect(screen.getByText('тонком')).toBeInTheDocument();
+    expect(screen.getByText('Томатный')).toBeInTheDocument();
+    expect(screen.getByText('Моцарелла')).toBeInTheDocument();
+    expect(screen.getByText('Помидор')).toBeInTheDocument();
+    expect(screen.getByText('Бекон')).toBeInTheDocument();
   });
 });

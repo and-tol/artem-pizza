@@ -7,7 +7,7 @@ import { LoginPage } from './LoginPage';
 
 describe('LoginPage', () => {
   it('renders correctly', () => {
-    const { getByRole,getByLabelText } = render(
+    const { getByRole, getByLabelText } = render(
       <MemoryRouter>
         <LoginPage />
       </MemoryRouter>
@@ -17,6 +17,7 @@ describe('LoginPage', () => {
     expect(getByLabelText('Пароль')).toBeInTheDocument();
     expect(getByRole('button')).toBeInTheDocument();
   });
+
   it('navigation to "/signup"', () => {
     const history = createMemoryHistory();
 
@@ -56,6 +57,7 @@ describe('LoginPage', () => {
 
   describe('with invalid email input', () => {
     it.todo('renders the email validation errors');
+  });
 
   describe('with invalid password', () => {
     it('renders password validation errors', async () => {

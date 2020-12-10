@@ -1,4 +1,6 @@
 import React from 'react';
+// Context
+import { usePizza } from '../../../PizzaContext';
 // Helpers
 import { calculateTotalPrice } from '../../../calculateTotalPrice';
 // Data
@@ -9,6 +11,7 @@ import {
   SAUCE,
   SIZE,
   VEGETABLES,
+  DEFAULT_PIZZA,
 } from '../../../pizzaData';
 // Types
 import {
@@ -17,13 +20,13 @@ import {
 } from '../../../types';
 
 interface CheckoutPreviewProps {
-  pizza: PizzaConfiguration;
+  pizza?: PizzaConfiguration;
 }
 
-export const CheckoutPreview: React.FC<CheckoutPreviewProps | undefined> = ({
-  pizza,
-}) => {
-  const { size, dough, sauce, cheese, vegetables, meat } = pizza;
+export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({ pizza }) => {
+  const { size, dough, sauce, cheese, vegetables, meat } =
+    pizza || DEFAULT_PIZZA;
+  console.log('sauce>>>>', SAUCE[sauce].name);
 
   const renderIngredient = (
     ingredients: string[],
@@ -40,15 +43,25 @@ export const CheckoutPreview: React.FC<CheckoutPreviewProps | undefined> = ({
       <section>
         <h3>Ленивая Маргарита</h3>
         <p>
-          <span>{SIZE[size].name}</span> см на {DOUGH[dough].case.toLowerCase()}{' '}
-          тесте • {SAUCE[sauce].name} соус •
-          {cheese.length ? renderIngredient(cheese, CHEESE) : null} •
-          {vegetables.length ? renderIngredient(vegetables, VEGETABLES) : null}{' '}
-          • {meat.length ? renderIngredient(meat, MEAT) : null}
+          <span>{SIZE[size].name}</span> см на
+          <span> {DOUGH[dough].case.toLowerCase()} </span>
+          тесте <span> • {SAUCE[sauce].name}</span> соус
+          <span>
+             {cheese?.length ? `• ${renderIngredient(cheese, CHEESE)}` : null}
+          </span>
+          <span>
+            {vegetables?.length
+              ? `• ${renderIngredient(vegetables, VEGETABLES)}`
+              : null}
+          </span>
+          <span>
+            {' '}
+            {meat?.length ? `• ${renderIngredient(meat, MEAT)}` : null}
+          </span>
         </p>
 
         <hr />
-        <p>{calculateTotalPrice(pizza)} руб.</p>
+        <p>{calculateTotalPrice((pizza = DEFAULT_PIZZA))} руб.</p>
       </section>
     </>
   );
