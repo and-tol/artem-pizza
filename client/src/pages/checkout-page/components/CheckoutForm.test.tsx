@@ -8,7 +8,16 @@ describe('CheckoutForm', () => {
   it('renders correctly', () => {
     const { getByLabelText, getByPlaceholderText, getByRole } = render(
       <MemoryRouter>
-        <CheckoutForm />
+        <CheckoutForm
+          defaultPizza={{
+            size: '30',
+            dough: 'thin',
+            sauce: 'tomato',
+            cheese: [],
+            vegetables: [],
+            meat: [],
+          }}
+        />
       </MemoryRouter>
     );
 
@@ -29,7 +38,16 @@ describe('CheckoutForm', () => {
     it('breaks the card number into groups of four digits', () => {
       const { getByPlaceholderText } = render(
         <MemoryRouter>
-          <CheckoutForm />
+          <CheckoutForm
+            defaultPizza={{
+              size: '30',
+              dough: 'thin',
+              sauce: 'tomato',
+              cheese: [],
+              vegetables: [],
+              meat: [],
+            }}
+          />
         </MemoryRouter>
       );
 
@@ -48,7 +66,16 @@ describe('CheckoutForm', () => {
     it('renders the address validation error', async () => {
       const { getByRole, getByText } = render(
         <MemoryRouter>
-          <CheckoutForm />
+          <CheckoutForm
+            defaultPizza={{
+              size: '30',
+              dough: 'thin',
+              sauce: 'tomato',
+              cheese: [],
+              vegetables: [],
+              meat: [],
+            }}
+          />
         </MemoryRouter>
       );
 
