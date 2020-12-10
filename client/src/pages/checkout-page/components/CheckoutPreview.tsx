@@ -1,6 +1,4 @@
 import React from 'react';
-// Context
-import { usePizza } from '../../../PizzaContext';
 // Helpers
 import { calculateTotalPrice } from '../../../calculateTotalPrice';
 // Data
@@ -26,7 +24,6 @@ interface CheckoutPreviewProps {
 export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({ pizza }) => {
   const { size, dough, sauce, cheese, vegetables, meat } =
     pizza || DEFAULT_PIZZA;
-  console.log('sauce>>>>', SAUCE[sauce].name);
 
   const renderIngredient = (
     ingredients: string[],
@@ -47,16 +44,16 @@ export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({ pizza }) => {
           <span> {DOUGH[dough].case.toLowerCase()} </span>
           тесте <span> • {SAUCE[sauce].name}</span> соус
           <span>
-             {cheese?.length ? `• ${renderIngredient(cheese, CHEESE)}` : null}
+             {cheese?.length ? ` • ${renderIngredient(cheese, CHEESE)}` : null}
           </span>
           <span>
             {vegetables?.length
-              ? `• ${renderIngredient(vegetables, VEGETABLES)}`
+              ? ` • ${renderIngredient(vegetables, VEGETABLES)}`
               : null}
           </span>
           <span>
             {' '}
-            {meat?.length ? `• ${renderIngredient(meat, MEAT)}` : null}
+            {meat?.length ? ` • ${renderIngredient(meat, MEAT)}` : null}
           </span>
         </p>
 

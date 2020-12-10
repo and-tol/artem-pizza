@@ -1,8 +1,7 @@
 import {
-  IngredientNameAndPriceState,
+  IngredientNameAndCaseState, IngredientNameAndPriceState,
   IngredientNameState,
-  PizzaConfiguration,
-  IngredientNameAndCaseState,
+  PizzaConfiguration
 } from './types';
 
 export const DEFAULT_PIZZA: PizzaConfiguration = Object.freeze({
@@ -50,3 +49,6 @@ export const MEAT: IngredientNameAndPriceState = Object.freeze({
 // 'Моцарелла', 'Чеддер', 'Дор Блю';
 // 'Помидор', 'Грибы', 'Перец', 'Ананасы', 'Оливки', 'Лук', 'Брокколи';
 // 'Бекон', 'Пепперони', 'Ветчина';
+
+
+export const PIZZA_DELIVERY = 180;

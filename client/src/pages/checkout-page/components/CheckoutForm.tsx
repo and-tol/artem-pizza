@@ -2,6 +2,12 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+// Helpers
+import { calculateTotalPrice } from '../../../calculateTotalPrice';
+// Types
+import { PizzaConfiguration } from '../../../types';
+// Data
+import { PIZZA_DELIVERY } from '../../../pizzaData';
 var valid = require('card-validator');
 
 const normalizeCardNumber = (value: string): string => {
@@ -13,6 +19,11 @@ const normalizeCardNumber = (value: string): string => {
       .substr(0, 19) || ''
   );
 };
+
+interface CheckoutFormProps {
+  pizza?: PizzaConfiguration;
+  defaultPizza: PizzaConfiguration;
+}
 
 type FormValues = {
   address: string;
@@ -29,7 +40,7 @@ const schema = yup.object().shape({
   address: yup.string().required('Это обязательное поле'),
 });
 
-export const CheckoutForm = () => {
+export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
   const {
     register,
     handleSubmit,
@@ -47,6 +58,9 @@ export const CheckoutForm = () => {
     console.log('data>>>>', data);
     // return data
   });
+
+  const orderPrice = calculateTotalPrice(pizza = defaultPizza);
+
   return (
     <>
       <section>
@@ -128,16 +142,16 @@ export const CheckoutForm = () => {
           </fieldset>
           <section>
             <p>
-              Стоимость заказа <span>420 руб.</span>
+              Стоимость заказа <span>{orderPrice} руб.</span>
             </p>
             <p>
-              Доставка <span>180 руб.</span>
+              Доставка <span>{PIZZA_DELIVERY} руб.</span>
             </p>
             <hr />
             <p>
-              К оплате <span>600 руб.</span>
+              К оплате <span>{orderPrice + PIZZA_DELIVERY} руб.</span>
             </p>
-            <button>Оплатить 600 руб.</button>
+            <button>Оплатить {orderPrice + PIZZA_DELIVERY} руб.</button>
           </section>
         </form>
         <p>
