@@ -40,8 +40,8 @@ export const CheckoutPreview: React.FC<CheckoutPreviewProps | undefined> = ({
       <section>
         <h3>Ленивая Маргарита</h3>
         <p>
-          {SIZE[size].name} см на {DOUGH[dough].case.toLowerCase()} тесте •{' '}
-          {SAUCE[sauce].name} соус •
+          <span>{SIZE[size].name}</span> см на {DOUGH[dough].case.toLowerCase()}{' '}
+          тесте • {SAUCE[sauce].name} соус •
           {cheese.length ? renderIngredient(cheese, CHEESE) : null} •
           {vegetables.length ? renderIngredient(vegetables, VEGETABLES) : null}{' '}
           • {meat.length ? renderIngredient(meat, MEAT) : null}
