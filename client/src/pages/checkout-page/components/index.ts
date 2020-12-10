@@ -1,1 +1,3 @@
-export * from './CheckoutPreview'
+export * from './CheckoutForm';
+export * from './CheckoutPreview';
+
