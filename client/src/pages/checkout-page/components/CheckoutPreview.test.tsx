@@ -3,7 +3,7 @@ import React from 'react';
 import { CheckoutPreview } from './CheckoutPreview';
 
 describe('CheckoutPreview', () => {
-  it('renders correctly', () => {
+  it('renders correctly', async () => {
     render(
       <CheckoutPreview
         pizza={{
@@ -18,10 +18,10 @@ describe('CheckoutPreview', () => {
     );
 
     expect(screen.getByText('30')).toBeInTheDocument();
-    expect(screen.getByText('тонком')).toBeInTheDocument();
-    expect(screen.getByText('Томатный')).toBeInTheDocument();
-    expect(screen.getByText('Моцарелла')).toBeInTheDocument();
-    expect(screen.getByText('Помидор')).toBeInTheDocument();
-    expect(screen.getByText('Бекон')).toBeInTheDocument();
+    expect(screen.getByText(/тонком/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Томатный/i)).toBeInTheDocument()
+    expect(await screen.findByText(/Моцарелла/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Помидор/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Бекон/i)).toBeInTheDocument();
   });
 });

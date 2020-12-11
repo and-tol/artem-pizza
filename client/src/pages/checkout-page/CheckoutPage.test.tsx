@@ -12,6 +12,6 @@ describe('CheckoutPage', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByLabelText('Оформление заказа')).toBeInTheDocument();
+    expect(screen.getByText('Оформление заказа')).toBeInTheDocument();
   });
 });
