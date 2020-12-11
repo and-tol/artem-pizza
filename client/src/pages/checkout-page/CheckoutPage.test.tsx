@@ -5,7 +5,7 @@ import { CheckoutPage } from './CheckoutPage';
 
 describe('CheckoutPage', () => {
   it('renders correctly', () => {
-    // TODO: React Context
+    
     render(
       <MemoryRouter>
         <CheckoutPage />
