@@ -11,7 +11,7 @@ interface PizzaProviderProps {
   children: React.ReactNode;
 }
 
-const PizzaContext = createContext<PizzaContext>({});
+export const PizzaContext = createContext<PizzaContext>({});
 
 export const PizzaProvider = (props: PizzaProviderProps) => {
   const [pizza, setPizza] = useState(DEFAULT_PIZZA);
