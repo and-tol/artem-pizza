@@ -2,12 +2,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import { api } from '../../../api';
 // Helpers
 import { calculateTotalPrice } from '../../../calculateTotalPrice';
 // Data
 import { PIZZA_DELIVERY } from '../../../pizzaData';
 // Types
-import { PizzaConfiguration } from '../../../types';
+import { Order, PizzaConfiguration } from '../../../types';
 var valid = require('card-validator');
 
 const normalizeCardNumber = (value: string): string => {
@@ -38,6 +39,8 @@ type FormValues = {
 
 const schema = yup.object().shape({
   address: yup.string().required('Это обязательное поле'),
+  cardNumber: yup.string().required('Это обязательное поле'),
+  cardName: yup.string().required('Это обязательное поле'),
 });
 
 export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
@@ -54,9 +57,19 @@ export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
   const сardNumber = watch('cardNumber');
   let numberValidation = valid.number(сardNumber);
 
-  const onSubmit = handleSubmit(data => {
+  const onSubmit = handleSubmit(async data => {
     console.log('data>>>>', data);
-    // return data
+
+    const order: Order = {
+      ingredients: [pizza],
+      address: data.address,
+      name: data.cardName,
+      card_number: data.cardNumber,
+    };
+
+    console.log('order>>>>', order);
+
+    await api.orders.createOrder(order);
   });
 
   const orderPrice = calculateTotalPrice((pizza = defaultPizza));
@@ -108,6 +121,7 @@ export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
                   setValue('cardNumber', normalizeCardNumber(value));
                 }}
               />
+              <div>{errors.cardNumber?.message}</div>
               <span>{numberValidation.card && numberValidation.card.type}</span>
             </label>
             <div>
@@ -138,6 +152,7 @@ export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
                 type='text'
                 placeholder='Имя как на карте'
               />
+              <div>{errors.cardName?.message}</div>
             </label>
           </fieldset>
           <section>
