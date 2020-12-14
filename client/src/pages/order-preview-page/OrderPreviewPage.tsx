@@ -7,7 +7,8 @@ import { OrderPreview } from './OrderPreview';
  * @param _usePizzaHook simplifies context testing
  */
 export const OrderPreviewPage = ({ _usePizzaHook = usePizza }) => {
-  const { pizza } = _usePizzaHook();
+  const PizzaContext = _usePizzaHook();
+  const pizza = PizzaContext!.pizza;
 
   if (pizza) {
     return (
@@ -23,4 +24,4 @@ export const OrderPreviewPage = ({ _usePizzaHook = usePizza }) => {
   } else {
     return <Redirect to='/' />;
   }
-};
+};;

@@ -22,7 +22,7 @@ const normalizeCardNumber = (value: string): string => {
 };
 
 interface CheckoutFormProps {
-  pizza?: PizzaConfiguration;
+  pizza: PizzaConfiguration | null;
   defaultPizza: PizzaConfiguration;
 }
 

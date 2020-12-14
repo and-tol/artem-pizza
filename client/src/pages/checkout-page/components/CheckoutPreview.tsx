@@ -12,15 +12,12 @@ import {
   DEFAULT_PIZZA,
 } from '../../../pizzaData';
 // Types
-import {
-  IngredientNameAndPriceState,
-  PizzaConfiguration,
-} from '../../../types';
+import { PizzaConfiguration } from '../../../types';
 // Helpers
 import { renderIngredient } from '../../../share/renderIngredient';
 
 interface CheckoutPreviewProps {
-  pizza?: PizzaConfiguration;
+  pizza: PizzaConfiguration;
 }
 
 export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({ pizza }) => {
