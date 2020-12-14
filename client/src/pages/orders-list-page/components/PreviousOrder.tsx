@@ -22,15 +22,6 @@ export const PreviousOrder = ({ order }: PreviousOrderProps) => {
 
   const { card_number, ingredients } = { ...order };
 
-  console.log("ingredients>>>", ingredients[0])
-  /*
-  Order = {
-  ingredients: [null | undefined | PizzaConfiguration];
-  address: string;
-  name: string;
-  card_number: string;
-  */
-
   return (
     <section>
       <header>
@@ -43,20 +34,20 @@ export const PreviousOrder = ({ order }: PreviousOrderProps) => {
       <div>
         <h3>Ленивая Маргарита</h3>
         <p>
-          <span>{SIZE[ingredients[0]?.size].name}</span> см на
-          <span> {DOUGH[ingredients.dough].case.toLowerCase()} </span>
-          тесте <span> • {SAUCE[ingredients.sauce].name}</span> соус
+          <span>{SIZE[ingredients[0]!.size].name}</span> см на
+          <span> {DOUGH[ingredients[0]!.dough].case.toLowerCase()} </span>
+          тесте <span> • {SAUCE[ingredients[0]!.sauce].name}</span> соус
           <span>
-             {ingredients.cheese?.length ? ` • ${renderIngredient(ingredients.cheese, CHEESE)}` : null}
+             {ingredients[0]!.cheese?.length ? ` • ${renderIngredient(ingredients[0]!.cheese, CHEESE)}` : null}
           </span>
           <span>
-            {ingredients.vegetables?.length
-              ? ` • ${renderIngredient(ingredients.vegetables, VEGETABLES)}`
+            {ingredients[0]!.vegetables?.length
+              ? ` • ${renderIngredient(ingredients[0]!.vegetables, VEGETABLES)}`
               : null}
           </span>
           <span>
             {' '}
-            {ingredients.meat?.length ? ` • ${renderIngredient(ingredients.meat, MEAT)}` : null}
+            {ingredients[0]!.meat?.length ? ` • ${renderIngredient(ingredients[0]!.meat, MEAT)}` : null}
           </span>
         </p>
       </div>
