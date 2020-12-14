@@ -21,8 +21,7 @@ interface CheckoutPreviewProps {
 }
 
 export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({ pizza }) => {
-  const { size, dough, sauce, cheese, vegetables, meat } =
-    pizza || DEFAULT_PIZZA;
+  const { size, dough, sauce, cheese, vegetables, meat } = pizza;
 
   return (
     <>
@@ -31,7 +30,7 @@ export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({ pizza }) => {
         <p>
           <span>{SIZE[size].name}</span> см на
           <span> {DOUGH[dough].case.toLowerCase()} </span>
-          тесте <span> • {SAUCE[sauce].name}</span> соус
+          тесте <span>{` • ${SAUCE[sauce].name}`}</span> соус
           <span>
              {cheese?.length ? ` • ${renderIngredient(cheese, CHEESE)}` : null}
           </span>

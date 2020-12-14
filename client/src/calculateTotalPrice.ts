@@ -1,4 +1,3 @@
-import { TotalPrice } from './types';
 import { SIZE, CHEESE, VEGETABLES, MEAT, DEFAULT_PIZZA } from './pizzaData';
 
 export const calculateTotalPrice = (pizza = DEFAULT_PIZZA): number => {

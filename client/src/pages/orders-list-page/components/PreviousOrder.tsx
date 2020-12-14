@@ -18,9 +18,9 @@ type PreviousOrderProps = {
 };
 
 export const PreviousOrder = ({ order }: PreviousOrderProps) => {
-  console.log('order>>>', order);
 
   const { card_number, ingredients } = { ...order };
+  console.log('order>>>', order?.ingredients[0]);
 
   return (
     <section>
