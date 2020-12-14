@@ -58,7 +58,6 @@ export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
   let numberValidation = valid.number(сardNumber);
 
   const onSubmit = handleSubmit(async data => {
-
     const order: Order = {
       ingredients: [pizza],
       address: data.address,
@@ -66,12 +65,14 @@ export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
       card_number: data.cardNumber,
     };
 
-    console.log('order>>>>', order);
-
     await api.orders.createOrder(order);
   });
 
-  const orderPrice = calculateTotalPrice((pizza = defaultPizza));
+  let orderPrice = calculateTotalPrice(defaultPizza);
+
+  if (pizza) {
+    orderPrice = calculateTotalPrice(pizza);
+  }
 
   return (
     <>

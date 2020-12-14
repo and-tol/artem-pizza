@@ -47,7 +47,7 @@ export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({ pizza }) => {
         </p>
 
         <hr />
-        <p>{calculateTotalPrice((pizza = DEFAULT_PIZZA))} руб.</p>
+        <p>{calculateTotalPrice(pizza)} руб.</p>
       </section>
     </>
   );
