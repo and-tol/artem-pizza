@@ -50,7 +50,8 @@ export type refType =
   | undefined;
 
 export type Order = {
-  ingredients: [null | undefined | PizzaConfiguration];
+  ingredients: [null | PizzaConfiguration];
+  // ingredients: [null | undefined | PizzaConfiguration];
   address: string;
   name: string;
   card_number: string;

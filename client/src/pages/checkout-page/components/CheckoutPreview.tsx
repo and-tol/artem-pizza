@@ -16,6 +16,8 @@ import {
   IngredientNameAndPriceState,
   PizzaConfiguration,
 } from '../../../types';
+// Helpers
+import { renderIngredient } from '../../../share/renderIngredient';
 
 interface CheckoutPreviewProps {
   pizza?: PizzaConfiguration;
@@ -24,16 +26,6 @@ interface CheckoutPreviewProps {
 export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({ pizza }) => {
   const { size, dough, sauce, cheese, vegetables, meat } =
     pizza || DEFAULT_PIZZA;
-
-  const renderIngredient = (
-    ingredients: string[],
-    data: IngredientNameAndPriceState
-  ): string => {
-    const newIngredients: string = ingredients
-      ?.map(i => data[i].name.toLowerCase())
-      .join(', ');
-    return newIngredients[0].toUpperCase() + newIngredients.slice(1);
-  };
 
   return (
     <>

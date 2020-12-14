@@ -1,16 +1,16 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { OrdersListPage } from './OrdersListPage';
 
 describe('OrdersListPage', () => {
   it('renders correctly', () => {
-    const { getByText } = render(
+    render(
       <MemoryRouter>
         <OrdersListPage />
       </MemoryRouter>
     );
 
-    expect(getByText(/со списком заказов/i)).toBeInTheDocument()
+    expect(screen.getByText(/Заказы/i)).toBeInTheDocument();
   });
 });

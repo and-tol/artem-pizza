@@ -5,6 +5,8 @@ import { usePizza } from '../../PizzaContext';
 import { DEFAULT_PIZZA } from '../../pizzaData';
 // Components
 import { CheckoutForm, CheckoutPreview } from './components';
+// Types
+import { PizzaConfiguration } from '../../types';
 
 export const CheckoutPage = () => {
   const { pizza } = usePizza();

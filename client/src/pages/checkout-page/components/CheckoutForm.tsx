@@ -58,7 +58,6 @@ export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
   let numberValidation = valid.number(сardNumber);
 
   const onSubmit = handleSubmit(async data => {
-    console.log('data>>>>', data);
 
     const order: Order = {
       ingredients: [pizza],

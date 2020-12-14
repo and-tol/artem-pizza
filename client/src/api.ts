@@ -27,5 +27,10 @@ export const api = Object.freeze({
         body: JSON.stringify(data),
       });
     },
+    showAllOrders: () => {
+      return fetch(`${root}/orders`, {
+        method: 'GET',
+      });
+    },
   },
 });
