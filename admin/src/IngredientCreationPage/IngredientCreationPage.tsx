@@ -1,45 +1,45 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
-
-type Ingredient = {
-  name: string;
-  slug: string;
-  price: string;
-  category: string;
-  image: File;
-};
+import { api } from '../api';
+// Type
+import { NewIngredient } from '../types';
 
 export const IngredientCreationPage = () => {
-  const { register, handleSubmit } = useForm<Ingredient>();
+  const form = useRef(null);
 
-  const onSubmit = handleSubmit(data => {
-    console.log(data);
-  });
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const formData = new FormData(form.current!);
+
+    const response = api.ingredients.createNewIngredient(formData);
+  };
+
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form ref={form} onSubmit={handleSubmit}>
         <div>
           <label htmlFor='name'>
             Название ингредиента. (Будет показано пользователю)
-            <input id='name' ref={register} type='text' name='name' />
+            <input id='name' type='text' name='name' />
           </label>
         </div>
         <div>
           <label htmlFor='asc'>
             Идентификатор ингредиента
-            <input ref={register} type='text' name='slug' />
+            <input type='text' name='slug' />
           </label>
         </div>
         <div>
           <label htmlFor='price'>
             Цена ингредиента
-            <input id='price' ref={register} type='tel' name='price' />
+            <input id='price' type='tel' name='price' />
           </label>
         </div>
         <div>
           <label htmlFor='picture'>
             Категория ингредиента
-            <select ref={register} name='category'>
+            <select name='category'>
               <option value='sauces'>Соус</option>
               <option value='cheese'>Сыр</option>
               <option value='vegetables'>Овощ</option>
@@ -50,7 +50,7 @@ export const IngredientCreationPage = () => {
         <div>
           <label htmlFor='picture'>
             Изображение ингредиента
-            <input ref={register} type='file' name='picture' />
+            <input type='file' name='picture' />
           </label>
         </div>
         <button>Отправить</button>
