@@ -24,15 +24,8 @@ export const IngredientCreationPage = () => {
     e.preventDefault();
 
     const formData = new FormData(form.current!);
-    const price = Number(formData.get('price'));
-    const picture = formData.get('picture');
+    const price = formData.get('price');
 
-    // const json = JSON.stringify(price);
-    // const blob = new Blob([json], {
-    //   type: 'application/json',
-    // });
-
-    // formData.set('price', price as any);
     formData.set('price', JSON.stringify(price));
 
     const response = api.ingredients.createNewIngredient(formData);

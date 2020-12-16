@@ -1,4 +1,3 @@
-import { NewIngredient } from './types';
 
 export const root = 'http://localhost:3000';
 
