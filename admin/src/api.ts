@@ -9,13 +9,14 @@ export const api = Object.freeze({
     },
 
     createNewIngredient: (formData: any) => {
-      console.log("api",formData)
+      console.log("api",formData.get('price'))
       return fetch(`${root}/ingredients`, {
         method: 'POST',
         // headers: { 'Content-Type': 'form/multipart' },
         // headers: { 'Content-Type': 'multipart/form-data' },
-        // headers: { 'Content-Type': 'multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL' },
         body: formData,
+        // headers: { 'Content-type': 'application/json' },
+        // body: JSON.stringify(data)
       });
     },
   },

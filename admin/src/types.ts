@@ -1,7 +1,7 @@
 export type NewIngredient = {
   name: string;
   slug: string;
-  price: string;
+  price: number;
   category: string;
   image: string;
 };
