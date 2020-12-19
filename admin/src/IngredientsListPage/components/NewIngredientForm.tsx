@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { api } from '../api';
+import { api } from '../../api';
 // Type
-import { NewIngredient } from '../types';
+import { Ingredient } from '../../types';
 
 const schema = yup.object().shape({
   name: yup.string().required('Название - обязательное поле'),
@@ -14,48 +14,57 @@ const schema = yup.object().shape({
     .typeError('Цена должна быть числом')
     .required('Цена - обязательное поле'),
   category: yup.string().required('Категория - обязательное поле'),
-  picture: yup.mixed().required('Картинка обязательна')
+  picture: yup.mixed().required('Картинка обязательна'),
 });
 
-export const IngredientCreationPage = () => {
+type NewIngredientFormProps = {
+  isCreating: boolean;
+};
+
+export const NewIngredientForm = (props: NewIngredientFormProps) => {
+  const { isCreating } = props;
   const form = useRef(null);
+  const { register, handleSubmit } = useForm<Ingredient>();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = handleSubmit(async data => {
+    const { name, slug, price, category, image } = data;
+    const formData = new FormData();
 
-    const formData = new FormData(form.current!);
-    const price = formData.get('price');
+    formData.append('name', name);
+    formData.append('slug', slug);
+    formData.append('price', price);
+    formData.append('category', category);
+    formData.append('image', image[0]);
 
-    formData.set('price', JSON.stringify(price));
-
-    const response = api.ingredients.createNewIngredient(formData);
-  };
+    const response = await api.ingredients.createNewIngredient(formData);
+  });
 
   return (
     <>
-      <form ref={form} onSubmit={handleSubmit}>
+      {isCreating && <h3> Создаем новый ингредиент (JSON)</h3>}
+      <form ref={form} onSubmit={onSubmit}>
         <div>
           <label htmlFor='name'>
             Название ингредиента. (Будет показано пользователю)
-            <input id='name' type='text' name='name' />
+            <input ref={register} id='name' type='text' name='name' />
           </label>
         </div>
         <div>
           <label htmlFor='asc'>
             Идентификатор ингредиента
-            <input type='text' name='slug' />
+            <input ref={register} type='text' name='slug' />
           </label>
         </div>
         <div>
           <label htmlFor='price'>
             Цена ингредиента
-            <input id='price' type='tel' name='price' />
+            <input ref={register} id='price' type='tel' name='price' />
           </label>
         </div>
         <div>
           <label htmlFor='category'>
             Категория ингредиента
-            <select name='category'>
+            <select ref={register} name='category'>
               <option value='sauces'>Соус</option>
               <option value='cheese'>Сыр</option>
               <option value='vegetables'>Овощ</option>
@@ -64,9 +73,9 @@ export const IngredientCreationPage = () => {
           </label>
         </div>
         <div>
-          <label htmlFor='picture'>
+          <label htmlFor='image'>
             Изображение ингредиента
-            <input type='file' name='picture' />
+            <input ref={register} type='file' name='image' />
           </label>
         </div>
         <button>Отправить</button>

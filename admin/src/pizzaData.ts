@@ -47,8 +47,16 @@ export const MEAT: IngredientNameAndPriceState = Object.freeze({
   ham: { name: 'Ветчина', price: 29 },
 });
 
+// 'Моцарелла', 'Чеддер', 'Дор Блю';
+// 'Помидор', 'Грибы', 'Перец', 'Ананасы', 'Оливки', 'Лук', 'Брокколи';
+// 'Бекон', 'Пепперони', 'Ветчина';
+
+export const PIZZA_DELIVERY = 180;
+
+
 export const ingredients = [
   {
+    id: "49idr5",
     name: 'Бекон',
     slug: 'bacon',
     price: 29,
@@ -56,6 +64,7 @@ export const ingredients = [
     image: 'bacon.npg',
   },
   {
+    id: "mslcow9",
     name: 'Ветчина',
     slug: 'ham',
     price: 29,
@@ -63,12 +72,3 @@ export const ingredients = [
     image: 'ham.npg',
   },
 ];
-
-// 'Пышное', 'Тонкое'
-// 'Томатный','Белый','Острый'
-
-// 'Моцарелла', 'Чеддер', 'Дор Блю';
-// 'Помидор', 'Грибы', 'Перец', 'Ананасы', 'Оливки', 'Лук', 'Брокколи';
-// 'Бекон', 'Пепперони', 'Ветчина';
-
-export const PIZZA_DELIVERY = 180;

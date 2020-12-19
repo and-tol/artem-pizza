@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { IngredientCreationPage } from './IngredientCreationPage';
+import { IngredientsListPage } from './IngredientsListPage';
 
 function App() {
   return (
     <>
       <Switch>
         <Route exact path='/'>
-          <IngredientCreationPage />
+          <IngredientsListPage />
         </Route>
         <Route path='/login'></Route>
         <Route path='/register'></Route>
