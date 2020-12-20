@@ -7,8 +7,6 @@ export const api = Object.freeze({
     },
 
     createNewIngredient: (data: any) => {
-      // console.log('api', data.get('price'));
-      console.log('api', data.get(""))
       return fetch(`${root}/ingredients`, {
         method: 'POST',
         // headers: { 'Content-Type': 'form/multipart' },
@@ -20,7 +18,6 @@ export const api = Object.freeze({
     },
 
     deleteIngredient: (id: string | null) => {
-      console.log("id>>>", id)
       return fetch(`${root}/ingredients/${id}`, {
         method: 'DELETE',
       });

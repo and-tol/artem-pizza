@@ -15,9 +15,9 @@ export const IngredientsListPage = () => {
   const btnDelRef = useRef<HTMLButtonElement>(null);
 
   const [isCreating, setIsCreating] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
 
   // Delete ingredient on server
-
   const deleteIngredient = async (e: React.MouseEvent<HTMLButtonElement>) => {
     await api.ingredients.deleteIngredient(e.currentTarget.getAttribute('id'));
     const ingredients = await api.ingredients
@@ -45,6 +45,24 @@ export const IngredientsListPage = () => {
     };
     getIngredients();
   }, []);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setIsAdding(false);
+    }, 5000);
+
+    const addIngredient = async () => {
+      const ingredients = await api.ingredients
+        .availableIngredients()
+        .then(data => data.json());
+
+      await setIngredients(ingredients);
+    };
+
+    addIngredient();
+
+    return () => clearTimeout(timeoutId);
+  }, [isAdding]);
 
   return (
     <>
@@ -79,10 +97,17 @@ export const IngredientsListPage = () => {
             Создать новый ингредиент
           </button>
         )}
-      </section>
 
-      <section>
-        <p>{isCreating && <NewIngredientForm isCreating={isCreating} />}</p>
+        <p>
+          {isCreating && (
+            <NewIngredientForm
+              isCreating={isCreating}
+              cancelCreatingNewIngredient={cancelCreatingNewIngredient}
+              setIsAdding={setIsAdding}
+            />
+          )}
+          {isAdding && <p>Новый ингредиент успешно добавлен</p>}
+        </p>
         {isCreating! && (
           <button type='button' onClick={cancelCreatingNewIngredient}>
             Отменить
