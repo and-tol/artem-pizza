@@ -25,3 +25,4 @@ yarn-error.log*
 ../client/temp
 ../client/source
 ../asserts
+../client/node_modules
