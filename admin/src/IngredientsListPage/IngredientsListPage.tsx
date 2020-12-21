@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // Api
 import { api } from '../api';
 // Types
@@ -12,12 +12,16 @@ export const IngredientsListPage = () => {
   const handleSetIsEditing = () => {
     setIsEditing(true);
   };
-  const btnDelRef = useRef<HTMLButtonElement>(null);
+  // const btnDelRef = useRef<HTMLButtonElement>(null);
 
   const [isCreating, setIsCreating] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
 
-  // Delete ingredient on server
+
+  /**
+   * Delete ingredient on server
+   * @param e
+   */
   const deleteIngredient = async (e: React.MouseEvent<HTMLButtonElement>) => {
     await api.ingredients.deleteIngredient(e.currentTarget.getAttribute('id'));
     const ingredients = await api.ingredients
@@ -34,7 +38,9 @@ export const IngredientsListPage = () => {
     setIsCreating(false);
   };
 
-  // Get all ingredients on server
+  /**
+   * Get all ingredients from the server
+   */
   useEffect(() => {
     const getIngredients = async () => {
       const ingredients = await api.ingredients

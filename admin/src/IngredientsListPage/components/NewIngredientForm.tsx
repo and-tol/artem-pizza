@@ -1,12 +1,12 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from 'react-query';
-
+import * as yup from 'yup';
 import { api } from '../../api';
 // Type
 import { Ingredient } from '../../types';
+
 
 const schema = yup.object().shape({
   name: yup.string().required('Название - обязательное поле'),
@@ -16,7 +16,7 @@ const schema = yup.object().shape({
     .transform((cv, ov) => (ov === '' ? undefined : cv))
     .typeError('Цена должна быть числом')
     .required('Цена - обязательное поле'),
-  category: yup.string().required('Категория - обязательное поле'),
+// FIXME: do not show error text
   image: yup.mixed().required('Картинка обязательна'),
 });
 
@@ -49,12 +49,12 @@ export const NewIngredientForm = (props: NewIngredientFormProps) => {
     await createIngredient(formData);
 
     await cancelCreatingNewIngredient();
-    await setIsAdding(true)
+    await setIsAdding(true);
   });
 
   return (
     <>
-      {isCreating && <h3> Создаем новый ингредиент (JSON)</h3>}
+      {isCreating && <h3> Создаем новый ингредиент</h3>}
       <form onSubmit={onSubmit}>
         <div>
           <label htmlFor='name'>
@@ -64,9 +64,9 @@ export const NewIngredientForm = (props: NewIngredientFormProps) => {
           </label>
         </div>
         <div>
-          <label htmlFor='asc'>
+          <label htmlFor='slug'>
             Идентификатор ингредиента
-            <input ref={register} type='text' name='slug' />
+            <input ref={register} id='slug' type='text' name='slug' />
             <div>{errors.slug?.message}</div>
           </label>
         </div>
@@ -80,7 +80,7 @@ export const NewIngredientForm = (props: NewIngredientFormProps) => {
         <div>
           <label htmlFor='category'>
             Категория ингредиента
-            <select ref={register} name='category'>
+            <select id='category' ref={register} name='category'>
               <option value='sauces'>Соус</option>
               <option value='cheese'>Сыр</option>
               <option value='vegetables'>Овощ</option>
@@ -92,9 +92,9 @@ export const NewIngredientForm = (props: NewIngredientFormProps) => {
         <div>
           <label htmlFor='image'>
             Изображение ингредиента
-            <input ref={register} type='file' name='image' />
-            <div>{errors.image?.message}</div>
+            <input id='image' ref={register} type='file' name='image' />
           </label>
+            <div>{errors.image?.message}</div>
         </div>
         <button>Отправить</button>
       </form>
