@@ -17,7 +17,6 @@ export const IngredientsListPage = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
 
-
   /**
    * Delete ingredient on server
    * @param e
@@ -39,7 +38,7 @@ export const IngredientsListPage = () => {
   };
 
   /**
-   * Get all ingredients from the server
+   * Get all ingredients from the server at the first rendering
    */
   useEffect(() => {
     const getIngredients = async () => {
@@ -47,8 +46,9 @@ export const IngredientsListPage = () => {
         .availableIngredients()
         .then(data => data.json());
 
-      setIngredients(ingredients);
+      await setIngredients(ingredients);
     };
+
     getIngredients();
   }, []);
 
@@ -57,15 +57,18 @@ export const IngredientsListPage = () => {
       setIsAdding(false);
     }, 5000);
 
-    const addIngredient = async () => {
-      const ingredients = await api.ingredients
-        .availableIngredients()
-        .then(data => data.json());
+    let ingredients: Ingredient[] = [];
+    const getIngredients = async () => {
+      const result = await api.ingredients.availableIngredients();
+
+      if (result) {
+        ingredients = await result.json();
+      }
 
       await setIngredients(ingredients);
     };
 
-    addIngredient();
+    getIngredients();
 
     return () => clearTimeout(timeoutId);
   }, [isAdding]);

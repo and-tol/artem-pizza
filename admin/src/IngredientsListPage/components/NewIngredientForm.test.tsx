@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, wait } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { NewIngredientForm } from './NewIngredientForm';
