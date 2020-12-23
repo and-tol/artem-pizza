@@ -3,15 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { api } from '../api';
 // Types
 import { Ingredient } from '../types';
+import { EditIngredientForm } from './components/EditIngredientForm';
 // Components
 import { NewIngredientForm } from './components/NewIngredientForm';
 
 export const IngredientsListPage = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-  const [isEditing, setIsEditing] = useState(false);
-  const handleSetIsEditing = () => {
-    setIsEditing(true);
-  };
+
   // const btnDelRef = useRef<HTMLButtonElement>(null);
 
   const [isCreating, setIsCreating] = useState(false);
@@ -22,7 +20,8 @@ export const IngredientsListPage = () => {
    * @param e
    */
   const deleteIngredient = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    await api.ingredients.deleteIngredient(e.currentTarget.getAttribute('id'));
+    const id = e.currentTarget.parentElement!.getAttribute('id');
+    await api.ingredients.deleteIngredient(id);
     const ingredients = await api.ingredients
       .availableIngredients()
       .then(data => data.json());
@@ -36,6 +35,21 @@ export const IngredientsListPage = () => {
   const cancelCreatingNewIngredient = () => {
     setIsCreating(false);
   };
+
+  /**
+   * Editing ingredient
+   */
+  const [selectedId, setSelectedID] = useState<string | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const editIngredient = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const id = e.currentTarget.parentElement!.getAttribute('id');
+    setSelectedID(id);
+    // setIsEditing(true);
+  };
+  const cancelEditingIngredient = () => {
+    setIsEditing(false);
+  };
+  const [selectedIngredient, setSelectedIngredient] = useState(null);
 
   /**
    * Get all ingredients from the server at the first rendering
@@ -81,19 +95,24 @@ export const IngredientsListPage = () => {
           {ingredients.map(ingredient => {
             return (
               <>
-                <div key={ingredient.id}>
+                <div key={ingredient.id} id={ingredient.id}>
                   <span>{ingredient.name}</span>
-                  <button type='button' onClick={handleSetIsEditing}>
+                  <button type='button' onClick={editIngredient}>
                     Редактировать
                   </button>
-                  <button
-                    type='button'
-                    id={ingredient.id}
-                    onClick={deleteIngredient}
-                  >
+                  <button type='button' onClick={deleteIngredient}>
                     Удалить
                   </button>
                 </div>
+                {selectedId === ingredient.id ? (
+                  <EditIngredientForm
+                    editingIngredient={ingredient.name}
+                    ingredient={ingredient}
+                    ingredientId={selectedId}
+                    cancelEditingIngredient={cancelEditingIngredient}
+                    setIsAdding={setIsAdding}
+                  />
+                ) : null}
               </>
             );
           })}

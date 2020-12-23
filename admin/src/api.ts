@@ -22,5 +22,12 @@ export const api = Object.freeze({
         method: 'DELETE',
       });
     },
+
+    editIngredient: (data: any, ingredientId: string) => {
+      return fetch(`${root}/ingredients/${ingredientId}`, {
+        method: 'PUT',
+        body: data,
+      });
+    },
   },
 });
