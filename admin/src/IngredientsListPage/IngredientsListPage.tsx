@@ -10,8 +10,6 @@ import { NewIngredientForm } from './components/NewIngredientForm';
 export const IngredientsListPage = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
 
-  // const btnDelRef = useRef<HTMLButtonElement>(null);
-
   const [isCreating, setIsCreating] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
 
@@ -118,13 +116,17 @@ export const IngredientsListPage = () => {
                   </button>
                 </div>
                 {!isCancel && selectedId === ingredient.id ? (
-                  <EditIngredientForm
-                    editingIngredient={ingredient.name}
-                    ingredient={ingredient}
-                    ingredientId={selectedId}
-                    cancelEditingIngredient={cancelEditingIngredient}
-                    // isEditing={isEditing}
-                  />
+                  <>
+                    <EditIngredientForm
+                      editingIngredient={ingredient.name}
+                      ingredient={ingredient}
+                      ingredientId={selectedId}
+                      setIsCancel={setIsCancel}
+                    />
+                    <button type='button' onClick={cancelEditingIngredient}>
+                      Отменить
+                    </button>
+                  </>
                 ) : null}
               </>
             );
@@ -149,7 +151,7 @@ export const IngredientsListPage = () => {
           )}
           {isAdding && <p>Новый ингредиент успешно добавлен</p>}
         </p>
-        {isCreating! && (
+        {!isCreating && (
           <button type='button' onClick={cancelCreatingNewIngredient}>
             Отменить
           </button>

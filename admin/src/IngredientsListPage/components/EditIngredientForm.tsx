@@ -23,7 +23,7 @@ type EditIngredientFormProps = {
   editingIngredient: string;
   ingredient: Ingredient;
   ingredientId: string;
-  cancelEditingIngredient: () => void;
+  setIsCancel: (value: boolean) => void;
 };
 
 type EditIngredient = {
@@ -35,7 +35,7 @@ export const EditIngredientForm = ({
   editingIngredient,
   ingredient,
   ingredientId,
-  cancelEditingIngredient,
+  setIsCancel,
 }: EditIngredientFormProps) => {
   const { register, handleSubmit, errors } = useForm<Ingredient>({
     resolver: yupResolver(schema),
@@ -48,7 +48,6 @@ export const EditIngredientForm = ({
     data: serverResponse,
     isError,
     isLoading,
-    isSuccess,
     mutateAsync: editIngredient,
   } = useMutation(({ formData, ingredientId }: EditIngredient) =>
     api.ingredients.editIngredient(formData, ingredientId)
@@ -69,10 +68,8 @@ export const EditIngredientForm = ({
 
   useEffect(() => {
     if (serverResponse?.ok) {
-      const id = setTimeout(() => {
-        setIsEditing(false);
-      }, 10000);
-      return () => clearTimeout(id);
+      setIsEditing(false);
+      setIsCancel(true);
     }
   });
 
@@ -155,9 +152,6 @@ export const EditIngredientForm = ({
             </div>
             <button>Отправить</button>
           </form>
-          <button type='button' onClick={cancelEditingIngredient}>
-            Отменить
-          </button>
         </>
       )}
     </>
