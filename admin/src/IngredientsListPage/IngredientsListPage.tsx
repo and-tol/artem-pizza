@@ -37,19 +37,32 @@ export const IngredientsListPage = () => {
   };
 
   /**
-   * Editing ingredient
+   * Ingredient editing
    */
   const [selectedId, setSelectedID] = useState<string | null>(null);
-  const [isEditing, setIsEditing] = useState(false);
+  const [isCancel, setIsCancel] = useState(false);
   const editIngredient = (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.parentElement!.getAttribute('id');
     setSelectedID(id);
-    // setIsEditing(true);
+    setIsCancel(false);
   };
   const cancelEditingIngredient = () => {
-    setIsEditing(false);
+    setIsCancel(true);
   };
-  const [selectedIngredient, setSelectedIngredient] = useState(null);
+  useEffect(() => {
+    let ingredients: Ingredient[] = [];
+    const getIngredients = async () => {
+      const result = await api.ingredients.availableIngredients();
+
+      if (result) {
+        ingredients = await result.json();
+      }
+
+      await setIngredients(ingredients);
+    };
+
+    getIngredients();
+  }, [isCancel]);
 
   /**
    * Get all ingredients from the server at the first rendering
@@ -104,13 +117,13 @@ export const IngredientsListPage = () => {
                     Удалить
                   </button>
                 </div>
-                {selectedId === ingredient.id ? (
+                {!isCancel && selectedId === ingredient.id ? (
                   <EditIngredientForm
                     editingIngredient={ingredient.name}
                     ingredient={ingredient}
                     ingredientId={selectedId}
                     cancelEditingIngredient={cancelEditingIngredient}
-                    setIsAdding={setIsAdding}
+                    // isEditing={isEditing}
                   />
                 ) : null}
               </>
