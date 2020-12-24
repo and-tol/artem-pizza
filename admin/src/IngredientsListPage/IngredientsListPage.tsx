@@ -55,12 +55,15 @@ export const IngredientsListPage = () => {
    * Ingredient is editing
    */
   const [isCancel, setIsCancel] = useState(false);
+  const [isEditing, setIsEditing] = useState(true);
+
   const editIngredient = (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.parentElement!.getAttribute('id');
 
     setSelectedID(id);
     setIsCancel(false);
     setIsShowing(false);
+    setIsEditing(true);
   };
   const cancelEditingIngredient = () => {
     setIsCancel(true);
@@ -163,13 +166,14 @@ export const IngredientsListPage = () => {
                   </p>
                 ) : null}
 
-                {!isCancel && selectedId === ingredient.id ? (
+                {!isCancel && isEditing && selectedId === ingredient.id ? (
                   <>
                     <EditIngredientForm
                       editingIngredient={ingredient.name}
                       ingredient={ingredient}
                       ingredientId={selectedId}
                       setIsCancel={setIsCancel}
+                      setIsEditing={setIsEditing}
                     />
                     <button type='button' onClick={cancelEditingIngredient}>
                       Отменить
