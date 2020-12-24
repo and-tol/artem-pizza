@@ -3,19 +3,20 @@ import React, { useEffect, useState } from 'react';
 import { api } from '../api';
 // Types
 import { Ingredient } from '../types';
-import { EditIngredientForm } from './components/EditIngredientForm';
 // Components
+import { EditIngredientForm } from './components/EditIngredientForm';
 import { NewIngredientForm } from './components/NewIngredientForm';
 
 export const IngredientsListPage = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-
+  const [selectedId, setSelectedID] = useState<string | null>(null);
   const [isCreating, setIsCreating] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   /**
    * Delete ingredient on server
-   * @param e
    */
   const deleteIngredient = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.parentElement!.getAttribute('id');
@@ -26,23 +27,40 @@ export const IngredientsListPage = () => {
 
     setIngredients(ingredients);
   };
-
   const createNewIngredient = () => {
     setIsCreating(true);
+    setIsShowing(false);
   };
+
+  /**
+   * Cancel Creating New Ingredient
+   */
   const cancelCreatingNewIngredient = () => {
     setIsCreating(false);
   };
 
   /**
-   * Ingredient editing
+   * Show ingredient
    */
-  const [selectedId, setSelectedID] = useState<string | null>(null);
+  const [isShowing, setIsShowing] = useState(false);
+  const showIngredient = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const id = e.currentTarget.parentElement!.getAttribute('id');
+
+    setSelectedID(id);
+    setIsShowing(true);
+    setIsCancel(true);
+  };
+
+  /**
+   * Ingredient is editing
+   */
   const [isCancel, setIsCancel] = useState(false);
   const editIngredient = (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.parentElement!.getAttribute('id');
+
     setSelectedID(id);
     setIsCancel(false);
+    setIsShowing(false);
   };
   const cancelEditingIngredient = () => {
     setIsCancel(true);
@@ -67,16 +85,24 @@ export const IngredientsListPage = () => {
    */
   useEffect(() => {
     const getIngredients = async () => {
-      const ingredients = await api.ingredients
-        .availableIngredients()
-        .then(data => data.json());
+      try {
+        const ingredients = await api.ingredients
+          .availableIngredients()
+          .then(data => data.json());
 
-      await setIngredients(ingredients);
+        await setIngredients(ingredients);
+        await setIsLoading(false);
+      } catch (err) {
+        setIsError(true);
+      }
     };
 
     getIngredients();
   }, []);
 
+  /**
+   * Get all ingredients when new ingredient has created
+   */
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setIsAdding(false);
@@ -95,6 +121,8 @@ export const IngredientsListPage = () => {
 
     getIngredients();
 
+    setIsShowing(false);
+
     return () => clearTimeout(timeoutId);
   }, [isAdding]);
 
@@ -103,11 +131,16 @@ export const IngredientsListPage = () => {
       <section>
         <h3>Доступные ингредиенты</h3>
         <p>
+          {isLoading && <p>Загрузка данных с сервера...</p>}
+          {isError && <p>Что-то пошло не так... Ошибка: err.message</p>}
           {ingredients.map(ingredient => {
             return (
               <>
                 <div key={ingredient.id} id={ingredient.id}>
                   <span>{ingredient.name}</span>
+                  <button type='button' onClick={showIngredient}>
+                    Показать
+                  </button>
                   <button type='button' onClick={editIngredient}>
                     Редактировать
                   </button>
@@ -115,6 +148,21 @@ export const IngredientsListPage = () => {
                     Удалить
                   </button>
                 </div>
+
+                {isShowing && selectedId === ingredient.id ? (
+                  <p>
+                    {ingredient && (
+                      <>
+                        <div key={ingredient.id}>
+                          <div>Название: {ingredient.name}</div>
+                          <div>Цена: {ingredient.price}</div>
+                          <div>Категория: {ingredient.category}</div>
+                        </div>
+                      </>
+                    )}
+                  </p>
+                ) : null}
+
                 {!isCancel && selectedId === ingredient.id ? (
                   <>
                     <EditIngredientForm
@@ -151,7 +199,7 @@ export const IngredientsListPage = () => {
           )}
           {isAdding && <p>Новый ингредиент успешно добавлен</p>}
         </p>
-        {!isCreating && (
+        {isCreating && (
           <button type='button' onClick={cancelCreatingNewIngredient}>
             Отменить
           </button>

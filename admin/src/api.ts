@@ -9,11 +9,7 @@ export const api = Object.freeze({
     createNewIngredient: (data: any) => {
       return fetch(`${root}/ingredients`, {
         method: 'POST',
-        // headers: { 'Content-Type': 'form/multipart' },
-        // headers: { 'Content-Type': 'multipart/form-data' },
         body: data,
-        // headers: { 'Content-type': 'application/json' },
-        // body: JSON.stringify(data)
       });
     },
 
@@ -23,11 +19,17 @@ export const api = Object.freeze({
       });
     },
 
-    editIngredient: (data: any, ingredientId: string) => {
+    editIngredient: (data: any, ingredientId: string | null) => {
       return fetch(`${root}/ingredients/${ingredientId}`, {
         method: 'PUT',
         body: data,
       });
+    },
+
+    showIngredient: (ingredientId: string | null) => {
+      return fetch(`${root}/ingredients/${ingredientId}`, {
+        method: 'GET',
+      }).then(ingredient => ingredient.json());
     },
   },
 });

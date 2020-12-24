@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import * as yup from 'yup';
@@ -23,7 +23,7 @@ type EditIngredientFormProps = {
   editingIngredient: string;
   ingredient: Ingredient;
   ingredientId: string;
-  setIsCancel: (value: boolean) => void;
+  setIsCancel: (v: boolean) => void;
 };
 
 type EditIngredient = {
@@ -64,13 +64,8 @@ export const EditIngredientForm = ({
     formData.append('image', image[0]);
 
     await editIngredient({ formData, ingredientId });
-  });
-
-  useEffect(() => {
-    if (serverResponse?.ok) {
-      setIsEditing(false);
-      setIsCancel(true);
-    }
+    await setIsEditing(false);
+    await setIsCancel(true);
   });
 
   if (isError) {

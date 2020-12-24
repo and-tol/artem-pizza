@@ -7,7 +7,6 @@ import { api } from '../../api';
 // Type
 import { Ingredient } from '../../types';
 
-
 const schema = yup.object().shape({
   name: yup.string().required('Название - обязательное поле'),
   slug: yup.string().required('Идентификатор - обязательное поле'),
@@ -16,7 +15,7 @@ const schema = yup.object().shape({
     .transform((cv, ov) => (ov === '' ? undefined : cv))
     .typeError('Цена должна быть числом')
     .required('Цена - обязательное поле'),
-// FIXME: do not show error text
+  // FIXME: do not show error text
   image: yup.mixed().required('Картинка обязательна'),
 });
 
@@ -94,7 +93,7 @@ export const NewIngredientForm = (props: NewIngredientFormProps) => {
             Изображение ингредиента
             <input id='image' ref={register} type='file' name='image' />
           </label>
-            <div>{errors.image?.message}</div>
+          <div>{errors.image?.message}</div>
         </div>
         <button>Отправить</button>
       </form>
