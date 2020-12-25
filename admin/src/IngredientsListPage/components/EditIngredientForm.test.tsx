@@ -6,6 +6,8 @@ import { EditIngredientForm } from './EditIngredientForm';
 const client = new QueryClient();
 
 const setIsCancel = jest.fn();
+const setIsEditing = jest.fn();
+
 const ingredient = {
   id: 'idTest',
   name: 'nameTest',
@@ -24,6 +26,7 @@ describe('EditIngredientForm', () => {
           ingredient={ingredient}
           ingredientId='idTest'
           setIsCancel={setIsCancel}
+          setIsEditing={setIsEditing}
         />
       </QueryClientProvider>
     );
@@ -47,9 +50,17 @@ describe('EditIngredientForm', () => {
         <QueryClientProvider client={client}>
           <EditIngredientForm
             editingIngredient='slugTest'
-            ingredient={ingredient}
+            ingredient={{
+              id: 'idTest',
+              name: '',
+              slug: '',
+              price: '',
+              category: '',
+              image: '',
+            }}
             ingredientId='idTest'
             setIsCancel={setIsCancel}
+            setIsEditing={setIsEditing}
           />
         </QueryClientProvider>
       );
@@ -77,6 +88,7 @@ describe('EditIngredientForm', () => {
             ingredient={ingredient}
             ingredientId='idTest'
             setIsCancel={setIsCancel}
+            setIsEditing={setIsEditing}
           />
         </QueryClientProvider>
       );
