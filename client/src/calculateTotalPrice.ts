@@ -1,7 +1,6 @@
-import { TotalPrice } from './types';
-import { SIZE, CHEESE, VEGETABLES, MEAT } from './pizzaData';
+import { SIZE, CHEESE, VEGETABLES, MEAT, DEFAULT_PIZZA } from './pizzaData';
 
-export const calculateTotalPrice = (pizza: TotalPrice): number => {
+export const calculateTotalPrice = (pizza = DEFAULT_PIZZA): number => {
   const { size, cheese, vegetables, meat } = pizza;
 
   const sizePrice: number = SIZE[size].price;

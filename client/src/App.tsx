@@ -25,7 +25,7 @@ function App() {
       <Route path='/checkout'>
         <CheckoutPage />
       </Route>
-      <Route path='/order-list'>
+      <Route path='/orders-list'>
         <OrdersListPage />
       </Route>
       <Route path='/receipt'>

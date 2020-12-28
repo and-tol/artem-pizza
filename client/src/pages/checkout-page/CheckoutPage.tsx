@@ -7,14 +7,14 @@ import { DEFAULT_PIZZA } from '../../pizzaData';
 import { CheckoutForm, CheckoutPreview } from './components';
 
 export const CheckoutPage = () => {
-  const { pizza } = usePizza();
+  const PizzaContext = usePizza();
 
   return (
     <>
       <h1>Оформление заказа</h1>
 
-      <CheckoutPreview pizza={pizza} />
-      <CheckoutForm defaultPizza={DEFAULT_PIZZA} pizza={pizza} />
+      <CheckoutPreview pizza={PizzaContext!.pizza} />
+      <CheckoutForm defaultPizza={DEFAULT_PIZZA} pizza={PizzaContext!.pizza} />
     </>
   );
 };

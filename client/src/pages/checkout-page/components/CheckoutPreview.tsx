@@ -12,28 +12,16 @@ import {
   DEFAULT_PIZZA,
 } from '../../../pizzaData';
 // Types
-import {
-  IngredientNameAndPriceState,
-  PizzaConfiguration,
-} from '../../../types';
+import { PizzaConfiguration } from '../../../types';
+// Helpers
+import { renderIngredient } from '../../../share/renderIngredient';
 
 interface CheckoutPreviewProps {
-  pizza?: PizzaConfiguration;
+  pizza: PizzaConfiguration;
 }
 
 export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({ pizza }) => {
-  const { size, dough, sauce, cheese, vegetables, meat } =
-    pizza || DEFAULT_PIZZA;
-
-  const renderIngredient = (
-    ingredients: string[],
-    data: IngredientNameAndPriceState
-  ): string => {
-    const newIngredients: string = ingredients
-      ?.map(i => data[i].name.toLowerCase())
-      .join(', ');
-    return newIngredients[0].toUpperCase() + newIngredients.slice(1);
-  };
+  const { size, dough, sauce, cheese, vegetables, meat } = pizza;
 
   return (
     <>
@@ -42,7 +30,7 @@ export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({ pizza }) => {
         <p>
           <span>{SIZE[size].name}</span> см на
           <span> {DOUGH[dough].case.toLowerCase()} </span>
-          тесте <span> • {SAUCE[sauce].name}</span> соус
+          тесте <span>{` • ${SAUCE[sauce].name}`}</span> соус
           <span>
              {cheese?.length ? ` • ${renderIngredient(cheese, CHEESE)}` : null}
           </span>
@@ -58,7 +46,7 @@ export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({ pizza }) => {
         </p>
 
         <hr />
-        <p>{calculateTotalPrice((pizza = DEFAULT_PIZZA))} руб.</p>
+        <p>{calculateTotalPrice(pizza)} руб.</p>
       </section>
     </>
   );
