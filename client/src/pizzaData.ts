@@ -1,7 +1,8 @@
 import {
-  IngredientNameAndCaseState, IngredientNameAndPriceState,
+  IngredientNameAndCaseState,
+  IngredientNameAndPriceState,
   IngredientNameState,
-  PizzaConfiguration
+  PizzaConfiguration,
 } from './types';
 
 export const DEFAULT_PIZZA: PizzaConfiguration = Object.freeze({
@@ -12,6 +13,10 @@ export const DEFAULT_PIZZA: PizzaConfiguration = Object.freeze({
   vegetables: [],
   meat: [],
 });
+
+export const PIZZA_DELIVERY = 180;
+
+// ----------- Old Data Stuructures ------------- //
 
 export const SIZE: IngredientNameAndPriceState = Object.freeze({
   '30': { name: '30', price: 200 },
@@ -51,4 +56,3 @@ export const MEAT: IngredientNameAndPriceState = Object.freeze({
 // 'Бекон', 'Пепперони', 'Ветчина';
 
 
-export const PIZZA_DELIVERY = 180;

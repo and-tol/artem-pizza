@@ -1,6 +1,6 @@
 import React from 'react';
 // Helpers
-import { calculateTotalPrice } from '../../calculateTotalPrice';
+import { calculateTotalPrice } from '../../share/calculateTotalPrice';
 // Data
 import { CHEESE, DOUGH, MEAT, SAUCE, SIZE, VEGETABLES } from '../../pizzaData';
 // Types

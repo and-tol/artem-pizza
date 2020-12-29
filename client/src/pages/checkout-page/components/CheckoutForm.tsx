@@ -1,10 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { api } from '../../../api';
 // Helpers
-import { calculateTotalPrice } from '../../../calculateTotalPrice';
+import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Data
 import { PIZZA_DELIVERY } from '../../../pizzaData';
 // Types

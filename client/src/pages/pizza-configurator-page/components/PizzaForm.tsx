@@ -1,21 +1,21 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { calculateTotalPrice } from '../../calculateTotalPrice';
+import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Data
 import {
-  DEFAULT_PIZZA,
-  DOUGH,
+  DEFAULT_PIZZA, // initialState from state-pizza
+  DOUGH, // state from state-ingredients
   SAUCE,
   SIZE,
   CHEESE,
   VEGETABLES,
   MEAT,
-} from '../../pizzaData';
+} from '../../../pizzaData';
 // Types
-import { PizzaConfiguration } from '../../types';
+import { PizzaConfiguration } from '../../../types';
 // Components
-import { CheckboxGroup } from './components/CheckboxGroup';
-import { RadioGroup } from './components/RadioGroup';
+import { CheckboxGroup } from './CheckboxGroup';
+import { RadioGroup } from './RadioGroup';
 
 export interface PizzaFormProps {
   onPizzaCreated?: (pizza: PizzaConfiguration) => void;

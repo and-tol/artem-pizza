@@ -1,5 +1,5 @@
 import React from 'react';
-import { PizzaForm } from './PizzaForm';
+import { PizzaForm } from './components/PizzaForm';
 import { usePizza } from '../../PizzaContext';
 import { useHistory } from 'react-router-dom';
 import { PizzaConfiguration } from '../../types';

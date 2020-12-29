@@ -1,4 +1,3 @@
-import React from 'react';
 // Data
 import {
   CHEESE,
@@ -20,7 +19,6 @@ type PreviousOrderProps = {
 export const PreviousOrder = ({ order }: PreviousOrderProps) => {
 
   const { card_number, ingredients } = { ...order };
-  console.log('order>>>', order?.ingredients[0]);
 
   return (
     <section>

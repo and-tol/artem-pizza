@@ -5,7 +5,7 @@ import { createMemoryHistory } from 'history';
 
 import { PizzaConfiguratorPage } from './PizzaConfiguratorPage';
 // Types
-import {PizzaFormProps} from './PizzaForm'
+import {PizzaFormProps} from './components/PizzaForm'
 
 
 jest.mock('./PizzaForm', () => ({

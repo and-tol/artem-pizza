@@ -57,7 +57,28 @@ export type Order = {
   card_number: string;
 };
 
-export type NewIngredient = {
+// Store Types
+export type OrdersState = {
+  orders: Order[];
+};
+
+export type PizzaState = {
+  pizza: PizzaConfiguration;
+};
+
+export type PizzaAction = {
+  type: string;
+  payload: PizzaConfiguration;
+};
+
+export type DispatchType = (args: PizzaAction) => PizzaAction;
+
+export interface IAction<T, R = any> {
+  type: T;
+  payload: R;
+}
+
+export type Ingredient = {
   id: string;
   name: string;
   slug: string;
@@ -65,3 +86,13 @@ export type NewIngredient = {
   category: string;
   image: string;
 };
+export interface IngredientsState {
+  ingredients: Ingredient[] | [];
+  errror: Error | null;
+  isLoading: boolean;
+}
+
+export interface IngredientsAction {
+  type: string;
+  payload: Ingredient[] | [] | Error | null;
+}
