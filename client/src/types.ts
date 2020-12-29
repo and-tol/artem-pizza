@@ -86,13 +86,17 @@ export type Ingredient = {
   category: string;
   image: string;
 };
+
+export interface ErrorState {
+  status: number;
+}
 export interface IngredientsState {
   ingredients: Ingredient[] | [];
-  errror: Error | null;
+  error: ErrorState | null;
   isLoading: boolean;
 }
 
 export interface IngredientsAction {
   type: string;
-  payload: Ingredient[] | [] | Error | null;
+  payload: Ingredient[] | [] | number | null;
 }

@@ -1,16 +1,27 @@
-import React from 'react';
-import { PizzaForm } from './components/PizzaForm';
-import { usePizza } from '../../PizzaContext';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { usePizza } from '../../PizzaContext';
+import { useDispatch } from 'react-redux';
+// ReduxActions
+import { ingredientsActions } from './state-ingredients/actions';
+// Types
 import { PizzaConfiguration } from '../../types';
+// Components
+import { PizzaForm } from './components/PizzaForm';
 
 /**
  * @param _usePizzaHook simplifies context testing
  */
 export const PizzaConfiguratorPage = ({ _usePizzaHook = usePizza }) => {
+  const dispatch = useDispatch();
+
   const PizzaContext = _usePizzaHook();
-  const setPizza = PizzaContext?.setPizza
+  const setPizza = PizzaContext?.setPizza;
   const history = useHistory();
+
+  useEffect(() => {
+    dispatch(ingredientsActions.fetchIngredientsAsync());
+  }, [dispatch]);
 
   const onPizzaChange = (pizza: PizzaConfiguration): void => {
     if (setPizza) {

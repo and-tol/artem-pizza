@@ -5,7 +5,7 @@ import { IngredientsState, IngredientsAction } from '../../../types';
 
 const initialState: IngredientsState = {
   ingredients: [],
-  errror: null,
+  error: null,
   isLoading: false,
 };
 
