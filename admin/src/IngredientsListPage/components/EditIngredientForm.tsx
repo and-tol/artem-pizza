@@ -82,11 +82,11 @@ export const EditIngredientForm = ({
   });
 
   if (isError) {
-    return <p>Ошибка: что-то пошло не так...</p>;
+    return <div>Ошибка: что-то пошло не так...</div>;
   }
 
   if (isLoading) {
-    return <p>Загрузка данных...</p>;
+    return <div>Загрузка данных...</div>;
   }
 
   return (
@@ -163,7 +163,7 @@ export const EditIngredientForm = ({
           </label>
           <div>{errors.thumbnail?.message}</div>
         </div>
-          {!serverResponse?.ok && <div>Не хватает данных</div>}
+          {/* {!serverResponse?.ok && <div>Не хватает данных</div>} */}
         <button>Отправить</button>
       </form>
     </>
