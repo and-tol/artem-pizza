@@ -20,6 +20,7 @@ export const api = Object.freeze({
     },
 
     editIngredient: (data: any, ingredientId: string | null) => {
+      console.log('ingredientId>>>', ingredientId);
       return fetch(`${root}/ingredients/${ingredientId}`, {
         method: 'PUT',
         body: data,

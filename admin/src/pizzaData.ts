@@ -14,6 +14,14 @@ export const DEFAULT_PIZZA: PizzaConfiguration = Object.freeze({
   meat: [],
 });
 
+// Category
+/*
+meets
+cheese
+vegs
+dough
+*/
+
 export const SIZE: IngredientNameAndPriceState = Object.freeze({
   '30': { name: '30', price: 200 },
   '35': { name: '35', price: 250 },
@@ -40,6 +48,7 @@ export const VEGETABLES: IngredientNameAndPriceState = Object.freeze({
   olives: { name: 'Оливки', price: 29 },
   onion: { name: 'Лук', price: 29 },
   broccoli: { name: 'Брокколи', price: 29 },
+  basil: { name: 'Базилик', price: 29 },
 });
 export const MEAT: IngredientNameAndPriceState = Object.freeze({
   bacon: { name: 'Бекон', price: 29 },
@@ -53,22 +62,23 @@ export const MEAT: IngredientNameAndPriceState = Object.freeze({
 
 export const PIZZA_DELIVERY = 180;
 
-
 export const ingredients = [
   {
-    id: "49idr5",
+    id: '49idr5',
     name: 'Бекон',
     slug: 'bacon',
     price: 29,
     category: 'meat',
     image: 'bacon.npg',
+    thumbnail: 'bacon.npg',
   },
   {
-    id: "mslcow9",
+    id: 'mslcow9',
     name: 'Ветчина',
     slug: 'ham',
     price: 29,
     category: 'meat',
     image: 'ham.npg',
+    thumbnail: 'ham.npg',
   },
 ];

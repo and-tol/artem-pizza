@@ -16,7 +16,8 @@ const schema = yup.object().shape({
     .typeError('Цена должна быть числом')
     .required('Цена - обязательное поле'),
   // FIXME: do not show error text
-  image: yup.mixed().required('Картинка обязательна'),
+  image: yup.mixed().required('Изображение обязательно'),
+  thumbnail: yup.mixed().required('Уменьшенное изображение обязательно'),
 });
 
 type NewIngredientFormProps = {
@@ -36,7 +37,7 @@ export const NewIngredientForm = (props: NewIngredientFormProps) => {
   );
 
   const onSubmit = handleSubmit(async data => {
-    const { name, slug, price, category, image } = data;
+    const { name, slug, price, category, image, thumbnail } = data;
     const formData = new FormData();
 
     formData.append('name', name);
@@ -44,6 +45,7 @@ export const NewIngredientForm = (props: NewIngredientFormProps) => {
     formData.append('price', price);
     formData.append('category', category);
     formData.append('image', image[0]);
+    formData.append('thumbnail', thumbnail[0]);
 
     await createIngredient(formData);
 
@@ -94,6 +96,13 @@ export const NewIngredientForm = (props: NewIngredientFormProps) => {
             <input id='image' ref={register} type='file' name='image' />
           </label>
           <div>{errors.image?.message}</div>
+        </div>
+        <div>
+          <label htmlFor='thumbnail'>
+            Уменьшенное изображение ингредиента
+            <input id='thumbnail' ref={register} type='file' name='thumbnail' />
+          </label>
+          <div>{errors.thumbnail?.message}</div>
         </div>
         <button>Отправить</button>
       </form>

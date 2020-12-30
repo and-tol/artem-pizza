@@ -5,6 +5,7 @@ export type Ingredient = {
   price: any;
   category: string;
   image: any;
+  thumbnail: any;
 };
 
 export type ShowIngredient = {
