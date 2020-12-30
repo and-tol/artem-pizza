@@ -16,7 +16,8 @@ const schema = yup.object().shape({
     .typeError('Цена должна быть числом')
     .required('Цена - обязательное поле'),
   // FIXME: do not show error text
-  image: yup.mixed().required('Картинка обязательна'),
+  image: yup.mixed().required('Изображение обязательно'),
+  thumbnail: yup.mixed().required('Уменьшенное изображение обязательно'),
 });
 
 type EditIngredientFormProps = {
@@ -55,14 +56,17 @@ export const EditIngredientForm = ({
   );
 
   const onSubmit = handleSubmit(async data => {
-    const { name, slug, price, category, image } = data;
+    const { name, slug, price, category, image, thumbnail } = data;
     const formData = new FormData();
+
+    console.log("data>>>>", data)
 
     formData.append('name', name);
     formData.append('slug', slug);
     formData.append('price', price);
     formData.append('category', category);
     formData.append('image', image[0]);
+    formData.append('thumbnail', thumbnail[0]);
 
     await editIngredient({ formData, ingredientId });
   });
@@ -78,11 +82,11 @@ export const EditIngredientForm = ({
   });
 
   if (isError) {
-    return <p>Ошибка: что-то пошло не так...</p>;
+    return <div>Ошибка: что-то пошло не так...</div>;
   }
 
   if (isLoading) {
-    return <p>Загрузка данных...</p>;
+    return <div>Загрузка данных...</div>;
   }
 
   return (
@@ -151,8 +155,15 @@ export const EditIngredientForm = ({
             <input id='image' ref={register} type='file' name='image' />
           </label>
           <div>{errors.image?.message}</div>
-          {!serverResponse?.ok && <div>Не хватает данных</div>}
         </div>
+        <div>
+          <label htmlFor='thumbnail'>
+            Уменьшенное изображение ингредиента
+            <input id='thumbnail' ref={register} type='file' name='thumbnail' />
+          </label>
+          <div>{errors.thumbnail?.message}</div>
+        </div>
+          {/* {!serverResponse?.ok && <div>Не хватает данных</div>} */}
         <button>Отправить</button>
       </form>
     </>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 // Api
 import { api } from '../api';
 // Types
@@ -20,13 +20,16 @@ export const IngredientsListPage = () => {
    */
   const deleteIngredient = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.parentElement!.getAttribute('id');
+
     await api.ingredients.deleteIngredient(id);
+    
     const ingredients = await api.ingredients
       .availableIngredients()
       .then(data => data.json());
 
     setIngredients(ingredients);
   };
+
   const createNewIngredient = () => {
     setIsCreating(true);
     setIsShowing(false);
@@ -133,13 +136,13 @@ export const IngredientsListPage = () => {
     <>
       <section>
         <h3>Доступные ингредиенты</h3>
-        <p>
+        <div>
           {isLoading && <p>Загрузка данных с сервера...</p>}
           {isError && <p>Что-то пошло не так... Ошибка: err.message</p>}
           {ingredients.map(ingredient => {
             return (
-              <>
-                <div key={ingredient.id} id={ingredient.id}>
+              <Fragment key={ingredient.id}>
+                <div id={ingredient.id}>
                   <span>{ingredient.name}</span>
                   <button type='button' onClick={showIngredient}>
                     Показать
@@ -156,7 +159,7 @@ export const IngredientsListPage = () => {
                   <p>
                     {ingredient && (
                       <>
-                        <div key={ingredient.id}>
+                        <div>
                           <div>Название: {ingredient.name}</div>
                           <div>Цена: {ingredient.price}</div>
                           <div>Категория: {ingredient.category}</div>
@@ -167,7 +170,7 @@ export const IngredientsListPage = () => {
                 ) : null}
 
                 {!isCancel && isEditing && selectedId === ingredient.id ? (
-                  <>
+                  <div>
                     <EditIngredientForm
                       editingIngredient={ingredient.name}
                       ingredient={ingredient}
@@ -178,12 +181,12 @@ export const IngredientsListPage = () => {
                     <button type='button' onClick={cancelEditingIngredient}>
                       Отменить
                     </button>
-                  </>
+                  </div>
                 ) : null}
-              </>
+              </Fragment>
             );
           })}
-        </p>
+        </div>
       </section>
 
       <section>

@@ -63,6 +63,7 @@ describe('IngredientsListPage', () => {
         price: 29,
         category: 'meat',
         image: 'bacon.npg',
+        thumbnail: 'bacon.npg',
       },
     ];
 
@@ -78,6 +79,7 @@ describe('IngredientsListPage', () => {
               price: 'test4',
               category: 'test5',
               image: 'test6',
+              thumbnail: 'trest7',
             },
           ]),
         },

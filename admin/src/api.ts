@@ -13,8 +13,8 @@ export const api = Object.freeze({
       });
     },
 
-    deleteIngredient: (id: string | null) => {
-      return fetch(`${root}/ingredients/${id}`, {
+    deleteIngredient: (ingredientId: string | null) => {
+      return fetch(`${root}/ingredients/${ingredientId}`, {
         method: 'DELETE',
       });
     },
