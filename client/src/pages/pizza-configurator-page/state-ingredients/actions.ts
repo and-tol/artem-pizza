@@ -3,7 +3,7 @@ import { actionTypes } from './actionTypes';
 // Api
 import { api } from '../../../api';
 // Types
-import { IngredientsState, ErrorState } from '../../../types';
+import { ErrorState, Ingredient, IngredientFromServer } from '../../../types';
 
 export const ingredientsActions = Object.freeze({
   startFetching: () => {
@@ -23,7 +23,7 @@ export const ingredientsActions = Object.freeze({
     };
   },
 
-  fillIngredients: (payload: IngredientsState) => {
+  fillIngredients: (payload: Ingredient[] | []) => {
     return {
       type: actionTypes.INGREDIENTS_FILL,
       payload,
@@ -37,13 +37,21 @@ export const ingredientsActions = Object.freeze({
     const response = await api.ingredients.availableIngredients();
 
     if (response.status === 200) {
-      const results = await response.json();
-      dispatch(ingredientsActions.fillIngredients(results));
+      const results: Array<IngredientFromServer> = await response.json();
+
+      const resultsWithCorrectTypes: Array<Ingredient> = results.map(item => ({
+        ...item,
+        price: Number(item.price),
+      }));
+
+      dispatch(ingredientsActions.fillIngredients(resultsWithCorrectTypes));
     } else {
       const error = {
         status: response.status,
       };
       dispatch(ingredientsActions.setFetchingError(error));
     }
+
+    dispatch(ingredientsActions.stopFetching());
   },
 });

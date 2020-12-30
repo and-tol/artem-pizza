@@ -78,11 +78,19 @@ export interface IAction<T, R = any> {
   payload: R;
 }
 
-export type Ingredient = {
+export type IngredientFromServer = {
   id: string;
   name: string;
   slug: string;
   price: string;
+  category: string;
+  image: string;
+};
+export type Ingredient = {
+  id: string;
+  name: string;
+  slug: string;
+  price: number;
   category: string;
   image: string;
 };
