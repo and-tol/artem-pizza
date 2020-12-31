@@ -141,7 +141,9 @@ export const EditIngredientForm = ({
               name='category'
               defaultValue={currentCategory}
             >
-              <option value='sauces'>Соус</option>
+              <option value='size'>Размер</option>
+              <option value='dough'>Тесто</option>
+              <option value='sauce'>Соус</option>
               <option value='cheese'>Сыр</option>
               <option value='vegetables'>Овощ</option>
               <option value='meat'>Мясо</option>
@@ -163,7 +165,7 @@ export const EditIngredientForm = ({
           </label>
           <div>{errors.thumbnail?.message}</div>
         </div>
-          {/* {!serverResponse?.ok && <div>Не хватает данных</div>} */}
+        {/* {!serverResponse?.ok && <div>Не хватает данных</div>} */}
         <button>Отправить</button>
       </form>
     </>

@@ -82,7 +82,9 @@ export const NewIngredientForm = (props: NewIngredientFormProps) => {
           <label htmlFor='category'>
             Категория ингредиента
             <select id='category' ref={register} name='category'>
-              <option value='sauces'>Соус</option>
+              <option value='size'>Размер</option>
+              <option value='dough'>Тесто</option>
+              <option value='sauce'>Соус</option>
               <option value='cheese'>Сыр</option>
               <option value='vegetables'>Овощ</option>
               <option value='meat'>Мясо</option>
