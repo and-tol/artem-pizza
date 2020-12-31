@@ -39,43 +39,43 @@ export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
     <>
       <form onSubmit={onSubmit}>
         <RadioGroup
-          register={register}
           legend='Размер'
+          register={register}
           name='size'
           options={SIZE}
         />
         <RadioGroup
-          register={register}
           legend='Тесто'
+          register={register}
           name='dough'
           options={DOUGH}
         />
         <RadioGroup
-          register={register}
           legend='Выберите соус'
+          register={register}
           name='sauce'
           options={SAUCE}
         />
 
         <CheckboxGroup
           legend='Добавьте сыр'
-          options={CHEESE}
           register={register}
           name='cheese'
+          options={CHEESE}
         />
 
         <CheckboxGroup
           legend='Добавьте овощи'
-          options={VEGETABLES}
           register={register}
           name='vegetables'
+          options={VEGETABLES}
         />
 
         <CheckboxGroup
           legend='Добавьте мясо'
-          options={MEAT}
           register={register}
           name='meat'
+          options={MEAT}
         />
 
         <button>Заказать за {totalPrice}руб.</button>

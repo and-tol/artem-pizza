@@ -30,8 +30,4 @@ const composeEnhancers =
 
 const middleware = [thunk, logger];
 
-// if (developmentEnvironment) {
-//   middleware.push(logger);
-// }
-
 export { composeEnhancers, middleware };

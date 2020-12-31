@@ -57,7 +57,7 @@ export type Order = {
   card_number: string;
 };
 
-// Store Types
+// ---- States Types ---- //
 export type OrdersState = {
   orders: Order[];
 };
@@ -73,10 +73,10 @@ export type PizzaAction = {
 
 export type DispatchType = (args: PizzaAction) => PizzaAction;
 
-export interface IAction<T, R = any> {
+/* export interface IAction<T, R = any> {
   type: T;
   payload: R;
-}
+} */
 
 export type IngredientFromServer = {
   id: string;
@@ -108,3 +108,11 @@ export interface IngredientsAction {
   type: string;
   payload: Ingredient[] | [] | number | null;
 }
+
+// TODO: create type for State
+/*
+export interface State {
+  ingredients: IngredientsState
+  pizza: any
+}
+*/
