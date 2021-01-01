@@ -1,22 +1,25 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { usePizza } from '../../PizzaContext';
+import {getPizza} from '../pizza-configurator-page/state-pizza/selectors'
 // Components
-// FIXME: OrderPreviewPage
-// import { OrderPreview } from './OrderPreview';
+import { OrderPreview } from './OrderPreview';
 
 /**
  * @param _usePizzaHook simplifies context testing
  */
 export const OrderPreviewPage = ({ _usePizzaHook = usePizza }) => {
   const PizzaContext = _usePizzaHook();
-  const pizza = PizzaContext!.pizza;
+  // const pizza = PizzaContext!.pizza;
+
+  const pizza = useSelector(getPizza);
 
   if (pizza) {
     return (
       <section>
         <h2>Ленивая Маргарита</h2>
-        {/* <OrderPreview pizza={pizza} /> */}
+        <OrderPreview pizza={pizza} />
         <hr />
         <Link to='/checkout'>
           На страницу оформления заказа с формой оплаты

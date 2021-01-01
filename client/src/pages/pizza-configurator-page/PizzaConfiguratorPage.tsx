@@ -4,11 +4,11 @@ import { usePizza } from '../../PizzaContext';
 import { useDispatch } from 'react-redux';
 // ReduxActions
 import { ingredientsActions } from './state-ingredients/actions';
+import { pizzaConfiguratorActions } from './state-pizza/actions';
 // Types
 import { PizzaConfiguration } from '../../types';
 // Components
 import { PizzaForm } from './components/PizzaForm';
-
 
 /**
  * @param _usePizzaHook simplifies context testing
@@ -18,7 +18,7 @@ export const PizzaConfiguratorPage = ({ _usePizzaHook = usePizza }) => {
   const history = useHistory();
 
   const PizzaContext = _usePizzaHook();
-  const setPizza = PizzaContext?.setPizza;
+  // const setPizza = PizzaContext?.setPizza;
 
   /**
    * Get ingredients fron server when component render first time
@@ -28,10 +28,11 @@ export const PizzaConfiguratorPage = ({ _usePizzaHook = usePizza }) => {
   }, [dispatch]);
 
   const onPizzaChange = (pizza: PizzaConfiguration): void => {
-    if (setPizza) {
-      setPizza(pizza);
-      history.push('/order-preview');
-    }
+    dispatch(pizzaConfiguratorActions.fillPizza(pizza));
+    // if (setPizza) {
+    //   setPizza(pizza);
+    // }
+    history.push('/order-preview');
   };
 
   return (
