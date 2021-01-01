@@ -1,15 +1,11 @@
-import React, { FC } from 'react';
-import {
-  IngredientNameAndPriceState,
-  IngredientNameState,
-  refType,
-} from '../../../types';
+import { FC } from 'react';
+import { Ingredient, refType } from '../../../types';
 
 interface CheckboxGroupProps {
   register: refType;
   legend: string;
-  options: IngredientNameAndPriceState | IngredientNameState;
   name: string;
+  options: Ingredient[] | [];
 }
 
 export const CheckboxGroup: FC<CheckboxGroupProps> = ({
@@ -23,11 +19,11 @@ export const CheckboxGroup: FC<CheckboxGroupProps> = ({
       <legend>{legend}</legend>
       {Object.entries(options).map(option => {
         return (
-          <label key={option[0]}>
+          <label key={option[1].id}>
             <input
               ref={register}
               type='checkbox'
-              value={option[0]}
+              value={option[1].slug}
               name={name}
             />
             {option[1].name}

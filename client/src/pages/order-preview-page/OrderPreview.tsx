@@ -31,7 +31,8 @@ export const OrderPreview: React.FC<OrderPreviewProps> = ({ pizza }) => {
           : null}
       </p>
       <p>{meat?.length ? `Мясо: ${renderIngredient(meat, MEAT)}` : null}</p>
-      <p>Стоимость: {calculateTotalPrice(pizza)}руб.</p>
+      {/* // FIXME: calculateTotalPrice(pizza) */}
+      <p>Стоимость: calculateTotalPrice(pizza)руб.</p>
     </section>
   );
 };

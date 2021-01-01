@@ -1,11 +1,16 @@
 import { actionTypes } from './actionTypes';
 // Types
 import { PizzaState, PizzaAction } from '../../../types';
-// Data
-import { DEFAULT_PIZZA } from '../../../pizzaData';
 
 const initialState: PizzaState = {
-  pizza: DEFAULT_PIZZA,
+  pizza: {
+    size: '30',
+    dough: 'thin',
+    sauce: 'tomato-sauce',
+    cheese: [],
+    vegetables: [],
+    meat: [],
+  },
 };
 
 export const pizzaConfiguratorReducer = (

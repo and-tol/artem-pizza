@@ -1,16 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
-// Data
+// Selectors
 import {
-  DEFAULT_PIZZA, // initialState from state-pizza
-  DOUGH, // state from state-ingredients
-  SAUCE,
-  SIZE,
-  CHEESE,
-  VEGETABLES,
-  MEAT,
-} from '../../../pizzaData';
+  getIngredients,
+  getIngredientsByCategory,
+} from '../state-ingredients/selectors';
+import { getPizza } from '../state-pizza/selectors';
+
 // Types
 import { PizzaConfiguration } from '../../../types';
 // Components
@@ -22,12 +20,35 @@ export interface PizzaFormProps {
 }
 
 export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
+  const pizza = useSelector(getPizza);
+
   const { register, handleSubmit, watch } = useForm<PizzaConfiguration>({
-    defaultValues: DEFAULT_PIZZA,
+    defaultValues: pizza,
   });
 
+  const ingredients = useSelector(getIngredients);
+
+  const SIZE = useSelector(getIngredientsByCategory('size'));
+  const DOUGH = useSelector(getIngredientsByCategory('dough'));
+  const SAUCE = useSelector(getIngredientsByCategory('sauce'));
+  const CHEESE = useSelector(getIngredientsByCategory('cheese'));
+  const VEGETABLES = useSelector(getIngredientsByCategory('vegetables'));
+  const MEAT = useSelector(getIngredientsByCategory('meat'));
+
+console.log('SIZE:', SIZE.filter(i => i.slug === '30'));
+console.log('ingredients>>>>', ingredients);
+
   const values = watch();
-  const totalPrice: number = calculateTotalPrice(values);
+
+  console.log('values>>>>', values);
+
+  // const totalPrice: number = calculateTotalPrice(
+  //   { SIZE, DOUGH, SAUCE, CHEESE, VEGETABLES, MEAT },
+  //   values
+  // );
+  const totalPrice: number = calculateTotalPrice(ingredients, values);
+
+// console.log('totalPrice>>>>', totalPrice);
 
   const onSubmit = handleSubmit((values: PizzaConfiguration) => {
     if (onPizzaCreated) {

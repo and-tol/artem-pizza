@@ -71,11 +71,12 @@ export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
     }
   });
 
-  let orderPrice = calculateTotalPrice(defaultPizza);
+  // FIXME: calculateTotalPrice
+  // let orderPrice = calculateTotalPrice(defaultPizza);
 
-  if (pizza) {
-    orderPrice = calculateTotalPrice(pizza);
-  }
+  // if (pizza) {
+  //   orderPrice = calculateTotalPrice(pizza);
+  // }
 
   return (
     <>
@@ -160,16 +161,16 @@ export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
           </fieldset>
           <section>
             <p>
-              Стоимость заказа <span>{orderPrice} руб.</span>
+              {/* Стоимость заказа <span>{orderPrice} руб.</span> */}
             </p>
             <p>
               Доставка <span>{PIZZA_DELIVERY} руб.</span>
             </p>
             <hr />
             <p>
-              К оплате <span>{orderPrice + PIZZA_DELIVERY} руб.</span>
+              К оплате <span>orderPrice + PIZZA_DELIVERY руб.</span>
             </p>
-            <button>Оплатить {orderPrice + PIZZA_DELIVERY} руб.</button>
+            <button>Оплатить orderPrice + PIZZA_DELIVERY руб.</button>
           </section>
         </form>
         <p>
