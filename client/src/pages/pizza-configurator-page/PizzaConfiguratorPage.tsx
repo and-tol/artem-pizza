@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { usePizza } from '../../PizzaContext';
 import { useDispatch } from 'react-redux';
 // ReduxActions
 import { ingredientsActions } from './state-ingredients/actions';
@@ -13,12 +12,9 @@ import { PizzaForm } from './components/PizzaForm';
 /**
  * @param _usePizzaHook simplifies context testing
  */
-export const PizzaConfiguratorPage = ({ _usePizzaHook = usePizza }) => {
+export const PizzaConfiguratorPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
-  const PizzaContext = _usePizzaHook();
-  // const setPizza = PizzaContext?.setPizza;
 
   /**
    * Get ingredients fron server when component render first time
@@ -29,9 +25,6 @@ export const PizzaConfiguratorPage = ({ _usePizzaHook = usePizza }) => {
 
   const onPizzaChange = (pizza: PizzaConfiguration): void => {
     dispatch(pizzaConfiguratorActions.fillPizza(pizza));
-    // if (setPizza) {
-    //   setPizza(pizza);
-    // }
     history.push('/order-preview');
   };
 
