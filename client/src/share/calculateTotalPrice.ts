@@ -1,8 +1,8 @@
-import { Ingredient, TotalPrice } from '../types';
+import { Ingredient,  PizzaConfiguration } from '../types';
 
 export const calculateTotalPrice = (
   ingredients: Ingredient[] | [],
-  pizza: TotalPrice
+  pizza: PizzaConfiguration
 ): number => {
   const { size, cheese, vegetables, meat } = pizza;
 

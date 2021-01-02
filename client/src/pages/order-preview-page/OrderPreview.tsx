@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 // Helpers
 import { calculateTotalPrice } from '../../share/calculateTotalPrice';
+import { renderIngredients } from '../../share/renderIngredient';
 
 import { PizzaConfiguration, Ingredient } from '../../types';
 // Selectors
@@ -25,17 +26,17 @@ export const OrderPreview: React.FC<OrderPreviewProps> = ({ pizza }) => {
    * @param ingredients - selected ingredient
    * @param data - possible ingredients
    */
-  const renderIngredient = (
-    ingredients: string[],
-    data: Ingredient[]
-  ): string =>
-    ingredients
-      ?.map(selectedIngredient => {
-        return data
-          .filter(i => i.slug === selectedIngredient)[0]
-          .name.toLowerCase();
-      })
-      .join(', ');
+  // const renderIngredients = (
+  //   ingredients: string[],
+  //   data: Ingredient[]
+  // ): string =>
+  //   ingredients
+  //     ?.map(selectedIngredient => {
+  //       return data
+  //         .filter(i => i.slug === selectedIngredient)[0]
+  //         .name.toLowerCase();
+  //     })
+  //     .join(', ');
 
   return (
     <section>
@@ -49,22 +50,28 @@ export const OrderPreview: React.FC<OrderPreviewProps> = ({ pizza }) => {
       <p>
         Тесто:
         {dough
-          ? ` ${ingredients.filter(i => i.slug === dough)[0].name.toLowerCase()}`
+          ? ` ${ingredients
+              .filter(i => i.slug === dough)[0]
+              .name.toLowerCase()}`
           : ' Ошибка базы данных'}
       </p>
       <p>
         Соус:
         {sauce
-          ? ` ${ingredients.filter(i => i.slug === sauce)[0].name.toLowerCase()}`
+          ? ` ${ingredients
+              .filter(i => i.slug === sauce)[0]
+              .name.toLowerCase()}`
           : ' Ошибка базы данных'}
       </p>
-      <p>{cheese.length ? `Сыр: ${renderIngredient(cheese, CHEESE)}` : null}</p>
+      <p>
+        {cheese.length ? `Сыр: ${renderIngredients(cheese, CHEESE)}` : null}
+      </p>
       <p>
         {vegetables?.length
-          ? `Овощи: ${renderIngredient(vegetables, VEGETABLES)}`
+          ? `Овощи: ${renderIngredients(vegetables, VEGETABLES)}`
           : null}
       </p>
-      <p>{meat?.length ? `Мясо: ${renderIngredient(meat, MEAT)}` : null}</p>
+      <p>{meat?.length ? `Мясо: ${renderIngredients(meat, MEAT)}` : null}</p>
 
       <p>Стоимость: {calculateTotalPrice(ingredients, pizza)}руб.</p>
     </section>

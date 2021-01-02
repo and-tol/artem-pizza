@@ -1,51 +1,70 @@
 import React from 'react';
 // Helpers
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
-// Data
-import {
-  CHEESE,
-  DOUGH,
-  MEAT,
-  SAUCE,
-  SIZE,
-  VEGETABLES,
-} from '../../../pizzaData';
-// Types
-import { PizzaConfiguration } from '../../../types';
 // Helpers
-import { renderIngredient } from '../../../share/renderIngredient';
+import { renderIngredients } from '../../../share/renderIngredient';
+// Types
+import { Ingredient, PizzaConfiguration } from '../../../types';
 
 interface CheckoutPreviewProps {
   pizza: PizzaConfiguration;
+  ingredients: Ingredient[] | [];
 }
 
-export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({ pizza }) => {
+export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({
+  pizza,
+  ingredients,
+}) => {
   const { size, dough, sauce, cheese, vegetables, meat } = pizza;
+
+  const CHEESE = ingredients.filter(i => i.category === 'cheese');
+  const VEGETABLES = ingredients.filter(i => i.category === 'vegetables');
+  const MEAT = ingredients.filter(i => i.category === 'meat');
 
   return (
     <>
       <section>
         <h3>Ленивая Маргарита</h3>
         <p>
-          <span>{SIZE[size].name}</span> см на
-          <span> {DOUGH[dough].case.toLowerCase()} </span>
-          тесте <span>{` • ${SAUCE[sauce].name}`}</span> соус
           <span>
-             {cheese?.length ? ` • ${renderIngredient(cheese, CHEESE)}` : null}
+            {size
+              ? ` ${ingredients.filter(i => i.slug === size)[0].name}`
+              : ' Ошибка базы данных'}
+          </span>{' '}
+          см на
+          <span>
+            тесте{' '}
+            {dough
+              ? ` ${ingredients
+                  .filter(i => i.slug === dough)[0]
+                  .name.toLowerCase()}`
+              : ' Ошибка базы данных'}
           </span>
+          <span>{` • ${
+            sauce
+              ? ` ${ingredients
+                  .filter(i => i.slug === sauce)[0]
+                  .name.toLowerCase()} `
+              : ' Ошибка базы данных'
+          }`}</span>{' '}
+          соус
           <span>
-            {vegetables?.length
-              ? ` • ${renderIngredient(vegetables, VEGETABLES)}`
+            {cheese.length
+              ? ` • Сыр: ${renderIngredients(cheese, CHEESE)}`
               : null}
           </span>
           <span>
-            {' '}
-            {meat?.length ? ` • ${renderIngredient(meat, MEAT)}` : null}
+            {vegetables?.length
+              ? ` • Овощи: ${renderIngredients(vegetables, VEGETABLES)}`
+              : null}
+          </span>
+          <span>
+            {meat?.length ? ` • Мясо: ${renderIngredients(meat, MEAT)}` : null}
           </span>
         </p>
 
         <hr />
-        <p>calculateTotalPrice(pizza) руб.</p>
+        <p>{calculateTotalPrice(ingredients, pizza)} руб.</p>
       </section>
     </>
   );

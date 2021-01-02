@@ -1,5 +1,4 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { api } from '../../../api';
@@ -8,7 +7,7 @@ import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Data
 import { PIZZA_DELIVERY } from '../../../pizzaData';
 // Types
-import { Order, PizzaConfiguration } from '../../../types';
+import { Order, PizzaConfiguration, Ingredient } from '../../../types';
 var valid = require('card-validator');
 
 const normalizeCardNumber = (value: string): string => {
@@ -22,8 +21,8 @@ const normalizeCardNumber = (value: string): string => {
 };
 
 interface CheckoutFormProps {
-  pizza: PizzaConfiguration | null;
-  defaultPizza: PizzaConfiguration;
+  pizza: PizzaConfiguration;
+  ingredients: Ingredient[] | [];
 }
 
 type FormValues = {
@@ -43,7 +42,7 @@ const schema = yup.object().shape({
   cardName: yup.string().required('Это обязательное поле'),
 });
 
-export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
+export const CheckoutForm = ({ pizza, ingredients }: CheckoutFormProps) => {
   const {
     register,
     handleSubmit,
@@ -70,6 +69,8 @@ export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
       await api.orders.createOrder(order);
     }
   });
+
+  const orderPrice = calculateTotalPrice(ingredients, pizza);
 
   return (
     <>
@@ -153,15 +154,17 @@ export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
             </label>
           </fieldset>
           <section>
-            <p>{/* Стоимость заказа <span>{orderPrice} руб.</span> */}</p>
+            <p>
+              Стоимость заказа <span>{orderPrice} руб.</span>
+            </p>
             <p>
               Доставка <span>{PIZZA_DELIVERY} руб.</span>
             </p>
             <hr />
             <p>
-              К оплате <span>orderPrice + PIZZA_DELIVERY руб.</span>
+              К оплате <span>{orderPrice + PIZZA_DELIVERY} руб.</span>
             </p>
-            <button>Оплатить orderPrice + PIZZA_DELIVERY руб.</button>
+            <button>Оплатить {orderPrice + PIZZA_DELIVERY} руб.</button>
           </section>
         </form>
         <p>

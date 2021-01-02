@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
+// Selectors
 import { getPizza } from '../pizza-configurator-page/state-pizza/selectors';
 // Components
 import { OrderPreview } from './OrderPreview';
@@ -9,10 +10,6 @@ export const OrderPreviewPage = () => {
   const pizza = useSelector(getPizza);
 
   const { size, dough, sauce } = pizza;
-
-  console.log('size>', !!size);
-  console.log('dough>', !!dough);
-  console.log('sauce>', !!sauce);
 
   /**
    * Style for link to go to another page

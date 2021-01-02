@@ -22,15 +22,6 @@ export interface PizzaConfiguration {
   meat: string[];
 }
 
-export interface TotalPrice {
-  size: string;
-  dough?: string;
-  sauce?: string;
-  cheese: string[];
-  vegetables: string[];
-  meat: string[];
-}
-
 // React Hook Form register
 export type RegisterOptions = Partial<{
   required: Message | ValidationRule<boolean>;

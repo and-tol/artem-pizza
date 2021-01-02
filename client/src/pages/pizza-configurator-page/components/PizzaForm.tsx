@@ -41,15 +41,12 @@ export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
 
   // FIXME: ? нужен ли сдесь Dispatch?
   useEffect(() => {
-    dispatch(pizzaConfiguratorActions.fillPizza(values))
+    dispatch(pizzaConfiguratorActions.fillPizza(values));
   }, [dispatch]);
 
   const totalPrice: number = calculateTotalPrice(ingredients, values);
 
   const onSubmit = handleSubmit((values: PizzaConfiguration) => {
-
-
-
     if (onPizzaCreated) {
       onPizzaCreated(values);
     }

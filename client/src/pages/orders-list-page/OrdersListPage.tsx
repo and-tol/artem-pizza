@@ -23,13 +23,13 @@ export const OrdersListPage = () => {
   return (
     <>
       <h1>Заказы</h1>
-      {previousOrders.length ? (
+      {/* {previousOrders.length ? (
         previousOrders.map((order, i) => (
           <PreviousOrder key={i} order={order} />
         ))
       ) : (
         <span>Вы пока не сделали ни одного заказа</span>
-      )}
+      )} */}
     </>
   );
 };

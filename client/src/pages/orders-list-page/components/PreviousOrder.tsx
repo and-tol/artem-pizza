@@ -10,14 +10,13 @@ import {
 // Types
 import { Order } from '../../../types';
 // Helpers
-import { renderIngredient } from '../../../share/renderIngredient';
+import { renderIngredients } from '../../../share/renderIngredient';
 
 type PreviousOrderProps = {
   order?: Order;
 };
 
 export const PreviousOrder = ({ order }: PreviousOrderProps) => {
-
   const { card_number, ingredients } = { ...order };
 
   return (
@@ -31,23 +30,7 @@ export const PreviousOrder = ({ order }: PreviousOrderProps) => {
       </header>
       <div>
         <h3>Ленивая Маргарита</h3>
-        <p>
-          <span>{SIZE[ingredients[0]!.size].name}</span> см на
-          <span> {DOUGH[ingredients[0]!.dough].case.toLowerCase()} </span>
-          тесте <span> • {SAUCE[ingredients[0]!.sauce].name}</span> соус
-          <span>
-             {ingredients[0]!.cheese?.length ? ` • ${renderIngredient(ingredients[0]!.cheese, CHEESE)}` : null}
-          </span>
-          <span>
-            {ingredients[0]!.vegetables?.length
-              ? ` • ${renderIngredient(ingredients[0]!.vegetables, VEGETABLES)}`
-              : null}
-          </span>
-          <span>
-            {' '}
-            {ingredients[0]!.meat?.length ? ` • ${renderIngredient(ingredients[0]!.meat, MEAT)}` : null}
-          </span>
-        </p>
+        {/*  */}
       </div>
       <hr />
       <footer>
@@ -61,3 +44,26 @@ export const PreviousOrder = ({ order }: PreviousOrderProps) => {
     </section>
   );
 };
+
+{/* <p>
+  <span>{SIZE[ingredients[0]!.size].name}</span> см на
+  <span> {DOUGH[ingredients[0]!.dough].case.toLowerCase()} </span>
+  тесте <span> • {SAUCE[ingredients[0]!.sauce].name}</span> соус
+  <span>
+     
+    {ingredients[0]!.cheese?.length
+      ? ` • ${renderIngredients(ingredients[0]!.cheese, CHEESE)}`
+      : null}
+  </span>
+  <span>
+    {ingredients[0]!.vegetables?.length
+      ? ` • ${renderIngredients(ingredients[0]!.vegetables, VEGETABLES)}`
+      : null}
+  </span>
+  <span>
+    {' '}
+    {ingredients[0]!.meat?.length
+      ? ` • ${renderIngredients(ingredients[0]!.meat, MEAT)}`
+      : null}
+  </span>
+</p>; */}
