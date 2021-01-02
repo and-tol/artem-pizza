@@ -1,19 +1,30 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { usePizza } from '../../PizzaContext';
-import {getPizza} from '../pizza-configurator-page/state-pizza/selectors'
+import { getPizza } from '../pizza-configurator-page/state-pizza/selectors';
 // Components
 import { OrderPreview } from './OrderPreview';
 
-/**
- * @param _usePizzaHook simplifies context testing
- */
-export const OrderPreviewPage = ({ _usePizzaHook = usePizza }) => {
-  const PizzaContext = _usePizzaHook();
-  // const pizza = PizzaContext!.pizza;
-
+export const OrderPreviewPage = () => {
   const pizza = useSelector(getPizza);
+
+  const { size, dough, sauce } = pizza;
+
+  console.log('size>', !!size);
+  console.log('dough>', !!dough);
+  console.log('sauce>', !!sauce);
+
+  /**
+   * Style for link to go to another page
+   */
+  const linkStyle =
+    !size || !dough || !sauce
+      ? ({
+          cursor: 'not-allowed',
+          opacity: '0.5',
+          'pointer-events': 'none',
+        } as React.CSSProperties)
+      : undefined;
 
   if (pizza) {
     return (
@@ -21,7 +32,7 @@ export const OrderPreviewPage = ({ _usePizzaHook = usePizza }) => {
         <h2>Ленивая Маргарита</h2>
         <OrderPreview pizza={pizza} />
         <hr />
-        <Link to='/checkout'>
+        <Link to='/checkout' style={linkStyle}>
           На страницу оформления заказа с формой оплаты
         </Link>
       </section>
@@ -29,4 +40,4 @@ export const OrderPreviewPage = ({ _usePizzaHook = usePizza }) => {
   } else {
     return <Redirect to='/' />;
   }
-};;
+};
