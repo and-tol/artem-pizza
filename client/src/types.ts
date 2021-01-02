@@ -48,9 +48,13 @@ export type Order = {
   card_number: string;
 };
 
-// ---- States Types ---- //
-export type OrdersState = {
+// ! ---- States Types ---- //
+export interface OrdersState {
   orders: Order[];
+}
+export type OrdersAction = {
+  type: string;
+  payload: Order;
 };
 
 export type PizzaState = {
@@ -100,10 +104,8 @@ export interface IngredientsAction {
   payload: Ingredient[] | [] | number | null;
 }
 
-// TODO: create type for State
-/*
 export interface State {
-  ingredients: IngredientsState
-  pizza: any
+  ingredients: IngredientsState;
+  pizza: PizzaState;
+  orders: OrdersState;
 }
-*/

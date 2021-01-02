@@ -1,13 +1,11 @@
 // Types
-import { Ingredient } from '../../../types';
+import { Ingredient, State } from '../../../types';
 
-// FIXME: type state  any
-export const getIngredients = (state: any): Ingredient[] =>
+export const getIngredients = (state: State): Ingredient[] =>
   state.ingredients.ingredients;
 
 export const getIngredientsByCategory = (category: string) => (
-  // FIXME: type state  any
-  state: any
+  state: State
 ): Ingredient[] => {
   return state.ingredients.ingredients.filter(
     (i: Ingredient) => i.category === category

@@ -1,4 +1,4 @@
-// Action Types
+// ActionTypes
 import { actionTypes } from './actionTypes';
 // Api
 import { api } from '../../../api';
