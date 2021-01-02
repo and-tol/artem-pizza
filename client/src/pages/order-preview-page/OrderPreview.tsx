@@ -42,20 +42,20 @@ export const OrderPreview: React.FC<OrderPreviewProps> = ({ pizza }) => {
       <p>
         Размер:
         {size
-          ? ingredients.filter(i => i.slug === size)[0].name
+          ? ` ${ingredients.filter(i => i.slug === size)[0].name}`
           : ' Ошибка базы данных'}
         см
       </p>
       <p>
         Тесто:
         {dough
-          ? ingredients.filter(i => i.slug === dough)[0].name.toLowerCase()
+          ? ` ${ingredients.filter(i => i.slug === dough)[0].name.toLowerCase()}`
           : ' Ошибка базы данных'}
       </p>
       <p>
-        Соус: 
+        Соус:
         {sauce
-          ? ingredients.filter(i => i.slug === sauce)[0].name.toLowerCase()
+          ? ` ${ingredients.filter(i => i.slug === sauce)[0].name.toLowerCase()}`
           : ' Ошибка базы данных'}
       </p>
       <p>{cheese.length ? `Сыр: ${renderIngredient(cheese, CHEESE)}` : null}</p>
