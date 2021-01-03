@@ -80,6 +80,7 @@ export type IngredientFromServer = {
   price: string;
   category: string;
   image: string;
+  thumbnail: string;
 };
 export type Ingredient = {
   id: string;
@@ -88,6 +89,7 @@ export type Ingredient = {
   price: number;
   category: string;
   image: string;
+  thumbnail: string;
 };
 
 export interface ErrorState {

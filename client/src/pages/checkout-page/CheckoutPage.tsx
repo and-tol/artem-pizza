@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux';
 import { getPizza } from '../pizza-configurator-page/state-pizza/selectors';
 import { getIngredients } from '../pizza-configurator-page/state-ingredients/selectors';
 // Components
-import { CheckoutForm, CheckoutPreview } from './components';
+import { CheckoutForm, OrderPreview } from './components';
+// Helpers
+import { calculateTotalPrice} from '../../share/calculateTotalPrice'
 
 export const CheckoutPage = () => {
   const pizza = useSelector(getPizza);
@@ -13,7 +15,9 @@ export const CheckoutPage = () => {
   return (
     <>
       <h1>Оформление заказа</h1>
-      <CheckoutPreview pizza={pizza} ingredients={ingredients} />
+      <OrderPreview pizza={pizza} ingredients={ingredients} />
+      <hr />
+      <p>{calculateTotalPrice(ingredients, pizza)} руб.</p>
       <CheckoutForm pizza={pizza} ingredients={ingredients} />
     </>
   );

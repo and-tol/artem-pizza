@@ -4,7 +4,35 @@ import { actionTypes } from './actionTypes';
 import { IngredientsState, IngredientsAction } from '../../../types';
 
 const initialState: IngredientsState = {
-  ingredients: [],
+  ingredients: [
+    {
+      category: 'size',
+      id: '0',
+      image: '',
+      name: '30',
+      price: 200,
+      slug: '30',
+      thumbnail: '',
+    },
+    {
+      category: 'dough',
+      id: '1',
+      image: '',
+      name: 'Тонкое',
+      price: 0,
+      slug: 'thin',
+      thumbnail: '',
+    },
+    {
+      category: 'sauce',
+      id: '2',
+      image: '',
+      name: 'Томатный',
+      price: 0,
+      slug: 'tomato-sauce',
+      thumbnail: '',
+    },
+  ],
   error: null,
   isLoading: false,
 };

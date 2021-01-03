@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 // Selectors
 import { getPizza } from '../pizza-configurator-page/state-pizza/selectors';
+import { getIngredients } from '../pizza-configurator-page/state-ingredients/selectors';
 // Components
 import { OrderPreview } from './OrderPreview';
 
 export const OrderPreviewPage = () => {
   const pizza = useSelector(getPizza);
+  const ingredients = useSelector(getIngredients);
 
   const { size, dough, sauce } = pizza;
 
@@ -27,7 +29,7 @@ export const OrderPreviewPage = () => {
     return (
       <section>
         <h2>Ленивая Маргарита</h2>
-        <OrderPreview pizza={pizza} />
+        <OrderPreview pizza={pizza} ingredients={ingredients} />
         <hr />
         <Link to='/checkout' style={linkStyle}>
           На страницу оформления заказа с формой оплаты

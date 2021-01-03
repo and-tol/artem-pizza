@@ -8,10 +8,10 @@ import { Ingredient, PizzaConfiguration } from '../../../types';
 
 interface CheckoutPreviewProps {
   pizza: PizzaConfiguration;
-  ingredients: Ingredient[] | [];
+  ingredients: Ingredient[];
 }
 
-export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({
+export const OrderPreview: React.FC<CheckoutPreviewProps> = ({
   pizza,
   ingredients,
 }) => {
@@ -27,25 +27,21 @@ export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({
         <h3>Ленивая Маргарита</h3>
         <p>
           <span>
-            {size
-              ? ` ${ingredients.filter(i => i.slug === size)[0].name}`
-              : ' Ошибка базы данных'}
+            {!!size && ` ${ingredients.filter(i => i.slug === size)[0].name}`}
           </span>{' '}
           см на
           <span>
             тесте{' '}
-            {dough
-              ? ` ${ingredients
-                  .filter(i => i.slug === dough)[0]
-                  .name.toLowerCase()}`
-              : ' Ошибка базы данных'}
+            {!!dough &&
+              ` ${ingredients
+                .filter(i => i.slug === dough)[0]
+                .name.toLowerCase()}`}
           </span>
           <span>{` • ${
-            sauce
-              ? ` ${ingredients
-                  .filter(i => i.slug === sauce)[0]
-                  .name.toLowerCase()} `
-              : ' Ошибка базы данных'
+            !!sauce &&
+            ` ${ingredients
+              .filter(i => i.slug === sauce)[0]
+              .name.toLowerCase()} `
           }`}</span>{' '}
           соус
           <span>
@@ -62,9 +58,6 @@ export const CheckoutPreview: React.FC<CheckoutPreviewProps> = ({
             {meat?.length ? ` • Мясо: ${renderIngredients(meat, MEAT)}` : null}
           </span>
         </p>
-
-        <hr />
-        <p>{calculateTotalPrice(ingredients, pizza)} руб.</p>
       </section>
     </>
   );
