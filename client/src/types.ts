@@ -100,14 +100,25 @@ export interface IngredientsState {
   error: ErrorState | null;
   isLoading: boolean;
 }
+export interface LoginState {
+  error: ErrorState | null;
+  isRegistered: boolean | null;
+  isLoading: boolean;
+  login: { name: string; email: string };
+}
 
 export interface IngredientsAction {
   type: string;
   payload: Ingredient[] | [] | number | null;
+}
+export interface LoginAction {
+  type: string;
+  payload: any;
 }
 
 export interface State {
   ingredients: IngredientsState;
   pizza: PizzaState;
   orders: OrdersState;
+  login: LoginState;
 }

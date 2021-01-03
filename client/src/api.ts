@@ -25,4 +25,32 @@ export const api = Object.freeze({
       });
     },
   },
+
+  users: {
+    create: (data: any) => {
+      return fetch(`${root}/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+    },
+    login: (credentials: any) => {
+      return fetch(`${root}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Base ${credentials}`,
+        },
+        credentials: 'include',
+      });
+    },
+    logout: () => {
+      return fetch(`${root}/logout`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+    },
+  },
 });
