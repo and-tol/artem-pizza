@@ -23,8 +23,6 @@ export const PizzaConfiguratorPage = () => {
   const pizza = useSelector(getPizza);
   const ingredients = useSelector(getIngredients);
 
-  console.log("1",ingredients);
-
   /**
    * Get ingredients fron server when component render first time
    */
