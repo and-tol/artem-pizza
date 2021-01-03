@@ -34,26 +34,7 @@ export const loginActions = Object.freeze({
     };
   },
 
-  /**
-   * User registation
-   * @param login -> login, email
-   */
-  userRegistationAsync: (login: any) => async (dispatch: any) => {
-    dispatch(loginActions.startFetching());
 
-    const response = await api.users.login(login);
-    if (response.status === 200) {
-      const results = await response.json();
-
-      dispatch(loginActions.setUserStatus(results));
-    } else {
-      const error = {
-        status: response.status,
-      };
-      dispatch(loginActions.setFetchingError(error));
-    }
-    dispatch(loginActions.stopFetching());
-  },
   /**
    * Checking user registration
    * @param credentials -> login, email

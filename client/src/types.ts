@@ -106,6 +106,12 @@ export interface LoginState {
   isLoading: boolean;
   login: { name: string; email: string };
 }
+export interface SignupState {
+  error: ErrorState | null;
+  isRegistered: boolean | null;
+  isLoading: boolean;
+  login: { name: string; email: string };
+}
 
 export interface IngredientsAction {
   type: string;
@@ -115,10 +121,15 @@ export interface LoginAction {
   type: string;
   payload: any;
 }
+export interface SignupAction {
+  type: string;
+  payload: any;
+}
 
 export interface State {
   ingredients: IngredientsState;
   pizza: PizzaState;
   orders: OrdersState;
   login: LoginState;
+  signup: SignupState;
 }
