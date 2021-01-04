@@ -11,7 +11,7 @@ import { getIngredients } from './state-ingredients/selectors';
 import { PizzaConfiguration } from '../../types';
 // Components
 import { PizzaForm } from './components/PizzaForm';
-import { OrderPreview } from './components/OrderPreview';
+import { OrderPreview } from '../../share/components/OrderPreview';
 
 /**
  * @param _usePizzaHook simplifies context testing

@@ -1,3 +1,3 @@
-import { Order, State } from '../../../types';
+import { IOrder, State } from '../../../types';
 
-export const getOrders = (state: State): Order[] => state.orders.orders;
+export const getOrders = (state: State): IOrder[] => state.orders.orders;

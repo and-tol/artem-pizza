@@ -1,7 +1,7 @@
 // ActionTypes
 import { actionTypes } from './actionTypes';
 // Types
-import { Order, ErrorState } from '../../../types';
+import { IOrder, ErrorState } from '../../../types';
 // Api
 import { api } from '../../../api';
 
@@ -23,7 +23,7 @@ export const ordersListActions = Object.freeze({
     };
   },
 
-  fillOrders: (payload: Order[] | []) => {
+  fillOrders: (payload: IOrder[] | []) => {
     return {
       type: actionTypes.ORDERS_FILL,
       payload,

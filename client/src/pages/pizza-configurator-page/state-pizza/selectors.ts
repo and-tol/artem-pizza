@@ -1,5 +1,4 @@
 // Types
-import { PizzaConfiguration } from '../../../types';
+import { PizzaConfiguration, State } from '../../../types';
 
-// FIXME: type state  any
-export const getPizza = (state: any): PizzaConfiguration => state.pizza.pizza
+export const getPizza = (state: State): PizzaConfiguration => state.pizza.pizza;

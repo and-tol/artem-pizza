@@ -7,7 +7,7 @@ const initialState: CheckoutState = {
   data: null,
   error: null,
   isLoading: false,
-  isAccept: true,
+  isAccepted: true,
 };
 
 export const checkoutReducer = (state = initialState, action: any) => {

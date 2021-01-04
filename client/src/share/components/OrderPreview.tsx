@@ -1,8 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+// Selectors
+import { getIngredientsByCategory } from '../../pages/pizza-configurator-page/state-ingredients/selectors';
 // Helpers
-import { renderIngredients } from '../../../share/renderIngredient';
+import { renderIngredients } from '../renderIngredient';
 // Types
-import { PizzaConfiguration, Ingredient } from '../../../types';
+import { PizzaConfiguration, Ingredient } from '../../types';
 
 export interface OrderPreviewProps {
   pizza: PizzaConfiguration;
@@ -15,9 +18,9 @@ export const OrderPreview: React.FC<OrderPreviewProps> = ({
 }) => {
   const { size, dough, sauce, cheese, vegetables, meat } = pizza;
 
-  const CHEESE = ingredients.filter(i => i.category === 'cheese');
-  const VEGETABLES = ingredients.filter(i => i.category === 'vegetables');
-  const MEAT = ingredients.filter(i => i.category === 'meat');
+  const CHEESE = useSelector(getIngredientsByCategory('cheese'));
+  const VEGETABLES = useSelector(getIngredientsByCategory('vegetables'));
+  const MEAT = useSelector(getIngredientsByCategory('meat'));
 
   return (
     <section>
@@ -25,9 +28,8 @@ export const OrderPreview: React.FC<OrderPreviewProps> = ({
         <span>
           {!!size && ` ${ingredients.filter(i => i.slug === size)[0].name}`}
         </span>{' '}
-        см на
+        см на тесте
         <span>
-          тесте{' '}
           {!!dough &&
             ` ${ingredients
               .filter(i => i.slug === dough)[0]
@@ -39,17 +41,19 @@ export const OrderPreview: React.FC<OrderPreviewProps> = ({
         }`}</span>{' '}
         соус
         <span>
-          {cheese.length
+          {cheese.length && CHEESE.length
             ? ` • Сыр: ${renderIngredients(cheese, CHEESE)}`
             : null}
         </span>
         <span>
-          {vegetables?.length
+          {vegetables?.length && VEGETABLES.length
             ? ` • Овощи: ${renderIngredients(vegetables, VEGETABLES)}`
             : null}
         </span>
         <span>
-          {meat?.length ? ` • Мясо: ${renderIngredients(meat, MEAT)}` : null}
+          {meat?.length && MEAT.length
+            ? ` • Мясо: ${renderIngredients(meat, MEAT)}`
+            : null}
         </span>
       </p>
     </section>

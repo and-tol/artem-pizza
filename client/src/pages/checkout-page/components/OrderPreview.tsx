@@ -17,6 +17,8 @@ export const OrderPreview: React.FC<CheckoutPreviewProps> = ({
 }) => {
   const { size, dough, sauce, cheese, vegetables, meat } = pizza;
 
+
+
   const CHEESE = ingredients.filter(i => i.category === 'cheese');
   const VEGETABLES = ingredients.filter(i => i.category === 'vegetables');
   const MEAT = ingredients.filter(i => i.category === 'meat');

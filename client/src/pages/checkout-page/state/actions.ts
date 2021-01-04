@@ -3,7 +3,7 @@ import { api } from '../../../api';
 // ActionTypes
 import { actionTypes } from './actionTypes';
 // Types
-import { ErrorState, Order } from '../../../types';
+import { ErrorState, IOrder } from '../../../types';
 
 export const checkoutActions = Object.freeze({
   startFetching: () => {
@@ -21,7 +21,7 @@ export const checkoutActions = Object.freeze({
     };
   },
 
-  fillOrder: (payload: Order) => {
+  fillOrder: (payload: IOrder) => {
     return {
       type: actionTypes.CHECKOUT_FILL,
       payload,
@@ -29,7 +29,7 @@ export const checkoutActions = Object.freeze({
   },
 
   // Async
-  sendOrderAsync: (data: Order) => async (dispatch: any) => {
+  sendOrderAsync: (data: IOrder) => async (dispatch: any) => {
     dispatch(checkoutActions.startFetching());
     const response = await api.orders.createOrder(data);
     if (response.status === 200) {

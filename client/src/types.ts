@@ -40,13 +40,13 @@ export type refType =
   | null
   | undefined;
 
-export type Order = {
-  ingredients: [null | PizzaConfiguration];
+export interface IOrder {
+  pizza: PizzaConfiguration;
   // ingredients: [null | undefined | PizzaConfiguration];
   address: string;
   name: string;
   card_number: string;
-};
+}
 
 export interface FormValues {
   address: string;
@@ -61,11 +61,11 @@ export interface FormValues {
 
 // ! ---- States Types ---- //
 export interface OrdersState {
-  orders: Order[];
+  orders: IOrder[];
 }
 export type OrdersAction = {
   type: string;
-  payload: Order;
+  payload: IOrder;
 };
 
 export type PizzaState = {
@@ -124,10 +124,10 @@ export interface SignupState {
   login: { name: string; email: string };
 }
 export interface CheckoutState {
-  data: Order | null;
+  data: IOrder | null;
   error: ErrorState | null;
   isLoading: boolean;
-  isAccept: boolean;
+  isAccepted: boolean;
 }
 
 export interface IngredientsAction {

@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react';
 // Api
 import { api } from '../../api';
 // Components
-import { PreviousOrder } from './components';
+import { Order } from '../../share/components';
 // Types
-import { Order } from '../../types';
+import { IOrder } from '../../types';
 
 export const OrdersListPage = () => {
-  const [previousOrders, setPreviousOrders] = useState<Order[]>([]);
+  const [previousOrders, setOrders] = useState<IOrder[]>([]);
 
   useEffect(() => {
     const getData = async () => {
       const response = await api.orders.showAllOrders();
       const results = await response.json();
 
-      setPreviousOrders(results);
+      setOrders(results);
     };
 
     getData();
@@ -23,13 +23,11 @@ export const OrdersListPage = () => {
   return (
     <>
       <h1>Заказы</h1>
-      {/* {previousOrders.length ? (
-        previousOrders.map((order, i) => (
-          <PreviousOrder key={i} order={order} />
-        ))
+      {previousOrders.length ? (
+        previousOrders.map((order, i) => <Order key={i} order={order} />)
       ) : (
         <span>Вы пока не сделали ни одного заказа</span>
-      )} */}
+      )}
     </>
   );
 };

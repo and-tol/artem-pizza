@@ -10,7 +10,7 @@ import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 import { PIZZA_DELIVERY } from '../../../pizzaData';
 // Types
 import {
-  Order,
+  IOrder,
   PizzaConfiguration,
   Ingredient,
   FormValues,
@@ -60,9 +60,9 @@ export const CheckoutForm = ({ pizza, ingredients }: CheckoutFormProps) => {
   let numberValidation = valid.number(сardNumber);
 
   const onSubmit = handleSubmit(data => {
-    let order: Order | null = null;
+    let order: IOrder | null = null;
     order = {
-      ingredients: [pizza],
+      pizza: pizza,
       address: data.address,
       name: data.cardName,
       card_number: data.cardNumber,
