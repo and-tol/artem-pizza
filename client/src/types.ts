@@ -48,6 +48,17 @@ export type Order = {
   card_number: string;
 };
 
+export interface FormValues {
+  address: string;
+  porch: string;
+  flow: string;
+  flat: string;
+  cardNumber: string;
+  year: string;
+  CVV: string;
+  cardName: string;
+}
+
 // ! ---- States Types ---- //
 export interface OrdersState {
   orders: Order[];
@@ -112,6 +123,12 @@ export interface SignupState {
   isLoading: boolean;
   login: { name: string; email: string };
 }
+export interface CheckoutState {
+  data: Order | null;
+  error: ErrorState | null;
+  isLoading: boolean;
+  isAccept: boolean;
+}
 
 export interface IngredientsAction {
   type: string;
@@ -125,6 +142,10 @@ export interface SignupAction {
   type: string;
   payload: any;
 }
+export interface CheckoutAction {
+  type: string;
+  payload: any;
+}
 
 export interface State {
   ingredients: IngredientsState;
@@ -132,4 +153,5 @@ export interface State {
   orders: OrdersState;
   login: LoginState;
   signup: SignupState;
+  checkout: CheckoutState;
 }

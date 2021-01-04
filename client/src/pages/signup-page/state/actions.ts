@@ -1,7 +1,8 @@
-// ActionTypes
+// Api
 import { api } from '../../../api';
 // Types
 import { ErrorState } from '../../../types';
+// ActionTypes
 import { actionTypes } from './actionTypes';
 
 export const signupActions = Object.freeze({

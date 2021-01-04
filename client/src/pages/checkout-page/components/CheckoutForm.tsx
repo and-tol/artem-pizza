@@ -1,13 +1,20 @@
+import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { api } from '../../../api';
+// Actions
+import { checkoutActions } from '../state/actions';
 // Helpers
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Data
 import { PIZZA_DELIVERY } from '../../../pizzaData';
 // Types
-import { Order, PizzaConfiguration, Ingredient } from '../../../types';
+import {
+  Order,
+  PizzaConfiguration,
+  Ingredient,
+  FormValues,
+} from '../../../types';
 var valid = require('card-validator');
 
 const normalizeCardNumber = (value: string): string => {
@@ -25,24 +32,20 @@ interface CheckoutFormProps {
   ingredients: Ingredient[] | [];
 }
 
-type FormValues = {
-  address: string;
-  porch: string;
-  flow: string;
-  flat: string;
-  cardNumber: string;
-  year: string;
-  CVV: string;
-  cardName: string;
-};
-
 const schema = yup.object().shape({
   address: yup.string().required('Это обязательное поле'),
   cardNumber: yup.string().required('Это обязательное поле'),
   cardName: yup.string().required('Это обязательное поле'),
 });
 
+/**
+ * Компонент собирает данные пользователя для оплаты заказа и отправляет на сервер
+ * The component collects user data for order payment and sends it to the server
+ * @param param0
+ */
 export const CheckoutForm = ({ pizza, ingredients }: CheckoutFormProps) => {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -56,7 +59,7 @@ export const CheckoutForm = ({ pizza, ingredients }: CheckoutFormProps) => {
   const сardNumber = watch('cardNumber');
   let numberValidation = valid.number(сardNumber);
 
-  const onSubmit = handleSubmit(async data => {
+  const onSubmit = handleSubmit(data => {
     let order: Order | null = null;
     order = {
       ingredients: [pizza],
@@ -64,9 +67,9 @@ export const CheckoutForm = ({ pizza, ingredients }: CheckoutFormProps) => {
       name: data.cardName,
       card_number: data.cardNumber,
     };
-
     if (order) {
-      await api.orders.createOrder(order);
+      dispatch(checkoutActions.fillOrder(order));
+      dispatch(checkoutActions.sendOrderAsync(order));
     }
   });
 
@@ -164,7 +167,9 @@ export const CheckoutForm = ({ pizza, ingredients }: CheckoutFormProps) => {
             <p>
               К оплате <span>{orderPrice + PIZZA_DELIVERY} руб.</span>
             </p>
-            <button>Оплатить {orderPrice + PIZZA_DELIVERY} руб.</button>
+            <button type='submit'>
+              Оплатить {orderPrice + PIZZA_DELIVERY} руб.
+            </button>
           </section>
         </form>
         <p>
