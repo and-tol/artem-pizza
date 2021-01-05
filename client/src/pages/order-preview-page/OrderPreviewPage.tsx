@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { getPizza } from '../pizza-configurator-page/state-pizza/selectors';
 import { getIngredients } from '../pizza-configurator-page/state-ingredients/selectors';
 // Components
-import { OrderPreview } from './OrderPreview';
+import { OrderPreview } from '../../share/components/OrderPreview';
 
 export const OrderPreviewPage = () => {
   const pizza = useSelector(getPizza);

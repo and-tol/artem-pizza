@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-// ReduxActions
-import { ingredientsActions } from './state-ingredients/actions';
-import { pizzaConfiguratorActions } from './state-pizza/actions';
-// Selectors
-import { getPizza } from './state-pizza/selectors';
-import { getIngredients } from './state-ingredients/selectors';
+import { useHistory } from 'react-router-dom';
+import { OrderPreview } from '../../share/components/OrderPreview';
 // Types
 import { PizzaConfiguration } from '../../types';
 // Components
 import { PizzaForm } from './components/PizzaForm';
-import { OrderPreview } from '../../share/components/OrderPreview';
+// ReduxActions
+import { ingredientsActions } from './state-ingredients/actions';
+import { getIngredients } from './state-ingredients/selectors';
+import { pizzaConfiguratorActions } from './state-pizza/actions';
+// Selectors
+import { getPizza } from './state-pizza/selectors';
 
 /**
  * @param _usePizzaHook simplifies context testing
@@ -30,6 +30,10 @@ export const PizzaConfiguratorPage = () => {
     dispatch(ingredientsActions.fetchIngredientsAsync());
   }, [dispatch]);
 
+  /**
+   * Function add pizza to store and go to OrderPreview Page
+   * @param pizza created pizza comfiguration
+   */
   const onPizzaChange = (pizza: PizzaConfiguration): void => {
     dispatch(pizzaConfiguratorActions.fillPizza(pizza));
     history.push('/order-preview');

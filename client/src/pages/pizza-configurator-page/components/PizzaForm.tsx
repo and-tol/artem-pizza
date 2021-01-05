@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Selectors
@@ -8,8 +8,6 @@ import {
   getIngredientsByCategory,
 } from '../state-ingredients/selectors';
 import { getPizza } from '../state-pizza/selectors';
-// StateActions
-import { pizzaConfiguratorActions } from '../state-pizza/actions';
 // Types
 import { PizzaConfiguration } from '../../../types';
 // Components
@@ -21,7 +19,6 @@ export interface PizzaFormProps {
 }
 
 export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
-  const dispatch = useDispatch();
   const pizza = useSelector(getPizza);
 
   const { register, handleSubmit, watch } = useForm<PizzaConfiguration>({
@@ -38,11 +35,6 @@ export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
   const MEAT = useSelector(getIngredientsByCategory('meat'));
 
   const values = watch();
-
-  // FIXME: ? нужен ли сдесь Dispatch?
-  useEffect(() => {
-    dispatch(pizzaConfiguratorActions.fillPizza(values));
-  }, [dispatch]);
 
   const totalPrice: number = calculateTotalPrice(ingredients, values);
 

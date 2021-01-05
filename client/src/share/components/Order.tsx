@@ -24,9 +24,6 @@ export const Order: React.FC<OrderProps> = ({ order }) => {
 
   const ingredients = useSelector(getIngredients);
 
-  // console.log('order>>>>', order);
-  // console.log('pizza order>>>>', pizza);
-
   return (
     <section>
       <header>

@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux';
 import { getPizza } from '../pizza-configurator-page/state-pizza/selectors';
 import { getIngredients } from '../pizza-configurator-page/state-ingredients/selectors';
 // Components
-import { CheckoutForm, OrderPreview } from './components';
+import { CheckoutForm } from './components';
+import { OrderPreview } from '../../share/components/OrderPreview';
 // Helpers
-import { calculateTotalPrice} from '../../share/calculateTotalPrice'
+import { calculateTotalPrice } from '../../share/calculateTotalPrice';
 
 export const CheckoutPage = () => {
   const pizza = useSelector(getPizza);
