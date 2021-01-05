@@ -16,6 +16,20 @@ export const DEFAULT_PIZZA: PizzaConfiguration = Object.freeze({
 
 export const PIZZA_DELIVERY = 180;
 
+export const fakeOrder = {
+  pizza: {
+    size: '30',
+    dough: 'thin',
+    sauce: 'tomato-sauce',
+    cheese: [],
+    vegetables: ['tomato'],
+    meat: ['ham'],
+  },
+  address: 'Ivanovskaya street 7-1',
+  name: 'Ivan Ivanov',
+  card_number: '4545454545454545',
+};
+
 // ----------- Old Data Stuructures ------------- //
 
 export const SIZE: IngredientNameAndPriceState = Object.freeze({
@@ -54,5 +68,3 @@ export const MEAT: IngredientNameAndPriceState = Object.freeze({
 // 'Моцарелла', 'Чеддер', 'Дор Блю';
 // 'Помидор', 'Грибы', 'Перец', 'Ананасы', 'Оливки', 'Лук', 'Брокколи';
 // 'Бекон', 'Пепперони', 'Ветчина';
-
-

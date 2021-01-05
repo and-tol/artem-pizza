@@ -22,6 +22,9 @@ export const OrderPreview: React.FC<OrderPreviewProps> = ({
   const VEGETABLES = useSelector(getIngredientsByCategory('vegetables'));
   const MEAT = useSelector(getIngredientsByCategory('meat'));
 
+  // console.log('order preview pizza>>>', pizza);
+  // console.log('order preview cheese>>>', cheese);
+
   return (
     <section>
       <p>

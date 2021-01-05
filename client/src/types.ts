@@ -46,6 +46,7 @@ export interface IOrder {
   address: string;
   name: string;
   card_number: string;
+  id?: string;
 }
 
 export interface FormValues {
@@ -58,32 +59,6 @@ export interface FormValues {
   CVV: string;
   cardName: string;
 }
-
-// ! ---- States Types ---- //
-export interface OrdersState {
-  orders: IOrder[];
-}
-export type OrdersAction = {
-  type: string;
-  payload: IOrder;
-};
-
-export type PizzaState = {
-  pizza: PizzaConfiguration;
-};
-
-export type PizzaAction = {
-  type: string;
-  payload: PizzaConfiguration;
-};
-
-export type DispatchType = (args: PizzaAction) => PizzaAction;
-
-/* export interface IAction<T, R = any> {
-  type: T;
-  payload: R;
-} */
-
 export type IngredientFromServer = {
   id: string;
   name: string;
@@ -102,6 +77,34 @@ export type Ingredient = {
   image: string;
   thumbnail: string;
 };
+
+// ! ---- States Types ---- //
+export interface OrdersState {
+  orders: IOrder[] | [];
+  isLoading: boolean;
+  error: ErrorState | null;
+}
+export type OrdersAction = {
+  type: string;
+  payload: IOrder;
+  error: any;
+};
+
+export type PizzaState = {
+  pizza: PizzaConfiguration;
+};
+
+export type PizzaAction = {
+  type: string;
+  payload: PizzaConfiguration;
+};
+
+export type DispatchType = (args: PizzaAction) => PizzaAction;
+
+/* export interface IAction<T, R = any> {
+  type: T;
+  payload: R;
+} */
 
 export interface ErrorState {
   status: number;
@@ -133,18 +136,22 @@ export interface CheckoutState {
 export interface IngredientsAction {
   type: string;
   payload: Ingredient[] | [] | number | null;
+  error: any;
 }
 export interface LoginAction {
   type: string;
   payload: any;
+  any: any;
 }
 export interface SignupAction {
   type: string;
   payload: any;
+  error: any;
 }
 export interface CheckoutAction {
   type: string;
   payload: any;
+  error: any;
 }
 
 export interface State {

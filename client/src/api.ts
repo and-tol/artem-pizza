@@ -19,7 +19,7 @@ export const api = Object.freeze({
         body: JSON.stringify(data),
       });
     },
-    showAllOrders: () => {
+    getAllOrders: () => {
       return fetch(`${root}/orders`, {
         method: 'GET',
       });

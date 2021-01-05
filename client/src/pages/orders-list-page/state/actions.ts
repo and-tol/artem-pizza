@@ -1,9 +1,9 @@
 // ActionTypes
 import { actionTypes } from './actionTypes';
-// Types
-import { IOrder, ErrorState } from '../../../types';
 // Api
 import { api } from '../../../api';
+// Types
+import { ErrorState, IOrder } from '../../../types';
 
 export const ordersListActions = Object.freeze({
   startFetching: () => {
@@ -32,9 +32,9 @@ export const ordersListActions = Object.freeze({
 
   // Async
   fetchOrdersAsync: () => async (dispatch: any) => {
-    dispatch(ordersListActions.startFetching);
+    dispatch(ordersListActions.startFetching());
 
-    const response = await api.orders.showAllOrders();
+    const response = await api.orders.getAllOrders();
 
     if (response.status === 200) {
       const results = await response.json();

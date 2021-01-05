@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
 import { useSelector } from 'react-redux';
-// Selectors
-import { getAcceptedOrder } from '../checkout-page/state/selectors';
-// Components
-import { Order } from '../../share/components';
+import { useHistory } from 'react-router-dom';
+import orderError from '../../asserts/icons/order-status_error.svg';
 // Images
 import orderSuccess from '../../asserts/icons/order-status_ok.svg';
-import orderError from '../../asserts/icons/order-status_error.svg';
+// Components
+import { Order } from '../../share/components';
+// Selectors
+import { getAcceptedOrder } from '../checkout-page/state/selectors';
+// Fake Data
+import { fakeOrder } from '../../pizzaData';
 
 /**
  * Страница подтверждения заказа
@@ -20,7 +22,9 @@ export const ReceiptPage = () => {
   const tryOrderAgain = () => {
     history.push('/checkout');
   };
-
+  /**
+   * Пользователь перенаправляется на главную страницу
+   */
   // useEffect(() => {
   //   let id: NodeJS.Timeout;
   //   if (isAccepted) {
@@ -33,20 +37,6 @@ export const ReceiptPage = () => {
   //   };
   // });
 
-  const order = {
-    pizza: {
-      size: '30',
-      dough: 'thin',
-      sauce: 'tomato-sauce',
-      cheese: [],
-      vegetables: ['tomato'],
-      meat: ['ham'],
-    },
-    address: 'Ivanovskaya street 7-1',
-    name: 'Ivan Ivanov',
-    card_number: '4545454545454545',
-  };
-
   return (
     <>
       {isAccepted && (
@@ -55,7 +45,7 @@ export const ReceiptPage = () => {
 
           <p>Спасибо за заказ!</p>
           <p>Заказ успешно оплачен, ждите вашу пиццу уже через час</p>
-          <Order order={order} />
+          <Order order={fakeOrder} />
         </section>
       )}
       {!isAccepted && (

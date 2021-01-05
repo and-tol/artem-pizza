@@ -24,6 +24,9 @@ export const Order: React.FC<OrderProps> = ({ order }) => {
 
   const ingredients = useSelector(getIngredients);
 
+  // console.log('order>>>>', order);
+  // console.log('pizza order>>>>', pizza);
+
   return (
     <section>
       <header>
@@ -44,7 +47,7 @@ export const Order: React.FC<OrderProps> = ({ order }) => {
           <span> • </span>
           оплата MC <span>{`*${card_number.slice(-4)} `}</span>
           <span>
-            <IconDelivery fill="orange" />
+            <IconDelivery fill='orange' />
             Доставляется
           </span>
         </div>
