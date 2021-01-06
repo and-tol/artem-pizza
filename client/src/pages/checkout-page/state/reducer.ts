@@ -1,5 +1,5 @@
 // Types
-import { CheckoutState } from '../../../types';
+import { CheckoutState, CheckoutAction } from '../../../types';
 // ActionTypes
 import { actionTypes } from './actionTypes';
 
@@ -10,7 +10,10 @@ const initialState: CheckoutState = {
   isAccepted: true,
 };
 
-export const checkoutReducer = (state = initialState, action: any) => {
+export const checkoutReducer = (
+  state = initialState,
+  action: CheckoutAction
+) => {
   switch (action.type) {
     case actionTypes.CHECKOUT_START_FETCHING:
       return { ...state, isLoading: true };
