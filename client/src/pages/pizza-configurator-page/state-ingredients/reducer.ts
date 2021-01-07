@@ -1,3 +1,4 @@
+// Action Types
 import { actionTypes } from './actionTypes';
 
 // Types
@@ -6,12 +7,12 @@ import { IngredientsState, IngredientsAction } from '../../../types';
 const initialState: IngredientsState = {
   ingredients: [
     {
-      category: 'size',
       id: '0',
-      image: '',
       name: '30',
-      price: 200,
       slug: '30',
+      price: 200,
+      category: 'size',
+      image: '',
       thumbnail: '',
     },
     {
@@ -40,7 +41,7 @@ const initialState: IngredientsState = {
 export const ingredientsReducer = (
   state = initialState,
   action: IngredientsAction
-) => {
+): IngredientsState => {
   switch (action.type) {
     case actionTypes.INGREDIENTS_START_FETCHING:
       return { ...state, isLoading: true };
@@ -50,7 +51,7 @@ export const ingredientsReducer = (
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        error: action.error,
       };
 
     case actionTypes.INGREDIENTS_FILL:

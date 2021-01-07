@@ -5,6 +5,11 @@ import { PizzaConfiguration } from '../../../types';
 import { actionTypes } from './actionTypes';
 
 export const pizzaConfiguratorActions = Object.freeze({
+  startPizza: () => {
+    return {
+      type: actionTypes.PIZZA_CONFIGURATOR_START_CONFIGURATION,
+    };
+  },
   fillPizza: (payload: PizzaConfiguration) => {
     return {
       type: actionTypes.PIZZA_CONFIGURATOR_FILL,

@@ -5,12 +5,17 @@ import { act } from 'react-dom/test-utils';
 import { MemoryRouter, Router } from 'react-router-dom';
 import { LoginPage } from './LoginPage';
 
+import {Provider} from 'react-redux';
+import { store} from '../../init/store'
+
 describe('LoginPage', () => {
   it('renders correctly', () => {
     const { getByRole, getByLabelText } = render(
-      <MemoryRouter>
-        <LoginPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <LoginPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     expect(getByLabelText('Э-почта')).toBeInTheDocument();
@@ -22,9 +27,11 @@ describe('LoginPage', () => {
     const history = createMemoryHistory();
 
     const { getByRole } = render(
-      <Router history={history}>
-        <LoginPage />
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <LoginPage />
+        </Router>
+      </Provider>
     );
 
     fireEvent.click(getByRole('link'));
@@ -35,9 +42,11 @@ describe('LoginPage', () => {
   describe('disabled button becomes enabled', () => {
     it('enables submitting when email and password were provided', () => {
       const { getByLabelText, getByRole } = render(
-        <MemoryRouter>
-          <LoginPage />
-        </MemoryRouter>
+        <Provider store={store}>
+          <MemoryRouter>
+            <LoginPage />
+          </MemoryRouter>
+        </Provider>
       );
 
       fireEvent.input(getByLabelText('Э-почта'), {
@@ -62,9 +71,11 @@ describe('LoginPage', () => {
   describe('with invalid password', () => {
     it('renders password validation errors', async () => {
       const { getByRole, getByLabelText, getByText, container } = render(
-        <MemoryRouter>
-          <LoginPage />
-        </MemoryRouter>
+        <Provider store={store}>
+          <MemoryRouter>
+            <LoginPage />
+          </MemoryRouter>
+        </Provider>
       );
 
       fireEvent.input(getByLabelText('Э-почта'), {

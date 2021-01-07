@@ -13,7 +13,7 @@ const initialState: CheckoutState = {
 export const checkoutReducer = (
   state = initialState,
   action: CheckoutAction
-) => {
+): CheckoutState => {
   switch (action.type) {
     case actionTypes.CHECKOUT_START_FETCHING:
       return { ...state, isLoading: true };

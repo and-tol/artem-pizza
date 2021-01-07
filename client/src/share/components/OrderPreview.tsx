@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 // Selectors
 import { getIngredientsByCategory } from '../../pages/pizza-configurator-page/state-ingredients/selectors';
+// Types
+import { Ingredient, PizzaConfiguration } from '../../types';
 // Helpers
 import { renderIngredients } from '../renderIngredient';
-// Types
-import { PizzaConfiguration, Ingredient } from '../../types';
 
 export interface OrderPreviewProps {
   pizza: PizzaConfiguration;
@@ -18,27 +18,21 @@ export const OrderPreview: React.FC<OrderPreviewProps> = ({
 }) => {
   const { size, dough, sauce, cheese, vegetables, meat } = pizza;
 
-  const CHEESE = useSelector(getIngredientsByCategory('cheese'));
-  const VEGETABLES = useSelector(getIngredientsByCategory('vegetables'));
-  const MEAT = useSelector(getIngredientsByCategory('meat'));
+  const CHEESE: Ingredient[] = useSelector(getIngredientsByCategory('cheese'));
+  const VEGETABLES: Ingredient[] = useSelector(
+    getIngredientsByCategory('vegetables')
+  );
+  const MEAT: Ingredient[] = useSelector(getIngredientsByCategory('meat'));
 
   return (
     <section>
       <p>
-        <span>
-          {!!size && ` ${ingredients.filter(i => i.slug === size)[0].name}`}
-        </span>{' '}
+        <span>{!!size && ` ${renderIngredients(size, ingredients)}`}</span>
         см на тесте
-        <span>
-          {!!dough &&
-            ` ${ingredients
-              .filter(i => i.slug === dough)[0]
-              .name.toLowerCase()}`}
-        </span>
+        <span>{!!dough && ` ${renderIngredients(dough, ingredients)}`}</span>
         <span>{` • ${
-          !!sauce &&
-          ` ${ingredients.filter(i => i.slug === sauce)[0].name.toLowerCase()} `
-        }`}</span>{' '}
+          !!sauce && ` ${renderIngredients(sauce, ingredients)} `
+        }`}</span>
         соус
         <span>
           {cheese.length && CHEESE.length

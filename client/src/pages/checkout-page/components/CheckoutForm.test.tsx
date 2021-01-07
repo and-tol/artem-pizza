@@ -3,16 +3,9 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { createStore } from 'redux';
-import { checkoutReducer } from './../state/reducer';
 import { CheckoutForm } from './CheckoutForm';
+import { store } from './../../../init/store';
 
-const store = createStore(checkoutReducer, {
-  data: null,
-  error: null,
-  isLoading: false,
-  isAccepted: true,
-});
 
 const defaultPizza = {
   size: '30',

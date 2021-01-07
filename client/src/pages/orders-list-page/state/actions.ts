@@ -23,7 +23,7 @@ export const ordersListActions = Object.freeze({
     };
   },
 
-  fillOrders: (payload: IOrder[] | []) => {
+  fillOrders: (payload: IOrder[]) => {
     return {
       type: actionTypes.ORDERS_FILL,
       payload,

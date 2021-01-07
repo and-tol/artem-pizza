@@ -1,4 +1,6 @@
+import { RootState } from '../../../init/rootReducer';
 // Types
-import { PizzaConfiguration, State } from '../../../types';
+import { PizzaConfiguration  } from '../../../types';
 
-export const getPizza = (state: State): PizzaConfiguration => state.pizza.pizza;
+export const getPizza = (state: RootState): PizzaConfiguration =>
+  state.pizza.pizza;

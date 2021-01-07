@@ -79,26 +79,45 @@ export type Ingredient = {
 };
 
 // ! ---- States Types ---- //
-export interface OrdersState {
-  orders: IOrder[] | [];
-  isLoading: boolean;
-  error: ErrorState | null;
+
+export interface PizzaState {
+  readonly pizza: PizzaConfiguration;
 }
-export type OrdersAction = {
-  type: string;
-  payload: IOrder;
-  error: any;
-};
+// export type PizzaState = {
+//   pizza: PizzaConfiguration;
+// };
 
-export type PizzaState = {
-  pizza: PizzaConfiguration;
-};
+export interface IngredientsState {
+  readonly ingredients: Ingredient[];
+  readonly error: ErrorState | null;
+  readonly isLoading: boolean;
+}
+export interface OrdersState {
+  readonly orders: IOrder[];
+  readonly isLoading: boolean;
+  readonly error: ErrorState | null;
+}
 
-export type PizzaAction = {
-  type: string;
-  payload: PizzaConfiguration;
-};
+export interface LoginState {
+  readonly error: ErrorState | null;
+  readonly isRegistered: boolean | null;
+  readonly isLoading: boolean;
+  readonly login: { name: string; email: string };
+}
 
+export interface SignupState {
+  readonly error: ErrorState | null;
+  readonly isRegistered: boolean | null;
+  readonly isLoading: boolean;
+  readonly login: { name: string; email: string };
+}
+
+export interface CheckoutState {
+  readonly data: IOrder | null;
+  readonly error: ErrorState | null;
+  readonly isLoading: boolean;
+  readonly isAccepted: boolean;
+}
 export type DispatchType = (args: PizzaAction) => PizzaAction;
 
 /* export interface IAction<T, R = any> {
@@ -109,39 +128,27 @@ export type DispatchType = (args: PizzaAction) => PizzaAction;
 export interface ErrorState {
   status: number;
 }
-export interface IngredientsState {
-  ingredients: Ingredient[] | [];
+
+export type OrdersAction = {
+  type: string;
+  payload: IOrder[];
   error: ErrorState | null;
-  isLoading: boolean;
-}
-export interface LoginState {
-  error: ErrorState | null;
-  isRegistered: boolean | null;
-  isLoading: boolean;
-  login: { name: string; email: string };
-}
-export interface SignupState {
-  error: ErrorState | null;
-  isRegistered: boolean | null;
-  isLoading: boolean;
-  login: { name: string; email: string };
-}
-export interface CheckoutState {
-  data: IOrder | null;
-  error: ErrorState | null;
-  isLoading: boolean;
-  isAccepted: boolean;
-}
+};
+
+export type PizzaAction = {
+  type: string;
+  payload: PizzaConfiguration;
+};
 
 export interface IngredientsAction {
   type: string;
-  payload: Ingredient[] | [] | number | null;
-  error: any;
+  payload: Ingredient[] | [];
+  error: ErrorState | null;
 }
 export interface LoginAction {
   type: string;
   payload: any;
-  any: any;
+  error: ErrorState | null;
 }
 export interface SignupAction {
   type: string;
@@ -155,10 +162,10 @@ export interface CheckoutAction {
 }
 
 export interface State {
-  ingredients: IngredientsState;
-  pizza: PizzaState;
-  orders: OrdersState;
-  login: LoginState;
-  signup: SignupState;
-  checkout: CheckoutState;
+  readonly pizza: PizzaState;
+  readonly ingredients: IngredientsState;
+  readonly orders: OrdersState;
+  readonly login: LoginState;
+  readonly signup: SignupState;
+  readonly checkout: CheckoutState;
 }

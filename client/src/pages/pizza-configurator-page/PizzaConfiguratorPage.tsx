@@ -13,9 +13,6 @@ import { pizzaConfiguratorActions } from './state-pizza/actions';
 // Selectors
 import { getPizza } from './state-pizza/selectors';
 
-/**
- * @param _usePizzaHook simplifies context testing
- */
 export const PizzaConfiguratorPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -24,9 +21,11 @@ export const PizzaConfiguratorPage = () => {
   const ingredients = useSelector(getIngredients);
 
   /**
-   * Get ingredients fron server when component render first time
+   * Get ingredients from server when component render first time
+   * Fill default pizza
    */
   useEffect(() => {
+    dispatch(pizzaConfiguratorActions.startPizza());
     dispatch(ingredientsActions.fetchIngredientsAsync());
   }, [dispatch]);
 

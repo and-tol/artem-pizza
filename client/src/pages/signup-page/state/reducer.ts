@@ -9,7 +9,10 @@ const initialState: SignupState = {
   login: { name: '', email: '' },
 };
 
-export const signupReducer = (state = initialState, action: SignupAction) => {
+export const signupReducer = (
+  state = initialState,
+  action: SignupAction
+): SignupState => {
   switch (action.type) {
     case actionTypes.SIGNUP_START_FETCHING:
       return { ...state, isLoading: true };
@@ -19,7 +22,7 @@ export const signupReducer = (state = initialState, action: SignupAction) => {
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        error: action.error,
       };
     case actionTypes.SIGNUP_SET_STATUS:
       return {

@@ -19,13 +19,10 @@ export const OrdersListPage = () => {
   const previousOrders = useSelector(getOrders);
   const isLoading = useSelector(getLoadingStatus);
 
-  if (isLoading) {
-    return <p>Загрузка данных...</p>;
-  }
-
   return (
     <>
-      <h1>Заказы</h1>
+      <h1 data-testid="orders">Заказы</h1>
+      {isLoading && <p>Загрузка данных...</p>}
       {previousOrders.length ? (
         previousOrders.map(order => <Order key={order.id} order={order} />)
       ) : (

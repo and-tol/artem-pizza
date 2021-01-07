@@ -11,6 +11,7 @@ describe('RadioGroup', () => {
         register={register}
         legend='Тест'
         name='test'
+        // FIXME: options={{ thin: { name: 'Тонкое' } }}
         options={{ thin: { name: 'Тонкое' } }}
       />
     );
@@ -25,6 +26,7 @@ describe('RadioGroup', () => {
         legend='Тест'
         name='test'
         options={{
+          // FIXME: thin: { name: 'Тонкое' },
           thin: { name: 'Тонкое' },
           puffy: { name: 'Пышное' },
         }}

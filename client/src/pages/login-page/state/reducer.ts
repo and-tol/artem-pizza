@@ -9,7 +9,10 @@ const initialState: LoginState = {
   login: { name:"",email:""}
 };
 
-export const loginReducer = (state = initialState, action: LoginAction) => {
+export const loginReducer = (
+  state = initialState,
+  action: LoginAction
+): LoginState => {
   switch (action.type) {
     case actionTypes.LOGIN_START_FETCHING:
       return { ...state, isLoading: true };
@@ -19,7 +22,7 @@ export const loginReducer = (state = initialState, action: LoginAction) => {
       return {
         ...state,
         isLoading: false,
-        error: action.payload
+        error: action.payload,
       };
     case actionTypes.LOGIN_SET_STATUS:
       return {
@@ -32,7 +35,7 @@ export const loginReducer = (state = initialState, action: LoginAction) => {
       return {
         ...state,
         isLoading: false,
-        login: action.payload
+        login: action.payload,
       };
 
     default:

@@ -2,13 +2,14 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { MemoryRouter, Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import { store } from '../../init/store';
+import { Provider } from 'react-redux';
 
 import { PizzaConfiguratorPage } from './PizzaConfiguratorPage';
 // Types
-import {PizzaFormProps} from './components/PizzaForm'
+import { PizzaFormProps } from './components/PizzaForm';
 
-
-jest.mock('./PizzaForm', () => ({
+jest.mock('./components/PizzaForm', () => ({
   PizzaForm: ({ onPizzaCreated }: PizzaFormProps) => {
     if (onPizzaCreated) {
       return (
@@ -34,9 +35,13 @@ jest.mock('./PizzaForm', () => ({
 describe('PizzaConfiguratorPage', () => {
   it('renders correctly', () => {
     const { getByText } = render(
-      <MemoryRouter>
-        <PizzaConfiguratorPage _usePizzaHook={() => ({ setPizza: () => {} })} />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <PizzaConfiguratorPage
+          // _usePizzaHook={() => ({ setPizza: () => {} })}
+          />
+        </MemoryRouter>
+      </Provider>
     );
 
     expect(getByText('Страница кофигуратора пиццы')).toBeInTheDocument();
@@ -47,11 +52,11 @@ describe('PizzaConfiguratorPage', () => {
 
     it('sets pizza value in the pizza context', () => {
       const { getByRole } = render(
-        <MemoryRouter>
-          <PizzaConfiguratorPage
-            _usePizzaHook={() => ({ setPizza: mockSetPizza })}
-          />
-        </MemoryRouter>
+        <Provider store={store}>
+          <MemoryRouter>
+            <PizzaConfiguratorPage />
+          </MemoryRouter>
+        </Provider>
       );
 
       fireEvent.click(getByRole('button'));
@@ -69,11 +74,11 @@ describe('PizzaConfiguratorPage', () => {
       const history = createMemoryHistory();
 
       const { getByRole } = render(
-        <Router history={history}>
-          <PizzaConfiguratorPage
-            _usePizzaHook={() => ({ setPizza: () => {} })}
-          />
-        </Router>
+        <Provider store={store}>
+          <Router history={history}>
+            <PizzaConfiguratorPage />
+          </Router>
+        </Provider>
       );
 
       fireEvent.click(getByRole('button'));

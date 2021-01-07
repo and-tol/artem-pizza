@@ -16,7 +16,7 @@ export const ingredientsActions = Object.freeze({
       type: actionTypes.INGREDIENTS_STOP_FETCHING,
     };
   },
-  setFetchingError: (error: ErrorState) => {
+  setFetchingError: (error: ErrorState | null) => {
     return {
       type: actionTypes.INGREDIENTS_SET_FETCHING_ERROR,
       payload: error,

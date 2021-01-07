@@ -27,7 +27,7 @@ const normalizeCardNumber = (value: string): string => {
   );
 };
 
-interface CheckoutFormProps {
+export interface CheckoutFormProps {
   pizza: PizzaConfiguration;
   ingredients: Ingredient[] | [];
 }

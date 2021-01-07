@@ -12,7 +12,7 @@ const initialState: OrdersState = {
 export const ordersListReducer = (
   state = initialState,
   action: OrdersAction
-) => {
+): OrdersState => {
   switch (action.type) {
     case actionTypes.ORDERS_START_FETCHING:
       return { ...state, isLoading: true };
@@ -22,14 +22,14 @@ export const ordersListReducer = (
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        error: action.error,
       };
 
     case actionTypes.ORDERS_FILL:
       return {
         ...state,
-        isLoading: false,
         orders: action.payload,
+        isLoading: false,
         error: null,
       };
 
