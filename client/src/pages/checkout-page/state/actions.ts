@@ -27,14 +27,22 @@ export const checkoutActions = Object.freeze({
       payload,
     };
   },
+  setAccept: (payload: string) => {
+    return {
+      type: actionTypes.CHECKOUT_SET_ACCEPT,
+      payload,
+    };
+  },
 
   // Async
   sendOrderAsync: (data: IOrder) => async (dispatch: any) => {
     dispatch(checkoutActions.startFetching());
+
     const response = await api.orders.createOrder(data);
     if (response.status === 200) {
-      const results = await response.json();
-      console.log('checkout results>>>>', results);
+      const { message } = await response.json();
+
+      dispatch(checkoutActions.setAccept(message));
     } else {
       const error = {
         status: response.status,

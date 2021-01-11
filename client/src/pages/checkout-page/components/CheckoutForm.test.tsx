@@ -6,22 +6,14 @@ import { MemoryRouter } from 'react-router-dom';
 import { CheckoutForm } from './CheckoutForm';
 import { store } from './../../../init/store';
 
-
-const defaultPizza = {
-  size: '30',
-  dough: 'thin',
-  sauce: 'tomato',
-  cheese: [],
-  vegetables: [],
-  meat: [],
-};
+import { mockDefaultPizza } from '../../../__mock__/defaulPizza';
 
 describe('CheckoutForm', () => {
   it('renders correctly', () => {
     const { getByLabelText, getByPlaceholderText, getByRole } = render(
       <Provider store={store}>
         <MemoryRouter>
-          <CheckoutForm pizza={defaultPizza} ingredients={[]} />
+          <CheckoutForm pizza={mockDefaultPizza} ingredients={[]} />
         </MemoryRouter>
       </Provider>
     );
@@ -44,7 +36,7 @@ describe('CheckoutForm', () => {
       const { getByPlaceholderText } = render(
         <Provider store={store}>
           <MemoryRouter>
-            <CheckoutForm pizza={defaultPizza} ingredients={[]} />
+            <CheckoutForm pizza={mockDefaultPizza} ingredients={[]} />
           </MemoryRouter>
         </Provider>
       );
@@ -65,7 +57,7 @@ describe('CheckoutForm', () => {
       const { getByRole, queryAllByText } = render(
         <Provider store={store}>
           <MemoryRouter>
-            <CheckoutForm pizza={defaultPizza} ingredients={[]} />
+            <CheckoutForm pizza={mockDefaultPizza} ingredients={[]} />
           </MemoryRouter>
         </Provider>
       );

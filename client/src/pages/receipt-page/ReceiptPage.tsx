@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import orderError from '../../asserts/icons/order-status_error.svg';
 // Images
+import orderError from '../../asserts/icons/order-status_error.svg';
 import orderSuccess from '../../asserts/icons/order-status_ok.svg';
 // Components
 import { Order } from '../../share/components';

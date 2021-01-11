@@ -1,10 +1,10 @@
 // Types
-import { CheckoutState, CheckoutAction } from '../../../types';
+import { CheckoutAction, CheckoutState } from '../../../types';
 // ActionTypes
 import { actionTypes } from './actionTypes';
 
-const initialState: CheckoutState = {
-  data: null,
+export const initialState: CheckoutState = {
+  order: null,
   error: null,
   isLoading: false,
   isAccepted: true,
@@ -30,7 +30,14 @@ export const checkoutReducer = (
       return {
         ...state,
         isLoading: false,
-        data: action.payload,
+        order: action.payload,
+      };
+    case actionTypes.CHECKOUT_SET_ACCEPT:
+      return {
+        ...state,
+        error: null,
+        isLoading: false,
+        isAccepted: action.payload,
       };
 
     default:

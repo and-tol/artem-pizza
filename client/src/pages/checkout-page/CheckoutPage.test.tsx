@@ -1,19 +1,19 @@
-import { render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../../init/store';
 import { MemoryRouter } from 'react-router-dom';
+import {
+  OrderPreview,
+  OrderPreviewProps,
+} from '../../share/components/OrderPreview';
 import { CheckoutPage } from './CheckoutPage';
-
 // Components
 import { CheckoutForm } from './components';
-import { OrderPreview } from '../../share/components/OrderPreview';
-// Types
-import { OrderPreviewProps } from '../../share/components/OrderPreview';
 import { CheckoutFormProps } from './components/CheckoutForm';
 // Mocks
-import { mockDefaultPizza } from './__mock__/defaulPizza';
+import { mockDefaultPizza } from '../../__mock__/defaulPizza';
 
 jest.mock('../../share/components/OrderPreview', () => ({
   OrderPreview: ({ pizza, ingredients }: OrderPreviewProps) => {

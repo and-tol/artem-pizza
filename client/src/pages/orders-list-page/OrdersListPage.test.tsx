@@ -16,11 +16,6 @@ describe('OrdersListPage', () => {
       </Provider>
     );
 
-    console.log('container>>>', container);
-    console.log('OrderListPage', screen.debug());
-    const title = container.querySelector('h1');
-    console.log('title>>>', title);
-
     expect(screen.getByTestId('orders')).toBeInTheDocument();
   });
 

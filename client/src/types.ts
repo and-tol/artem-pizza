@@ -22,6 +22,11 @@ export interface PizzaConfiguration {
   meat: string[];
 }
 
+export interface Login {
+  password: string;
+  email: string;
+}
+
 // React Hook Form register
 export type RegisterOptions = Partial<{
   required: Message | ValidationRule<boolean>;
@@ -44,8 +49,8 @@ export interface IOrder {
   pizza: PizzaConfiguration;
   // ingredients: [null | undefined | PizzaConfiguration];
   address: string;
-  name: string;
-  card_number: string;
+  cardName: string;
+  cardNumber: string;
   id?: string;
 }
 
@@ -68,7 +73,7 @@ export type IngredientFromServer = {
   image: string;
   thumbnail: string;
 };
-export type Ingredient = {
+export interface Ingredient {
   id: string;
   name: string;
   slug: string;
@@ -76,7 +81,7 @@ export type Ingredient = {
   category: string;
   image: string;
   thumbnail: string;
-};
+}
 
 // ! ---- States Types ---- //
 
@@ -102,27 +107,28 @@ export interface LoginState {
   readonly error: ErrorState | null;
   readonly isRegistered: boolean | null;
   readonly isLoading: boolean;
-  readonly login: { name: string; email: string };
+  readonly login: Login;
 }
 
 export interface SignupState {
   readonly error: ErrorState | null;
   readonly isRegistered: boolean | null;
   readonly isLoading: boolean;
-  readonly login: { name: string; email: string };
+  readonly login: Login;
 }
 
 export interface CheckoutState {
-  readonly data: IOrder | null;
+  readonly order: IOrder | null;
   readonly error: ErrorState | null;
   readonly isLoading: boolean;
   readonly isAccepted: boolean;
 }
 export type DispatchType = (args: PizzaAction) => PizzaAction;
 
-/* export interface IAction<T, R = any> {
+/* export interface IAction<T, R = any, E = ErrorState | any | null> {
   type: T;
   payload: R;
+  error: E;
 } */
 
 export interface ErrorState {
@@ -138,6 +144,7 @@ export type OrdersAction = {
 export type PizzaAction = {
   type: string;
   payload: PizzaConfiguration;
+  error: any;
 };
 
 export interface IngredientsAction {
@@ -148,7 +155,7 @@ export interface IngredientsAction {
 export interface LoginAction {
   type: string;
   payload: any;
-  error: ErrorState | null;
+  error: any;
 }
 export interface SignupAction {
   type: string;

@@ -6,7 +6,7 @@ const initialState: SignupState = {
   error: null,
   isRegistered: null,
   isLoading: false,
-  login: { name: '', email: '' },
+  login: { password: '', email: '' },
 };
 
 export const signupReducer = (

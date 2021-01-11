@@ -64,8 +64,8 @@ export const CheckoutForm = ({ pizza, ingredients }: CheckoutFormProps) => {
     order = {
       pizza: pizza,
       address: data.address,
-      name: data.cardName,
-      card_number: data.cardNumber,
+      cardName: data.cardName,
+      cardNumber: data.cardNumber,
     };
     if (order) {
       dispatch(checkoutActions.fillOrder(order));

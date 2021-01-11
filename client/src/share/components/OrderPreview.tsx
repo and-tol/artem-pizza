@@ -35,17 +35,17 @@ export const OrderPreview: React.FC<OrderPreviewProps> = ({
         }`}</span>
         соус
         <span>
-          {cheese.length && CHEESE.length
+          {cheese !== undefined && cheese.length && CHEESE.length
             ? ` • Сыр: ${renderIngredients(cheese, CHEESE)}`
             : null}
         </span>
         <span>
-          {vegetables?.length && VEGETABLES.length
+          {vegetables !== undefined && vegetables?.length && VEGETABLES.length
             ? ` • Овощи: ${renderIngredients(vegetables, VEGETABLES)}`
             : null}
         </span>
         <span>
-          {meat?.length && MEAT.length
+          {meat !== undefined && meat?.length && MEAT.length
             ? ` • Мясо: ${renderIngredients(meat, MEAT)}`
             : null}
         </span>

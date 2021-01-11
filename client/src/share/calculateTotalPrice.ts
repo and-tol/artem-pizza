@@ -17,7 +17,7 @@ export const calculateTotalPrice = (
   }
 
   let cheesePrice = 0;
-  if (CHEESE.length && cheese !== undefined && cheese.length) {
+  if (cheese !== undefined && CHEESE.length && cheese.length) {
     cheesePrice = cheese.reduce(
       (price: number, cheese: string) =>
         price + CHEESE.filter(i => i.slug === cheese)[0].price,
@@ -26,7 +26,7 @@ export const calculateTotalPrice = (
   }
 
   let vegetablesPrice = 0;
-  if (VEGETABLES.length && vegetables !== undefined && vegetables.length) {
+  if (vegetables !== undefined && VEGETABLES.length && vegetables.length) {
     vegetablesPrice = vegetables.reduce(
       (price: number, vegetables: string) =>
         price + VEGETABLES.filter(i => i.slug === vegetables)[0].price,
@@ -35,7 +35,7 @@ export const calculateTotalPrice = (
   }
 
   let meatPrice = 0;
-  if (MEAT.length && meat !== undefined && meat.length) {
+  if (meat !== undefined && MEAT.length && meat.length) {
     meatPrice = meat.reduce(
       (price: number, meat: string) =>
         price + MEAT.filter(i => i.slug === meat)[0].price,

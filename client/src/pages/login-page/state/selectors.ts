@@ -1,3 +1,3 @@
-import { State } from '../../../types';
+import { RootState } from '../../../init/rootReducer';
 
-export const getStatus = (state: State) => state.login.isRegistered;
+export const getStatus = (state: RootState) => state.login.isRegistered;

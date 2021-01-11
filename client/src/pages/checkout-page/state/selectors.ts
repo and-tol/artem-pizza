@@ -1,5 +1,5 @@
 // Types
-import { State } from '../../../types';
+import { RootState } from '../../../init/rootReducer';
 
-export const getAcceptedOrder = (state: State): boolean =>
+export const getAcceptedOrder = (state: RootState): boolean =>
   state.checkout.isAccepted;

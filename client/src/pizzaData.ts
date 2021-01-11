@@ -26,9 +26,14 @@ export const fakeOrder = {
     meat: ['ham'],
   },
   address: 'Ivanovskaya street 7-1',
-  name: 'Ivan Ivanov',
-  card_number: '4545454545454545',
+  cardName: 'Ivan Ivanov',
+  cardNumber: '4545454545454545',
 };
+
+export const IngredientsCases = [
+  { slug: 'thin', case: 'тонком' },
+  { slug: 'puffy', case: 'пышном' },
+];
 
 // ----------- Old Data Stuructures ------------- //
 

@@ -37,7 +37,7 @@ export const loginActions = Object.freeze({
 
   /**
    * Checking user registration
-   * @param credentials -> login, email
+   * @param credentials -> password, email
    */
   checkUserAsync: (credentials: any) => async (dispatch: any) => {
     dispatch(loginActions.startFetching());

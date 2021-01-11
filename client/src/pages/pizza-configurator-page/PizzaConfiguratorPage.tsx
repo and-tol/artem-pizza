@@ -20,10 +20,6 @@ export const PizzaConfiguratorPage = () => {
   const pizza = useSelector(getPizza);
   const ingredients = useSelector(getIngredients);
 
-  /**
-   * Get ingredients from server when component render first time
-   * Fill default pizza
-   */
   useEffect(() => {
     dispatch(pizzaConfiguratorActions.startPizza());
     dispatch(ingredientsActions.fetchIngredientsAsync());

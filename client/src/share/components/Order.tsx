@@ -16,8 +16,9 @@ type OrderProps = {
 };
 
 export const Order: React.FC<OrderProps> = ({ order }) => {
-  const { card_number, pizza } = { ...order };
+  const { cardNumber, pizza } = { ...order };
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(ingredientsActions.fetchIngredientsAsync());
   }, [dispatch]);
@@ -40,9 +41,9 @@ export const Order: React.FC<OrderProps> = ({ order }) => {
       <hr />
       <footer>
         <div>
-          <span>420</span> руб.
+          <span>420</span> руб
           <span> • </span>
-          оплата MC <span>{`*${card_number.slice(-4)} `}</span>
+          оплата MC <span>{`*${cardNumber.slice(-4)} `}</span>
           <span>
             <IconDelivery fill='orange' />
             Доставляется

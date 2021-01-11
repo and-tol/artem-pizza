@@ -7,7 +7,6 @@ import { MemoryRouter, Router } from 'react-router-dom';
 import { store } from '../../init/store';
 import { SignupPage } from './SignupPage';
 
-
 describe('SignupPage', () => {
   it('renders correctly', () => {
     const { getByRole, getByLabelText } = render(

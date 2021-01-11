@@ -9,10 +9,16 @@ export const renderIngredients = (
   selectedIngredients: string[] | string,
   availableIngredients: Ingredient[]
 ): string | undefined => {
-  if (typeof selectedIngredients === 'string' && availableIngredients.length) {
+  if (
+    selectedIngredients &&
+    typeof selectedIngredients === 'string' &&
+    availableIngredients.length
+  ) {
     return availableIngredients
-      .filter(i => i.slug === selectedIngredients)[0]
-      .name.toLowerCase();
+      .filter(i => {
+        return i.slug === selectedIngredients;
+      })[0]
+      .name?.toLowerCase();
   }
 
   if (Array.isArray(selectedIngredients)) {
@@ -21,7 +27,7 @@ export const renderIngredients = (
         ?.map(selectedIngredient => {
           return availableIngredients
             .filter(i => i.slug === selectedIngredient)[0]
-            .name.toLowerCase();
+            .name?.toLowerCase();
         })
         .join(', ');
     }

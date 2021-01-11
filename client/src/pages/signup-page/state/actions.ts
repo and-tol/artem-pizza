@@ -37,7 +37,7 @@ export const signupActions = Object.freeze({
 
   /**
    * User check registation
-   * @param login -> login, email
+   * @param login -> password, email
    */
   userRegistationAsync: (login: any) => async (dispatch: any) => {
     dispatch(signupActions.startFetching());
