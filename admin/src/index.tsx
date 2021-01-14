@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import CssBaseLine from '@material-ui/core/CssBaseLine';
 
 import './index.css';
 import App from './App';
@@ -12,7 +13,10 @@ ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={client}>
       <BrowserRouter>
-        <App />
+        <>
+          <CssBaseLine />
+          <App />
+        </>
       </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>,

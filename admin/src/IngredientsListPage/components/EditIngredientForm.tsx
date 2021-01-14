@@ -59,8 +59,6 @@ export const EditIngredientForm = ({
     const { name, slug, price, category, image, thumbnail } = data;
     const formData = new FormData();
 
-    console.log("data>>>>", data)
-
     formData.append('name', name);
     formData.append('slug', slug);
     formData.append('price', price);

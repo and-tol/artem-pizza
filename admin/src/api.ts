@@ -1,4 +1,4 @@
-export const root = 'http://localhost:3000';
+export const root = 'http://localhost:4000';
 
 export const api = Object.freeze({
   ingredients: {

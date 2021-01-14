@@ -22,7 +22,7 @@ export const IngredientsListPage = () => {
     const id = e.currentTarget.parentElement!.getAttribute('id');
 
     await api.ingredients.deleteIngredient(id);
-    
+
     const ingredients = await api.ingredients
       .availableIngredients()
       .then(data => data.json());
@@ -138,7 +138,7 @@ export const IngredientsListPage = () => {
         <h3>Доступные ингредиенты</h3>
         <div>
           {isLoading && <p>Загрузка данных с сервера...</p>}
-          {isError && <p>Что-то пошло не так... Ошибка: err.message</p>}
+          {isError && <p>Что-то пошло не так... "Ошибка: err.message"</p>}
           {ingredients.map(ingredient => {
             return (
               <Fragment key={ingredient.id}>
@@ -155,9 +155,8 @@ export const IngredientsListPage = () => {
                   </button>
                 </div>
 
-                {isShowing && selectedId === ingredient.id ? (
-                  <p>
-                    {ingredient && (
+                {isShowing && selectedId === ingredient.id
+                  ? ingredient && (
                       <>
                         <div>
                           <div>Название: {ingredient.name}</div>
@@ -165,9 +164,8 @@ export const IngredientsListPage = () => {
                           <div>Категория: {ingredient.category}</div>
                         </div>
                       </>
-                    )}
-                  </p>
-                ) : null}
+                    )
+                  : null}
 
                 {!isCancel && isEditing && selectedId === ingredient.id ? (
                   <div>
