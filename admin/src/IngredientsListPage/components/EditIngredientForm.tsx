@@ -1,6 +1,22 @@
+import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
+// Style
+import {
+  Container,
+  Grid,
+  Button,
+  FormControl,
+  FormHelperText,
+  Input,
+  makeStyles,
+  MenuItem,
+  Select,
+  Typography,
+  Box,
+  TextField,
+} from '@material-ui/core';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import * as yup from 'yup';
 import { api } from '../../api';
@@ -33,6 +49,46 @@ type EditIngredient = {
   ingredientId: string;
 };
 
+const categories = [
+  { value: 'size', name: 'Размер' },
+  { value: 'dough', name: 'Тесто' },
+  { value: 'sauce', name: 'Соус' },
+  { value: 'cheese', name: 'Сыр' },
+  { value: 'vegetables', name: 'Овощ' },
+  { value: 'meat', name: 'Мясо' },
+];
+
+const useStyles = makeStyles({
+  root: { padding: '1rem', backgroundColor: '#f5f5f5' },
+  h5: {
+    marginBottom: '1.3rem',
+    fontSize: '1.3rem',
+    fontFamily: 'Roboto Slab',
+  },
+  formControl: {
+    marginBottom: 12,
+    paddingBottom: 12,
+    width: '100%',
+    color: '#757575',
+    fontSize: '.9rem',
+    // borderBottom: '1px solid #bdbdbd',
+  },
+  input: {
+    marginTop: '0.4rem !important',
+    color: '#424242',
+    fontFamily: 'Roboto Slab',
+  },
+  errorMessage: {
+    color: '#e53935',
+    fontSize: '0.8rem',
+    fontStyle: 'italic',
+  },
+  btnImg: {
+    lineHeight: 1.25,
+    fontSize: '0.75rem',
+  },
+});
+
 export const EditIngredientForm = ({
   editingIngredient,
   ingredient,
@@ -40,12 +96,11 @@ export const EditIngredientForm = ({
   setIsCancel,
   setIsEditing,
 }: EditIngredientFormProps) => {
-  const { register, handleSubmit, errors } = useForm<Ingredient>({
+  const styles = useStyles();
+  const { register, handleSubmit, errors, control } = useForm<Ingredient>({
     resolver: yupResolver(schema),
   });
-
   const [currentCategory] = useState(ingredient.category);
-
   const {
     data: serverResponse,
     isError,
@@ -54,10 +109,11 @@ export const EditIngredientForm = ({
   } = useMutation(({ formData, ingredientId }: EditIngredient) =>
     api.ingredients.editIngredient(formData, ingredientId)
   );
-
   const onSubmit = handleSubmit(async data => {
     const { name, slug, price, category, image, thumbnail } = data;
     const formData = new FormData();
+
+    console.log('data', data);
 
     formData.append('name', name);
     formData.append('slug', slug);
@@ -80,92 +136,127 @@ export const EditIngredientForm = ({
   });
 
   if (isError) {
-    return <div>Ошибка: что-то пошло не так...</div>;
+    return <p>Ошибка: что-то пошло не так...</p>;
   }
 
   if (isLoading) {
-    return <div>Загрузка данных...</div>;
+    return <p>Загрузка данных...</p>;
   }
 
   return (
-    <>
-      <h3> Редактируем ингредиент {editingIngredient}</h3>
+    <Container className={styles.root}>
+      <Typography variant='h5' className={styles.h5}>
+        Редактируем ингредиент {editingIngredient}
+      </Typography>
       <form onSubmit={onSubmit}>
-        <div>
+        <FormControl className={styles.formControl}>
           <label htmlFor='name'>
             Название ингредиента. (Будет показано пользователю)
+          </label>
+          <Controller
+            as={<Input className={styles.input} error={!!errors.name} />}
+            id='name'
+            name='name'
+            control={control}
+            defaultValue={ingredient.name}
+            required
+            fullWidth
+          />
+          {errors.name && (
+            <Box className={styles.errorMessage}>{errors.name?.message}</Box>
+          )}
+        </FormControl>
+
+        <FormControl className={styles.formControl}>
+          <label htmlFor='slug'>Идентификатор ингредиента</label>
+          <Controller
+            as={<Input className={styles.input} error={!!errors.slug} />}
+            id='slug'
+            name='slug'
+            control={control}
+            defaultValue={ingredient.slug}
+            required
+            fullWidth
+          />
+          {errors.slug && <Box>{errors.slug?.message}</Box>}
+        </FormControl>
+        <FormControl className={styles.formControl}>
+          <label htmlFor='price'>Цена ингредиента</label>
+          <Controller
+            as={<Input className={styles.input} error={!!errors.price} />}
+            id='price'
+            name='price'
+            control={control}
+            defaultValue={ingredient.price}
+            required
+            fullWidth
+          />
+          {errors.price && (
+            <Box className={styles.errorMessage}>{errors.price?.message}</Box>
+          )}
+        </FormControl>
+        <FormControl className={styles.formControl}>
+          <label htmlFor='category'>Категория ингредиента</label>
+          <Controller
+            control={control}
+            name='category'
+            defaultValue={currentCategory}
+            as={
+              <Select id='category'>
+                {categories.map(c => (
+                  <MenuItem key={c.value} value={c.value}>
+                    {c.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            }
+          />
+          {errors.category && <Box>{errors.category?.message}</Box>}
+        </FormControl>
+        <FormControl className={styles.formControl}>
+          <Button
+            component='label'
+            variant='outlined'
+            className={styles.btnImg}
+          >
+            Добавить изображение ингредиента
             <input
+              id='image'
+              name='image'
               ref={register}
-              id='name'
-              type='text'
-              name='name'
-              defaultValue={ingredient.name}
+              type='file'
+              accept='.png'
+              hidden
             />
-            <div>{errors.name?.message}</div>
-          </label>
-        </div>
-        <div>
-          <label htmlFor='slug'>
-            Идентификатор ингредиента
+          </Button>
+
+          {errors.image && <Box>{errors.image?.message}</Box>}
+        </FormControl>
+
+        <FormControl className={styles.formControl}>
+          <Button
+            variant='outlined'
+            component='label'
+            className={styles.btnImg}
+          >
+            Добавить Уменьшенное изображение ингредиента
             <input
+              id='thumbnail'
               ref={register}
-              id='slug'
-              type='text'
-              name='slug'
-              defaultValue={ingredient.slug}
+              type='file'
+              name='thumbnail'
+              accept='.png'
+              hidden
             />
-            <div>{errors.slug?.message}</div>
-          </label>
-        </div>
-        <div>
-          <label htmlFor='price'>
-            Цена ингредиента
-            <input
-              ref={register}
-              id='price'
-              type='tel'
-              name='price'
-              defaultValue={ingredient.price}
-            />
-            <div>{errors.price?.message}</div>
-          </label>
-        </div>
-        <div>
-          <label htmlFor='category'>
-            Категория ингредиента
-            <select
-              id='category'
-              ref={register}
-              name='category'
-              defaultValue={currentCategory}
-            >
-              <option value='size'>Размер</option>
-              <option value='dough'>Тесто</option>
-              <option value='sauce'>Соус</option>
-              <option value='cheese'>Сыр</option>
-              <option value='vegetables'>Овощ</option>
-              <option value='meat'>Мясо</option>
-            </select>
-            <div>{errors.category?.message}</div>
-          </label>
-        </div>
-        <div>
-          <label htmlFor='image'>
-            Изображение ингредиента
-            <input id='image' ref={register} type='file' name='image' />
-          </label>
-          <div>{errors.image?.message}</div>
-        </div>
-        <div>
-          <label htmlFor='thumbnail'>
-            Уменьшенное изображение ингредиента
-            <input id='thumbnail' ref={register} type='file' name='thumbnail' />
-          </label>
-          <div>{errors.thumbnail?.message}</div>
-        </div>
+          </Button>
+          {errors.thumbnail && <Box>{errors.thumbnail?.message}</Box>}
+        </FormControl>
         {/* {!serverResponse?.ok && <div>Не хватает данных</div>} */}
-        <button>Отправить</button>
+
+        <Button type='submit' variant='outlined' onClick={onSubmit}>
+          Отправить
+        </Button>
       </form>
-    </>
+    </Container>
   );
 };
