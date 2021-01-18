@@ -1,27 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 // Style
 import {
   Container,
-  Grid,
   Button,
   FormControl,
-  FormHelperText,
   Input,
   makeStyles,
   MenuItem,
   Select,
   Typography,
   Box,
-  TextField,
 } from '@material-ui/core';
-import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import * as yup from 'yup';
 import { api } from '../../api';
 // Type
 import { Ingredient } from '../../types';
+// Data
+import { categories } from '../../data';
 
 const schema = yup.object().shape({
   name: yup.string().required('Название - обязательное поле'),
@@ -48,15 +46,6 @@ type EditIngredient = {
   formData: FormData;
   ingredientId: string;
 };
-
-const categories = [
-  { value: 'size', name: 'Размер' },
-  { value: 'dough', name: 'Тесто' },
-  { value: 'sauce', name: 'Соус' },
-  { value: 'cheese', name: 'Сыр' },
-  { value: 'vegetables', name: 'Овощ' },
-  { value: 'meat', name: 'Мясо' },
-];
 
 const useStyles = makeStyles({
   root: { padding: '1rem', backgroundColor: '#f5f5f5' },
@@ -148,6 +137,7 @@ export const EditIngredientForm = ({
       <Typography variant='h5' className={styles.h5}>
         Редактируем ингредиент {editingIngredient}
       </Typography>
+
       <form onSubmit={onSubmit}>
         <FormControl className={styles.formControl}>
           <label htmlFor='name'>
