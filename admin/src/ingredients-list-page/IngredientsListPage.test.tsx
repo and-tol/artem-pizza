@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { act } from 'react-test-renderer';
-import { IngredientsListPage } from './IngredientsListPage';
+import { IngredientsListPage } from './ingredients-list-page';
 import { api } from '../api';
 import { Ingredient } from '../types';
 
