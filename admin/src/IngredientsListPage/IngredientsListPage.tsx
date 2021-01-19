@@ -6,14 +6,49 @@ import { Ingredient } from '../types';
 // Components
 import { EditIngredientForm } from './components/EditIngredientForm';
 import { NewIngredientForm } from './components/NewIngredientForm';
+// Styles
+import {
+  makeStyles,
+  ButtonGroup,
+  Button,
+  Grid,
+  CircularProgress,
+  Typography,
+  Box,
+} from '@material-ui/core';
+const useStyles = makeStyles({
+  title: { paddingTop: '2rem' },
+  buttonGroup: { marginBottom: '0.1rem' },
+  newIngredientBlock: {
+    marginTop: '1.4rem',
+  },
+  showIngredientBlock: { padding: '1rem 0.5rem', backgroundColor: '#e3f2fd' },
+  cancelBlock: {
+    marginTop: '1.5rem',
+  },
+  deletingMessage: {
+    position: 'absolute',
+    top: '10rem',
+    backgroundColor: 'red',
+    opacity: 0.8,
+    padding: '1rem 2rem',
+    zIndex: 100,
+    color: 'white',
+    transform: 'translate3d(-50%,0,0)',
+    left: '50%',
+    margin: 0,
+  },
+});
 
 export const IngredientsListPage = () => {
+  const styles = useStyles();
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-  const [selectedId, setSelectedID] = useState<string | null>(null);
+  const [selectedId, setSelectedID] = useState<string | null>('');
   const [isCreating, setIsCreating] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [isDeleting, setIsDeliting] = useState(true);
 
   /**
    * Delete ingredient on server
@@ -21,29 +56,39 @@ export const IngredientsListPage = () => {
   const deleteIngredient = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.parentElement!.getAttribute('id');
 
-    await api.ingredients.deleteIngredient(id);
-    
+    const result = await api.ingredients.deleteIngredient(id);
+
+    setIsDeliting(result.ok);
+
     const ingredients = await api.ingredients
       .availableIngredients()
       .then(data => data.json());
 
     setIngredients(ingredients);
   };
+  useEffect(() => {
+    const id = setTimeout(() => {
+      setIsDeliting(false);
+    }, 1000);
+    return () => {
+      clearTimeout(id);
+    };
+  });
 
+  /**
+   * Creating/CancelCreating New Ingredient
+   */
   const createNewIngredient = () => {
     setIsCreating(true);
     setIsShowing(false);
   };
 
-  /**
-   * Cancel Creating New Ingredient
-   */
   const cancelCreatingNewIngredient = () => {
     setIsCreating(false);
   };
 
   /**
-   * Show ingredient
+   * Show/unshow ingredient
    */
   const [isShowing, setIsShowing] = useState(false);
   const showIngredient = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -53,12 +98,16 @@ export const IngredientsListPage = () => {
     setIsShowing(true);
     setIsCancel(true);
   };
+  const unshowIngredient = () => {
+    setIsShowing(false);
+  };
 
   /**
-   * Ingredient is editing
+   * Ingredient is editing.
+   * Show/hide form to editing ingredients
    */
-  const [isCancel, setIsCancel] = useState(false);
-  const [isEditing, setIsEditing] = useState(true);
+  const [isCancel, setIsCancel] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
 
   const editIngredient = (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.parentElement!.getAttribute('id');
@@ -68,8 +117,10 @@ export const IngredientsListPage = () => {
     setIsShowing(false);
     setIsEditing(true);
   };
+
   const cancelEditingIngredient = () => {
     setIsCancel(true);
+    setIsEditing(false);
   };
   useEffect(() => {
     let ingredients: Ingredient[] = [];
@@ -134,84 +185,168 @@ export const IngredientsListPage = () => {
 
   return (
     <>
-      <section>
-        <h3>Доступные ингредиенты</h3>
-        <div>
-          {isLoading && <p>Загрузка данных с сервера...</p>}
-          {isError && <p>Что-то пошло не так... Ошибка: err.message</p>}
-          {ingredients.map(ingredient => {
-            return (
-              <Fragment key={ingredient.id}>
-                <div id={ingredient.id}>
-                  <span>{ingredient.name}</span>
-                  <button type='button' onClick={showIngredient}>
-                    Показать
-                  </button>
-                  <button type='button' onClick={editIngredient}>
-                    Редактировать
-                  </button>
-                  <button type='button' onClick={deleteIngredient}>
-                    Удалить
-                  </button>
-                </div>
+      {isDeleting && (
+        <Box className={styles.deletingMessage}>
+          <p>Ингредиент удалён</p>
+        </Box>
+      )}
 
-                {isShowing && selectedId === ingredient.id ? (
-                  <p>
-                    {ingredient && (
-                      <>
-                        <div>
-                          <div>Название: {ingredient.name}</div>
-                          <div>Цена: {ingredient.price}</div>
-                          <div>Категория: {ingredient.category}</div>
-                        </div>
-                      </>
-                    )}
-                  </p>
-                ) : null}
+      {!isCreating && (
+        <Grid container component='section' justify='center'>
+          <Typography variant='h3' color='initial' className={styles.title}>
+            Доступные ингредиенты
+          </Typography>
 
-                {!isCancel && isEditing && selectedId === ingredient.id ? (
-                  <div>
-                    <EditIngredientForm
-                      editingIngredient={ingredient.name}
-                      ingredient={ingredient}
-                      ingredientId={selectedId}
-                      setIsCancel={setIsCancel}
-                      setIsEditing={setIsEditing}
-                    />
-                    <button type='button' onClick={cancelEditingIngredient}>
-                      Отменить
-                    </button>
-                  </div>
-                ) : null}
-              </Fragment>
-            );
-          })}
-        </div>
-      </section>
+          <Grid container alignItems='center'>
+            <Grid
+              container
+              direction='column'
+              alignItems='center'
+              justify='center'
+            >
+              {isLoading && <CircularProgress />}
+              {isLoading && <p>Загрузка данных с сервера...</p>}
+              {isError && <p>Что-то пошло не так... </p>}
+            </Grid>
+            {ingredients.map(ingredient => {
+              return (
+                <Fragment key={ingredient.id}>
+                  <Grid
+                    container
+                    justify='center'
+                    className={styles.buttonGroup}
+                  >
+                    <Grid
+                      container
+                      direction='row'
+                      justify='center'
+                      alignItems='center'
+                      spacing={3}
+                    >
+                      <Grid item sm={2}>
+                        {ingredient.name}
+                      </Grid>
+                      <Grid item sm={4}>
+                        <ButtonGroup
+                          id={ingredient.id}
+                          variant='text'
+                          color='primary'
+                          aria-label='outlined primary button group'
+                        >
+                          {!isShowing || !(selectedId === ingredient.id) ? (
+                            <Button type='button' onClick={showIngredient}>
+                              Показать
+                            </Button>
+                          ) : (
+                            <Button type='button' onClick={unshowIngredient}>
+                              Убрать
+                            </Button>
+                          )}
+                          {isCancel || !(selectedId === ingredient.id) ? (
+                            <Button
+                              color='inherit'
+                              type='button'
+                              onClick={editIngredient}
+                            >
+                              Редактировать
+                            </Button>
+                          ) : (
+                            <Button
+                              color='inherit'
+                              type='button'
+                              onClick={cancelEditingIngredient}
+                            >
+                              Отменить
+                            </Button>
+                          )}
+                          <Button
+                            type='button'
+                            color='secondary'
+                            onClick={deleteIngredient}
+                          >
+                            Удалить
+                          </Button>
+                        </ButtonGroup>
+                      </Grid>
+                    </Grid>
+                    {isShowing && selectedId === ingredient.id
+                      ? ingredient && (
+                          <Grid
+                            item
+                            sm={6}
+                            className={styles.showIngredientBlock}
+                          >
+                            <Grid container justify='center' direction='column'>
+                              <div>Название: {ingredient.name}</div>
+                              <div>Цена: {ingredient.price} руб</div>
+                              <div>Категория: {ingredient.category}</div>
+                            </Grid>
+                          </Grid>
+                        )
+                      : null}
 
-      <section>
-        {!isCreating && (
-          <button type='button' onClick={createNewIngredient}>
+                    {!isCancel && isEditing && selectedId === ingredient.id ? (
+                      <Grid item sm={6}>
+                        <Grid container justify='center' direction='column'>
+                          <EditIngredientForm
+                            editingIngredient={ingredient.name}
+                            ingredient={ingredient}
+                            ingredientId={selectedId}
+                            setIsCancel={setIsCancel}
+                            setIsEditing={setIsEditing}
+                          />
+                        </Grid>
+                      </Grid>
+                    ) : null}
+                  </Grid>
+                </Fragment>
+              );
+            })}
+          </Grid>
+        </Grid>
+      )}
+
+      <Grid
+        container
+        component='section'
+        justify='center'
+        className={styles.newIngredientBlock}
+      >
+        {!isCreating && !isLoading && (
+          <Button
+            variant='outlined'
+            type='button'
+            onClick={createNewIngredient}
+          >
             Создать новый ингредиент
-          </button>
+          </Button>
         )}
 
-        <p>
-          {isCreating && (
-            <NewIngredientForm
-              isCreating={isCreating}
-              cancelCreatingNewIngredient={cancelCreatingNewIngredient}
-              setIsAdding={setIsAdding}
-            />
-          )}
-          {isAdding && <p>Новый ингредиент успешно добавлен</p>}
-        </p>
-        {isCreating && (
-          <button type='button' onClick={cancelCreatingNewIngredient}>
-            Отменить
-          </button>
-        )}
-      </section>
+        <Grid container justify='center'>
+          <Grid item sm={6}>
+            {isCreating && (
+              <NewIngredientForm
+                isCreating={isCreating}
+                cancelCreatingNewIngredient={cancelCreatingNewIngredient}
+                setIsAdding={setIsAdding}
+              />
+            )}
+            {isAdding && <p>Новый ингредиент успешно добавлен</p>}
+
+            {isCreating && (
+              <Grid container justify='center' className={styles.cancelBlock}>
+                <Button
+                  variant='outlined'
+                  type='button'
+                  onClick={cancelCreatingNewIngredient}
+                >
+                  Отменить
+                </Button>
+              </Grid>
+            )}
+          </Grid>
+        </Grid>
+      </Grid>
     </>
   );
 };
