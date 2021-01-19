@@ -46,6 +46,7 @@ export const NewIngredientForm = (props: NewIngredientFormProps) => {
   const styles = useStyles();
   const { register, handleSubmit, errors, control } = useForm<Ingredient>({
     resolver: yupResolver(schema),
+    defaultValues: {},
   });
 
   const { mutateAsync: createIngredient } = useMutation((data: FormData) =>

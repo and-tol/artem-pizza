@@ -9,13 +9,12 @@ import { NewIngredientForm } from './components/NewIngredientForm';
 // Styles
 import {
   makeStyles,
-  Container,
   ButtonGroup,
   Button,
   Grid,
-  Box,
   CircularProgress,
   Typography,
+  Box,
 } from '@material-ui/core';
 const useStyles = makeStyles({
   title: { paddingTop: '2rem' },
@@ -27,6 +26,18 @@ const useStyles = makeStyles({
   cancelBlock: {
     marginTop: '1.5rem',
   },
+  deletingMessage: {
+    position: 'absolute',
+    top: '10rem',
+    backgroundColor: 'red',
+    opacity: 0.8,
+    padding: '1rem 2rem',
+    zIndex: 100,
+    color: 'white',
+    transform: 'translate3d(-50%,0,0)',
+    left: '50%',
+    margin: 0,
+  },
 });
 
 export const IngredientsListPage = () => {
@@ -37,6 +48,7 @@ export const IngredientsListPage = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [isDeleting, setIsDeliting] = useState(true);
 
   /**
    * Delete ingredient on server
@@ -44,7 +56,9 @@ export const IngredientsListPage = () => {
   const deleteIngredient = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.parentElement!.getAttribute('id');
 
-    await api.ingredients.deleteIngredient(id);
+    const result = await api.ingredients.deleteIngredient(id);
+
+    setIsDeliting(result.ok);
 
     const ingredients = await api.ingredients
       .availableIngredients()
@@ -52,6 +66,14 @@ export const IngredientsListPage = () => {
 
     setIngredients(ingredients);
   };
+  useEffect(() => {
+    const id = setTimeout(() => {
+      setIsDeliting(false);
+    }, 1000);
+    return () => {
+      clearTimeout(id);
+    };
+  });
 
   /**
    * Creating/CancelCreating New Ingredient
@@ -163,6 +185,12 @@ export const IngredientsListPage = () => {
 
   return (
     <>
+      {isDeleting && (
+        <Box className={styles.deletingMessage}>
+          <p>Ингредиент удалён</p>
+        </Box>
+      )}
+
       {!isCreating && (
         <Grid container component='section' justify='center'>
           <Typography variant='h3' color='initial' className={styles.title}>

@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core';
 export const useStyles = makeStyles({
   root: {
     padding: '1rem',
-    backgroundColor: '#f5f5f5'
+    backgroundColor: '#f5f5f5',
   },
   h5: {
     marginBottom: '1.3rem',
@@ -33,6 +33,7 @@ export const useStyles = makeStyles({
     fontSize: '0.75rem',
   },
   formSelect: {
-    width: '100%'
-  }
+    width: '100%',
+  },
+
 });

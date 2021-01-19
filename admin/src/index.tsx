@@ -2,7 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Container, ThemeProvider, createMuiTheme, styled } from '@material-ui/core/';
+import {
+  Container,
+  ThemeProvider,
+  createMuiTheme,
+  styled,
+} from '@material-ui/core/';
 
 import './index.css';
 import App from './App';
@@ -19,9 +24,9 @@ const theme = createMuiTheme({
 
 const StyledContainer = styled(Container)({
   paddingTop: '1rem',
-  paddingBottom: '1.5rem'
-})
-
+  paddingBottom: '1.5rem',
+  position: 'relative',
+});
 
 ReactDOM.render(
   <React.StrictMode>
