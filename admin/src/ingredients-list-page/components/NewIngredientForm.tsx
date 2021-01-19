@@ -1,26 +1,25 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { useMutation } from 'react-query';
-import * as yup from 'yup';
-import { api } from '../../api';
-// Type
-import { Ingredient } from '../../types';
-// Data
-import { categories } from '../../data';
-
 // Style
 import {
-  Container,
+  Box,
   Button,
+  Container,
   FormControl,
   Input,
   MenuItem,
   Select,
   Typography,
-  Box,
 } from '@material-ui/core';
-import { useStyles } from './style/useStyles';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import * as yup from 'yup';
+import { api } from '../../api';
+// Data
+import { categories } from '../../shared/pizzaData';
+// Type
+import { Ingredient } from '../../types';
+import { useFormStyles } from '../../shared/style/useFormStyles';
 
 const schema = yup.object().shape({
   name: yup.string().required('Название - обязательное поле'),
@@ -43,7 +42,7 @@ type NewIngredientFormProps = {
 
 export const NewIngredientForm = (props: NewIngredientFormProps) => {
   const { isCreating, cancelCreatingNewIngredient, setIsAdding } = props;
-  const styles = useStyles();
+  const styles = useFormStyles();
   const { register, handleSubmit, errors, control } = useForm<Ingredient>({
     resolver: yupResolver(schema),
     defaultValues: {},

@@ -3,8 +3,10 @@ import { useState, useEffect } from 'react';
 import { api } from '../api';
 // Styles
 import { Grid, Typography, FormControl, Button } from '@material-ui/core';
+import { useFormStyles } from '../shared/style/useFormStyles';
 
 export const SignupPage = () => {
+  const styles = useFormStyles();
   const [state, setState] = useState<{ [x: string]: string }>({
     email: '',
     password: '',
@@ -29,7 +31,7 @@ export const SignupPage = () => {
         <form onSubmit={handleSubmit}>
           <Grid container justify='center' direction='column'>
             <FormControl
-            // className={styles.formControl}
+            className={styles.formControl}
             >
               <label htmlFor='email'>Электронная почта </label>
               <input
@@ -41,7 +43,7 @@ export const SignupPage = () => {
               />
             </FormControl>
             <FormControl
-            // className={styles.formControl}
+            className={styles.formControl}
             >
               <label htmlFor='password'>Пароль </label>
               <input
