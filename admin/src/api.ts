@@ -1,3 +1,6 @@
+// Types
+import { User } from './types';
+
 export const root = 'http://localhost:4000';
 
 export const api = Object.freeze({
@@ -30,6 +33,28 @@ export const api = Object.freeze({
       return fetch(`${root}/ingredients/${ingredientId}`, {
         method: 'GET',
       }).then(ingredient => ingredient.json());
+    },
+  },
+
+  user: {
+    create: (data: any) => {
+      return fetch(`${root}/user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+    },
+    login: (credentials: any) => {
+      return fetch(`${root}/user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Base ${credentials}`,
+        },
+        credentials: 'include',
+      }).then(token => token.json());
     },
   },
 });

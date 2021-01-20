@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles({
+export const useFormStyles = makeStyles({
   root: {
     padding: '1rem',
     backgroundColor: '#f5f5f5',

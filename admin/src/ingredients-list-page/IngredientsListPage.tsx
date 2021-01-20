@@ -48,7 +48,7 @@ export const IngredientsListPage = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [isDeleting, setIsDeliting] = useState(true);
+  const [isDeleting, setIsDeliting] = useState(false);
 
   /**
    * Delete ingredient on server
