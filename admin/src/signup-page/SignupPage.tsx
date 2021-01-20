@@ -1,23 +1,23 @@
-import { useState, useEffect } from 'react';
-import { useMutation } from 'react-query';
-import * as yup from 'yup';
-import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-// Api
-import { api } from '../api';
-// Types
-import { User } from '../types';
+import { useHistory } from 'react-router-dom';
 // Styles
 import {
-  Grid,
-  Typography,
-  FormControl,
-  Button,
-  Input,
-  FormLabel,
   Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Grid,
+  Input,
+  Typography,
 } from '@material-ui/core';
+import { Controller, useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+import * as yup from 'yup';
+// Api
+import { api } from '../api';
 import { useFormStyles } from '../shared/style/useFormStyles';
+// Types
+import { User } from '../types';
 
 const schema = yup.object().shape({
   email: yup
@@ -31,6 +31,7 @@ const schema = yup.object().shape({
 });
 
 export const SignupPage = () => {
+  const history = useHistory();
   const styles = useFormStyles();
   const { mutateAsync: createUser } = useMutation((data: any) =>
     api.user.create(data)
@@ -43,11 +44,10 @@ export const SignupPage = () => {
     },
   });
 
-  console.log('errors', errors);
-
   const onSubmit = handleSubmit(async data => {
-    console.log('data', data);
     await createUser(data);
+
+    history.push('/ingredients-list');
   });
 
   return (
