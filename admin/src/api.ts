@@ -1,3 +1,6 @@
+// Types
+import { User } from './types';
+
 export const root = 'http://localhost:4000';
 
 export const api = Object.freeze({

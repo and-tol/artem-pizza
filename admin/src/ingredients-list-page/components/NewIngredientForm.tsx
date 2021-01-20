@@ -42,8 +42,8 @@ type NewIngredientFormProps = {
 };
 
 export const NewIngredientForm = (props: NewIngredientFormProps) => {
-  const { isCreating, cancelCreatingNewIngredient, setIsAdding } = props;
   const styles = useFormStyles();
+  const { isCreating, cancelCreatingNewIngredient, setIsAdding } = props;
   const { register, handleSubmit, errors, control } = useForm<Ingredient>({
     resolver: yupResolver(schema),
     defaultValues: {},
