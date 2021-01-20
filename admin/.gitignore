@@ -30,3 +30,5 @@ yarn-error.log*
 ../client/node_modules
 TODO.md
 /temp
+
+.eslintcache
