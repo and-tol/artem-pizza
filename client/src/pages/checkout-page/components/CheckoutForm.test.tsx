@@ -1,24 +1,21 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 import { CheckoutForm } from './CheckoutForm';
+import { store } from './../../../init/store';
+
+import { mockDefaultPizza } from '../../../testUtils/mockDefaultPizza';
 
 describe('CheckoutForm', () => {
   it('renders correctly', () => {
     const { getByLabelText, getByPlaceholderText, getByRole } = render(
-      <MemoryRouter>
-        <CheckoutForm
-          defaultPizza={{
-            size: '30',
-            dough: 'thin',
-            sauce: 'tomato',
-            cheese: [],
-            vegetables: [],
-            meat: [],
-          }}
-        />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <CheckoutForm pizza={mockDefaultPizza} ingredients={[]} />
+        </MemoryRouter>
+      </Provider>
     );
 
     expect(getByPlaceholderText('Введите адрес')).toBeInTheDocument();
@@ -37,18 +34,11 @@ describe('CheckoutForm', () => {
   describe('on card number change', () => {
     it('breaks the card number into groups of four digits', () => {
       const { getByPlaceholderText } = render(
-        <MemoryRouter>
-          <CheckoutForm
-            defaultPizza={{
-              size: '30',
-              dough: 'thin',
-              sauce: 'tomato',
-              cheese: [],
-              vegetables: [],
-              meat: [],
-            }}
-          />
-        </MemoryRouter>
+        <Provider store={store}>
+          <MemoryRouter>
+            <CheckoutForm pizza={mockDefaultPizza} ingredients={[]} />
+          </MemoryRouter>
+        </Provider>
       );
 
       const inputCC: HTMLInputElement = getByPlaceholderText(
@@ -64,26 +54,23 @@ describe('CheckoutForm', () => {
 
   describe('with invalid input address', () => {
     it('renders the address validation error', async () => {
-      const { getByRole, getByText } = render(
-        <MemoryRouter>
-          <CheckoutForm
-            defaultPizza={{
-              size: '30',
-              dough: 'thin',
-              sauce: 'tomato',
-              cheese: [],
-              vegetables: [],
-              meat: [],
-            }}
-          />
-        </MemoryRouter>
+      const { getByRole, queryAllByText } = render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <CheckoutForm pizza={mockDefaultPizza} ingredients={[]} />
+          </MemoryRouter>
+        </Provider>
       );
 
       await act(async () => {
         fireEvent.submit(getByRole('button'));
       });
 
-      expect(getByText('Это обязательное поле')).toBeInTheDocument();
+      const div = queryAllByText(/Это обязательное поле/i);
+
+      expect(div[0]).toBeInTheDocument();
+      expect(div[1]).toBeInTheDocument();
+      expect(div[2]).toBeInTheDocument();
     });
   });
 });

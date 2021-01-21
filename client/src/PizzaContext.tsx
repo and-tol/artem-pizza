@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from 'react';
 import { DEFAULT_PIZZA } from './pizzaData';
 import { PizzaConfiguration } from './types';
 
-export interface PizzaContext {
+export interface IPizzaContext {
   pizza: PizzaConfiguration;
   setPizza?: React.Dispatch<React.SetStateAction<PizzaConfiguration>>;
 }
@@ -11,7 +11,7 @@ interface PizzaProviderProps {
   children: React.ReactNode;
 }
 
-export const PizzaContext = createContext<PizzaContext | null>(null);
+export const PizzaContext = createContext<IPizzaContext | null>(null);
 
 export const PizzaProvider = (props: PizzaProviderProps) => {
   const [pizza, setPizza] = useState(DEFAULT_PIZZA);

@@ -1,11 +1,37 @@
-import { IngredientNameAndPriceState } from '../types';
+import { Ingredient } from '../types';
 
-export const renderIngredient = (
-  ingredients: string[],
-  data: IngredientNameAndPriceState
-): string => {
-  const newIngredients: string = ingredients
-    ?.map(i => data[i].name.toLowerCase())
-    .join(', ');
-  return newIngredients[0].toUpperCase() + newIngredients.slice(1);
+/**
+ * Function render selected ingredients
+ * @param selectedIngredients - selected ingredient
+ * @param availableIngredients - possible ingredients
+ */
+export const renderIngredients = (
+  selectedIngredients: string[] | string,
+  availableIngredients: Ingredient[]
+): string | undefined => {
+  if (
+    selectedIngredients &&
+    typeof selectedIngredients === 'string' &&
+    availableIngredients.length
+  ) {
+    return availableIngredients
+      .filter(i => {
+        return i.slug === selectedIngredients;
+      })[0]
+      .name?.toLowerCase();
+  }
+
+  if (Array.isArray(selectedIngredients)) {
+    if (selectedIngredients.length && availableIngredients.length) {
+      return selectedIngredients
+        ?.map(selectedIngredient => {
+          return availableIngredients
+            .filter(i => i.slug === selectedIngredient)[0]
+            .name?.toLowerCase();
+        })
+        .join(', ');
+    }
+  }
+
+  return undefined;
 };

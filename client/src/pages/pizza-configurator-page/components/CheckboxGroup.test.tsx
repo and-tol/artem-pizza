@@ -12,6 +12,7 @@ describe('CheckboxGroup', () => {
         register={register}
         name='test2'
         options={{
+          // FIXME: bacon: { name: 'test1', price: 1 }
           bacon: { name: 'test1', price: 1 },
         }}
       />

@@ -22,13 +22,9 @@ export interface PizzaConfiguration {
   meat: string[];
 }
 
-export interface TotalPrice {
-  size: string;
-  dough?: string;
-  sauce?: string;
-  cheese: string[];
-  vegetables: string[];
-  meat: string[];
+export interface Login {
+  password: string;
+  email: string;
 }
 
 // React Hook Form register
@@ -49,19 +45,134 @@ export type refType =
   | null
   | undefined;
 
-export type Order = {
-  ingredients: [null | PizzaConfiguration];
+export interface IOrder {
+  pizza: PizzaConfiguration;
   // ingredients: [null | undefined | PizzaConfiguration];
   address: string;
-  name: string;
-  card_number: string;
-};
+  cardName: string;
+  cardNumber: string;
+  id?: string;
+}
 
-export type NewIngredient = {
+export interface FormValues {
+  address: string;
+  porch: string;
+  flow: string;
+  flat: string;
+  cardNumber: string;
+  year: string;
+  CVV: string;
+  cardName: string;
+}
+export type IngredientFromServer = {
   id: string;
   name: string;
   slug: string;
   price: string;
   category: string;
   image: string;
+  thumbnail: string;
 };
+export interface Ingredient {
+  id: string;
+  name: string;
+  slug: string;
+  price: number;
+  category: string;
+  image: string;
+  thumbnail: string;
+}
+
+// ! ---- States Types ---- //
+
+export interface PizzaState {
+  readonly pizza: PizzaConfiguration;
+}
+// export type PizzaState = {
+//   pizza: PizzaConfiguration;
+// };
+
+export interface IngredientsState {
+  readonly ingredients: Ingredient[];
+  readonly error: ErrorState | null;
+  readonly isLoading: boolean;
+}
+export interface OrdersState {
+  readonly orders: IOrder[];
+  readonly isLoading: boolean;
+  readonly error: ErrorState | null;
+}
+
+export interface LoginState {
+  readonly error: ErrorState | null;
+  readonly isRegistered: boolean | null;
+  readonly isLoading: boolean;
+  readonly login: Login;
+}
+
+export interface SignupState {
+  readonly error: ErrorState | null;
+  readonly isRegistered: boolean | null;
+  readonly isLoading: boolean;
+  readonly login: Login;
+}
+
+export interface CheckoutState {
+  readonly order: IOrder | null;
+  readonly error: ErrorState | null;
+  readonly isLoading: boolean;
+  readonly isAccepted: boolean;
+}
+export type DispatchType = (args: PizzaAction) => PizzaAction;
+
+/* export interface IAction<T, R = any, E = ErrorState | any | null> {
+  type: T;
+  payload: R;
+  error: E;
+} */
+
+export interface ErrorState {
+  status: number;
+}
+
+export type OrdersAction = {
+  type: string;
+  payload: IOrder[];
+  error: ErrorState | null;
+};
+
+export type PizzaAction = {
+  type: string;
+  payload: PizzaConfiguration;
+  error: any;
+};
+
+export interface IngredientsAction {
+  type: string;
+  payload: Ingredient[] | [];
+  error: ErrorState | null;
+}
+export interface LoginAction {
+  type: string;
+  payload: any;
+  error: any;
+}
+export interface SignupAction {
+  type: string;
+  payload: any;
+  error: any;
+}
+export interface CheckoutAction {
+  type: string;
+  payload: any;
+  error: any;
+}
+
+export interface State {
+  readonly pizza: PizzaState;
+  readonly ingredients: IngredientsState;
+  readonly orders: OrdersState;
+  readonly login: LoginState;
+  readonly signup: SignupState;
+  readonly checkout: CheckoutState;
+}
