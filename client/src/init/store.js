@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 
 import { checkoutReducer as checkout } from '../pages/checkout-page/state/checkoutReducer';
-import { loginReducer as login } from '../pages/login-page/state/reducer';
+import { loginReducer as login } from '../pages/login-page/state/loginReducer';
 import { ordersListReducer as orders } from '../pages/orders-list-page/state/reducer';
 import { ingredientsReducer as ingredients } from '../pages/pizza-configurator-page/state-ingredients/reducer';
 import { pizzaConfiguratorReducer as pizza } from '../pages/pizza-configurator-page/state-pizza/reducer';

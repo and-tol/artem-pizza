@@ -5,14 +5,9 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 // Selectors
-import { getStatus } from './state/selectors';
+import { getStatus } from './state/loginSelectors';
 // Actions
-import { loginActions } from './state/actions';
-
-type FormValues = {
-  email: string | undefined;
-  password: string | undefined;
-};
+import { loginActions } from './state/loginActions';
 
 const schema = yup.object().shape({
   email: yup.string().email('Неверный адрес электронной почты'),
@@ -25,7 +20,7 @@ export const LoginPage = () => {
   const dispatch = useDispatch();
   const isRegistered = useSelector(getStatus);
 
-  const { register, handleSubmit, errors, watch } = useForm<FormValues>({
+  const { register, handleSubmit, errors, watch } = useForm({
     resolver: yupResolver(schema),
   });
   const [isDisabled, setIsDisabled] = useState(true);
@@ -52,29 +47,31 @@ export const LoginPage = () => {
     <>
       <h1>Авторизация</h1>
       {isRegistered && <section>Добро пожаловать!</section>}
-      {!isRegistered &&<form onSubmit={onSubmit}>
-        <fieldset>
-          <label htmlFor='email'>
-            Э-почта
-            <input id='email' ref={register} type='text' name='email' />
-            <div>{errors.email?.message}</div>
-          </label>
-          <label htmlFor='password'>
-            Пароль
-            <input
-              id='password'
-              ref={register}
-              type='password'
-              name='password'
-            />
-            <div>{errors.password?.message}</div>
-          </label>
-        </fieldset>
-        <button type='submit' disabled={isDisabled}>
-          Войти
-        </button>
-        <Link to='/signup'>На страницу Регистрации </Link>
-      </form>}
+      {!isRegistered && (
+        <form onSubmit={onSubmit}>
+          <fieldset>
+            <label htmlFor='email'>
+              Э-почта
+              <input id='email' ref={register} type='text' name='email' />
+              <div>{errors.email?.message}</div>
+            </label>
+            <label htmlFor='password'>
+              Пароль
+              <input
+                id='password'
+                ref={register}
+                type='password'
+                name='password'
+              />
+              <div>{errors.password?.message}</div>
+            </label>
+          </fieldset>
+          <button type='submit' disabled={isDisabled}>
+            Войти
+          </button>
+          <Link to='/signup'>На страницу Регистрации </Link>
+        </form>
+      )}
     </>
   );
 };

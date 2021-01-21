@@ -14,6 +14,10 @@ export const checkoutReducer = createReducer(initialState, builder => {
     .addCase('checkout/sendOrderAsync/pending', state => {
       state.isLoading = true;
     })
+    .addCase('checkout/sendOrderAsync/rejected', state => {
+      state.isLoading = false;
+      state.error = 'fetching error';
+    })
     .addCase(checkoutActionTypes.CHECKOUT_STOP_FETCHING, state => {
       state.isLoading = false;
     })
@@ -24,10 +28,7 @@ export const checkoutReducer = createReducer(initialState, builder => {
         state.error = action.payload;
       }
     )
-    .addCase('checkout/sendOrderAsync/rejected', state => {
-      state.isLoading = false;
-      state.error = 'fetching error';
-    })
+
     .addCase(checkoutActionTypes.CHECKOUT_FILL, (state, action) => {
       state.isLoading = false;
       state.order = action.payload;

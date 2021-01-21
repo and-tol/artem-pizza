@@ -1,5 +1,5 @@
-import { actionTypes } from './actionTypes';
-import { loginReducer } from './reducer';
+import { loginActionTypes } from './loginActionTypes';
+import { loginReducer } from './loginReducer';
 
 describe('loginReducer', () => {
   const initialState = {
@@ -11,7 +11,7 @@ describe('loginReducer', () => {
 
   it('is fill data into state', () => {
     const action = {
-      type: actionTypes.LOGIN_FILL,
+      type: loginActionTypes.LOGIN_FILL,
       payload: { name: 'name', email: 'name' },
       error: null,
       isRegistered: null,

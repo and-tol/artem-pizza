@@ -1,5 +1,5 @@
-import { loginActions } from './actions';
-import { actionTypes } from './actionTypes';
+import { loginActions } from './loginActions';
+import { actionTypes } from './loginActionTypes';
 
 jest.mock('../../../api', () => {
   return {

@@ -6,6 +6,7 @@ export const stopFetching = createAction('checkout/stopFetching');
 export const setFetchingError = createAction('checkout/setFetchingError');
 export const fillOrder = createAction('checkout/fill');
 export const setAccept = createAction('checkout/setAccept');
+
 export const sendOrderAsync = createAsyncThunk(
   'checkout/sendOrderAsync',
   async (data, thunkAPI) => {
