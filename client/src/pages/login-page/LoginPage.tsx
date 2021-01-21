@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch, useSelector } from 'react-redux';
+// Selectors
+import { getStatus } from './state/selectors';
+// Actions
+import { loginActions } from './state/actions';
 
 type FormValues = {
   email: string | undefined;
@@ -10,15 +15,16 @@ type FormValues = {
 };
 
 const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email('Неверный адрес электронной почты'),
+  email: yup.string().email('Неверный адрес электронной почты'),
   password: yup
     .string()
-    .min(6, 'Длина пароля должна быть не менее шести символов')
+    .min(6, 'Длина пароля должна быть не менее шести символов'),
 });
 
 export const LoginPage = () => {
+  const dispatch = useDispatch();
+  const isRegistered = useSelector(getStatus);
+
   const { register, handleSubmit, errors, watch } = useForm<FormValues>({
     resolver: yupResolver(schema),
   });
@@ -34,23 +40,24 @@ export const LoginPage = () => {
   }, [email, password]);
 
   const onSubmit = handleSubmit(data => {
-    console.log(data);
+    dispatch(loginActions.fillUserData(data));
+    // dispatch(loginActions.checkUserAsync(data));
+    /**
+     * Set user registered
+     */
+    dispatch(loginActions.setUserStatus(true));
   });
 
   return (
     <>
       <h1>Авторизация</h1>
-      <form onSubmit={onSubmit}>
+      {isRegistered && <section>Добро пожаловать!</section>}
+      {!isRegistered &&<form onSubmit={onSubmit}>
         <fieldset>
           <label htmlFor='email'>
             Э-почта
-            <input
-              id='email'
-              ref={register}
-              type='text'
-              name='email'
-            />
-            <div>{errors.email?.message }</div>
+            <input id='email' ref={register} type='text' name='email' />
+            <div>{errors.email?.message}</div>
           </label>
           <label htmlFor='password'>
             Пароль
@@ -60,14 +67,14 @@ export const LoginPage = () => {
               type='password'
               name='password'
             />
-            <div>{errors.password?.message }</div>
+            <div>{errors.password?.message}</div>
           </label>
         </fieldset>
         <button type='submit' disabled={isDisabled}>
           Войти
         </button>
         <Link to='/signup'>На страницу Регистрации </Link>
-      </form>
+      </form>}
     </>
   );
 };

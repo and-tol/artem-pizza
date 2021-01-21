@@ -1,24 +1,16 @@
-import { Order, NewIngredient } from './types';
+import { IOrder } from './types';
 
-export const root = 'http://localhost:3000';
+export const root = 'http://localhost:4000';
 
 export const api = Object.freeze({
   ingredients: {
     availableIngredients: () => {
-      return fetch(`${root}/ingredients`, { method: 'GET' });
-    },
-
-    createNewIngredient: (data: NewIngredient) => {
-      return fetch(`${root}/ingredients`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json; charset=UTF-8' },
-        body: JSON.stringify(data),
-      });
+      return fetch(`${root}/ingredients`);
     },
   },
 
   orders: {
-    createOrder: (data: Order) => {
+    createOrder: (data: IOrder) => {
       return fetch(`${root}/orders`, {
         method: 'POST',
         headers: {
@@ -27,9 +19,37 @@ export const api = Object.freeze({
         body: JSON.stringify(data),
       });
     },
-    showAllOrders: () => {
+    getAllOrders: () => {
       return fetch(`${root}/orders`, {
         method: 'GET',
+      });
+    },
+  },
+
+  users: {
+    create: (data: any) => {
+      return fetch(`${root}/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+    },
+    login: (credentials: any) => {
+      return fetch(`${root}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Base ${credentials}`,
+        },
+        credentials: 'include',
+      });
+    },
+    logout: () => {
+      return fetch(`${root}/logout`, {
+        method: 'POST',
+        credentials: 'include',
       });
     },
   },

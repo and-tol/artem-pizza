@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import * as yup from 'yup';
+import { loginActions } from './../login-page/state/actions';
+// Actions
+import { signupActions } from './state/actions';
+// Selectors
+import { getStatus } from './state/selectors';
 
 type FormValues = {
   email: string;
@@ -16,7 +22,13 @@ const schema = yup.object().shape({
     .min(6, 'Длина пароля должна быть не менее шести символов'),
 });
 
+/**
+ * User registration page
+ * Страница регистрации пользователя
+ */
 export const SignupPage = () => {
+  const dispatch = useDispatch();
+
   const { register, watch, errors, handleSubmit } = useForm<FormValues>({
     resolver: yupResolver(schema),
   });
@@ -32,13 +44,19 @@ export const SignupPage = () => {
   }, [watchEmail, watchPassword]);
 
   const onSubmit = handleSubmit(data => {
-    console.log(data);
+    dispatch(signupActions.fillUserData(data));
+
+    // ! Авторизация (login) пользователя
+    dispatch(loginActions.setUserStatus(true));
   });
+
+  const isRegistered = useSelector(getStatus);
 
   return (
     <>
       <h1>Страница регистрации</h1>
-      <form onSubmit={onSubmit}>
+      {isRegistered && <p>Регистрация прошла успешно</p>}
+      {!isRegistered && <form onSubmit={onSubmit}>
         <fieldset>
           <label htmlFor='email'>
             Э-почта
@@ -59,8 +77,8 @@ export const SignupPage = () => {
         <button type='submit' disabled={isDisabled}>
           Зарегистрироваться
         </button>
+      </form>}
         <Link to='/login'>На страницу Входа в приложение (Логина) </Link>
-      </form>
     </>
   );
 };

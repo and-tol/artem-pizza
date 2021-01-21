@@ -4,9 +4,12 @@ import { MemoryRouter, Router } from 'react-router-dom';
 import { OrderPreviewPage } from './OrderPreviewPage';
 import { createMemoryHistory } from 'history';
 // Types
-import { OrderPreviewProps } from './OrderPreview';
+import { OrderPreviewProps } from '../../share/components/OrderPreview';
 
-jest.mock('./OrderPreview.tsx', () => ({
+import { store } from '../../init/store';
+import { Provider } from 'react-redux';
+
+jest.mock('../../share/components/OrderPreview', () => ({
   OrderPreview: ({ pizza }: OrderPreviewProps) => {
     return <div>{pizza.sauce}</div>;
   },
@@ -15,37 +18,27 @@ jest.mock('./OrderPreview.tsx', () => ({
 describe('OrderPreviewPage', () => {
   it('renders correctly if pizza not undefined', () => {
     const { getByText } = render(
-      <MemoryRouter>
-        <OrderPreviewPage
-          _usePizzaHook={() => ({
-            pizza: {
-              size: 'test1',
-              dough: 'test2',
-              sauce: 'test3',
-              cheese: ['test4'],
-              vegetables: ['test5'],
-              meat: ['test6'],
-            },
-          })}
-        />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <OrderPreviewPage />
+        </MemoryRouter>
+      </Provider>
     );
 
     expect(getByText('Ленивая Маргарита')).toBeInTheDocument();
   });
+  
   it("if pizza=undefined redirect  to '/'", () => {
     const history = createMemoryHistory();
 
     render(
-      <Router history={history}>
-        <OrderPreviewPage
-          _usePizzaHook={() => ({
-            pizza: undefined
-          })}
-        />
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <OrderPreviewPage />
+        </Router>
+      </Provider>
     );
 
-    expect(history.location.pathname).toEqual('/')
+    expect(history.location.pathname).toEqual('/');
   });
 });

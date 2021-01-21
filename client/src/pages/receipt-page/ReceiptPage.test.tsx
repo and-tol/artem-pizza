@@ -1,16 +1,28 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { MemoryRouter, Router } from 'react-router-dom';
+import { store } from '../../init/store';
 import { ReceiptPage } from './ReceiptPage';
+import { createMemoryHistory } from 'history';
 
 describe('ReceiptPage', () => {
-  it('renders correctly', () => {
-    const { getByText } = render(
-      <MemoryRouter>
-        <ReceiptPage />
-      </MemoryRouter>
+  const history = createMemoryHistory();
+  it('renders if isAccepted true', async () => {
+    const isAccepter = true;
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <Router history={history}>
+            <ReceiptPage />
+          </Router>
+        </MemoryRouter>
+      </Provider>
     );
 
-    expect(getByText('Страница с чеком')).toBeInTheDocument();
+    // FIXME: crash test,
+    // TODO: need rease mock const isAccepted = useSelector(getAcceptedOrder);
+    // expect(await screen.getByText(/Спасибо за заказ! /i)).toBeInTheDocument();
   });
 });

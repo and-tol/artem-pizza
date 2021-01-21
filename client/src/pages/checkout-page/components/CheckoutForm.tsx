@@ -1,14 +1,20 @@
+import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { api } from '../../../api';
+// Actions
+import { checkoutActions } from '../state/checkoutActions';
 // Helpers
-import { calculateTotalPrice } from '../../../calculateTotalPrice';
+import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Data
 import { PIZZA_DELIVERY } from '../../../pizzaData';
 // Types
-import { Order, PizzaConfiguration } from '../../../types';
+import {
+  IOrder,
+  PizzaConfiguration,
+  Ingredient,
+  FormValues,
+} from '../../../types';
 var valid = require('card-validator');
 
 const normalizeCardNumber = (value: string): string => {
@@ -21,21 +27,10 @@ const normalizeCardNumber = (value: string): string => {
   );
 };
 
-interface CheckoutFormProps {
-  pizza: PizzaConfiguration | null;
-  defaultPizza: PizzaConfiguration;
+export interface CheckoutFormProps {
+  pizza: PizzaConfiguration;
+  ingredients: Ingredient[] | [];
 }
-
-type FormValues = {
-  address: string;
-  porch: string;
-  flow: string;
-  flat: string;
-  cardNumber: string;
-  year: string;
-  CVV: string;
-  cardName: string;
-};
 
 const schema = yup.object().shape({
   address: yup.string().required('Это обязательное поле'),
@@ -43,7 +38,14 @@ const schema = yup.object().shape({
   cardName: yup.string().required('Это обязательное поле'),
 });
 
-export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
+/**
+ * Компонент собирает данные пользователя для оплаты заказа и отправляет на сервер
+ * The component collects user data for order payment and sends it to the server
+ * @param param0
+ */
+export const CheckoutForm = ({ pizza, ingredients }: CheckoutFormProps) => {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -57,25 +59,21 @@ export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
   const сardNumber = watch('cardNumber');
   let numberValidation = valid.number(сardNumber);
 
-  const onSubmit = handleSubmit(async data => {
-    let order: Order | null = null;
+  const onSubmit = handleSubmit(data => {
+    let order: IOrder | null = null;
     order = {
-      ingredients: [pizza],
+      pizza: pizza,
       address: data.address,
-      name: data.cardName,
-      card_number: data.cardNumber,
+      cardName: data.cardName,
+      cardNumber: data.cardNumber,
     };
-
     if (order) {
-      await api.orders.createOrder(order);
+      dispatch(checkoutActions.fillOrder(order));
+      dispatch(checkoutActions.sendOrderAsync(order));
     }
   });
 
-  let orderPrice = calculateTotalPrice(defaultPizza);
-
-  if (pizza) {
-    orderPrice = calculateTotalPrice(pizza);
-  }
+  const orderPrice = calculateTotalPrice(ingredients, pizza);
 
   return (
     <>
@@ -169,7 +167,9 @@ export const CheckoutForm = ({ pizza, defaultPizza }: CheckoutFormProps) => {
             <p>
               К оплате <span>{orderPrice + PIZZA_DELIVERY} руб.</span>
             </p>
-            <button>Оплатить {orderPrice + PIZZA_DELIVERY} руб.</button>
+            <button type='submit'>
+              Оплатить {orderPrice + PIZZA_DELIVERY} руб.
+            </button>
           </section>
         </form>
         <p>

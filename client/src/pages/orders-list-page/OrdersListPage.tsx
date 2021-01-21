@@ -1,32 +1,30 @@
-import React, { useEffect, useState } from 'react';
-// Api
-import { api } from '../../api';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+// Actions
+import { ordersListActions } from './state/actions';
+import { ingredientsActions } from '../pizza-configurator-page/state-ingredients/actions';
+// Selectors
+import { getOrders, getLoadingStatus } from './state/selectors';
 // Components
-import { PreviousOrder } from './components';
-// Types
-import { Order } from '../../types';
+import { Order } from '../../share/components';
 
 export const OrdersListPage = () => {
-  const [previousOrders, setPreviousOrders] = useState<Order[]>([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const getData = async () => {
-      const response = await api.orders.showAllOrders();
-      const results = await response.json();
+    dispatch(ingredientsActions.fetchIngredientsAsync());
+    dispatch(ordersListActions.fetchOrdersAsync());
+  }, [dispatch]);
 
-      setPreviousOrders(results);
-    };
-
-    getData();
-  }, []);
+  const previousOrders = useSelector(getOrders);
+  const isLoading = useSelector(getLoadingStatus);
 
   return (
     <>
-      <h1>Заказы</h1>
+      <h1 data-testid="orders">Заказы</h1>
+      {isLoading && <p>Загрузка данных...</p>}
       {previousOrders.length ? (
-        previousOrders.map((order, i) => (
-          <PreviousOrder key={i} order={order} />
-        ))
+        previousOrders.map(order => <Order key={order.id} order={order} />)
       ) : (
         <span>Вы пока не сделали ни одного заказа</span>
       )}

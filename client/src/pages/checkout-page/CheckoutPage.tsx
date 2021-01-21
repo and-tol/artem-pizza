@@ -1,20 +1,25 @@
 import React from 'react';
-// Context
-import { usePizza } from '../../PizzaContext';
-// Data
-import { DEFAULT_PIZZA } from '../../pizzaData';
+import { useSelector } from 'react-redux';
+// Helpers
+import { calculateTotalPrice } from '../../share/calculateTotalPrice';
+import { OrderPreview } from '../../share/components/OrderPreview';
+import { getIngredients } from '../pizza-configurator-page/state-ingredients/selectors';
+// Selectors
+import { getPizza } from '../pizza-configurator-page/state-pizza/selectors';
 // Components
-import { CheckoutForm, CheckoutPreview } from './components';
+import { CheckoutForm } from './components';
 
-export const CheckoutPage = () => {
-  const PizzaContext = usePizza();
+export const CheckoutPage = (props: any) => {
+  const pizza = useSelector(getPizza);
+  const ingredients = useSelector(getIngredients);
 
   return (
     <>
       <h1>Оформление заказа</h1>
-
-      <CheckoutPreview pizza={PizzaContext!.pizza} />
-      <CheckoutForm defaultPizza={DEFAULT_PIZZA} pizza={PizzaContext!.pizza} />
+      <OrderPreview pizza={pizza} ingredients={ingredients} />
+      <hr />
+      <p>{calculateTotalPrice(ingredients, pizza)} руб.</p>
+      <CheckoutForm pizza={pizza} ingredients={ingredients} />
     </>
   );
 };
