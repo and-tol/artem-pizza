@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { CheckoutForm } from './CheckoutForm';
-import { store } from './../../../init/store';
+import { store } from '../../../init/store';
 
 import { mockDefaultPizza } from '../../../testUtils/mockDefaultPizza';
 
@@ -41,9 +41,7 @@ describe('CheckoutForm', () => {
         </Provider>
       );
 
-      const inputCC: HTMLInputElement = getByPlaceholderText(
-        'Номер карты'
-      ) as HTMLInputElement;
+      const inputCC = getByPlaceholderText('Номер карты');
       fireEvent.input(inputCC, {
         target: { value: '1234123412341234' },
       });

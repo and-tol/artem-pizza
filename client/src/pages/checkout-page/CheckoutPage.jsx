@@ -9,7 +9,7 @@ import { getPizza } from '../pizza-configurator-page/state-pizza/selectors';
 // Components
 import { CheckoutForm } from './components';
 
-export const CheckoutPage = (props: any) => {
+export const CheckoutPage = () => {
   const pizza = useSelector(getPizza);
   const ingredients = useSelector(getIngredients);
 

@@ -3,21 +3,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 // Actions
-import { checkoutActions } from '../state/checkoutActions';
+import * as checkoutActions from '../state/checkoutActions';
 // Helpers
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Data
 import { PIZZA_DELIVERY } from '../../../pizzaData';
-// Types
-import {
-  IOrder,
-  PizzaConfiguration,
-  Ingredient,
-  FormValues,
-} from '../../../types';
-var valid = require('card-validator');
 
-const normalizeCardNumber = (value: string): string => {
+const valid = require('card-validator');
+
+const normalizeCardNumber = value => {
   return (
     value
       .replace(/\s/g, '')
@@ -26,11 +20,6 @@ const normalizeCardNumber = (value: string): string => {
       .substr(0, 19) || ''
   );
 };
-
-export interface CheckoutFormProps {
-  pizza: PizzaConfiguration;
-  ingredients: Ingredient[] | [];
-}
 
 const schema = yup.object().shape({
   address: yup.string().required('Это обязательное поле'),
@@ -41,18 +30,13 @@ const schema = yup.object().shape({
 /**
  * Компонент собирает данные пользователя для оплаты заказа и отправляет на сервер
  * The component collects user data for order payment and sends it to the server
- * @param param0
+ * @param pizza 
+ * @param ingredients
  */
-export const CheckoutForm = ({ pizza, ingredients }: CheckoutFormProps) => {
+export const CheckoutForm = ({ pizza, ingredients }) => {
   const dispatch = useDispatch();
 
-  const {
-    register,
-    handleSubmit,
-    errors,
-    setValue,
-    watch,
-  } = useForm<FormValues>({
+  const { register, handleSubmit, errors, setValue, watch } = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -60,7 +44,7 @@ export const CheckoutForm = ({ pizza, ingredients }: CheckoutFormProps) => {
   let numberValidation = valid.number(сardNumber);
 
   const onSubmit = handleSubmit(data => {
-    let order: IOrder | null = null;
+    let order = null;
     order = {
       pizza: pizza,
       address: data.address,
