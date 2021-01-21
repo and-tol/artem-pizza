@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/temp
 
 # testing
 /coverage
@@ -22,5 +23,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/client/temp
-/client/source
+../admin/temp
+../client/temp
+../client/source
+../asserts
+../client/node_modules
+TODO.md
+/temp
