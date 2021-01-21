@@ -7,7 +7,7 @@ import orderSuccess from '../../asserts/icons/order-status_ok.svg';
 // Components
 import { Order } from '../../share/components';
 // Selectors
-import { getAcceptedOrder } from '../checkout-page/state/selectors';
+import { getAcceptedOrder } from '../checkout-page/state/checkoutSelectors';
 // Fake Data
 import { fakeOrder } from '../../pizzaData';
 

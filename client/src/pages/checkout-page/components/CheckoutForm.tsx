@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 // Actions
-import { checkoutActions } from '../state/actions';
+import { checkoutActions } from '../state/checkoutActions';
 // Helpers
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Data

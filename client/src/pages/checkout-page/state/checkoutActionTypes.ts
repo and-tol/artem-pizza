@@ -1,4 +1,4 @@
-export const actionTypes = Object.freeze({
+export const checkoutActionTypes = Object.freeze({
   CHECKOUT_START_FETCHING: 'CHECKOUT_START_FETCHING',
   CHECKOUT_STOP_FETCHING: 'CHECKOUT_STOP_FETCHING',
   CHECKOUT_SET_FETCHING_ERROR: 'CHECKOUT_SET_FETCHING_ERROR',
@@ -7,5 +7,4 @@ export const actionTypes = Object.freeze({
   CHECKOUT_SET_ACCEPT: 'CHECKOUT_SET_ACCEPT',
 
   CHECKOUT_SEND_DATA_ASYNC: 'CHECKOUT_SEND_DATA_ASYNC',
-
-})
+});

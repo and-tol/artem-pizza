@@ -1,6 +1,6 @@
-import { mockDefaultPizza } from '../../../__mock__/defaulPizza';
-import { checkoutActions } from './actions';
-import { actionTypes } from './actionTypes';
+import { mockDefaultPizza } from '../../../testUtils/mockDefaultPizza';
+import { checkoutActions } from './checkoutActions';
+import { checkoutActionTypes } from './checkoutActionTypes';
 
 jest.mock('../../../api', () => {
   return {
@@ -33,9 +33,9 @@ describe('.sendOrderAsync', () => {
     await checkoutActions.sendOrderAsync(order)(dispatch);
 
     const expectedActions = [
-      { type: actionTypes.CHECKOUT_START_FETCHING },
-      { type: actionTypes.CHECKOUT_FILL, payload: 'Success' },
-      { type: actionTypes.CHECKOUT_STOP_FETCHING },
+      { type: checkoutActionTypes.CHECKOUT_START_FETCHING },
+      { type: checkoutActionTypes.CHECKOUT_FILL, payload: 'Success' },
+      { type: checkoutActionTypes.CHECKOUT_STOP_FETCHING },
     ];
 
     expect(dispatch).toHaveBeenCalledTimes(3);
@@ -54,7 +54,7 @@ describe('actions', () => {
     };
 
     const expectedAction = {
-      type: actionTypes.CHECKOUT_FILL,
+      type: checkoutActionTypes.CHECKOUT_FILL,
       payload: test,
     };
 

@@ -1,5 +1,5 @@
-import { actionTypes } from './actionTypes';
-import { checkoutReducer } from './reducer';
+import { checkoutActionTypes } from './checkoutActionTypes';
+import { checkoutReducer } from './checkoutReducer';
 
 const initialState = {
   order: null,
@@ -11,7 +11,7 @@ const initialState = {
 describe('checkoutReducer', () => {
   it('set initial state', () => {
     const action = {
-      type: actionTypes.CHECKOUT_FILL,
+      type: checkoutActionTypes.CHECKOUT_FILL,
       payload: null,
       error: null,
     };
@@ -25,7 +25,7 @@ describe('checkoutReducer', () => {
   });
   it('is fill data into state', () => {
     const action = {
-      type: actionTypes.CHECKOUT_FILL,
+      type: checkoutActionTypes.CHECKOUT_FILL,
       payload: { test: 'test' },
       error: null,
     };

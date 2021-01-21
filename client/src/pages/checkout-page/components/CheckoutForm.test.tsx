@@ -6,7 +6,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { CheckoutForm } from './CheckoutForm';
 import { store } from './../../../init/store';
 
-import { mockDefaultPizza } from '../../../__mock__/defaulPizza';
+import { mockDefaultPizza } from '../../../testUtils/mockDefaultPizza';
 
 describe('CheckoutForm', () => {
   it('renders correctly', () => {

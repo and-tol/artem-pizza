@@ -1,5 +1,5 @@
 import { IOrder } from '../types';
-import { mockDefaultPizza } from './defaulPizza';
+import { mockDefaultPizza } from './mockDefaultPizza';
 
 export const mockOrder: IOrder = {
   pizza: mockDefaultPizza,

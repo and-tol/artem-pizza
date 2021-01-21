@@ -1,7 +1,7 @@
 // Types
 import { CheckoutAction, CheckoutState } from '../../../types';
 // ActionTypes
-import { actionTypes } from './actionTypes';
+import { checkoutActionTypes } from './checkoutActionTypes';
 
 export const initialState: CheckoutState = {
   order: null,
@@ -15,24 +15,24 @@ export const checkoutReducer = (
   action: CheckoutAction
 ): CheckoutState => {
   switch (action.type) {
-    case actionTypes.CHECKOUT_START_FETCHING:
+    case checkoutActionTypes.CHECKOUT_START_FETCHING:
       return { ...state, isLoading: true };
-    case actionTypes.CHECKOUT_STOP_FETCHING:
+    case checkoutActionTypes.CHECKOUT_STOP_FETCHING:
       return { ...state, isLoading: false };
-    case actionTypes.CHECKOUT_SET_FETCHING_ERROR:
+    case checkoutActionTypes.CHECKOUT_SET_FETCHING_ERROR:
       return {
         ...state,
         isLoading: false,
         error: action.payload,
       };
 
-    case actionTypes.CHECKOUT_FILL:
+    case checkoutActionTypes.CHECKOUT_FILL:
       return {
         ...state,
         isLoading: false,
         order: action.payload,
       };
-    case actionTypes.CHECKOUT_SET_ACCEPT:
+    case checkoutActionTypes.CHECKOUT_SET_ACCEPT:
       return {
         ...state,
         error: null,
