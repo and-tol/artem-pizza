@@ -47,6 +47,7 @@ yarn-error.log*
 /admin/npm-debug.log*
 /admin/yarn-debug.log*
 /admin/yarn-error.log*
+admin/.eslintcache
 
 /client/npm-debug.log*
 /client/yarn-debug.log*
@@ -54,4 +55,7 @@ yarn-error.log*
 
 /client/temp
 /client/bug
-
+/client/.eslintcache
+client/.eslintcache
+.gitignore
+admin/.gitignore
