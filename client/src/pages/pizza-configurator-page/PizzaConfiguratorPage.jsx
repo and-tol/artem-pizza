@@ -5,9 +5,9 @@ import { OrderPreview } from '../../share/components/OrderPreview';
 // Components
 import { PizzaForm } from './components/PizzaForm';
 // ReduxActions
-import { ingredientsActions } from './state-ingredients/ingredientsActions';
+import * as ingredientsActions from './state-ingredients/ingredientsActions';
 import { getIngredients } from './state-ingredients/ingredientsSelectors';
-import { pizzaConfiguratorActions } from './state-pizza/pizzaActions';
+import * as pizzaActions from './state-pizza/pizzaActions';
 // Selectors
 import { getPizza } from './state-pizza/pizzaSelectors';
 
@@ -19,7 +19,6 @@ export const PizzaConfiguratorPage = () => {
   const ingredients = useSelector(getIngredients);
 
   useEffect(() => {
-    dispatch(pizzaConfiguratorActions.startPizza());
     dispatch(ingredientsActions.fetchIngredientsAsync());
   }, [dispatch]);
 
@@ -27,8 +26,8 @@ export const PizzaConfiguratorPage = () => {
    * Component add pizza to store and go to OrderPreview Page
    * @param pizza created pizza comfiguration
    */
-  const onPizzaChange = (pizza) => {
-    dispatch(pizzaConfiguratorActions.fillPizza(pizza));
+  const onPizzaChange = pizza => {
+    dispatch(pizzaActions.fillPizza(pizza));
     history.push('/order-preview');
   };
 

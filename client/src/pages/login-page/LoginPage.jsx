@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Selectors
 import { getStatus } from './state/loginSelectors';
 // Actions
-import { loginActions } from './state/loginActions';
+import * as loginActions from './state/loginActions';
 
 const schema = yup.object().shape({
   email: yup.string().email('Неверный адрес электронной почты'),

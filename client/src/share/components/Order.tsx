@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // Types
 import { IOrder } from '../../types';
 // Actions
-import { ingredientsActions } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsActions';
+import * as ingredientsActions from '../../pages/pizza-configurator-page/state-ingredients/ingredientsActions';
 // Selectors
 import { getIngredients } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Components

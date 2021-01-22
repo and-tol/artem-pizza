@@ -1,4 +1,4 @@
-import { pizzaActionTypes } from './pizzaActionTypes';
+import { pizzaActionTypes } from './pizzaActionsTypes';
 import { pizzaReducer } from './pizzaReducer';
 
 import { mockDefaultPizza as mockInitialState } from '../../../testUtils/mockDefaultPizza';

@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
-import { loginActions } from '../login-page/state/loginActions';
 // Actions
+import * as loginActions from '../login-page/state/loginActions';
 import { signupActions } from './state/actions';
 // Selectors
 import { getStatus } from './state/selectors';

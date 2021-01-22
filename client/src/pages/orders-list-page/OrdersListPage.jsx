@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Actions
-import { ordersListActions } from './state/ordersListActions';
-import { ingredientsActions } from '../pizza-configurator-page/state-ingredients/ingredientsActions';
+import * as ordersListActions from './state/ordersListActions';
+import * as ingredientsActions from '../pizza-configurator-page/state-ingredients/ingredientsActions';
 // Selectors
 import { getOrders, getLoadingStatus } from './state/ordersListselectors';
 // Components
@@ -21,7 +21,7 @@ export const OrdersListPage = () => {
 
   return (
     <>
-      <h1 data-testid="orders">Заказы</h1>
+      <h1 data-testid='orders'>Заказы</h1>
       {isLoading && <p>Загрузка данных...</p>}
       {previousOrders.length ? (
         previousOrders.map(order => <Order key={order.id} order={order} />)

@@ -14,11 +14,7 @@ const initialState = {
 };
 
 export const pizzaReducer = createReducer(initialState, builder => {
-  builder
-    .addCase(pizzaActionsTypes.PIZZA_START_CONFIGURATION, (state, action) => {
-      state.pizza = action.payload;
-    })
-    .addCase(pizzaActionsTypes.PIZZA_FILL, (state, action) => {
-      state.pizza = action.payload;
-    });
+  builder.addCase(pizzaActionsTypes.PIZZA_FILL, (state, action) => {
+    state.pizza = action.payload;
+  });
 });
