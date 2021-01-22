@@ -18,11 +18,11 @@ export const OrderPreviewPage = () => {
    */
   const linkStyle =
     !size || !dough || !sauce
-      ? ({
+      ? {
           cursor: 'not-allowed',
           opacity: '0.5',
           'pointer-events': 'none',
-        } as React.CSSProperties)
+        }
       : undefined;
 
   if (pizza) {

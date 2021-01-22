@@ -3,14 +3,13 @@ import { render } from '@testing-library/react';
 import { MemoryRouter, Router } from 'react-router-dom';
 import { OrderPreviewPage } from './OrderPreviewPage';
 import { createMemoryHistory } from 'history';
-// Types
-import { OrderPreviewProps } from '../../share/components/OrderPreview';
+
 
 import { store } from '../../init/store';
 import { Provider } from 'react-redux';
 
 jest.mock('../../share/components/OrderPreview', () => ({
-  OrderPreview: ({ pizza }: OrderPreviewProps) => {
+  OrderPreview: ({ pizza }) => {
     return <div>{pizza.sauce}</div>;
   },
 }));
@@ -27,7 +26,7 @@ describe('OrderPreviewPage', () => {
 
     expect(getByText('Ленивая Маргарита')).toBeInTheDocument();
   });
-  
+
   it("if pizza=undefined redirect  to '/'", () => {
     const history = createMemoryHistory();
 

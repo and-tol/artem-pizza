@@ -1,6 +1,6 @@
-import { mockDefaultPizza as mockPizza } from '../../../__mock__/defaulPizza';
-import { actionTypes } from './actionTypes';
-import { ordersListActions } from './actions';
+import { mockDefaultPizza as mockPizza } from '../../../testUtils/mockDefaultPizza';
+import { ordersListActionTypes } from './orderListActionTypes';
+import { ordersListActions } from './ordersListActions';
 
 const mockOrders = [
   {
@@ -20,7 +20,7 @@ const mockOrders = [
 describe('actions', () => {
   it('create an action that fills data of orders to store', () => {
     const expectedAction = {
-      type: actionTypes.ORDERS_FILL,
+      type: ordersListActionTypes.ORDERS_FILL,
       payload: mockOrders,
     };
 
@@ -45,9 +45,9 @@ describe('thunk fetchOrdersAsync', () => {
 
   it.skip('fetches orders and dispatches ORDERS_FILL action with its data', async () => {
     const expectedActions = [
-      { type: actionTypes.ORDERS_START_FETCHING },
-      { type: actionTypes.ORDERS_FILL, orders: mockOrders },
-      { type: actionTypes.ORDERS_STOP_FETCHING },
+      // { type: ordersListActionTypes.ORDERS_START_FETCHING },
+      { type: ordersListActionTypes.ORDERS_FILL, orders: mockOrders },
+      { type: ordersListActionTypes.ORDERS_STOP_FETCHING },
     ];
 
     await ordersListActions.fetchOrdersAsync()(dispatch);
@@ -55,7 +55,7 @@ describe('thunk fetchOrdersAsync', () => {
     expect(dispatch).toBeCalledWith(expectedActions);
 
     expect(dispatch).toHaveBeenNthCalledWith(2, {
-      type: actionTypes.ORDERS_FETCH_ASYNC,
+      type: ordersListActionTypes.ORDERS_FETCH_ASYNC,
       orders: mockOrders,
     });
   });

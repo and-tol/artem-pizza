@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Actions
-import { ordersListActions } from './state/actions';
+import { ordersListActions } from './state/ordersListActions';
 import { ingredientsActions } from '../pizza-configurator-page/state-ingredients/actions';
 // Selectors
-import { getOrders, getLoadingStatus } from './state/selectors';
+import { getOrders, getLoadingStatus } from './state/ordersListselectors';
 // Components
 import { Order } from '../../share/components';
 

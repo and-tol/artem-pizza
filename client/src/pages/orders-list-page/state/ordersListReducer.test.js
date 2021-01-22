@@ -1,7 +1,7 @@
-import { actionTypes } from './actionTypes';
-import { ordersListReducer } from './reducer';
-import { mockDefaultPizza as mockPizza } from '../../../__mock__/defaulPizza';
-import { mockOrder } from './../../../__mock__/order';
+import { ordersListActionTypes } from './ordersListActionTypes';
+import { ordersListReducer } from './ordersListReducer';
+import { mockDefaultPizza as mockPizza } from '../../../testUtils/mockDefaultPizza';
+import { mockOrder } from './../../../testUtils/mockOrder';
 
 const initialState = {
   orders: [],
@@ -14,7 +14,7 @@ describe('ordersListReducer', () => {
     const mockOrders = [mockOrder];
 
     const action = {
-      type: actionTypes.ORDERS_FILL,
+      type: ordersListActionTypes.ORDERS_FILL,
       payload: mockOrders,
       error: null,
     };
