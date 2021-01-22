@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { CheckboxGroup } from './CheckboxGroup';
 
@@ -12,7 +12,6 @@ describe('CheckboxGroup', () => {
         register={register}
         name='test2'
         options={{
-          // FIXME: bacon: { name: 'test1', price: 1 }
           bacon: { name: 'test1', price: 1 },
         }}
       />

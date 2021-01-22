@@ -1,13 +1,13 @@
-import { actionTypes } from './actionTypes';
-import { mockIngredient } from './../../../__mock__/ingredient';
-import { ingredientsActions } from './actions';
+import { ingredientsActionTypes } from './ingredientsActionTypes';
+import { mockIngredient } from '../../../testUtils/mockIngredient';
+import { ingredientsActions } from './ingredientsActions';
 
 const mockIngredients = [mockIngredient];
 
 describe('actions', () => {
   it('create an action that fills data of ingredients to store', () => {
     const expectedAction = {
-      type: actionTypes.INGREDIENTS_FILL,
+      type: ingredientsActionTypes.INGREDIENTS_FILL,
       payload: mockIngredients,
     };
 
@@ -33,18 +33,11 @@ describe('thunk actions', () => {
       });
 
       const dispatch = jest.fn();
-      const expectedAction = [
-        { type: actionTypes.INGREDIENTS_START_FETCHING },
-        { type: actionTypes.INGREDIENTS_FILL, ingredients: [mockIngredient] },
-        { type: actionTypes.INGREDIENTS_STOP_FETCHING },
-      ];
 
       await ingredientsActions.fetchIngredientsAsync()(dispatch);
 
-      expect(dispatch).toBeCalledWith(expectedAction);
-
       expect(dispatch).toHaveBeenNthCalledWith(2, {
-        type: actionTypes.INGREDIENTS_FETCH_ASYNC,
+        type: ingredientsActionTypes.INGREDIENTS_FETCH_ASYNC,
         ingredints: mockIngredients,
       });
     });

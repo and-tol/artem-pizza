@@ -1,10 +1,10 @@
-import { actionTypes } from './actionTypes';
-import { pizzaConfiguratorActions } from './actions';
+import { pizzaActionsTypes } from './pizzaActionsTypes';
+import { pizzaConfiguratorActions } from './pizzaActions';
 
 describe('actions', () => {
   it('create startPizza action that fills data of pizza with default ingredients', () => {
     const expectedAction = {
-      type: actionTypes.PIZZA_CONFIGURATOR_START_CONFIGURATION,
+      type: pizzaActionsTypes.PIZZA_START_CONFIGURATION,
     };
 
     expect(pizzaConfiguratorActions.startPizza()).toEqual(expectedAction);
@@ -20,7 +20,7 @@ describe('actions', () => {
     };
 
     const expectedAction = {
-      type: actionTypes.PIZZA_CONFIGURATOR_FILL,
+      type: pizzaActionsTypes.PIZZA_CONFIGURATOR_FILL,
       payload: mockPizza,
       error: 'test_error',
     };

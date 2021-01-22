@@ -1,5 +1,8 @@
-import { state as mockState } from '../../../__mock__/state';
-import { getIngredients, getIngredientsByCategory } from './selectors';
+import { mockState } from '../../../testUtils/mockState';
+import {
+  getIngredients,
+  getIngredientsByCategory,
+} from './ingredientsSelectors';
 
 describe('.getIngredients', () => {
   it('return data of ingredients from store', () => {

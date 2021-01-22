@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 // Selectors
-import { getIngredientsByCategory } from '../../pages/pizza-configurator-page/state-ingredients/selectors';
+import { getIngredientsByCategory } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Types
 import { Ingredient, PizzaConfiguration } from '../../types';
 // Helpers

@@ -31,3 +31,4 @@ admin/.gitignore
 
 .eslintcache
 .gitignore
+../.gitignore

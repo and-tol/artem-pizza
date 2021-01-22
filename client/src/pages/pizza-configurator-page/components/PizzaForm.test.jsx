@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import {  render } from '@testing-library/react';
 import { PizzaForm } from './PizzaForm';
 import { Provider } from 'react-redux';
 import { store } from '../../../init/store';

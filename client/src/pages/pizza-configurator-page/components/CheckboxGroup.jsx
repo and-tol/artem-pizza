@@ -1,19 +1,4 @@
-import { FC } from 'react';
-import { Ingredient, refType } from '../../../types';
-
-interface CheckboxGroupProps {
-  register: refType;
-  legend: string;
-  name: string;
-  options: Ingredient[] | [];
-}
-
-export const CheckboxGroup: FC<CheckboxGroupProps> = ({
-  register,
-  legend,
-  options,
-  name,
-}) => {
+export const CheckboxGroup = ({ register, legend, options, name }) => {
   return (
     <fieldset>
       <legend>{legend}</legend>

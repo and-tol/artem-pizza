@@ -2,8 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 // Selectors
-import { getPizza } from '../pizza-configurator-page/state-pizza/selectors';
-import { getIngredients } from '../pizza-configurator-page/state-ingredients/selectors';
+import { getPizza } from '../pizza-configurator-page/state-pizza/pizzaSelectors';
+import { getIngredients } from '../pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Components
 import { OrderPreview } from '../../share/components/OrderPreview';
 

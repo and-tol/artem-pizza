@@ -1,14 +1,4 @@
-import { FC } from 'react';
-import { refType, Ingredient } from '../../../types';
-
-interface RadioButtonsProps {
-  register: refType;
-  legend: string;
-  name: string;
-  options: Ingredient[] | [];
-}
-
-export const RadioGroup: FC<RadioButtonsProps> = props => {
+export const RadioGroup = props => {
   const { register, legend, name, options } = props;
 
   return (

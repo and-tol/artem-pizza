@@ -28,7 +28,6 @@ export const checkoutReducer = createReducer(initialState, builder => {
         state.error = action.payload;
       }
     )
-
     .addCase(checkoutActionTypes.CHECKOUT_FILL, (state, action) => {
       state.isLoading = false;
       state.order = action.payload;

@@ -8,10 +8,10 @@ import { Provider } from 'react-redux';
 import { PizzaConfiguratorPage } from './PizzaConfiguratorPage';
 // Types
 import { PizzaFormProps } from './components/PizzaForm';
-import { PizzaConfiguration } from '../../types';
+
 import { OrderPreviewProps } from '../../share/components/OrderPreview';
 
-const pizza: PizzaConfiguration = {
+const pizza = {
   size: 'test1',
   dough: 'test2',
   sauce: 'test3',

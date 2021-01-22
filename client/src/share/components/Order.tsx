@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 // Types
 import { IOrder } from '../../types';
 // Actions
-import { ingredientsActions } from '../../pages/pizza-configurator-page/state-ingredients/actions';
+import { ingredientsActions } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsActions';
 // Selectors
-import { getIngredients } from '../../pages/pizza-configurator-page/state-ingredients/selectors';
+import { getIngredients } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Components
 import { OrderPreview } from './OrderPreview';
 // Icons

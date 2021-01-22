@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Actions
 import { ordersListActions } from './state/ordersListActions';
-import { ingredientsActions } from '../pizza-configurator-page/state-ingredients/actions';
+import { ingredientsActions } from '../pizza-configurator-page/state-ingredients/ingredientsActions';
 // Selectors
 import { getOrders, getLoadingStatus } from './state/ordersListselectors';
 // Components

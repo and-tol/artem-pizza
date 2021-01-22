@@ -1,16 +1,7 @@
-import { actionTypes } from '../state-pizza/actionTypes';
-import { pizzaConfiguratorReducer } from './reducer';
+import { pizzaActionTypes } from './pizzaActionTypes';
+import { pizzaReducer } from './pizzaReducer';
 
-const initialState = {
-  pizza: {
-    size: '30',
-    dough: 'thin',
-    sauce: 'tomato-sauce',
-    cheese: [],
-    vegetables: [],
-    meat: [],
-  },
-};
+import { mockDefaultPizza as mockInitialState } from '../../../testUtils/mockDefaultPizza';
 
 describe('pizzaReducer', () => {
   it.todo("fill data of pizza's configuration into state", () => {
@@ -24,12 +15,12 @@ describe('pizzaReducer', () => {
     };
 
     const action = {
-      type: actionTypes.PIZZA_CONFIGURATOR_FILL,
+      type: pizzaActionTypes.PIZZA_FILL,
       payload: mockPizza,
       error: null,
     };
 
-    expect(pizzaConfiguratorReducer(initialState, action)).toEqual({
+    expect(pizzaReducer(mockInitialState, action)).toEqual({
       pizza: {
         size: 'test_size',
         dough: 'test_dough',

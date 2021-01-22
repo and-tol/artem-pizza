@@ -1,6 +1,6 @@
-import { actionTypes } from './actionTypes';
-import { ingredientsReducer } from './reducer';
-import { mockIngredient } from '../../../__mock__/ingredient';
+import { ingredientsActionTypes } from './ingredientsActionTypes';
+import { ingredientsReducer } from './ingredientsReducer';
+import { mockIngredient } from '../../../testUtils/mockIngredient';
 
 const initialState = {
   ingredients: [mockIngredient],
@@ -13,7 +13,7 @@ describe('ingredientsReducer', () => {
     const mockIngredients = [mockIngredient];
 
     const action = {
-      type: actionTypes.INGREDIENTS_FILL,
+      type: ingredientsActionTypes.INGREDIENTS_FILL,
       payload: mockIngredients,
       error: null,
     };

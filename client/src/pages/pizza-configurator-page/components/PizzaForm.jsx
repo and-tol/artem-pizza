@@ -6,22 +6,17 @@ import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 import {
   getIngredients,
   getIngredientsByCategory,
-} from '../state-ingredients/selectors';
-import { getPizza } from '../state-pizza/selectors';
-// Types
-import { PizzaConfiguration } from '../../../types';
+} from '../state-ingredients/ingredientsSelectors';
+import { getPizza } from '../state-pizza/pizzaSelectors';
+
 // Components
 import { CheckboxGroup } from './CheckboxGroup';
 import { RadioGroup } from './RadioGroup';
 
-export interface PizzaFormProps {
-  onPizzaCreated?: (pizza: PizzaConfiguration) => void;
-}
-
-export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
+export const PizzaForm = ({ onPizzaCreated }) => {
   const pizza = useSelector(getPizza);
 
-  const { register, handleSubmit, watch } = useForm<PizzaConfiguration>({
+  const { register, handleSubmit, watch } = useForm({
     defaultValues: pizza,
   });
 
@@ -36,9 +31,9 @@ export const PizzaForm = ({ onPizzaCreated }: PizzaFormProps) => {
 
   const values = watch();
 
-  const totalPrice: number = calculateTotalPrice(ingredients, values);
+  const totalPrice = calculateTotalPrice(ingredients, values);
 
-  const onSubmit = handleSubmit((values: PizzaConfiguration) => {
+  const onSubmit = handleSubmit(values => {
     if (onPizzaCreated) {
       onPizzaCreated(values);
     }
