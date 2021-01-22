@@ -1,6 +1,6 @@
-import { signupReducer } from './reducer';
-import { mockLogin } from '../../../__mock__/login';
-import { actionTypes } from './actionTypes';
+import { signupReducer } from './signupReducer';
+import { mockLogin } from '../../../testUtils/mockLogin';
+import { signupActionTypes } from './signupActionTypes';
 
 const initialState = {
   error: null,
@@ -12,7 +12,7 @@ const initialState = {
 describe('signupReducer', () => {
   it('fill data of user into state', () => {
     const action = {
-      type: actionTypes.SIGNUP_FILL,
+      type: signupActionTypes.SIGNUP_FILL,
       payload: mockLogin,
       error: null,
     };
@@ -30,7 +30,7 @@ describe('signupReducer', () => {
 
   it("set status registration of user", () => {
     const action = {
-      type: actionTypes.SIGNUP_SET_STATUS,
+      type: signupActionTypes.SIGNUP_SET_STATUS,
       payload: true,
       error: null,
     }

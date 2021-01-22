@@ -13,7 +13,7 @@ import { fakeOrder } from '../../pizzaData';
 
 /**
  * Страница подтверждения заказа
- * Order confirmation page
+ * Component Order confirmation page
  */
 export const ReceiptPage = () => {
   const history = useHistory();
@@ -22,20 +22,6 @@ export const ReceiptPage = () => {
   const tryOrderAgain = () => {
     history.push('/checkout');
   };
-  /**
-   * Пользователь перенаправляется на главную страницу
-   */
-  // useEffect(() => {
-  //   let id: NodeJS.Timeout;
-  //   if (isAccepted) {
-  //     id = setTimeout(() => {
-  //       history.push('/');
-  //     }, 3500);
-  //   }
-  //   return () => {
-  //     clearTimeout(id);
-  //   };
-  // });
 
   return (
     <>

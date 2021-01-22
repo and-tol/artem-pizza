@@ -6,7 +6,7 @@ import { loginReducer as login } from '../pages/login-page/state/loginReducer';
 import { ordersListReducer as orders } from '../pages/orders-list-page/state/ordersListReducer';
 import { ingredientsReducer as ingredients } from '../pages/pizza-configurator-page/state-ingredients/ingredientsReducer';
 import { pizzaReducer as pizza } from '../pages/pizza-configurator-page/state-pizza/pizzaReducer';
-import { signupReducer as signup } from '../pages/signup-page/state/reducer';
+import { signupReducer as signup } from '../pages/signup-page/state/signupReducer';
 
 // Store
 export const store = configureStore({

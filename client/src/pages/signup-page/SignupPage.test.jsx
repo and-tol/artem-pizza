@@ -68,7 +68,7 @@ describe('SignupPage', () => {
   describe('with invalid password', () => {
     describe('with invalid password', () => {
       it('renders password validation errors', async () => {
-        const { getByRole, getByLabelText, getByText, container } = render(
+        const { getByRole, getByLabelText, getByText } = render(
           <Provider store={store}>
             <MemoryRouter>
               <SignupPage />

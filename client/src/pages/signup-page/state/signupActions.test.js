@@ -1,11 +1,11 @@
-import { actionTypes } from './actionTypes';
-import { signupActions } from './actions';
-import { mockLogin as mockSignup } from '../../../__mock__/login';
+import { signupActionTypes } from './signupActionTypes';
+import * as signupActions from './signupActions';
+import { mockLogin as mockSignup } from '../../../testUtils/mockLogin';
 
 describe('actions', () => {
   it('create an action that fill data of user to store', () => {
     const expectedAction = {
-      type: actionTypes.SIGNUP_FILL,
+      type: signupActionTypes.SIGNUP_FILL,
       payload: mockSignup,
     };
 
@@ -30,12 +30,11 @@ describe('thunk actions', () => {
 
       const dispatch = jest.fn();
       const expectedAction = [
-        { type: actionTypes.SIGNUP_START_FETCHING },
         {
-          type: actionTypes.SIGNUP_SET_STATUS,
+          type: signupActionTypes.SIGNUP_SET_STATUS,
           isRegistered: true,
         },
-        { type: actionTypes.SIGNUP_STOP_FETCHING },
+        { type: signupActionTypes.SIGNUP_STOP_FETCHING },
       ];
 
       await signupActions.userRegistationAsync(mockSignup)(dispatch);

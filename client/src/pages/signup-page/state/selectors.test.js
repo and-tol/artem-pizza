@@ -1,5 +1,5 @@
-import { getStatus } from './selectors';
-import { state as mockState } from '../../../__mock__/state';
+import { getStatus } from './signupSelectors';
+import { mockState } from '../../../testUtils/mockState';
 
 describe('.getStatus', () => {
   it('retern status of user registration', () => {

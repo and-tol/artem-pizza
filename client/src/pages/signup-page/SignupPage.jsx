@@ -6,14 +6,9 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 // Actions
 import * as loginActions from '../login-page/state/loginActions';
-import { signupActions } from './state/actions';
+import { signupActions } from './state/signupActions';
 // Selectors
-import { getStatus } from './state/selectors';
-
-type FormValues = {
-  email: string;
-  password: string;
-};
+import { getStatus } from './state/signupSelectors';
 
 const schema = yup.object().shape({
   email: yup.string().email('Неверный адрес электронной почты'),
@@ -23,13 +18,13 @@ const schema = yup.object().shape({
 });
 
 /**
- * User registration page
+ * Component User registration page
  * Страница регистрации пользователя
  */
 export const SignupPage = () => {
   const dispatch = useDispatch();
 
-  const { register, watch, errors, handleSubmit } = useForm<FormValues>({
+  const { register, watch, errors, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
   const [isDisabled, setIsDisabled] = useState(true);
