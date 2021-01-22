@@ -25,7 +25,9 @@ yarn-error.log*
 /temp
 /source
 
-../admin/temp/
-..admin/.eslintcache
+admin/temp/
+admin/.eslintcache
+admin/.gitignore
 
 .eslintcache
+.gitignore
