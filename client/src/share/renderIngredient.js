@@ -1,14 +1,12 @@
-import { Ingredient } from '../types';
-
 /**
  * Function render selected ingredients
  * @param selectedIngredients - selected ingredient
  * @param availableIngredients - possible ingredients
  */
 export const renderIngredients = (
-  selectedIngredients: string[] | string,
-  availableIngredients: Ingredient[]
-): string | undefined => {
+  selectedIngredients,
+  availableIngredients
+) => {
   if (
     selectedIngredients &&
     typeof selectedIngredients === 'string' &&

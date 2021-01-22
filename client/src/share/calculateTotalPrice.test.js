@@ -1,5 +1,3 @@
-// Types
-import { PizzaConfiguration } from '../types';
 import { calculateTotalPrice } from './calculateTotalPrice';
 
 const ingredients = [
@@ -43,7 +41,7 @@ const ingredients = [
 
 describe('calculateTotalPrice', () => {
   it('returns the sum wwithout ingredients with size 30cm', () => {
-    const pizza: PizzaConfiguration = {
+    const pizza = {
       size: '30',
       dough: 'thin',
       sauce: 'tomato',
@@ -55,7 +53,7 @@ describe('calculateTotalPrice', () => {
     expect(calculateTotalPrice(ingredients, pizza)).toEqual(200);
   });
   it('returns the sum when all possible ingredients are selected with size 35cm', () => {
-    const pizza: PizzaConfiguration = {
+    const pizza = {
       size: '35',
       dough: 'thin',
       sauce: 'tomato',

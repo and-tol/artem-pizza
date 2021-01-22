@@ -1,7 +1,6 @@
-import { RootState } from '../init/rootReducer';
 import { mockDefaultPizza } from './mockDefaultPizza';
 
-export const mockState: RootState = {
+export const mockState = {
   pizza: {
     pizza: mockDefaultPizza,
   },

@@ -7,22 +7,19 @@ import { Ingredient, PizzaConfiguration } from '../../types';
 // Helpers
 import { renderIngredients } from '../renderIngredient';
 
-export interface OrderPreviewProps {
-  pizza: PizzaConfiguration;
-  ingredients: Ingredient[] | [];
-}
 
-export const OrderPreview: React.FC<OrderPreviewProps> = ({
+
+export const OrderPreview = ({
   pizza,
   ingredients,
 }) => {
   const { size, dough, sauce, cheese, vegetables, meat } = pizza;
 
-  const CHEESE: Ingredient[] = useSelector(getIngredientsByCategory('cheese'));
-  const VEGETABLES: Ingredient[] = useSelector(
+  const CHEESE = useSelector(getIngredientsByCategory('cheese'));
+  const VEGETABLES = useSelector(
     getIngredientsByCategory('vegetables')
   );
-  const MEAT: Ingredient[] = useSelector(getIngredientsByCategory('meat'));
+  const MEAT = useSelector(getIngredientsByCategory('meat'));
 
   return (
     <section>

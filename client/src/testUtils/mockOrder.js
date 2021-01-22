@@ -1,7 +1,6 @@
-import { IOrder } from '../types';
 import { mockDefaultPizza } from './mockDefaultPizza';
 
-export const mockOrder: IOrder = {
+export const mockOrder = {
   pizza: mockDefaultPizza,
   address: 'test_address',
   cardName: 'test_name',

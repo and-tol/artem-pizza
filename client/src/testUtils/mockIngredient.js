@@ -1,6 +1,4 @@
-import { Ingredient } from '../types';
-
-export const mockIngredient: Ingredient = {
+export const mockIngredient = {
   id: 'test_id',
   name: 'test_name',
   slug: 'test_slug',

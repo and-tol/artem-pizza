@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import { PizzaProvider } from './PizzaContext';
+// import { PizzaProvider } from './PizzaContext';
 import App from './App';
 import './index.css';
 
@@ -12,11 +12,11 @@ import { store } from './init/store';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PizzaProvider>
+      {/* <PizzaProvider> */}
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </PizzaProvider>
+      {/* </PizzaProvider> */}
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

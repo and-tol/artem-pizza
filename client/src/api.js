@@ -1,4 +1,3 @@
-import { IOrder } from './types';
 
 export const root = 'http://localhost:4000';
 
@@ -10,7 +9,7 @@ export const api = Object.freeze({
   },
 
   orders: {
-    createOrder: (data: IOrder) => {
+    createOrder: (data) => {
       return fetch(`${root}/orders`, {
         method: 'POST',
         headers: {
@@ -27,7 +26,7 @@ export const api = Object.freeze({
   },
 
   users: {
-    create: (data: any) => {
+    create: (data) => {
       return fetch(`${root}/users`, {
         method: 'POST',
         headers: {
@@ -36,7 +35,7 @@ export const api = Object.freeze({
         body: JSON.stringify(data),
       });
     },
-    login: (credentials: any) => {
+    login: (credentials) => {
       return fetch(`${root}/login`, {
         method: 'POST',
         headers: {

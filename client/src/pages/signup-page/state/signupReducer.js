@@ -17,7 +17,6 @@ export const signupReducer = createReducer(initialState, builder => {
       state.isLoading = false;
       state.error = 'fetching error';
     })
-    .addCase()
     .addCase(signupActionTypes.SIGNUP_STOP_FETCHING, state => {
       state.isLoading = false;
     })

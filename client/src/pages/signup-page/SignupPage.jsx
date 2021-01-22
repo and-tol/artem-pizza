@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 // Actions
 import * as loginActions from '../login-page/state/loginActions';
-import { signupActions } from './state/signupActions';
+import * as signupActions from './state/signupActions';
 // Selectors
 import { getStatus } from './state/signupSelectors';
 
@@ -51,29 +51,31 @@ export const SignupPage = () => {
     <>
       <h1>Страница регистрации</h1>
       {isRegistered && <p>Регистрация прошла успешно</p>}
-      {!isRegistered && <form onSubmit={onSubmit}>
-        <fieldset>
-          <label htmlFor='email'>
-            Э-почта
-            <input ref={register} id='email' type='text' name='email' />
-            <div>{errors.email?.message}</div>
-          </label>
-          <label htmlFor='password'>
-            Пароль
-            <input
-              ref={register}
-              id='password'
-              type='password'
-              name='password'
-            />
-            <div>{errors.password?.message}</div>
-          </label>
-        </fieldset>
-        <button type='submit' disabled={isDisabled}>
-          Зарегистрироваться
-        </button>
-      </form>}
-        <Link to='/login'>На страницу Входа в приложение (Логина) </Link>
+      {!isRegistered && (
+        <form onSubmit={onSubmit}>
+          <fieldset>
+            <label htmlFor='email'>
+              Э-почта
+              <input ref={register} id='email' type='text' name='email' />
+              <div>{errors.email?.message}</div>
+            </label>
+            <label htmlFor='password'>
+              Пароль
+              <input
+                ref={register}
+                id='password'
+                type='password'
+                name='password'
+              />
+              <div>{errors.password?.message}</div>
+            </label>
+          </fieldset>
+          <button type='submit' disabled={isDisabled}>
+            Зарегистрироваться
+          </button>
+        </form>
+      )}
+      <Link to='/login'>На страницу Входа в приложение (Логина) </Link>
     </>
   );
 };

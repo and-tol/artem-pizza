@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// Types
-import { IOrder } from '../../types';
+
 // Actions
 import * as ingredientsActions from '../../pages/pizza-configurator-page/state-ingredients/ingredientsActions';
 // Selectors
@@ -11,11 +10,9 @@ import { OrderPreview } from './OrderPreview';
 // Icons
 import { ReactComponent as IconDelivery } from '../../asserts/icons/icn_delivery.svg';
 
-type OrderProps = {
-  order: IOrder;
-};
 
-export const Order: React.FC<OrderProps> = ({ order }) => {
+
+export const Order = ({ order }) => {
   const { cardNumber, pizza } = { ...order };
   const dispatch = useDispatch();
 
