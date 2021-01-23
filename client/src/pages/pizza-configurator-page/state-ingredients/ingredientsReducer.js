@@ -84,4 +84,20 @@ export const ingredientsReducer = createSlice({
       state.error = null;
     },
   },
+  extraReducers: {
+    [fetchIngredientsAsync.fulfilled]: (state, action) => {
+      state.ingredients = action.payload;
+      state.isLoading = false;
+      state.error = null;
+    },
+    [fetchIngredientsAsync.rejected]: state => {
+      state.isLoading = false;
+      state.error = {
+        status: 'fetching error',
+      };
+    },
+    [fetchIngredientsAsync.pending]: state => {
+      state.isLoading = true;
+    }
+  },
 });
