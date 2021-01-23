@@ -1,6 +1,6 @@
-import { createReducer } from '@reduxjs/toolkit';
-// ActionTypes
-import { loginActionTypes } from './loginActionTypes';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+// Api
+import { api } from '../../../api';
 
 const initialState = {
   login: { password: '', email: '' },
@@ -9,30 +9,64 @@ const initialState = {
   error: null,
 };
 
-export const loginReducer = createReducer(initialState, builder => {
-  builder
-    .addCase('login/checkUserAsync/pending', state => {
+export const checkUserAsync = createAsyncThunk(
+  'login/loginFetchAsync',
+  async (credentials, thunkAPI) => {
+    thunkAPI.dispatch(loginReducer.actions.startFetching);
+    const response = await api.users.login(credentials);
+    if (response.status === 200) {
+      const results = await response.json();
+
+      thunkAPI.dispatch(loginReducer.setUserStatus(results));
+    } else {
+      const error = {
+        status: response.status,
+      };
+      thunkAPI.dispatch(loginReducer.setFetchingError(error));
+    }
+    thunkAPI.dispatch(loginReducer.stopFetching());
+  }
+);
+
+export const loginReducer = createSlice({
+  name: 'login',
+  initialState,
+  reducers: {
+    startFetching: state => {
       state.isLoading = true;
-    })
-    .addCase('login/checkUserAsync/rejected', state => {
-      state.isLoading = false;
-      state.error = 'fetching error';
-    })
-    .addCase(loginActionTypes.LOGIN_STOP_FETCHING, state => {
-      state.isLoading = false;
-    })
-    .addCase(loginActionTypes.LOGIN_SET_FETCHING_ERROR, (state, action) => {
+    },
+    stopFetching: state => {
+      state.isLoading = true;
+    },
+    setFetchingError: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-    })
-    .addCase(loginActionTypes.LOGIN_FILL, (state, action) => {
+    },
+    fillUserData: (state, action) => {
       state.login = action.payload;
       state.isLoading = false;
       state.error = null;
-    })
-    .addCase(loginActionTypes.LOGIN_SET_STATUS, (state, action) => {
+    },
+    setUserStatus: (state, action) => {
       state.isRegistered = action.payload;
       state.isLoading = false;
       state.error = null;
-    });
+    },
+  },
+  extraReducers: {
+    [checkUserAsync.fulfilled]: (state, action) => {
+      state.login = action.payload;
+      state.isLoading = false;
+      state.error = null;
+    },
+    [checkUserAsync.rejected]: state => {
+      state.isLoading = false;
+      state.error = {
+        status: 'fetching error',
+      };
+    },
+    [checkUserAsync.pending]: state => {
+      state.isLoading = true;
+    },
+  },
 });

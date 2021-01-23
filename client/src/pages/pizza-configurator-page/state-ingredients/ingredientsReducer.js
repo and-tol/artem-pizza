@@ -1,7 +1,6 @@
-import { createReducer } from '@reduxjs/toolkit';
-
-// Action Types
-import { ingredientsActionTypes } from './ingredientsActionTypes';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+// Api
+import { api } from '../../../api';
 
 const initialState = {
   ingredients: [
@@ -37,20 +36,52 @@ const initialState = {
   isLoading: false,
 };
 
-export const ingredientsReducer = createReducer(initialState, builder => {
-  builder
-    .addCase('ingredients/fetchIngredientsAsync/pending', state => {
+export const fetchIngredientsAsync = createAsyncThunk(
+  'ingredients/ingredientsFetchAsync',
+  async (_, thunkAPI) => {
+    thunkAPI.dispatch(ingredientsReducer.actions.startFetching);
+    const response = await api.ingredients.availableIngredients();
+
+    if (response.status === 200) {
+      const results = await response.json();
+
+      const resultsWithCorrectTypes = results.map(item => ({
+        ...item,
+        price: Number(item.price),
+      }));
+
+      thunkAPI.dispatch(
+        ingredientsReducer.actions.fillIngredients(resultsWithCorrectTypes)
+      );
+    } else {
+      const error = {
+        status: response.status,
+      };
+      thunkAPI.dispatch(ingredientsReducer.actions.setFetchingError(error));
+    }
+
+    thunkAPI.dispatch(ingredientsReducer.actions.stopFetching());
+  }
+);
+
+export const ingredientsReducer = createSlice({
+  name: 'ingreddients',
+  initialState,
+  reducers: {
+    startFetching: state => {
       state.isLoading = true;
-    })
-    .addCase('ingredients/fetchIngredientsAsync/rejected', state => {
-      state.error = 'fetching error';
-    })
-    .addCase(ingredientsActionTypes.INGREDIENTS_STOP_FETCHING, state => {
+    },
+    stopFetching: state => {
+      state.isLoading = true;
+    },
+    setFetchingError: (state, action) => {
       state.isLoading = false;
-    })
-    .addCase(ingredientsActionTypes.INGREDIENTS_FILL, (state, action) => {
+      state.error = action.payload;
+    },
+    fillIngredients: (state, action) => {
       state.ingredients = action.payload;
       state.isLoading = false;
       state.error = null;
-    });
+    },
+  },
 });

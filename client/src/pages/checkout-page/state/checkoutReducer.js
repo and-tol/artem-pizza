@@ -1,6 +1,6 @@
-import { createReducer } from '@reduxjs/toolkit';
-// ActionTypes
-import { checkoutActionTypes } from './checkoutActionTypes';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+// Api
+import { api } from '../../../api';
 
 export const initialState = {
   order: null,
@@ -9,32 +9,63 @@ export const initialState = {
   isAccepted: true,
 };
 
-export const checkoutReducer = createReducer(initialState, builder => {
-  builder
-    .addCase('checkout/sendOrderAsync/pending', state => {
+export const sendOrderAsync = createAsyncThunk(
+  'checkout/sendOrderAsync',
+  async (data, thunkAPI) => {
+    thunkAPI.dispatch(checkoutReducer.actions.startFetching());
+    const response = await api.orders.createOrder(data);
+    if (response.status === 200) {
+      const { message } = await response.json();
+      thunkAPI.dispatch(checkoutReducer.actions.fillOrder(message));
+    } else {
+      const error = {
+        status: response.status,
+      };
+      thunkAPI.dispatch(checkoutReducer.actions.setFetchingError(error));
+    }
+    thunkAPI.dispatch(checkoutReducer.actions.stopFetching());
+  }
+);
+
+export const checkoutReducer = createSlice({
+  name: 'checkout',
+  initialState,
+  reducers: {
+    startFetching: state => {
       state.isLoading = true;
-    })
-    .addCase('checkout/sendOrderAsync/rejected', state => {
+    },
+    stopFetching: state => {
+      state.isLoading = true;
+    },
+    setFetchingError: (state, action) => {
       state.isLoading = false;
-      state.error = 'fetching error';
-    })
-    .addCase(checkoutActionTypes.CHECKOUT_STOP_FETCHING, state => {
-      state.isLoading = false;
-    })
-    .addCase(
-      checkoutActionTypes.CHECKOUT_SET_FETCHING_ERROR,
-      (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      }
-    )
-    .addCase(checkoutActionTypes.CHECKOUT_FILL, (state, action) => {
-      state.isLoading = false;
+      state.error = action.payload;
+    },
+    fillOrder: (state, action) => {
       state.order = action.payload;
-    })
-    .addCase(checkoutActionTypes.CHECKOUT_SET_ACCEPT, (state, action) => {
-      state.error = null;
       state.isLoading = false;
+      state.error = null;
+    },
+    setAccept: (state, action) => {
       state.isAccepted = action.payload;
-    });
+      state.isLoading = false;
+      state.error = null;
+    },
+  },
+  extraReducers: {
+    [sendOrderAsync.fulfilled]: (state, action) => {
+      state.order = action.payload;
+      state.isLoading = false;
+      state.error = null;
+    },
+    [sendOrderAsync.rejected]: state => {
+      state.isLoading = false;
+      state.error = {
+        status: 'fetching error',
+      };
+    },
+    [sendOrderAsync.pending]: state => {
+      state.isLoading = true;
+    },
+  },
 });

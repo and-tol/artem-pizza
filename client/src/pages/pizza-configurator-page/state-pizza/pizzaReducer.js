@@ -1,6 +1,4 @@
-import { createReducer } from '@reduxjs/toolkit';
-
-import { pizzaActionsTypes } from './pizzaActionsTypes';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   pizza: {
@@ -13,8 +11,15 @@ const initialState = {
   },
 };
 
-export const pizzaReducer = createReducer(initialState, builder => {
-  builder.addCase(pizzaActionsTypes.PIZZA_FILL, (state, action) => {
-    state.pizza = action.payload;
-  });
+export const pizzaReducer = createSlice({
+  name: 'pizza',
+  initialState,
+  reducers: {
+    fillPizza: (state, action) => {
+      state.pizza = action.payload;
+    },
+    resetPizza: state => {
+      state.pizza = { ...initialState.pizza };
+    },
+  },
 });

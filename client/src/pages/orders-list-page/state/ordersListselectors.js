@@ -1,3 +1,3 @@
-export const getOrders = state => state.orders.orders;
+export const getOrders = state => state.ordersList.orders;
 
-export const getLoadingStatus = state => state.orders.isLoading;
+export const getLoadingStatus = state => state.ordersList.isLoading;

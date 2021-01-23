@@ -1,5 +1,6 @@
-import { createReducer } from '@reduxjs/toolkit';
-import { signupActionTypes } from './signupActionTypes';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+// Api
+import { api } from '../../../api';
 
 const initialState = {
   error: null,
@@ -8,29 +9,68 @@ const initialState = {
   login: { password: '', email: '' },
 };
 
-export const signupReducer = createReducer(initialState, builder => {
-  builder
-    .addCase('signup/userRegistationAsync/pending', state => {
+/**
+ * Action User check registation
+ * @param login -> password, email
+ */
+export const userSingupAsync = createAsyncThunk(
+  'signup/signupFetchAsync',
+  async (login, thunkAPI) => {
+    thunkAPI.dispatch(signupReducer.actions.startFetching());
+    const response = await api.users.create(login);
+    if (response.status === 200) {
+      const results = await response.json();
+
+      thunkAPI.dispatch(signupReducer.actions.setUserStatus(results));
+    } else {
+      const error = {
+        status: response.status,
+      };
+      thunkAPI.dispatch(signupReducer.actions.setFetchingError(error));
+    }
+    thunkAPI.dispatch(signupReducer.actions.stopFetching());
+  }
+);
+
+export const signupReducer = createSlice({
+  name: 'signup',
+  initialState,
+  reducers: {
+    startFetching: state => {
       state.isLoading = true;
-    })
-    .addCase('signup/userRegistationAsync/reject', state => {
-      state.isLoading = false;
-      state.error = 'fetching error';
-    })
-    .addCase(signupActionTypes.SIGNUP_STOP_FETCHING, state => {
-      state.isLoading = false;
-    })
-    .addCase(signupActionTypes.SIGNUP_SET_FETCHING_ERROR, (state, action) => {
+    },
+    stopFetching: state => {
+      state.isLoading = true;
+    },
+    setFetchingError: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-    })
-    .addCase(signupActionTypes.SIGNUP_FILL, (state, action) => {
-      state.isLoading = false;
+    },
+    fillUserData: (state, action) => {
       state.login = action.payload;
-    })
-    .addCase(signupActionTypes.SIGNUP_SET_STATUS, (state, action) => {
       state.isLoading = false;
-      state.isRegistered = action.payload;
       state.error = null;
-    });
+    },
+    setUserStatus: (state, action) => {
+      state.isRegistered = action.payload;
+      state.isLoading = false;
+      state.error = null;
+    },
+  },
+  extraReducers: {
+    [userSingupAsync.fulfilled]: (state, action) => {
+      state.login = action.payload;
+      state.isLoading = false;
+      state.error = null;
+    },
+    [userSingupAsync.rejected]: state => {
+      state.isLoading = false;
+      state.error = {
+        status: 'fetching error',
+      };
+    },
+    [userSingupAsync.pending]: state => {
+      state.isLoading = true;
+    },
+  },
 });
