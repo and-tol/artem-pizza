@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Actions
-import * as ordersListActions from './state/ordersListActions';
-import * as ingredientsActions from '../pizza-configurator-page/state-ingredients/ingredientsActions';
+import { fetchOrdersListAsync } from './state/ordersListReducer';
+import {fetchIngredientsAsync} from '../pizza-configurator-page/state-ingredients/ingredientsReducer';
 // Selectors
 import { getOrders, getLoadingStatus } from './state/ordersListselectors';
 // Components
@@ -12,8 +12,8 @@ export const OrdersListPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(ingredientsActions.fetchIngredientsAsync());
-    dispatch(ordersListActions.fetchOrdersAsync());
+    dispatch(fetchIngredientsAsync());
+    dispatch(fetchOrdersListAsync());
   }, [dispatch]);
 
   const previousOrders = useSelector(getOrders);

@@ -8,6 +8,7 @@ import App from './App';
 import './index.css';
 
 import { store } from './init/store';
+console.log('store>>>', store.getState());
 
 ReactDOM.render(
   <React.StrictMode>

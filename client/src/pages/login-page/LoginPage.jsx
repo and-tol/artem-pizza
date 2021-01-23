@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Selectors
 import { getStatus } from './state/loginSelectors';
 // Actions
-import * as loginActions from './state/loginActions';
+import { loginReducer } from './state/loginReducer';
 
 const schema = yup.object().shape({
   email: yup.string().email('Неверный адрес электронной почты'),
@@ -35,12 +35,12 @@ export const LoginPage = () => {
   }, [email, password]);
 
   const onSubmit = handleSubmit(data => {
-    dispatch(loginActions.fillUserData(data));
+    dispatch(loginReducer.actions.fillUserData(data));
     // dispatch(loginActions.checkUserAsync(data));
     /**
      * Set user registered
      */
-    dispatch(loginActions.setUserStatus(true));
+    dispatch(loginReducer.actions.setUserStatus(true));
   });
 
   return (

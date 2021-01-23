@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 // Helpers
 import { calculateTotalPrice } from '../../share/calculateTotalPrice';
 import { OrderPreview } from '../../share/components/OrderPreview';
-import { getIngredients } from '../pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Selectors
+import { getIngredients } from '../pizza-configurator-page/state-ingredients/ingredientsSelectors';
 import { getPizza } from '../pizza-configurator-page/state-pizza/pizzaSelectors';
 // Components
 import { CheckoutForm } from './components';

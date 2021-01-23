@@ -3,7 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 // Actions
-import * as checkoutActions from '../state/checkoutActions';
+
+import { checkoutReducer  } from '../state/checkoutReducer';
 // Helpers
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Data
@@ -30,7 +31,7 @@ const schema = yup.object().shape({
 /**
  * Компонент собирает данные пользователя для оплаты заказа и отправляет на сервер
  * The component collects user data for order payment and sends it to the server
- * @param pizza 
+ * @param pizza
  * @param ingredients
  */
 export const CheckoutForm = ({ pizza, ingredients }) => {
@@ -52,8 +53,8 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
       cardNumber: data.cardNumber,
     };
     if (order) {
-      dispatch(checkoutActions.fillOrder(order));
-      dispatch(checkoutActions.sendOrderAsync(order));
+      dispatch(checkoutReducer.actions.fillOrder(order));
+      dispatch(checkoutReducer.actions.sendOrderAsync(order));
     }
   });
 

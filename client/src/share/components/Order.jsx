@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Actions
-import * as ingredientsActions from '../../pages/pizza-configurator-page/state-ingredients/ingredientsActions';
+import {fetchIngredientsAsync} from '../../pages/pizza-configurator-page/state-ingredients/ingredientsReducer';
 // Selectors
 import { getIngredients } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Components
@@ -17,7 +17,7 @@ export const Order = ({ order }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(ingredientsActions.fetchIngredientsAsync());
+    dispatch(fetchIngredientsAsync());
   }, [dispatch]);
 
   const ingredients = useSelector(getIngredients);

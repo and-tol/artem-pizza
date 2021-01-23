@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 // Actions
-import * as loginActions from '../login-page/state/loginActions';
-import * as signupActions from './state/signupActions';
+import { loginReducer } from '../login-page/state/loginReducer';
+import { signupReducer } from './state/signupReducer';
 // Selectors
 import { getStatus } from './state/signupSelectors';
 
@@ -39,10 +39,10 @@ export const SignupPage = () => {
   }, [watchEmail, watchPassword]);
 
   const onSubmit = handleSubmit(data => {
-    dispatch(signupActions.fillUserData(data));
+    dispatch(signupReducer.actions.fillUserData(data));
 
     // ! Авторизация (login) пользователя
-    dispatch(loginActions.setUserStatus(true));
+    dispatch(loginReducer.actions.setUserStatus(true));
   });
 
   const isRegistered = useSelector(getStatus);

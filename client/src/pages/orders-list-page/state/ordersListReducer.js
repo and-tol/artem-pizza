@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-// ActionTypes
-import { ordersListActionTypes } from './ordersListActionTypes';
+// Api
+import { api } from '../../../api';
 
 const initialState = {
   orders: [],
@@ -9,23 +9,23 @@ const initialState = {
 };
 
 export const fetchOrdersListAsync = createAsyncThunk(
-  ordersListActionTypes.ORDERS_FETCH_ASYNC,
+  'orders/fetchOrdersListAsync',
   async (_, thunkAPI) => {
     const response = await api.orders.getAllOrders();
 
     if (response.status === 200) {
       const results = await response.json();
 
-      thunkAPI.dispatch(fillOrders(results));
+      thunkAPI.dispatch(ordersListReducer.actions.fillOrders(results));
     } else {
       const error = {
         status: response.status,
       };
 
-      thunkAPI.dispatch(setFetchingError(error));
+      thunkAPI.dispatch(ordersListReducer.actions.setFetchingError(error));
     }
 
-    thunkAPI.dispatch(stopFetching());
+    thunkAPI.dispatch(ordersListReducer.actions.stopFetching());
   }
 );
 

@@ -4,11 +4,11 @@ import { useHistory } from 'react-router-dom';
 import { OrderPreview } from '../../share/components/OrderPreview';
 // Components
 import { PizzaForm } from './components/PizzaForm';
-// ReduxActions
-import * as ingredientsActions from './state-ingredients/ingredientsActions';
-import { getIngredients } from './state-ingredients/ingredientsSelectors';
-import * as pizzaActions from './state-pizza/pizzaActions';
+// Actions
+import { fetchIngredientsAsync } from './state-ingredients/ingredientsReducer';
+import { pizzaReducer } from './state-pizza/pizzaReducer';
 // Selectors
+import { getIngredients } from './state-ingredients/ingredientsSelectors';
 import { getPizza } from './state-pizza/pizzaSelectors';
 
 export const PizzaConfiguratorPage = () => {
@@ -19,7 +19,7 @@ export const PizzaConfiguratorPage = () => {
   const ingredients = useSelector(getIngredients);
 
   useEffect(() => {
-    dispatch(ingredientsActions.fetchIngredientsAsync());
+    dispatch(fetchIngredientsAsync());
   }, [dispatch]);
 
   /**
@@ -27,7 +27,7 @@ export const PizzaConfiguratorPage = () => {
    * @param pizza created pizza comfiguration
    */
   const onPizzaChange = pizza => {
-    dispatch(pizzaActions.fillPizza(pizza));
+    dispatch(pizzaReducer.actions.fillPizza(pizza));
     history.push('/order-preview');
   };
 
