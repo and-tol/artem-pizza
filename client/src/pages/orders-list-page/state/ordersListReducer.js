@@ -17,6 +17,8 @@ export const fetchOrdersListAsync = createAsyncThunk(
       const results = await response.json();
 
       thunkAPI.dispatch(ordersListReducer.actions.fillOrders(results));
+
+      return results;
     } else {
       const error = {
         status: response.status,
@@ -33,9 +35,6 @@ export const ordersListReducer = createSlice({
   name: 'ordersList',
   initialState,
   reducers: {
-    startFetching: state => {
-      state.isLoading = true;
-    },
     stopFetching: state => {
       state.isLoading = false;
     },

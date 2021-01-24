@@ -12,11 +12,12 @@ export const initialState = {
 export const sendOrderAsync = createAsyncThunk(
   'checkout/sendOrderAsync',
   async (data, thunkAPI) => {
-    thunkAPI.dispatch(checkoutReducer.actions.startFetching());
     const response = await api.orders.createOrder(data);
     if (response.status === 200) {
       const { message } = await response.json();
       thunkAPI.dispatch(checkoutReducer.actions.fillOrder(message));
+
+      return message;
     } else {
       const error = {
         status: response.status,
@@ -31,9 +32,6 @@ export const checkoutReducer = createSlice({
   name: 'checkout',
   initialState,
   reducers: {
-    startFetching: state => {
-      state.isLoading = true;
-    },
     stopFetching: state => {
       state.isLoading = true;
     },

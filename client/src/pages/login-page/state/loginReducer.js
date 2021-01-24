@@ -12,12 +12,12 @@ const initialState = {
 export const checkUserAsync = createAsyncThunk(
   'login/loginFetchAsync',
   async (credentials, thunkAPI) => {
-    thunkAPI.dispatch(loginReducer.actions.startFetching);
     const response = await api.users.login(credentials);
     if (response.status === 200) {
       const results = await response.json();
 
       thunkAPI.dispatch(loginReducer.setUserStatus(results));
+      return results;
     } else {
       const error = {
         status: response.status,
@@ -32,9 +32,7 @@ export const loginReducer = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    startFetching: state => {
-      state.isLoading = true;
-    },
+
     stopFetching: state => {
       state.isLoading = true;
     },

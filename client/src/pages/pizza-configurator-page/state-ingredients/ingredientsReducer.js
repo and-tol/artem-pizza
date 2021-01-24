@@ -14,22 +14,22 @@ const initialState = {
       thumbnail: '',
     },
     {
-      category: 'dough',
       id: '1',
-      image: '',
       name: 'Тонкое',
-      price: 0,
       slug: 'thin',
+      price: 0,
+      category: 'dough',
+      image: '',
       thumbnail: '',
     },
     {
-      category: 'sauce',
       id: '2',
-      image: '',
       name: 'Томатный',
-      price: 0,
       slug: 'tomato-sauce',
+      category: 'sauce',
+      price: 0,
       thumbnail: '',
+      image: '',
     },
   ],
   error: null,
@@ -39,7 +39,6 @@ const initialState = {
 export const fetchIngredientsAsync = createAsyncThunk(
   'ingredients/ingredientsFetchAsync',
   async (_, thunkAPI) => {
-    thunkAPI.dispatch(ingredientsReducer.actions.startFetching);
     const response = await api.ingredients.availableIngredients();
 
     if (response.status === 200) {
@@ -50,9 +49,7 @@ export const fetchIngredientsAsync = createAsyncThunk(
         price: Number(item.price),
       }));
 
-      thunkAPI.dispatch(
-        ingredientsReducer.actions.fillIngredients(resultsWithCorrectTypes)
-      );
+      return resultsWithCorrectTypes;
     } else {
       const error = {
         status: response.status,
@@ -78,11 +75,6 @@ export const ingredientsReducer = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    fillIngredients: (state, action) => {
-      state.ingredients = action.payload;
-      state.isLoading = false;
-      state.error = null;
-    },
   },
   extraReducers: {
     [fetchIngredientsAsync.fulfilled]: (state, action) => {
@@ -98,6 +90,6 @@ export const ingredientsReducer = createSlice({
     },
     [fetchIngredientsAsync.pending]: state => {
       state.isLoading = true;
-    }
+    },
   },
 });
