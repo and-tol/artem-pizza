@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Selectors
@@ -7,20 +7,20 @@ import {
   getIngredients,
   getIngredientsByCategory,
 } from '../state-ingredients/ingredientsSelectors';
-import { getPizza } from '../state-pizza/pizzaSelectors';
-// Actions
-import { pizzaReducer } from '../state-pizza/pizzaReducer';
+
+// Data
+import { DEFAULT_PIZZA } from '../../../pizzaData';
 // Components
 import { CheckboxGroup } from './CheckboxGroup';
 import { RadioGroup } from './RadioGroup';
+import { OrderPreview } from '../../../share/components/OrderPreview';
 
-export const PizzaForm = ({ onPizzaCreated }) => {
-  const dispatch = useDispatch();
-  const pizza = useSelector(getPizza);
-
-  const { register, handleSubmit, watch } = useForm({
-    defaultValues: pizza,
+export const PizzaForm = ({ onPizzaOrder }) => {
+  const { register, handleSubmit, watch, control } = useForm({
+    defaultValues: DEFAULT_PIZZA,
   });
+
+  console.log('control>>>', control);
 
   const ingredients = useSelector(getIngredients);
 
@@ -33,20 +33,17 @@ export const PizzaForm = ({ onPizzaCreated }) => {
 
   const values = watch();
 
-  useEffect(() => {
-    dispatch(pizzaReducer.actions.fillPizza(values));
-  }, [values, dispatch]);
-
   const totalPrice = calculateTotalPrice(ingredients, values);
 
-  const onSubmit = handleSubmit(values => {
-    if (onPizzaCreated) {
-      onPizzaCreated(values);
+  const onSubmit = handleSubmit(data => {
+    if (onPizzaOrder) {
+      onPizzaOrder(data);
     }
   });
 
   return (
     <>
+      <OrderPreview pizza={values} ingredients={ingredients} />
       <form onSubmit={onSubmit}>
         <RadioGroup
           legend='Размер'
