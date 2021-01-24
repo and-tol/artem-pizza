@@ -1,14 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 // import { PizzaProvider } from './PizzaContext';
-import App from './App';
-import './index.css';
+import App from './App'
+import './index.css'
+import { store } from './init/store'
 
-import { store } from './init/store';
-console.log('store>>>', store.getState());
+
 
 ReactDOM.render(
   <React.StrictMode>

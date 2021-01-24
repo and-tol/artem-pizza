@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Selectors
@@ -8,12 +8,14 @@ import {
   getIngredientsByCategory,
 } from '../state-ingredients/ingredientsSelectors';
 import { getPizza } from '../state-pizza/pizzaSelectors';
-
+// Actions
+import { pizzaReducer } from '../state-pizza/pizzaReducer';
 // Components
 import { CheckboxGroup } from './CheckboxGroup';
 import { RadioGroup } from './RadioGroup';
 
 export const PizzaForm = ({ onPizzaCreated }) => {
+  const dispatch = useDispatch();
   const pizza = useSelector(getPizza);
 
   const { register, handleSubmit, watch } = useForm({
@@ -30,6 +32,10 @@ export const PizzaForm = ({ onPizzaCreated }) => {
   const MEAT = useSelector(getIngredientsByCategory('meat'));
 
   const values = watch();
+
+  useEffect(() => {
+    dispatch(pizzaReducer.actions.fillPizza(values));
+  }, [values, dispatch]);
 
   const totalPrice = calculateTotalPrice(ingredients, values);
 

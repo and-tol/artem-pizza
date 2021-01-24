@@ -23,12 +23,12 @@ export const PizzaConfiguratorPage = () => {
   }, [dispatch]);
 
   /**
-   * Component add pizza to store and go to OrderPreview Page
+   * Function add pizza to store and go to OrderPreview Page
    * @param pizza created pizza comfiguration
    */
   const onPizzaChange = pizza => {
     dispatch(pizzaReducer.actions.fillPizza(pizza));
-    history.push('/order-preview');
+    history.push('/checkout');
   };
 
   return (
