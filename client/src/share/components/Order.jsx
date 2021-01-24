@@ -2,15 +2,13 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Actions
-import {fetchIngredientsAsync} from '../../pages/pizza-configurator-page/state-ingredients/ingredientsReducer';
+import { fetchIngredientsAsync } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsReducer';
 // Selectors
 import { getIngredients } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Components
 import { OrderPreview } from './OrderPreview';
 // Icons
 import { ReactComponent as IconDelivery } from '../../asserts/icons/icn_delivery.svg';
-
-
 
 export const Order = ({ order }) => {
   const { cardNumber, pizza } = { ...order };
