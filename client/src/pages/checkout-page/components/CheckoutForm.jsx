@@ -3,8 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 // Actions
-
-import { checkoutReducer  } from '../state/checkoutReducer';
+import { checkoutReducer, sendOrderAsync } from '../state/checkoutReducer';
 // Helpers
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Data
@@ -54,7 +53,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
     };
     if (order) {
       dispatch(checkoutReducer.actions.fillOrder(order));
-      dispatch(checkoutReducer.actions.sendOrderAsync(order));
+      dispatch(sendOrderAsync(order));
     }
   });
 

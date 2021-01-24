@@ -16,11 +16,9 @@ import { RadioGroup } from './RadioGroup';
 import { OrderPreview } from '../../../share/components/OrderPreview';
 
 export const PizzaForm = ({ onPizzaOrder }) => {
-  const { register, handleSubmit, watch, control } = useForm({
+  const { register, handleSubmit, watch } = useForm({
     defaultValues: DEFAULT_PIZZA,
   });
-
-  console.log('control>>>', control);
 
   const ingredients = useSelector(getIngredients);
 

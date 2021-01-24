@@ -6,7 +6,7 @@ export const initialState = {
   order: null,
   error: null,
   isLoading: false,
-  isAccepted: true,
+  isAccepted: false,
 };
 
 export const sendOrderAsync = createAsyncThunk(
@@ -14,17 +14,15 @@ export const sendOrderAsync = createAsyncThunk(
   async (data, thunkAPI) => {
     const response = await api.orders.createOrder(data);
     if (response.status === 200) {
-      const { message } = await response.json();
-      thunkAPI.dispatch(checkoutReducer.actions.fillOrder(message));
-
-      return message;
+      const results = await response.json();
+      thunkAPI.dispatch(checkoutReducer.actions.setAccept(results.status));
+      return results.status;
     } else {
       const error = {
         status: response.status,
       };
       thunkAPI.dispatch(checkoutReducer.actions.setFetchingError(error));
     }
-    thunkAPI.dispatch(checkoutReducer.actions.stopFetching());
   }
 );
 
@@ -51,8 +49,7 @@ export const checkoutReducer = createSlice({
     },
   },
   extraReducers: {
-    [sendOrderAsync.fulfilled]: (state, action) => {
-      state.order = action.payload;
+    [sendOrderAsync.fulfilled]: (state ) => {
       state.isLoading = false;
       state.error = null;
     },

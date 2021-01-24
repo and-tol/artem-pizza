@@ -1,12 +1,13 @@
 /**
  * Function render selected ingredients
- * @param selectedIngredients - selected ingredient
+ * @param selectedIngredients - selected ingredient/s
  * @param availableIngredients - possible ingredients
  */
 export const renderIngredients = (
   selectedIngredients,
   availableIngredients
 ) => {
+
   if (
     selectedIngredients &&
     typeof selectedIngredients === 'string' &&
@@ -31,5 +32,5 @@ export const renderIngredients = (
     }
   }
 
-  return undefined;
+  return null;
 };
