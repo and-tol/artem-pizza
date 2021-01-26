@@ -6,7 +6,7 @@ import { useWindowDimensions } from '../hooks/useWindowsDimentions';
 import { ReactComponent as NavbarBrand } from '../../asserts/NavbarBrand.svg';
 import { ReactComponent as IcnAccount } from '../../asserts/icons/icn_account.svg';
 // Styles
-import { StyledWrapper } from '../styled-components/StyledHeader';
+import { StyledWrapper } from '../styled-components/StyledWrapper';
 import * as Button from '../styled-components/Button';
 
 export const StyledHeader = styled.header`
@@ -26,10 +26,6 @@ const WrapperHeader = styled(StyledWrapper)`
     min-height: 80px;
   }
 `;
-
-// const StyledLink = styled(Link)`
-//   padding: 13px;
-// `;
 
 const StyledIcnAccount = styled(IcnAccount)`
   margin-right: 9px;
