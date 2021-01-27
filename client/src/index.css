@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;800');
+/* @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;800'); */
 @import-normalize;
 
 html {
@@ -28,7 +28,19 @@ body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
 }
+
+@media (min-width: 960.5px) {
+  body {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
 #root {
   display: flex;
   align-items: center;
@@ -39,6 +51,7 @@ body {
 
 :root {
   --white: #fff;
+  --black: #F1F33;
   --primary: #00a896;
   --primary-dark: #009485;
   --gray100: #f9f9fb;
@@ -49,4 +62,5 @@ body {
   --shadow: 0px 3px 4px rgba(75, 75, 124, 0.05),
     0px 0px 2px rgba(75, 75, 124, 0.2);
   --shadow-inset: inset 0px 1px 4px rgba(0, 0, 0, 0.25);
+  --point-desktop: 960.5px;
 }

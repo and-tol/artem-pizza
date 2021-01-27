@@ -14,9 +14,10 @@ import { Header } from './share/components/Header';
 const Main = styled.main`
   width: 100%;
   display: flex;
-  align-items: center;
   flex-direction: column;
   overflow: hidden;
+  padding-top: 16px;
+  padding-bottom: 16px;
 
   @media (max-width: 360px) {
     width: 100%;
@@ -26,6 +27,8 @@ const Main = styled.main`
   }
   @media (min-width: 960.5px) {
     width: 960px;
+    padding-top: 32px;
+    padding-bottom: 32px;
   }
 `;
 

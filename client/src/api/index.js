@@ -1,5 +1,5 @@
-
-export const root = 'http://localhost:4000';
+// Config
+import { root } from './config';
 
 export const api = Object.freeze({
   ingredients: {
@@ -9,7 +9,7 @@ export const api = Object.freeze({
   },
 
   orders: {
-    createOrder: (data) => {
+    createOrder: data => {
       return fetch(`${root}/orders`, {
         method: 'POST',
         headers: {
@@ -26,7 +26,7 @@ export const api = Object.freeze({
   },
 
   users: {
-    create: (data) => {
+    create: data => {
       return fetch(`${root}/users`, {
         method: 'POST',
         headers: {
@@ -35,7 +35,7 @@ export const api = Object.freeze({
         body: JSON.stringify(data),
       });
     },
-    login: (credentials) => {
+    login: credentials => {
       return fetch(`${root}/login`, {
         method: 'POST',
         headers: {
