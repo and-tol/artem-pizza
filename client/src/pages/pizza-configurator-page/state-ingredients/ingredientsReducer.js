@@ -26,7 +26,7 @@ const initialState = {
       id: '2',
       name: 'Томатный',
       slug: 'tomato-sauce',
-      category: 'sauce',
+      category: 'sauces',
       price: 0,
       thumbnail: '',
       image: '',

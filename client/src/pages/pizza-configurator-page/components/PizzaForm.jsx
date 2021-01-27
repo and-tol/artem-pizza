@@ -24,7 +24,7 @@ export const PizzaForm = ({ onPizzaOrder }) => {
 
   const SIZE = useSelector(getIngredientsByCategory('size'));
   const DOUGH = useSelector(getIngredientsByCategory('dough'));
-  const SAUCE = useSelector(getIngredientsByCategory('sauce'));
+  const SAUCES = useSelector(getIngredientsByCategory('sauces'));
   const CHEESE = useSelector(getIngredientsByCategory('cheese'));
   const VEGETABLES = useSelector(getIngredientsByCategory('vegetables'));
   const MEAT = useSelector(getIngredientsByCategory('meat'));
@@ -55,11 +55,11 @@ export const PizzaForm = ({ onPizzaOrder }) => {
           name='dough'
           options={DOUGH}
         />
-        <RadioGroup
+        <CheckboxGroup
           legend='Выберите соус'
           register={register}
-          name='sauce'
-          options={SAUCE}
+          name='sauces'
+          options={SAUCES}
         />
 
         <CheckboxGroup

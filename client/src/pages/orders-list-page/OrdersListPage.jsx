@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchOrdersListAsync } from './state/ordersListReducer';
 import {fetchIngredientsAsync} from '../pizza-configurator-page/state-ingredients/ingredientsReducer';
 // Selectors
-import { getOrders, getLoadingStatus } from './state/ordersListselectors';
+import { getOrders, getLoadingStatus } from './state/ordersListSelectors';
 // Components
 import { Order } from '../../share/components';
 

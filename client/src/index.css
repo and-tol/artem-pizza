@@ -1,4 +1,33 @@
-/* @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;800'); */
+@font-face {
+  font-family: 'M PLUS Rounded 1c';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+    url('./fonts/m-plus-rounded-1c-v10-latin_cyrillic-regular.woff2')
+      format('woff2'),
+    url('./fonts/m-plus-rounded-1c-v10-latin_cyrillic-regular.woff')
+      format('woff');
+}
+
+@font-face {
+  font-family: 'M PLUS Rounded 1c';
+  font-style: normal;
+  font-weight: 500;
+  src: local(''),
+    url('./fonts/m-plus-rounded-1c-v10-latin_cyrillic-500.woff2')
+      format('woff2'),
+    url('./fonts/m-plus-rounded-1c-v10-latin_cyrillic-500.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'M PLUS Rounded 1c';
+  font-style: normal;
+  font-weight: 800;
+  src: local(''),
+    url('./fonts/m-plus-rounded-1c-v10-latin_cyrillic-800.woff2')
+      format('woff2'),
+    url('./fonts/m-plus-rounded-1c-v10-latin_cyrillic-800.woff') format('woff');
+}
 @import-normalize;
 
 html {

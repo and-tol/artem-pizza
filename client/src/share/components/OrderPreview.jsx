@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 // Config
-import { root as url} from '../../api/config'
+import { root as url } from '../../api/config';
 // Img
 import plate from '../../asserts/plate.png';
 import thin from '../../asserts/thin.png';
@@ -46,13 +46,15 @@ const IngredientImage = styled(Image)`
 `;
 
 export const OrderPreview = ({ pizza, ingredients }) => {
-  const { size, dough, sauce, cheese, vegetables, meat } = pizza;
+  const { size, dough, sauces, cheese, vegetables, meat } = pizza;
 
-  console.log('sauce>>>', sauce);
+  console.log('pizza>>>', pizza);
+  console.log('sauces>>>', sauces);
 
   const CHEESE = useSelector(getIngredientsByCategory('cheese'));
   const VEGETABLES = useSelector(getIngredientsByCategory('vegetables'));
   const MEAT = useSelector(getIngredientsByCategory('meat'));
+  const SAUCES = useSelector(getIngredientsByCategory('sauces'));
 
   return (
     <section>
@@ -63,17 +65,21 @@ export const OrderPreview = ({ pizza, ingredients }) => {
           vegetables.map(v => <IngredientImage key={v} src={`${url}${v}`} />)}
         {cheese &&
           cheese.map(c => <IngredientImage key={c} src={`${url}${c}`} />)}
-          <IngredientImage src={`${url}${sauce}`} alt={sauce} />
+        {sauces &&
+          sauces.map(s => <IngredientImage key={s} src={`${url}${s}`} />)}
       </Preview>
       <H3>Маргарита</H3>
       <p>
         <span>{!!size && ` ${renderIngredients(size, ingredients)}`}</span>
         см на тесте
         <span>{!!dough && ` ${renderIngredients(dough, ingredients)}`}</span>
-        <span>{` • ${
-          !!sauce && ` ${renderIngredients(sauce, ingredients)} `
-        }`}</span>
-        соус
+        <span>
+          {sauces !== undefined && sauces.length && SAUCES.length
+            ? `• Соус: ${renderIngredients(sauces, ingredients)}
+        }`
+            : null}
+        </span>
+
         <span>
           {cheese !== undefined && cheese.length && CHEESE.length
             ? ` • Сыр: ${renderIngredients(cheese, CHEESE)}`

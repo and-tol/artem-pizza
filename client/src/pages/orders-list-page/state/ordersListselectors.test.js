@@ -1,5 +1,5 @@
 import { mockState } from '../../../testUtils/mockState';
-import { getOrders, getLoadingStatus } from './ordersListselectors';
+import { getOrders, getLoadingStatus } from './ordersListSelectors';
 
 describe('.getOrders', () => {
   it('return data of the orders from store', () => {
