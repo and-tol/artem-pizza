@@ -14,6 +14,8 @@ export const Order = ({ order }) => {
   const { cardNumber, pizza } = { ...order };
   const dispatch = useDispatch();
 
+  console.log('Order pizza', pizza);
+
   useEffect(() => {
     dispatch(fetchIngredientsAsync());
   }, [dispatch]);

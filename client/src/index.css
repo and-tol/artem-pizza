@@ -45,6 +45,10 @@ a {
   padding: 0;
 }
 
+fieldset {
+  border: none;
+}
+
 html,
 body,
 #root {
@@ -61,6 +65,7 @@ body {
   font-weight: normal;
   font-size: 12px;
   line-height: 18px;
+  color: var(--gray600);
 }
 
 @media (min-width: 960.5px) {
@@ -69,6 +74,8 @@ body {
     line-height: 20px;
   }
 }
+
+h1,h3,h5, p, fieldset {margin: 0; padding:0}
 
 #root {
   display: flex;
@@ -80,16 +87,18 @@ body {
 
 :root {
   --white: #fff;
-  --black: #F1F33;
+  --black: #1F1F33;
   --primary: #00a896;
   --primary-dark: #009485;
   --gray100: #f9f9fb;
   --gray200: #e1e1ed;
   --gray400: #8181b1;
   --gray600: #4b4b7c;
-  --icon-color: #4b4b7c;
   --shadow: 0px 3px 4px rgba(75, 75, 124, 0.05),
     0px 0px 2px rgba(75, 75, 124, 0.2);
   --shadow-inset: inset 0px 1px 4px rgba(0, 0, 0, 0.25);
-  --point-desktop: 960.5px;
 }
+
+/* Break points */
+/* --point-desktop: 960.5px; */
+/* --point-tablet-w: 480px ; */

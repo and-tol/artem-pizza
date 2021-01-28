@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
+import styled from 'styled-components';
 // Selectors
 import {
   getIngredients,
@@ -14,6 +15,23 @@ import { DEFAULT_PIZZA } from '../../../pizzaData';
 import { CheckboxGroup } from './CheckboxGroup';
 import { RadioGroup } from './RadioGroup';
 import { OrderPreview } from '../../../share/components/OrderPreview';
+import { RadioGroupSwitcher } from './RadioGroupSwitcher';
+
+// Styles
+const RadioGroupSwitcherContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+
+  @media (min-width: 480px) {
+    justify-content: flex-start;
+  }
+  @media (min-width: 960.5px) {
+    margin-bottom: 32px;
+  }
+`;
 
 export const PizzaForm = ({ onPizzaOrder }) => {
   const { register, handleSubmit, watch } = useForm({
@@ -31,6 +49,8 @@ export const PizzaForm = ({ onPizzaOrder }) => {
 
   const values = watch();
 
+  console.log('values', values);
+
   const totalPrice = calculateTotalPrice(ingredients, values);
 
   const onSubmit = handleSubmit(data => {
@@ -43,19 +63,22 @@ export const PizzaForm = ({ onPizzaOrder }) => {
     <>
       <OrderPreview pizza={values} ingredients={ingredients} />
       <form onSubmit={onSubmit}>
+        <RadioGroupSwitcherContainer>
+          <RadioGroupSwitcher
+            legend='Размер'
+            register={register}
+            name='size'
+            options={SIZE}
+          />
+
+          <RadioGroupSwitcher
+            legend='Тесто'
+            register={register}
+            name='dough'
+            options={DOUGH}
+          />
+        </RadioGroupSwitcherContainer>
         <RadioGroup
-          legend='Размер'
-          register={register}
-          name='size'
-          options={SIZE}
-        />
-        <RadioGroup
-          legend='Тесто'
-          register={register}
-          name='dough'
-          options={DOUGH}
-        />
-        <CheckboxGroup
           legend='Выберите соус'
           register={register}
           name='sauces'

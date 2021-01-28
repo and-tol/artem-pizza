@@ -17,12 +17,15 @@ const H3 = styled.h3`
   font-size: 20px;
   line-height: 24px;
   color: var(--black);
+  margin: 0;
+  margin-bottom: 8px;
 `;
 const Preview = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  margin-bottom: 16px;
 `;
 const Plate = styled.img`
   width: 300px;
@@ -38,18 +41,19 @@ const Image = styled.img`
   transform: translate3d(-50%, 0, 0);
   left: 50%;
 `;
-const DoughImage = styled(Image)`
+const IngredientImage = styled(Image)`
   width: 255px;
 `;
-const IngredientImage = styled(Image)`
+const IngredientsImage = styled(Image)`
   width: 230px;
+`;
+const P = styled.p`
+  margin-bottom: 24px;
+  @media (min-width: var(--point-desktop));
 `;
 
 export const OrderPreview = ({ pizza, ingredients }) => {
   const { size, dough, sauces, cheese, vegetables, meat } = pizza;
-
-  console.log('pizza>>>', pizza);
-  console.log('sauces>>>', sauces);
 
   const CHEESE = useSelector(getIngredientsByCategory('cheese'));
   const VEGETABLES = useSelector(getIngredientsByCategory('vegetables'));
@@ -60,26 +64,25 @@ export const OrderPreview = ({ pizza, ingredients }) => {
     <section>
       <Preview>
         <Plate src={plate} alt='plate' />
-        {meat && meat.map(m => <IngredientImage key={m} src={`${url}${m}`} />)}
+        <IngredientImage src={`${url}${dough}`} />
+        {meat && meat.map(m => <IngredientsImage key={m} src={`${url}${m}`} />)}
         {vegetables &&
-          vegetables.map(v => <IngredientImage key={v} src={`${url}${v}`} />)}
+          vegetables.map(v => <IngredientsImage key={v} src={`${url}${v}`} />)}
         {cheese &&
-          cheese.map(c => <IngredientImage key={c} src={`${url}${c}`} />)}
-        {sauces &&
-          sauces.map(s => <IngredientImage key={s} src={`${url}${s}`} />)}
+          cheese.map(c => <IngredientsImage key={c} src={`${url}${c}`} />)}
+        <IngredientImage src={`${url}${sauces}`} />
       </Preview>
       <H3>Маргарита</H3>
-      <p>
+      <P>
         <span>{!!size && ` ${renderIngredients(size, ingredients)}`}</span>
         см на тесте
         <span>{!!dough && ` ${renderIngredients(dough, ingredients)}`}</span>
+        <br />
         <span>
           {sauces !== undefined && sauces.length && SAUCES.length
-            ? `• Соус: ${renderIngredients(sauces, ingredients)}
-        }`
+            ? `Соус: ${renderIngredients(sauces, ingredients)}`
             : null}
         </span>
-
         <span>
           {cheese !== undefined && cheese.length && CHEESE.length
             ? ` • Сыр: ${renderIngredients(cheese, CHEESE)}`
@@ -95,7 +98,7 @@ export const OrderPreview = ({ pizza, ingredients }) => {
             ? ` • Мясо: ${renderIngredients(meat, MEAT)}`
             : null}
         </span>
-      </p>
+      </P>
     </section>
   );
 };

@@ -4,7 +4,7 @@ export const initialState = {
   pizza: {
     size: '30',
     dough: 'thin',
-    sauces: ['tomato-sauce'],
+    sauces: 'tomato-sauce',
     cheese: [],
     vegetables: [],
     meat: [],

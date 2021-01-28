@@ -8,8 +8,8 @@ export const CheckboxGroup = ({ register, legend, options, name }) => {
             <input
               ref={register}
               type='checkbox'
-              value={option[1].slug}
               name={name}
+              value={option[1].slug}
             />
             {option[1].name}
           </label>

@@ -1,7 +1,7 @@
 export const mockDefaultPizza = {
   size: '30',
   dough: 'thin',
-  sauce: 'tomato',
+  sauces: ['tomato'],
   cheese: [],
   vegetables: [],
   meat: [],

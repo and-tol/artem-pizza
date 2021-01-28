@@ -1,7 +1,7 @@
 export const DEFAULT_PIZZA = Object.freeze({
   size: '30',
   dough: 'thin',
-  sauce: 'tomato-sauce',
+  sauces: 'tomato-sauce',
   cheese: [],
   vegetables: [],
   meat: [],
@@ -13,7 +13,7 @@ export const fakeOrder = {
   pizza: {
     size: '30',
     dough: 'thin',
-    sauce: 'tomato-sauce',
+    sauces: 'tomato-sauce',
     cheese: [],
     vegetables: ['tomato'],
     meat: ['ham'],
