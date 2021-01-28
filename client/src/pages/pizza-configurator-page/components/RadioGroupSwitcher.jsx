@@ -1,6 +1,10 @@
 import { Fragment } from 'react';
 import styled from 'styled-components';
 
+// Styles
+import { Legend } from '../../../share/styled-components/Legend';
+import { RadioGroupContainer as SwitcherContainer } from '../../../share/styled-components/RadioGroupContainer';
+
 const Fieldset = styled.fieldset`
   display: inline-block;
   & + & {
@@ -12,29 +16,7 @@ const Fieldset = styled.fieldset`
     }
   }
 `;
-const Legend = styled.legend`
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 6px;
-  @media (min-width: 960.5px) {
-    font-size: 16px;
-    line-height: 24px;
-    margin-bottom: 8px;
-  }
-`;
-const SwitcherContainer = styled.div`
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 2px;
-  background: var(--gray100);
-  border-radius: 12px;
-  overflow: auto;
-  @media (min-width: 960.5px) {
-    border-radius: 14px;
-  }
-`;
+
 const Label = styled.label`
   display: flex;
   flex-direction: row;
@@ -67,31 +49,27 @@ const Input = styled.input`
 export const RadioGroupSwitcher = props => {
   const { legend, options, register, name } = props;
 
-  console.log(options);
-
   return (
-    <>
-      <Fieldset>
-        <Legend>{legend}</Legend>
-        <SwitcherContainer>
-          {Object.entries(options).map(option => (
-            <Fragment key={option[1].id}>
-              <Input
-                id={option[1].id}
-                ref={register}
-                type='radio'
-                name={name}
-                value={option[1].slug}
-                hidden
-              />
-              <Label htmlFor={option[1].id}>
-                {option[1].name}
-                {name === 'size' ? 'см' : null}
-              </Label>
-            </Fragment>
-          ))}
-        </SwitcherContainer>
-      </Fieldset>
-    </>
+    <Fieldset>
+      <Legend>{legend}</Legend>
+      <SwitcherContainer>
+        {Object.entries(options).map(option => (
+          <Fragment key={option[1].id}>
+            <Input
+              id={option[1].id}
+              ref={register}
+              type='radio'
+              name={name}
+              value={option[1].slug}
+              hidden
+            />
+            <Label htmlFor={option[1].id}>
+              {option[1].name}
+              {name === 'size' ? 'см' : null}
+            </Label>
+          </Fragment>
+        ))}
+      </SwitcherContainer>
+    </Fieldset>
   );
 };

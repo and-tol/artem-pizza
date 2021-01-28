@@ -13,23 +13,25 @@ import {
 import { DEFAULT_PIZZA } from '../../../pizzaData';
 // Components
 import { CheckboxGroup } from './CheckboxGroup';
-import { RadioGroup } from './RadioGroup';
+import { RadioGroupSlider } from './RadioGroupSlider';
 import { OrderPreview } from '../../../share/components/OrderPreview';
 import { RadioGroupSwitcher } from './RadioGroupSwitcher';
 
 // Styles
-const RadioGroupSwitcherContainer = styled.div`
+const RadioGroupContainer = styled.div`
+  position: relative;
+  margin-bottom: 24px;
+  @media (min-width: 960.5px) {
+    margin-bottom: 32px;
+  }
+`;
+const RadioGroupSwitcherContainer = styled(RadioGroupContainer)`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
-
   @media (min-width: 480px) {
     justify-content: flex-start;
-  }
-  @media (min-width: 960.5px) {
-    margin-bottom: 32px;
   }
 `;
 
@@ -78,34 +80,32 @@ export const PizzaForm = ({ onPizzaOrder }) => {
             options={DOUGH}
           />
         </RadioGroupSwitcherContainer>
-        <RadioGroup
-          legend='Выберите соус'
-          register={register}
-          name='sauces'
-          options={SAUCES}
-        />
-
+        <RadioGroupContainer>
+          <RadioGroupSlider
+            legend='Выберите соус'
+            register={register}
+            name='sauces'
+            options={SAUCES}
+          />
+        </RadioGroupContainer>
         <CheckboxGroup
           legend='Добавьте сыр'
           register={register}
           name='cheese'
           options={CHEESE}
         />
-
         <CheckboxGroup
           legend='Добавьте овощи'
           register={register}
           name='vegetables'
           options={VEGETABLES}
         />
-
         <CheckboxGroup
           legend='Добавьте мясо'
           register={register}
           name='meat'
           options={MEAT}
         />
-
         <button>Заказать за {totalPrice}руб.</button>
       </form>
     </>
