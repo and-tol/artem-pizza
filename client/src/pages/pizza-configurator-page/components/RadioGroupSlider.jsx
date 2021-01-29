@@ -2,22 +2,32 @@ import { Fragment } from 'react';
 import styled from 'styled-components';
 // Styles
 import { Legend } from '../../../share/styled-components/Legend';
-import { RadioGroupContainer } from '../../../share/styled-components/RadioGroupContainer';
+import { InputGroupContainer } from '../../../share/styled-components/InputGroupContainer';
 
-const SliderContainer = styled(RadioGroupContainer)`
-  display: flex;
+const SliderContainer = styled(InputGroupContainer)`
+  display: inline-flex;
   flex-wrap: nowrap;
-  white-space: nowrap;
   position: relative;
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  margin-right: -(var(--padding-glob));
+  margin-bottom: 24px;
+  @media (min-width: 960.5px) {
+    margin-bottom: 32px;
+  }
   @media (min-width: 960.5px) {
     background-color: #fff;
     border: none;
   }
 `;
-
-const Fieldset = styled.fieldset`
-  display: inline-block;
-  overflow: auto;
+const SliderWrapper = styled.div`
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  margin-right: -(var(--padding-glob));
 `;
 
 const Slide = styled.label`
@@ -27,7 +37,7 @@ const Slide = styled.label`
   align-items: center;
   border-radius: 10px;
   padding: 4px 12px;
-
+  white-space: nowrap;
   border-radius: 12px;
   background-color: transparent;
   font-size: 14px;
@@ -54,8 +64,9 @@ export const RadioGroupSlider = props => {
 
   return (
     <>
-      <Fieldset>
-        <Legend>{legend}</Legend>
+      <Legend>{legend}</Legend>
+      {/* <Fieldset> */}
+      <SliderWrapper>
         <SliderContainer>
           {Object.entries(options).map(option => (
             <Fragment key={option[1].id}>
@@ -74,7 +85,8 @@ export const RadioGroupSlider = props => {
             </Fragment>
           ))}
         </SliderContainer>
-      </Fieldset>
+      </SliderWrapper>
+      {/* </Fieldset> */}
     </>
   );
 };

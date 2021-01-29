@@ -15,7 +15,7 @@ const Main = styled.main`
   width: 100%;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   padding: 16px;
 
   @media (max-width: 360px) {

@@ -63,7 +63,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
     <>
       <section>
         <form onSubmit={onSubmit}>
-          <fieldset>
+          <div>
             <legend>Адрес доставки</legend>
             <label htmlFor='address'>
               <input
@@ -89,8 +89,8 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                 <input ref={register} name='flat' id='flat' type='tel' />
               </label>
             </div>
-          </fieldset>
-          <fieldset>
+          </div>
+          <div>
             <legend>Данные для оплаты</legend>
             <label htmlFor='cardNumber'>
               <input
@@ -139,7 +139,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
               />
               <div>{errors.cardName?.message}</div>
             </label>
-          </fieldset>
+          </div>
           <section>
             <p>
               Стоимость заказа <span>{orderPrice} руб.</span>

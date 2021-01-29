@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 import styled from 'styled-components';
 // Selectors
@@ -80,14 +80,14 @@ export const PizzaForm = ({ onPizzaOrder }) => {
             options={DOUGH}
           />
         </RadioGroupSwitcherContainer>
-        <RadioGroupContainer>
+        {/* <RadioGroupContainer> */}
           <RadioGroupSlider
             legend='Выберите соус'
             register={register}
             name='sauces'
             options={SAUCES}
           />
-        </RadioGroupContainer>
+        {/* </RadioGroupContainer> */}
 
         <RadioGroupContainer>
           <CheckboxGroup

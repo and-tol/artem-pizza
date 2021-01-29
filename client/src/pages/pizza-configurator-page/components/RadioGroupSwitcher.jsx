@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 // Styles
 import { Legend } from '../../../share/styled-components/Legend';
-import { RadioGroupContainer as SwitcherContainer } from '../../../share/styled-components/RadioGroupContainer';
+import { InputGroupContainer as SwitcherContainer } from '../../../share/styled-components/InputGroupContainer';
 
-const Fieldset = styled.fieldset`
+const Fieldset = styled.div`
   display: inline-block;
   & + & {
     @media (min-width: 480px) {
