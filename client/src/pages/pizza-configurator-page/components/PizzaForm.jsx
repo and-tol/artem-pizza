@@ -36,7 +36,7 @@ const RadioGroupSwitcherContainer = styled(RadioGroupContainer)`
 `;
 
 export const PizzaForm = ({ onPizzaOrder }) => {
-  const { register, handleSubmit, watch } = useForm({
+  const { register, handleSubmit, watch, control } = useForm({
     defaultValues: DEFAULT_PIZZA,
   });
 
@@ -88,12 +88,17 @@ export const PizzaForm = ({ onPizzaOrder }) => {
             options={SAUCES}
           />
         </RadioGroupContainer>
-        <CheckboxGroup
-          legend='Добавьте сыр'
-          register={register}
-          name='cheese'
-          options={CHEESE}
-        />
+
+        <RadioGroupContainer>
+          <CheckboxGroup
+            legend='Добавьте сыр'
+            register={register}
+            name='cheese'
+            options={CHEESE}
+            values={values}
+          />
+        </RadioGroupContainer>
+
         <CheckboxGroup
           legend='Добавьте овощи'
           register={register}

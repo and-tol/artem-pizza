@@ -75,19 +75,26 @@ body {
   }
 }
 
-h1,h3,h5, p, fieldset {margin: 0; padding:0}
+h1,
+h3,
+h5,
+p,
+fieldset {
+  margin: 0;
+  padding: 0;
+}
 
 #root {
   display: flex;
   align-items: center;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
   width: 100%;
 }
 
 :root {
   --white: #fff;
-  --black: #1F1F33;
+  --black: #1f1f33;
   --primary: #00a896;
   --primary-dark: #009485;
   --gray100: #f9f9fb;

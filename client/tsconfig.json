@@ -22,7 +22,7 @@
   },
   "include": [
     "src/**/*"
-  ],
+, "temp/RadioGroupWithRef.jsx", "temp/RadioGr.jsx"  ],
   "exclude": [
     "node_modules",
     "**/*.test.ts",
