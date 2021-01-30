@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 import styled from 'styled-components';
+// Hooks
+import { useWindowDimensions } from '../../../share/hooks/useWindowsDimentions';
 // Selectors
 import {
   getIngredients,
@@ -16,6 +18,8 @@ import { CheckboxGroup } from './CheckboxGroup';
 import { RadioGroupSlider } from './RadioGroupSlider';
 import { OrderPreview } from '../../../share/components/OrderPreview';
 import { RadioGroupSwitcher } from './RadioGroupSwitcher';
+import { ButtonPrimary } from '../../../share/styled-components/Button';
+import { Footer } from '../../../share/styled-components/Footer';
 
 // Styles
 const RadioGroupContainer = styled.div`
@@ -35,8 +39,15 @@ const RadioGroupSwitcherContainer = styled(RadioGroupContainer)`
   }
 `;
 
+const Button = styled(ButtonPrimary)`
+  @media (max-width: 360px) {
+    width: 100%;
+  }
+`;
+
 export const PizzaForm = ({ onPizzaOrder }) => {
-  const { register, handleSubmit, watch, control } = useForm({
+  const { width: windowWidth } = useWindowDimensions();
+  const { register, handleSubmit, watch } = useForm({
     defaultValues: DEFAULT_PIZZA,
   });
 
@@ -81,12 +92,12 @@ export const PizzaForm = ({ onPizzaOrder }) => {
           />
         </RadioGroupSwitcherContainer>
         {/* <RadioGroupContainer> */}
-          <RadioGroupSlider
-            legend='Выберите соус'
-            register={register}
-            name='sauces'
-            options={SAUCES}
-          />
+        <RadioGroupSlider
+          legend='Выберите соус'
+          register={register}
+          name='sauces'
+          options={SAUCES}
+        />
         {/* </RadioGroupContainer> */}
 
         <RadioGroupContainer>
@@ -95,7 +106,6 @@ export const PizzaForm = ({ onPizzaOrder }) => {
             register={register}
             name='cheese'
             options={CHEESE}
-            values={values}
           />
         </RadioGroupContainer>
 
@@ -111,7 +121,13 @@ export const PizzaForm = ({ onPizzaOrder }) => {
           name='meat'
           options={MEAT}
         />
-        <button>Заказать за {totalPrice}руб.</button>
+        {windowWidth <= 480 ? (
+          <Footer>
+            <Button>Заказать за {totalPrice}руб.</Button>
+          </Footer>
+        ) : (
+          <Button>Заказать за {totalPrice}руб.</Button>
+        )}
       </form>
     </>
   );

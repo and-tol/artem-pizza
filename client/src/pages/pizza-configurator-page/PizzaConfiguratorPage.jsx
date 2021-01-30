@@ -8,15 +8,6 @@ import { PizzaForm } from './components/PizzaForm';
 import { fetchIngredientsAsync } from './state-ingredients/ingredientsReducer';
 import { pizzaReducer } from './state-pizza/pizzaReducer';
 
-const H1 = styled.h1`
-  font-style: normal;
-  font-weight: 800;
-  font-size: 24px;
-  line-height: 32px;
-  color: var(--black);
-  margin: 0 0 24px;
-`;
-
 export const PizzaConfiguratorPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -36,7 +27,7 @@ export const PizzaConfiguratorPage = () => {
 
   return (
     <>
-      <H1>Страница кофигуратора пиццы</H1>
+      <h1>Страница кофигуратора пиццы</h1>
       <PizzaForm onPizzaOrder={onPizzaOrder} />
     </>
   );

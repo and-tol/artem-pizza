@@ -6,7 +6,6 @@ const Button = ({ children, ...args }) => {
 
 export const ButtonPrimary = styled.button`
   background-color: var(--primary);
-  border-radius: 16px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -21,6 +20,8 @@ export const ButtonPrimary = styled.button`
   font-family: 'M PLUS Rounded 1c', sans-serif;
   cursor: pointer;
   outline: transparent;
+  border: none;
+  border-radius: 16px;
   &:hover {
     background-color: var(--primary-dark);
     box-shadow: var(--shadow);

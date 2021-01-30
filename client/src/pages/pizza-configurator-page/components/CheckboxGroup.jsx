@@ -1,4 +1,3 @@
-import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as IconCheck } from '../../../asserts/icons/icn_check.svg';
 // Styles
@@ -11,25 +10,33 @@ const Fieldset = styled.div`
   color: var(--black);
   font-weight: 500;
   overflow-x: auto;
+  padding-top: 4px;
+  margin-top: -4px;
   &::-webkit-scrollbar {
     display: none;
   }
-
   margin-right: calc(var(--padding-glob) * (-1));
   margin-left: calc(var(--padding-glob) * (-1));
   &:first-child {
     margin-left: var(--padding-glob);
     @media (min-width: 960.5px) {
-      margin-left: calc(var(--padding-glob) * 4.5);
+      margin-left: 0;
     }
+  }
+  @media (min-width: 960.5px) {
+    padding-top: 8px;
+    margin-top: -8px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
   }
 `;
 const Article = styled.article`
-  & + & {
-    margin-left: 8px;
-    @media (min-width: 960.5px) {
-      margin-left: 16px;
-    }
+  position: relative;
+  margin-right: 8px;
+
+  @media (min-width: 960.5px) {
+    margin-right: 16px;
+    margin-bottom: 28px;
   }
 `;
 const Label = styled.label`
@@ -142,7 +149,7 @@ export const CheckboxGroup = ({ register, legend, options, name }) => {
       <Fieldset>
         {Object.entries(options).map(option => {
           return (
-            <Article>
+            <Article key={option[1].id}>
               <Input
                 id={option[1].id}
                 ref={register}

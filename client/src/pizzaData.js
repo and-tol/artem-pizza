@@ -25,12 +25,12 @@ export const fakeOrder = {
 
 export const IngredientsCases = [
   { slug: 'thin', case: 'тонком' },
-  { slug: 'puffy', case: 'пышном' },
+  { slug: 'thick', case: 'толстом' },
 ];
 
 
 
-// 'Пышное', 'Тонкое'
+// 'Толстое', 'Тонкое'
 // 'Томатный','Белый','Острый'
 
 // 'Моцарелла', 'Чеддер', 'Дор Блю';

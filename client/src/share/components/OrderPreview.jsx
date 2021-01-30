@@ -5,11 +5,13 @@ import { root as url } from '../../api/config';
 // Img
 import plate from '../../asserts/plate.png';
 import thin from '../../asserts/thin.png';
-import bacon from '../../asserts/ingredients/bacon.png';
+import thick from '../../asserts/thick.png';
+import { serverImgs } from '../../api/config';
 // Selectors
 import { getIngredientsByCategory } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Helpers
 import { renderIngredients } from '../renderIngredient';
+import { useEffect, useState } from 'react';
 
 // Styles
 const H3 = styled.h3`
@@ -41,15 +43,26 @@ const Image = styled.img`
   transform: translate3d(-50%, 0, 0);
   left: 50%;
 `;
-const IngredientImage = styled(Image)`
-  width: 255px;
+const DoughImage = styled(Image)`
+  ${({ size }) => (size === '30' ? 'width: 230px;' : 'width: 255px;')};
+  transition: all var(--transition);
 `;
 const IngredientsImage = styled(Image)`
-  width: 230px;
+  ${({ size }) => (size === '30' ? 'width: 190px' : 'width: 218px')};
+  transition: all var(--transition);
+  left: 48.5%;
 `;
-const P = styled.p`
+const Composition = styled.div`
   margin-bottom: 24px;
-  @media (min-width: var(--point-desktop));
+  @media (min-width: var(--point-desktop)) {
+    margin-bottom: 32px;
+  } ;
+`;
+const CompositionItem = styled.p`
+  margin-bottom: 4px;
+  @media (min-width: var(--point-desktop)) {
+    margin-bottom: 6px;
+  } ;
 `;
 
 export const OrderPreview = ({ pizza, ingredients }) => {
@@ -60,45 +73,79 @@ export const OrderPreview = ({ pizza, ingredients }) => {
   const MEAT = useSelector(getIngredientsByCategory('meat'));
   const SAUCES = useSelector(getIngredientsByCategory('sauces'));
 
+  /**
+   * What is dough type?
+   */
+  const [doughImageLink, setDoughImageLink] = useState(null);
+  useEffect(() => {
+    if (dough === 'thin') {
+      setDoughImageLink(thin);
+    }
+    if (dough === 'thick') {
+      setDoughImageLink(thick);
+    }
+  }, [dough]);
+
   return (
     <section>
       <Preview>
         <Plate src={plate} alt='plate' />
-        <IngredientImage src={`${url}${dough}`} />
-        {meat && meat.map(m => <IngredientsImage key={m} src={`${url}${m}`} />)}
-        {vegetables &&
-          vegetables.map(v => <IngredientsImage key={v} src={`${url}${v}`} />)}
+        {}
+        <DoughImage size={size} src={doughImageLink} alt='dough' />
         {cheese &&
-          cheese.map(c => <IngredientsImage key={c} src={`${url}${c}`} />)}
-        <IngredientImage src={`${url}${sauces}`} />
+          cheese.map(c => (
+            <IngredientsImage
+              key={c}
+              src={`${serverImgs}${c}.png`}
+              size={size}
+            />
+          ))}
+        {meat &&
+          meat.map(m => (
+            <IngredientsImage
+              key={m}
+              src={`${serverImgs}${m}.png`}
+              size={size}
+            />
+          ))}
+        {vegetables &&
+          vegetables.map(v => (
+            <IngredientsImage
+              key={v}
+              src={`${serverImgs}${v}.png`}
+              size={size}
+            />
+          ))}
+        {/* there should be sauces here */}
       </Preview>
       <H3>Маргарита</H3>
-      <P>
-        <span>{!!size && ` ${renderIngredients(size, ingredients)}`}</span>
-        см на тесте
-        <span>{!!dough && ` ${renderIngredients(dough, ingredients)}`}</span>
-        <br />
-        <span>
+      <Composition>
+        <CompositionItem>
+          <span>{!!size && ` ${renderIngredients(size, ingredients)}`}</span>
+          см на тесте
+          <span>{!!dough && ` ${renderIngredients(dough, ingredients)}`}</span>
+        </CompositionItem>
+        <CompositionItem>
           {sauces !== undefined && sauces.length && SAUCES.length
             ? `Соус: ${renderIngredients(sauces, ingredients)}`
             : null}
-        </span>
-        <span>
+        </CompositionItem>
+        <CompositionItem>
           {cheese !== undefined && cheese.length && CHEESE.length
-            ? ` • Сыр: ${renderIngredients(cheese, CHEESE)}`
+            ? `Сыр: ${renderIngredients(cheese, CHEESE)}`
             : null}
-        </span>
-        <span>
+        </CompositionItem>
+        <CompositionItem>
           {vegetables !== undefined && vegetables?.length && VEGETABLES.length
-            ? ` • Овощи: ${renderIngredients(vegetables, VEGETABLES)}`
+            ? `Овощи: ${renderIngredients(vegetables, VEGETABLES)}`
             : null}
-        </span>
-        <span>
+        </CompositionItem>
+        <CompositionItem>
           {meat !== undefined && meat?.length && MEAT.length
-            ? ` • Мясо: ${renderIngredients(meat, MEAT)}`
+            ? `Мясо: ${renderIngredients(meat, MEAT)}`
             : null}
-        </span>
-      </P>
+        </CompositionItem>
+      </Composition>
     </section>
   );
 };

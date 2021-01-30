@@ -105,9 +105,19 @@ fieldset {
     0px 0px 2px rgba(75, 75, 124, 0.2);
   --shadow-inset: inset 0px 1px 4px rgba(0, 0, 0, 0.25);
   --padding-glob: 16px;
-  /* --padding-glob-minus: -16px; */
+  --transition:  0.3s ease;
+}
+
+h1 {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--black);
+  margin: 0 0 24px;
 }
 
 /* Break points */
 /* --point-desktop: 960.5px; */
 /* --point-tablet-w: 480px ; */
+/* 360px */
