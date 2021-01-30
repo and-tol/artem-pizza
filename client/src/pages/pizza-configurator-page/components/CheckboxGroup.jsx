@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { ReactComponent as IconCheck } from '../../../asserts/icons/icn_check.svg';
+// Images
+import { serverImgs } from '../../../api/config';
 // Styles
 import { Legend } from '../../../share/styled-components/Legend';
 
@@ -74,12 +76,11 @@ const Label = styled.label`
     isSelected ? 'var(--primary)' : 'transparent'}; */
 `;
 
-const Image = styled.div`
+const Image = styled.img`
   position: relative;
   display: block;
   width: 64px;
   height: 64px;
-  background: paleturquoise;
   margin-bottom: 8px;
   @media (min-width: 960.5px) {
     margin-bottom: 12px;
@@ -163,7 +164,10 @@ export const CheckboxGroup = ({ register, legend, options, name }) => {
                 key={option[1].id}
                 className={option[1].slug}
               >
-                <Image />
+                <Image
+                  src={`${serverImgs}${option[1].thumbnail}`}
+                  alt={option[1].name}
+                />
                 <LabelText>{option[1].name}</LabelText>
                 <PriceInputContainer>
                   <Price>{option[1].price}₽</Price>

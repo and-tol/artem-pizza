@@ -43,6 +43,7 @@ const Slide = styled.label`
   font-size: 14px;
   line-height: 20px;
   cursor: pointer;
+  transition: all var(--transition);
   @media (min-width: 960.5px) {
     padding: 4px 12px;
     font-size: 16px;
@@ -65,7 +66,6 @@ export const RadioGroupSlider = props => {
   return (
     <>
       <Legend>{legend}</Legend>
-      {/* <Fieldset> */}
       <SliderWrapper>
         <SliderContainer>
           {Object.entries(options).map(option => (
@@ -86,7 +86,6 @@ export const RadioGroupSlider = props => {
           ))}
         </SliderContainer>
       </SliderWrapper>
-      {/* </Fieldset> */}
     </>
   );
 };

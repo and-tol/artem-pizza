@@ -62,8 +62,6 @@ export const PizzaForm = ({ onPizzaOrder }) => {
 
   const values = watch();
 
-  console.log('values', values);
-
   const totalPrice = calculateTotalPrice(ingredients, values);
 
   const onSubmit = handleSubmit(data => {
@@ -91,14 +89,12 @@ export const PizzaForm = ({ onPizzaOrder }) => {
             options={DOUGH}
           />
         </RadioGroupSwitcherContainer>
-        {/* <RadioGroupContainer> */}
         <RadioGroupSlider
           legend='Выберите соус'
           register={register}
           name='sauces'
           options={SAUCES}
         />
-        {/* </RadioGroupContainer> */}
 
         <RadioGroupContainer>
           <CheckboxGroup

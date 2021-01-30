@@ -1,8 +1,6 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-// Config
-import { root as url } from '../../api/config';
-// Img
+// Images
 import plate from '../../asserts/plate.png';
 import thin from '../../asserts/thin.png';
 import thick from '../../asserts/thick.png';
@@ -48,19 +46,23 @@ const DoughImage = styled(Image)`
   transition: all var(--transition);
 `;
 const IngredientsImage = styled(Image)`
-  ${({ size }) => (size === '30' ? 'width: 190px' : 'width: 218px')};
+  ${({ size }) => (size === '30' ? 'width: 194px' : 'width: 218px')};
+  left: 49%;
   transition: all var(--transition);
-  left: 48.5%;
+  @media (min-width: 960.5px) {
+    ${({ size }) => (size === '30' ? 'width: 194px' : 'width: 218px')};
+    left: 49.6%;
+  } ;
 `;
 const Composition = styled.div`
   margin-bottom: 24px;
-  @media (min-width: var(--point-desktop)) {
+  @media (min-width: 960.5px) {
     margin-bottom: 32px;
   } ;
 `;
 const CompositionItem = styled.p`
   margin-bottom: 4px;
-  @media (min-width: var(--point-desktop)) {
+  @media (min-width: 960.5px) {
     margin-bottom: 6px;
   } ;
 `;
