@@ -1,26 +1,26 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
-import styled from 'styled-components'
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 // Data
-import { DEFAULT_PIZZA } from '../../../pizzaData'
-import { calculateTotalPrice } from '../../../share/calculateTotalPrice'
-import { OrderPreview } from '../../../share/components/OrderPreview'
+import { DEFAULT_PIZZA } from '../../../pizzaData';
+import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
+import { OrderPreview } from '../../../share/components/OrderPreview';
 // Hooks
-import { useWindowDimensions } from '../../../share/hooks/useWindowsDimentions'
-import { ButtonPrimary } from '../../../share/styled-components/Button'
-import { Footer } from '../../../share/styled-components/Footer'
+import { useWindowDimensions } from '../../../share/hooks/useWindowsDimentions';
+import { ButtonPrimary } from '../../../share/styled-components/Button';
+import { Footer } from '../../../share/styled-components/Footer';
 // Selectors
 import {
   getIngredients,
   getIngredientsByCategory,
-  getLoadingStatus
-} from '../state-ingredients/ingredientsSelectors'
+  getLoadingStatus,
+} from '../state-ingredients/ingredientsSelectors';
 // Components
-import { CheckboxGroup } from './CheckboxGroup'
-import { RadioGroupSlider } from './RadioGroupSlider'
-import { RadioGroupSwitcher } from './RadioGroupSwitcher'
-
+import { Loader } from '../../../share/components/loader';
+import { CheckboxGroup } from './CheckboxGroup';
+import { RadioGroupSlider } from './RadioGroupSlider';
+import { RadioGroupSwitcher } from './RadioGroupSwitcher';
 
 // Styles
 const Container = styled.section`
@@ -89,10 +89,10 @@ export const PizzaForm = ({ onPizzaOrder }) => {
 
   if (isLoading) {
     return (
-      <Container>
-        <div>Loading...</div>
-    </Container>
-    )
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   return (
