@@ -3,8 +3,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import App from './App';
 import './index.css';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+
+import App from './App';
+
 import { store } from './init/store';
 
 ReactDOM.render(
