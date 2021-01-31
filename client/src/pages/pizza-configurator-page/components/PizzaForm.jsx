@@ -1,27 +1,42 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useForm } from 'react-hook-form';
-import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
-import styled from 'styled-components';
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { useSelector } from 'react-redux'
+import styled from 'styled-components'
+// Data
+import { DEFAULT_PIZZA } from '../../../pizzaData'
+import { calculateTotalPrice } from '../../../share/calculateTotalPrice'
+import { OrderPreview } from '../../../share/components/OrderPreview'
 // Hooks
-import { useWindowDimensions } from '../../../share/hooks/useWindowsDimentions';
+import { useWindowDimensions } from '../../../share/hooks/useWindowsDimentions'
+import { ButtonPrimary } from '../../../share/styled-components/Button'
+import { Footer } from '../../../share/styled-components/Footer'
 // Selectors
 import {
   getIngredients,
   getIngredientsByCategory,
-} from '../state-ingredients/ingredientsSelectors';
-
-// Data
-import { DEFAULT_PIZZA } from '../../../pizzaData';
+  getLoadingStatus
+} from '../state-ingredients/ingredientsSelectors'
 // Components
-import { CheckboxGroup } from './CheckboxGroup';
-import { RadioGroupSlider } from './RadioGroupSlider';
-import { OrderPreview } from '../../../share/components/OrderPreview';
-import { RadioGroupSwitcher } from './RadioGroupSwitcher';
-import { ButtonPrimary } from '../../../share/styled-components/Button';
-import { Footer } from '../../../share/styled-components/Footer';
+import { CheckboxGroup } from './CheckboxGroup'
+import { RadioGroupSlider } from './RadioGroupSlider'
+import { RadioGroupSwitcher } from './RadioGroupSwitcher'
+
 
 // Styles
+const Container = styled.section`
+  @media (min-width: 960.5px) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+`;
+
+const FormStyled = styled.form`
+  @media (min-width: 960.5px) {
+    max-width: 500px;
+  }
+`;
+
 const RadioGroupContainer = styled.div`
   position: relative;
   margin-bottom: 24px;
@@ -50,6 +65,8 @@ export const PizzaForm = ({ onPizzaOrder }) => {
   const { register, handleSubmit, watch } = useForm({
     defaultValues: DEFAULT_PIZZA,
   });
+  const isLoading = useSelector(getLoadingStatus);
+  console.log('isLoading>>>>', isLoading);
 
   const ingredients = useSelector(getIngredients);
 
@@ -70,10 +87,23 @@ export const PizzaForm = ({ onPizzaOrder }) => {
     }
   });
 
+  if (isLoading) {
+    return (
+      <Container>
+        <div>Loading...</div>
+    </Container>
+    )
+  }
+
   return (
-    <>
-      <OrderPreview pizza={values} ingredients={ingredients} />
-      <form onSubmit={onSubmit}>
+    <Container>
+      <OrderPreview
+        pizza={values}
+        ingredients={ingredients}
+        onSubmit={onSubmit}
+        totalPrice={totalPrice}
+      />
+      <FormStyled onSubmit={onSubmit}>
         <RadioGroupSwitcherContainer>
           <RadioGroupSwitcher
             legend='Размер'
@@ -117,14 +147,12 @@ export const PizzaForm = ({ onPizzaOrder }) => {
           name='meat'
           options={MEAT}
         />
-        {windowWidth <= 480 ? (
+        {windowWidth < 960 && (
           <Footer>
             <Button>Заказать за {totalPrice}руб.</Button>
           </Footer>
-        ) : (
-          <Button>Заказать за {totalPrice}руб.</Button>
         )}
-      </form>
-    </>
+      </FormStyled>
+    </Container>
   );
 };

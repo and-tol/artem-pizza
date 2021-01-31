@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { OrderPreview } from './OrderPreview';
+import { OrderPreview } from '../../../share/components/OrderPreview';
 
-import { store } from '../../init/store';
+import { store } from '../../../init/store';
 import { Provider } from 'react-redux';
 
 describe('OrderPreview', () => {

@@ -1,19 +1,19 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 // Hooks
-import { useWindowDimensions } from '../../share/hooks/useWindowsDimentions';
+import { useWindowDimensions } from '../../../share/hooks/useWindowsDimentions';
 // Components
-import { ButtonPrimary } from '../../share/styled-components/Button';
-import { Footer } from '../../share/styled-components/Footer';
+import { ButtonPrimary } from '../../../share/styled-components/Button';
+
 // Images
-import plate from '../../asserts/plate.png';
-import thin from '../../asserts/thin.png';
-import thick from '../../asserts/thick.png';
-import { serverImgs } from '../../api/config';
+import plate from '../../../asserts/plate.png';
+import thin from '../../../asserts/thin.png';
+import thick from '../../../asserts/thick.png';
+import { serverImgs } from '../../../api/config';
 // Selectors
-import { getIngredientsByCategory } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
+import { getIngredientsByCategory } from '../state-ingredients/ingredientsSelectors';
 // Helpers
-import { renderIngredients } from '../renderIngredient';
+import { renderIngredients } from '../../../share/renderIngredient';
 import { useEffect, useState } from 'react';
 
 // Styles
@@ -64,8 +64,8 @@ const IngredientsImage = styled(Image)`
   left: 49%;
   transition: all var(--transition);
   @media (min-width: 960.5px) {
-    ${({ size }) => (size === '30' ? 'width: 235px' : 'width: 266px')};
-    left: 49.6%;
+    ${({ size }) => (size === '30' ? 'width: 213px' : 'width: 266px')};
+    left: 50%;
   } ;
 `;
 const Composition = styled.div`
@@ -86,7 +86,7 @@ const Button = styled(ButtonPrimary)`
   }
 `;
 
-export const OrderPreview = ({ pizza, ingredients, totalPrice, onSubmit }) => {
+export const PizzaPreview = ({ pizza, ingredients, totalPrice, onSubmit }) => {
   const { width: windowWidth } = useWindowDimensions();
   const { size, dough, sauces, cheese, vegetables, meat } = pizza;
 

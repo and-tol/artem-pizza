@@ -14,6 +14,7 @@ const Fieldset = styled.div`
   overflow-x: auto;
   padding-top: 4px;
   margin-top: -4px;
+  padding-left: var(--padding-glob);
   &::-webkit-scrollbar {
     display: none;
   }

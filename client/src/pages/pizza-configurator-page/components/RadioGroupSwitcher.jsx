@@ -1,9 +1,9 @@
-import { Fragment } from 'react';
-import styled from 'styled-components';
-
+import { Fragment } from 'react'
+import styled from 'styled-components'
+import { InputGroupContainer as SwitcherContainer } from '../../../share/styled-components/InputGroupContainer'
 // Styles
-import { Legend } from '../../../share/styled-components/Legend';
-import { InputGroupContainer as SwitcherContainer } from '../../../share/styled-components/InputGroupContainer';
+import { Legend } from '../../../share/styled-components/Legend'
+
 
 const Fieldset = styled.div`
   display: inline-block;
@@ -24,7 +24,6 @@ const Label = styled.label`
   align-items: center;
   border-radius: 10px;
   padding: 4px 12px;
-
   border-radius: 12px;
   background-color: transparent;
   font-size: 14px;
@@ -43,6 +42,7 @@ const Input = styled.input`
     font-weight: 500;
     box-shadow: var(--shadow);
     cursor: default;
+    letter-spacing: -0.4px;
   }
 `;
 

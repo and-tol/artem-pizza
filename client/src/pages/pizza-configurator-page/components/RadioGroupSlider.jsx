@@ -14,12 +14,12 @@ const SliderContainer = styled(InputGroupContainer)`
   }
   margin-right: -(var(--padding-glob));
   margin-bottom: 24px;
-  @media (min-width: 960.5px) {
-    margin-bottom: 32px;
-  }
+
   @media (min-width: 960.5px) {
     background-color: #fff;
     border: none;
+    flex-wrap: wrap;
+    margin-bottom: calc(32px - 8px);
   }
 `;
 const SliderWrapper = styled.div`
@@ -48,6 +48,7 @@ const Slide = styled.label`
     padding: 4px 12px;
     font-size: 16px;
     line-height: 24px;
+    margin-bottom: 8px;
   }
 `;
 const Input = styled.input`

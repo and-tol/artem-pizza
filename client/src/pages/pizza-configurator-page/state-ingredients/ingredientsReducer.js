@@ -33,7 +33,7 @@ const initialState = {
     },
   ],
   error: null,
-  isLoading: false,
+  isLoading: true,
 };
 
 export const fetchIngredientsAsync = createAsyncThunk(
