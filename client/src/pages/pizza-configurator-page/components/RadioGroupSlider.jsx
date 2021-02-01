@@ -38,17 +38,15 @@ const Slide = styled.label`
   border-radius: 10px;
   padding: 4px 12px;
   white-space: nowrap;
-  border-radius: 12px;
   background-color: transparent;
-  font-size: 14px;
-  line-height: 20px;
   cursor: pointer;
   transition: all var(--transition);
   @media (min-width: 960px) {
-    padding: 4px 12px;
-    font-size: 16px;
-    line-height: 24px;
+    border-radius: 12px;
+    padding: 8px 16px;
     margin-bottom: 8px;
+    border: 2px solid var(--gray200);
+    margin-right: 8px;
   }
 `;
 const Input = styled.input`
@@ -58,6 +56,9 @@ const Input = styled.input`
     font-weight: 500;
     box-shadow: var(--shadow);
     cursor: default;
+    @media (min-width: 960px) {
+      border-color: var(--primary)
+    }
   }
 `;
 
