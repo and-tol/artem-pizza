@@ -7,8 +7,6 @@ import { useWindowDimensions } from '../hooks/useWindowDimentions';
 import { getIngredientsByCategory } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Helpers
 import { renderIngredients } from '../renderIngredient';
-// TODO: +++++++++
-import { calculateTotalPrice } from '../calculateTotalPrice';
 
 // Styles
 const Composition = styled.div`
@@ -25,12 +23,6 @@ const Title = styled.h3`
   color: var(--black);
   margin: 0;
   margin-bottom: 8px;
-`;
-const CompositionItem = styled.p`
-  margin-bottom: 4px;
-  @media (min-width: var(--point-desktop)) {
-    margin-bottom: 6px;
-  } ;
 `;
 
 export const OrderPreview = ({ pizza, ingredients }) => {

@@ -11,6 +11,8 @@ import { fetchIngredientsAsync } from '../../pages/pizza-configurator-page/state
 import { getIngredients } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Components
 import { OrderPreview } from './OrderPreview';
+// TODO: +++++++++
+import { calculateTotalPrice } from '../calculateTotalPrice';
 // Icons
 import { ReactComponent as IconDelivery } from '../../asserts/icons/icn_delivery.svg';
 import { ReactComponent as IconRepeat } from '../../asserts/icons/icn_repeat.svg';
@@ -78,6 +80,7 @@ export const Order = props => {
   }, [dispatch]);
 
   const ingredients = useSelector(getIngredients);
+  const totalPrice = calculateTotalPrice(ingredients, pizza);
 
   return (
     <Article>
@@ -92,7 +95,7 @@ export const Order = props => {
       <OrderPreview pizza={pizza} ingredients={ingredients} />
 
       <OrderPreviewFooter>
-        <Price>420 руб</Price>
+        <Price>{totalPrice} руб</Price>
         <LogoVisa width='30' height='20,5' />
         <span>{order && `*${order.cardNumber?.slice(-4)} `}</span>
         <OrderPreviewFooterDelivery>
