@@ -11,7 +11,7 @@ const Fieldset = styled.div`
     @media (min-width: 480px) {
       margin-left: 36px;
     }
-    @media (min-width: 960.5px) {
+    @media (min-width: 960px) {
       margin-left: 16px;
     }
   }
@@ -29,7 +29,7 @@ const Label = styled.label`
   font-size: 14px;
   line-height: 20px;
   cursor: pointer;
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     padding: 4px 12px;
     font-size: 16px;
     line-height: 24px;

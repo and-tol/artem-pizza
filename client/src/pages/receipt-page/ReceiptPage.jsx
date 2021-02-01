@@ -1,15 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 // Images
-import orderError from '../../asserts/icons/order-status_error.svg';
-import orderSuccess from '../../asserts/icons/order-status_ok.svg';
-// Components
-import { Order } from '../../share/components';
-// Selectors
-import { getAcceptedOrder } from '../checkout-page/state/checkoutSelectors';
+import orderError from '../../asserts/icons/order-status_error.svg'
+import orderSuccess from '../../asserts/icons/order-status_ok.svg'
 // Fake Data
-import { fakeOrder } from '../../pizzaData';
+import { fakeOrder } from '../../pizzaData'
+// Components
+import { Order } from '../../share/components'
+// Selectors
+import { getOrder } from '../checkout-page/state/checkoutSelectors'
 
 /**
  * Страница подтверждения заказа
@@ -17,7 +17,7 @@ import { fakeOrder } from '../../pizzaData';
  */
 export const ReceiptPage = () => {
   const history = useHistory();
-  const isAccepted = useSelector(getAcceptedOrder);
+  const isAccepted = useSelector(getOrder);
 
   const tryOrderAgain = () => {
     history.push('/checkout');

@@ -65,9 +65,6 @@ export const ingredientsReducer = createSlice({
   name: 'ingreddients',
   initialState,
   reducers: {
-    startFetching: state => {
-      state.isLoading = true;
-    },
     stopFetching: state => {
       state.isLoading = true;
     },

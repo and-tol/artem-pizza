@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Wrapper = ({ children, ...args }) => {
   return <div {...args}>{children}</div>;
@@ -10,7 +10,7 @@ export const StyledWrapper = styled(Wrapper)`
   justify-content: space-between;
   align-items: center;
 
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     width: 960px;
   }
 `;

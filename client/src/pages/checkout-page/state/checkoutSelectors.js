@@ -1,1 +1,1 @@
-export const getAcceptedOrder = state => state.checkout.isAccepted;
+export const getOrder = state => state.checkout.order;

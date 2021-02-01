@@ -1,8 +1,8 @@
-import { Fragment } from 'react';
-import styled from 'styled-components';
+import { Fragment } from 'react'
+import styled from 'styled-components'
+import { InputGroupContainer } from '../../../share/styled-components/InputGroupContainer'
 // Styles
-import { Legend } from '../../../share/styled-components/Legend';
-import { InputGroupContainer } from '../../../share/styled-components/InputGroupContainer';
+import { Legend } from '../../../share/styled-components/Legend'
 
 const SliderContainer = styled(InputGroupContainer)`
   display: inline-flex;
@@ -15,7 +15,7 @@ const SliderContainer = styled(InputGroupContainer)`
   margin-right: -(var(--padding-glob));
   margin-bottom: 24px;
 
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     background-color: #fff;
     border: none;
     flex-wrap: wrap;
@@ -44,7 +44,7 @@ const Slide = styled.label`
   line-height: 20px;
   cursor: pointer;
   transition: all var(--transition);
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     padding: 4px 12px;
     font-size: 16px;
     line-height: 24px;

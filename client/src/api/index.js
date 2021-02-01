@@ -19,9 +19,7 @@ export const api = Object.freeze({
       });
     },
     getAllOrders: () => {
-      return fetch(`${root}/orders`, {
-        method: 'GET',
-      });
+      return fetch(`${root}/orders`);
     },
   },
 

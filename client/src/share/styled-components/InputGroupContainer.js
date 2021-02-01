@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const InputGroupContainer = styled.div`
   display: inline-flex;
@@ -8,7 +8,7 @@ export const InputGroupContainer = styled.div`
   border-radius: 12px;
   background: var(--gray100);
   overflow-x: auto;
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     border-radius: 14px;
   }
 `;

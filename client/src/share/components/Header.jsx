@@ -1,13 +1,13 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-// Hooks
-import { useWindowDimensions } from '../hooks/useWindowsDimentions';
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import { ReactComponent as IcnAccount } from '../../asserts/icons/icn_account.svg'
 // Images
-import { ReactComponent as NavbarBrand } from '../../asserts/NavbarBrand.svg';
-import { ReactComponent as IcnAccount } from '../../asserts/icons/icn_account.svg';
+import { ReactComponent as NavbarBrand } from '../../asserts/NavbarBrand.svg'
+// Hooks
+import { useWindowDimensions } from '../hooks/useWindowDimentions'
+import * as Button from '../styled-components/Button'
 // Styles
-import { StyledWrapper } from '../styled-components/StyledWrapper';
-import * as Button from '../styled-components/Button';
+import { StyledWrapper } from '../styled-components/StyledWrapper'
 
 export const StyledHeader = styled.header`
   width: 100%;
@@ -21,7 +21,7 @@ export const StyledHeader = styled.header`
 const WrapperHeader = styled(StyledWrapper)`
   min-height: 56px;
   padding: 8px;
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     padding: 16px;
     min-height: 80px;
   }

@@ -1,17 +1,16 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import styled from 'styled-components';
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import styled from 'styled-components'
+import { CheckoutPage } from './pages/checkout-page'
+import { LoginPage } from './pages/login-page'
+import { NotFoundPage } from './pages/not-found-page'
+import { OrdersListPage } from './pages/orders-list-page'
 // Pages
-import { PizzaConfiguratorPage } from './pages/pizza-configurator-page';
-import { CheckoutPage } from './pages/checkout-page';
-import { LoginPage } from './pages/login-page';
-import { OrdersListPage } from './pages/orders-list-page';
-import { ReceiptPage } from './pages/receipt-page';
-import { SignupPage } from './pages/signup-page';
-import { NotFoundPage } from './pages/not-found-page';
+import { PizzaConfiguratorPage } from './pages/pizza-configurator-page'
+import { ReceiptPage } from './pages/receipt-page'
+import { SignupPage } from './pages/signup-page'
 // Components
-import { Header } from './share/components/Header';
-import { Footer } from './share/styled-components/Footer';
+import { Header } from './share/components/Header'
 
 
 const Main = styled.main`
@@ -26,7 +25,7 @@ const Main = styled.main`
   @media (max-width: 960px) {
     max-width: 960px;
   }
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     width: 960px;
     padding: 32px 72px 32px;
   }

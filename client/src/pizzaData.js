@@ -7,7 +7,17 @@ export const DEFAULT_PIZZA = Object.freeze({
   meat: [],
 });
 
-export const PIZZA_DELIVERY = 180;
+// export const PIZZA_DELIVERY.price = 180;
+
+export const PIZZA_DELIVERY = Object.freeze({
+  price: 180,
+  status: {
+    0: 'В работе',
+    1: 'Доставляется',
+    2: 'Доставлен',
+    3: 'Повторить заказ',
+  },
+});
 
 export const fakeOrder = {
   pizza: {
@@ -27,8 +37,6 @@ export const IngredientsCases = [
   { slug: 'thin', case: 'тонком' },
   { slug: 'thick', case: 'толстом' },
 ];
-
-
 
 // 'Толстое', 'Тонкое'
 // 'Томатный','Белый','Острый'

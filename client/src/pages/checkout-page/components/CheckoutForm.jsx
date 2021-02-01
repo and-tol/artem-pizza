@@ -1,13 +1,13 @@
-import { useDispatch } from 'react-redux';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-// Actions
-import { checkoutReducer, sendOrderAsync } from '../state/checkoutReducer';
-// Helpers
-import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import * as yup from 'yup'
 // Data
-import { PIZZA_DELIVERY } from '../../../pizzaData';
+import { PIZZA_DELIVERY } from '../../../pizzaData'
+// Helpers
+import { calculateTotalPrice } from '../../../share/calculateTotalPrice'
+// Actions
+import { checkoutReducer, sendOrderAsync } from '../state/checkoutReducer'
 
 const valid = require('card-validator');
 
@@ -145,14 +145,14 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
               Стоимость заказа <span>{orderPrice} руб.</span>
             </p>
             <p>
-              Доставка <span>{PIZZA_DELIVERY} руб.</span>
+              Доставка <span>{PIZZA_DELIVERY.price} руб.</span>
             </p>
             <hr />
             <p>
-              К оплате <span>{orderPrice + PIZZA_DELIVERY} руб.</span>
+              К оплате <span>{orderPrice + PIZZA_DELIVERY.price} руб.</span>
             </p>
             <button type='submit'>
-              Оплатить {orderPrice + PIZZA_DELIVERY} руб.
+              Оплатить {orderPrice + PIZZA_DELIVERY.price} руб.
             </button>
           </section>
         </form>

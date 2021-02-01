@@ -22,7 +22,7 @@
   },
   "include": [
     "src/**/*"
-, "temp/RadioGroupWithRef.jsx", "temp/RadioGr.jsx", "temp/OrderPreview.test.jsx", "temp/CheckoutForm.jsx"  ],
+, "temp/RadioGroupWithRef.jsx", "temp/RadioGr.jsx", "temp/OrderPreview.test.jsx", "temp/CheckoutForm.jsx", "temp/OrderPreview.jsx"  ],
   "exclude": [
     "node_modules",
     "**/*.test.ts",

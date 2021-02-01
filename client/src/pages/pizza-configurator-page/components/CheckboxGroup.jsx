@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { ReactComponent as IconCheck } from '../../../asserts/icons/icn_check.svg';
+import styled from 'styled-components'
 // Images
-import { serverImgs } from '../../../api/config';
+import { serverImgs } from '../../../api/config'
+import { ReactComponent as IconCheck } from '../../../asserts/icons/icn_check.svg'
 // Styles
-import { Legend } from '../../../share/styled-components/Legend';
+import { Legend } from '../../../share/styled-components/Legend'
 
 const Fieldset = styled.div`
   display: flex;
@@ -22,11 +22,11 @@ const Fieldset = styled.div`
   margin-left: calc(var(--padding-glob) * (-1));
   &:first-child {
     margin-left: var(--padding-glob);
-    @media (min-width: 960.5px) {
+    @media (min-width: 960px) {
       margin-left: 0;
     }
   }
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     padding-top: 8px;
     margin-top: -8px;
     flex-wrap: wrap;
@@ -37,7 +37,7 @@ const Article = styled.article`
   position: relative;
   margin-right: 8px;
 
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     margin-right: 16px;
     margin-bottom: 28px;
   }
@@ -49,7 +49,7 @@ const Label = styled.label`
   justify-content: flex-start;
   width: 104px;
   height: 128px;
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     width: 112px;
     height: 156px;
   }
@@ -83,11 +83,11 @@ const Image = styled.img`
   width: 64px;
   height: 64px;
   margin-bottom: 8px;
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     margin-bottom: 12px;
   }
   top: -18.8px;
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     top: -21.75px;
   }
   transform: translate3d(-50%, 0, 0);
@@ -97,7 +97,7 @@ const Image = styled.img`
 const LabelText = styled.p`
   display: block;
   margin-bottom: 8px;
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     margin-bottom: 12px;
   }
 `;

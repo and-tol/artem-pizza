@@ -1,30 +1,29 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { useSelector } from 'react-redux'
+import styled from 'styled-components'
 // Data
-import { DEFAULT_PIZZA } from '../../../pizzaData';
-import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
-import { OrderPreview } from '../../../share/components/OrderPreview';
+import { DEFAULT_PIZZA } from '../../../pizzaData'
+// Helpers
+import { calculateTotalPrice } from '../../../share/calculateTotalPrice'
+// Components
+import { Loader } from '../../../share/components/loader'
 // Hooks
-import { useWindowDimensions } from '../../../share/hooks/useWindowsDimentions';
-import { ButtonPrimary } from '../../../share/styled-components/Button';
-import { Footer } from '../../../share/styled-components/Footer';
+import { useWindowDimensions } from '../../../share/hooks/useWindowDimentions'
+// Styles
+import { ButtonPrimary, Footer } from '../../../share/styled-components'
 // Selectors
 import {
   getIngredients,
   getIngredientsByCategory,
-  getLoadingStatus,
-} from '../state-ingredients/ingredientsSelectors';
-// Components
-import { Loader } from '../../../share/components/loader';
-import { CheckboxGroup } from './CheckboxGroup';
-import { RadioGroupSlider } from './RadioGroupSlider';
-import { RadioGroupSwitcher } from './RadioGroupSwitcher';
-
-// Styles
+  getLoadingStatus
+} from '../state-ingredients/ingredientsSelectors'
+import { CheckboxGroup } from './CheckboxGroup'
+import { PizzaPreview } from './PizzaPreview'
+import { RadioGroupSlider } from './RadioGroupSlider'
+import { RadioGroupSwitcher } from './RadioGroupSwitcher'
 const Container = styled.section`
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -32,7 +31,7 @@ const Container = styled.section`
 `;
 
 const FormStyled = styled.form`
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     max-width: 500px;
   }
 `;
@@ -40,7 +39,7 @@ const FormStyled = styled.form`
 const RadioGroupContainer = styled.div`
   position: relative;
   margin-bottom: 24px;
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     margin-bottom: 32px;
   }
 `;
@@ -97,7 +96,7 @@ export const PizzaForm = ({ onPizzaOrder }) => {
 
   return (
     <Container>
-      <OrderPreview
+      <PizzaPreview
         pizza={values}
         ingredients={ingredients}
         onSubmit={onSubmit}
