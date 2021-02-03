@@ -1,15 +1,15 @@
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import { ReactComponent as IcnAccount } from '../../asserts/icons/icn_account.svg'
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { ReactComponent as IcnAccount } from '../../asserts/icons/icn_account.svg';
 // Images
-import { ReactComponent as NavbarBrand } from '../../asserts/NavbarBrand.svg'
+import { ReactComponent as NavbarBrand } from '../../asserts/NavbarBrand.svg';
 // Hooks
-import { useWindowDimensions } from '../hooks/useWindowDimentions'
-import * as Button from '../styled-components/Button'
+import { useWindowDimensions } from '../hooks/useWindowDimentions';
+import * as Button from '../styled-components/Button';
 // Styles
-import { StyledWrapper } from '../styled-components/StyledWrapper'
+import { StyledWrapper } from '../styled-components/StyledWrapper';
 
-export const StyledHeader = styled.header`
+export const Styled = styled.header`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -18,7 +18,7 @@ export const StyledHeader = styled.header`
     0px 3px 4px 0px rgba(46, 49, 55, 0.05);
 `;
 
-const WrapperHeader = styled(StyledWrapper)`
+const Wrapper = styled(StyledWrapper)`
   min-height: 56px;
   padding: 8px;
   @media (min-width: 960px) {
@@ -36,10 +36,10 @@ const StyledNavbarBrand = styled(NavbarBrand)`
 `;
 
 export const Header = () => {
-  const {width: windowWidth } = useWindowDimensions();
+  const { width: windowWidth } = useWindowDimensions();
   return (
-    <StyledHeader>
-      <WrapperHeader>
+    <Styled>
+      <Wrapper>
         <Link to='/'>
           <StyledNavbarBrand height={24} />
         </Link>
@@ -52,7 +52,7 @@ export const Header = () => {
             <StyledIcnAccount /> Личный кабинет
           </Button.ButtonSecondary>
         )}
-      </WrapperHeader>
-    </StyledHeader>
+      </Wrapper>
+    </Styled>
   );
 };

@@ -1,17 +1,25 @@
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import styled from 'styled-components'
-import { CheckoutPage } from './pages/checkout-page'
-import { LoginPage } from './pages/login-page'
-import { NotFoundPage } from './pages/not-found-page'
-import { OrdersListPage } from './pages/orders-list-page'
+import React from 'react';
+import { Route, Switch, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+import { CheckoutPage } from './pages/checkout-page';
+import { LoginPage } from './pages/login-page';
+import { NotFoundPage } from './pages/not-found-page';
+import { OrdersListPage } from './pages/orders-list-page';
 // Pages
-import { PizzaConfiguratorPage } from './pages/pizza-configurator-page'
-import { ReceiptPage } from './pages/receipt-page'
-import { SignupPage } from './pages/signup-page'
+import { PizzaConfiguratorPage } from './pages/pizza-configurator-page';
+import { ReceiptPage } from './pages/receipt-page';
+import { SignupPage } from './pages/signup-page';
 // Components
-import { Header } from './share/components/Header'
-
+import { Header } from './share/components/Header';
+// Styles
+const GlobWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  background-color: ${({ pathname }) =>
+    pathname === '/checkout' && 'var(--gray100)'};
+`;
 
 const Main = styled.main`
   width: 100%;
@@ -28,18 +36,20 @@ const Main = styled.main`
   @media (min-width: 960px) {
     width: 960px;
     padding: 32px 72px 32px;
+    padding: ${({ pathname }) => pathname === '/checkout' && '0'};
   }
 `;
 
 function App() {
+  const { pathname } = useLocation();
+
   return (
-    <>
+    <GlobWrapper pathname={pathname}>
       <Header />
-      <Main>
+      <Main pathname={pathname}>
         <Switch>
           <Route exact path='/'>
             <PizzaConfiguratorPage />
-
           </Route>
           <Route path='/login'>
             <LoginPage />
@@ -61,7 +71,7 @@ function App() {
           </Route>
         </Switch>
       </Main>
-    </>
+    </GlobWrapper>
   );
 }
 

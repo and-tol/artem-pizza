@@ -1,22 +1,20 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-// Hooks
-import { useWindowDimensions } from '../hooks/useWindowDimentions';
-// Data
-import { PIZZA_DELIVERY } from '../../pizzaData';
+// Icons
+import { ReactComponent as IconDelivery } from '../../asserts/icons/icn_delivery.svg';
 // Actions
 import { fetchIngredientsAsync } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsReducer';
 // Selectors
 import { getIngredients } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
-// Components
-import { OrderPreview } from './OrderPreview';
+// Data
+import { PIZZA_DELIVERY } from '../../pizzaData';
 // TODO: +++++++++
 import { calculateTotalPrice } from '../calculateTotalPrice';
-// Icons
-import { ReactComponent as IconDelivery } from '../../asserts/icons/icn_delivery.svg';
-import { ReactComponent as IconRepeat } from '../../asserts/icons/icn_repeat.svg';
-import { ReactComponent as LogoVisa } from '../../asserts/paymentIcons/Visa.svg';
+// Hooks
+import { useWindowDimensions } from '../hooks/useWindowDimentions';
+// Components
+import { OrderPreview } from './OrderPreview';
 // Styles
 const Article = styled.article`
   display: flex;
@@ -28,10 +26,6 @@ const Article = styled.article`
   box-shadow: 0px 8px 16px rgba(75, 75, 124, 0.05);
   margin-bottom: 16px;
   max-width: 350px;
-  @media (min-width: 960px) {
-    max-width: 600px;
-    width: 600px;
-  }
 `;
 
 const OrderPreviewHeader = styled.header`
@@ -96,8 +90,7 @@ export const Order = props => {
 
       <OrderPreviewFooter>
         <Price>{totalPrice} руб</Price>
-        <LogoVisa width='30' height='20,5' />
-        <span>{order && `*${order.cardNumber?.slice(-4)} `}</span>
+        <span>{order && ` ${order.cardNumber?.slice(-4)} `}</span>
         <OrderPreviewFooterDelivery>
           <IconDelivery fill='var(--secondary)' />
           <DeliveryText>Доставляется</DeliveryText>

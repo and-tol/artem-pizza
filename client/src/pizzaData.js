@@ -19,6 +19,39 @@ export const PIZZA_DELIVERY = Object.freeze({
   },
 });
 
+export const PAYMENT_CARD = Object.freeze({
+  'american-express': 'Amex',
+  Bancontact: 'Bancontact',
+  'diners-club': 'DinersClub',
+  discover: 'Discover',
+  elo: 'Elo',
+  maestro: 'Maestro',
+  mastercard: 'MasterCard',
+  UnionPay: 'UnionPay',
+  visa: 'Visa',
+  jcb: 'JCB',
+  unionpay: 'UnionPay',
+  mir: 'Mir',
+  hiper: 'Hiper',
+  hipercard: 'Hipercard',
+});
+// export const PAYMENT_CARD = Object.freeze({
+//   'american-express': 'Amex',
+//   Bancontact: 'Bancontact',
+//   'diners-club': 'DinersClub',
+//   discover: 'Discover',
+//   elo: 'Elo',
+//   maestro: 'Maestro',
+//   mastercard: 'MasterCard',
+//   UnionPay: 'UnionPay',
+//   visa: 'Visa',
+//   jcb: 'JSB',
+//   unionpay: 'UnionPay',
+//   mir: 'Mir',
+//   hiper: 'Hiper',
+//   hipercard: 'Hipercard',
+// });
+
 export const fakeOrder = {
   pizza: {
     size: '30',

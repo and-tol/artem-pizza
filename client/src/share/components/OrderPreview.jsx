@@ -1,8 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-// Hooks
-import { useWindowDimensions } from '../hooks/useWindowDimentions';
 // Selectors
 import { getIngredientsByCategory } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Helpers
@@ -27,7 +25,7 @@ const Title = styled.h3`
 
 export const OrderPreview = ({ pizza, ingredients }) => {
   const { pathname } = useLocation();
-  const { width: windowWidth } = useWindowDimensions();
+
   const { size, dough, sauces, cheese, vegetables, meat } = pizza;
 
   const CHEESE = useSelector(getIngredientsByCategory('cheese'));

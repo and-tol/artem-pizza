@@ -65,7 +65,6 @@ export const PizzaForm = ({ onPizzaOrder }) => {
     defaultValues: DEFAULT_PIZZA,
   });
   const isLoading = useSelector(getLoadingStatus);
-  console.log('isLoading>>>>', isLoading);
 
   const ingredients = useSelector(getIngredients);
 

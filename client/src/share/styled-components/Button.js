@@ -31,13 +31,18 @@ export const ButtonPrimary = styled.button`
     box-shadow: var(--shadow-inset);
   }
 
-  ${({ disabled }) =>
+  /* ${({ disabled }) =>
     disabled &&
     css`
       background-color: var(--gray200);
       color: var(--gray400);
       cursor: not-allowed;
-    `}
+    `} */
+  &[disabled] {
+    background-color: var(--gray200);
+    color: var(--gray400);
+    cursor: not-allowed;
+  }
 `;
 
 export const ButtonLarge = styled(ButtonPrimary)`

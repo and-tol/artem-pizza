@@ -1,13 +1,168 @@
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-import * as yup from 'yup'
+import { useEffect, useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import * as yup from 'yup';
+import styled from 'styled-components';
+// Hooks
+import { useWindowDimensions } from '../../../share/hooks/useWindowDimentions';
 // Data
-import { PIZZA_DELIVERY } from '../../../pizzaData'
+import { PIZZA_DELIVERY } from '../../../pizzaData';
+import { PAYMENT_CARD } from '../../../pizzaData';
 // Helpers
-import { calculateTotalPrice } from '../../../share/calculateTotalPrice'
+import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Actions
-import { checkoutReducer, sendOrderAsync } from '../state/checkoutReducer'
+import { checkoutReducer, sendOrderAsync } from '../state/checkoutReducer';
+import { getOrder } from '../state/checkoutSelectors';
+// Components
+import { Order } from '../../../share/components';
+import { ImageIcon } from './ImageIcon';
+// Styles
+import { ButtonPrimary } from '../../../share/styled-components/Button';
+import {
+  InputFieldwPlaceholder,
+  InputField,
+} from '../../../share/styled-components/InputField';
+const Section = styled.section`
+  padding-bottom: 160px;
+  @media (min-width: 960px) {
+    padding-bottom: 0px;
+  }
+`;
+
+const OrderPreview = styled(Order)`
+  grid-area: order;
+  @media (min-width: 960px) {
+    max-width: 350px;
+  }
+`;
+const FormContent = styled.div`
+  grid-area: form;
+  @media (min-width: 960px) {
+    max-width: 530px;
+  }
+`;
+const Form = styled.form`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'order'
+    'form'
+    'payment';
+  @media (min-width: 960px) {
+    grid-template-columns: 1fr 350px;
+    grid-template-rows: 0.6fr 1.4fr;
+    gap: 0px 80px;
+    grid-template-areas:
+      'form order'
+      'form payment';
+  }
+`;
+
+const Legend = styled.legend`
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--black);
+  margin-bottom: 16px;
+  @media (min-width: 960px) {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+`;
+
+const FormSection = styled.div`
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--gray200);
+  & + & {
+    margin-top: 16px;
+    @media (min-width: 960px) {
+      margin-top: 24px;
+    }
+  }
+  @media (min-width: 960px) {
+    padding-bottom: 24px;
+  }
+`;
+const AddressDetails = styled.div`
+  display: flex;
+  margin-bottom: -12px;
+  @media (min-width: 960px) {
+    margin-bottom: -16px;
+  }
+  label {
+    color: var(--gray600);
+    input {
+      margin-top: 4px;
+    }
+  }
+`;
+const CardDetails = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const OrderPayment = styled.footer`
+  grid-area: payment;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px 16px;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0px -16px 32px rgba(75, 75, 124, 0.05),
+    0px 0px 4px rgba(75, 75, 124, 0.1);
+  @media (min-width: 960px) {
+    position: relative;
+    max-width: 350px;
+    box-shadow: none;
+    background-color: transparent;
+  }
+`;
+const OrderPaymentSection = styled.p`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+  font-weight: ${({ toPay }) => toPay && '500'};
+  margin-top: ${({ toPay }) => toPay && '18px'};
+  @media (min-width: 480px) {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 8px;
+  }
+`;
+const DividingLine = styled.div`
+  width: 100%;
+  border-bottom: 1px dashed var(--gray200);
+  padding-bottom: 4px;
+  @media (min-width: 480px) {
+    padding-bottom: 8px;
+  }
+`;
+const CheckoutFormButton = styled(ButtonPrimary)`
+  margin-top: 16px;
+  @media (min-width: 960px) {
+    width: 100%;
+    margin-top: 32px;
+  }
+`;
+const ArtemPromises = styled.p`
+  margin-top: 24px;
+`;
+const ErrorsMessage = styled.div`
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--status-error);
+  position: relative;
+  bottom: 20px;
+`;
 
 const valid = require('card-validator');
 
@@ -35,13 +190,28 @@ const schema = yup.object().shape({
  */
 export const CheckoutForm = ({ pizza, ingredients }) => {
   const dispatch = useDispatch();
+  const order = useSelector(getOrder);
+  const { width: windowWidth } = useWindowDimensions();
+  const [cardImage, setCardImage] = useState('');
 
-  const { register, handleSubmit, errors, setValue, watch } = useForm({
+  const {
+    register,
+    handleSubmit,
+    errors,
+    setValue,
+    watch,
+    formState: { isDirty, isSubmitting, touched, dirtyFields },
+  } = useForm({
+    mode: 'all',
     resolver: yupResolver(schema),
   });
 
   const сardNumber = watch('cardNumber');
-  let numberValidation = valid.number(сardNumber);
+  let CardNumberValidation = valid.number(сardNumber);
+
+  useEffect(() => {
+    setCardImage(`${PAYMENT_CARD[CardNumberValidation.card?.type]}`);
+  }, [CardNumberValidation]);
 
   const onSubmit = handleSubmit(data => {
     let order = null;
@@ -60,40 +230,69 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
   const orderPrice = calculateTotalPrice(ingredients, pizza);
 
   return (
-    <>
-      <section>
-        <form onSubmit={onSubmit}>
-          <div>
-            <legend>Адрес доставки</legend>
+    <Section>
+      <Form onSubmit={onSubmit}>
+        <OrderPreview order={order} pizza={pizza} />
+        <FormContent className='form'>
+          {!!CardNumberValidation.card?.type && (
+            <ImageIcon img={cardImage} width='30' />
+          )}
+          <FormSection>
+            <Legend>Адрес доставки</Legend>
             <label htmlFor='address'>
-              <input
+              <InputFieldwPlaceholder
                 ref={register}
                 name='address'
                 id='address'
                 type='text'
                 placeholder='Введите адрес'
+                invalid={!!errors.address && 'address'}
+                valid={!errors.address && touched.address && 'address'}
               />
-              <div>{errors.address?.message}</div>
+              <ErrorsMessage>{errors.address?.message}</ErrorsMessage>
             </label>
-            <div>
+            <AddressDetails>
               <label htmlFor='porch'>
                 подъезд
-                <input ref={register} name='porch' id='porch' type='tel' />
+                <InputField
+                  width='104'
+                  margin='8'
+                  ref={register}
+                  name='porch'
+                  id='porch'
+                  type='tel'
+                  valid={!errors.porch && touched.porch && 'porch'}
+                />
               </label>
               <label htmlFor='flow'>
                 этаж
-                <input ref={register} name='flow' id='flow' type='tel' />
+                <InputField
+                  width='104'
+                  margin='8'
+                  ref={register}
+                  name='flow'
+                  id='flow'
+                  type='tel'
+                  valid={!errors.flow && touched.flow && 'flow'}
+                />
               </label>
               <label htmlFor='flat'>
                 квартира
-                <input ref={register} name='flat' id='flat' type='tel' />
+                <InputField
+                  width='104'
+                  ref={register}
+                  name='flat'
+                  id='flat'
+                  type='tel'
+                  valid={!errors.flat && touched.flat && 'flat'}
+                />
               </label>
-            </div>
-          </div>
-          <div>
-            <legend>Данные для оплаты</legend>
+            </AddressDetails>
+          </FormSection>
+          <FormSection>
+            <Legend>Данные для оплаты</Legend>
             <label htmlFor='cardNumber'>
-              <input
+              <InputFieldwPlaceholder
                 ref={register}
                 name='cardNumber'
                 id='cardNumber'
@@ -105,62 +304,72 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                   const { value } = e.target;
                   setValue('cardNumber', normalizeCardNumber(value));
                 }}
+                invalid={!!errors.cardNumber && 'cardNumber'}
+                valid={!errors.cardNumber && touched.cardNumber && 'cardNumber'}
               />
-              <div>{errors.cardNumber?.message}</div>
-              <span>{numberValidation.card && numberValidation.card.type}</span>
+              <ErrorsMessage>{errors.cardNumber?.message}</ErrorsMessage>
+              <span>
+                {CardNumberValidation.card && CardNumberValidation.card.type}
+              </span>
             </label>
-            <div>
+            <CardDetails>
               <label htmlFor='year'>
-                <input
+                <InputFieldwPlaceholder
+                  width={windowWidth >= 960 ? '128' : '102'}
                   ref={register}
                   name='year'
                   id='year'
                   type='tel'
                   placeholder='MM/YYYY'
+                  valid={!errors.year && touched.year && 'year'}
                 />
               </label>
               <label htmlFor='CVV'>
-                <input
+                <InputFieldwPlaceholder
+                  width={windowWidth >= 960 ? '76' : '64'}
                   ref={register}
                   name='CVV'
                   id='CVV'
                   type='tel'
                   placeholder='CVV'
+                  valid={!errors['CVV'] && touched['CVV'] && 'CVV'}
                 />
               </label>
-            </div>
+            </CardDetails>
             <label htmlFor='cardName'>
-              <input
+              <InputFieldwPlaceholder
                 ref={register}
                 name='cardName'
                 id='cardName'
                 type='text'
                 placeholder='Имя как на карте'
+                invalid={!!errors.cardName && 'cardName'}
+                valid={!errors.cardName && touched.cardName && 'cardName'}
               />
-              <div>{errors.cardName?.message}</div>
+              <ErrorsMessage>{errors.cardName?.message}</ErrorsMessage>
             </label>
-          </div>
-          <section>
-            <p>
-              Стоимость заказа <span>{orderPrice} руб.</span>
-            </p>
-            <p>
-              Доставка <span>{PIZZA_DELIVERY.price} руб.</span>
-            </p>
-            <hr />
-            <p>
-              К оплате <span>{orderPrice + PIZZA_DELIVERY.price} руб.</span>
-            </p>
-            <button type='submit'>
-              Оплатить {orderPrice + PIZZA_DELIVERY.price} руб.
-            </button>
-          </section>
-        </form>
-        <p>
-          Доставим пиццу в течение часа или вернем деньги. Артем слов на ветер
-          не бросает.
-        </p>
-      </section>
-    </>
+          </FormSection>
+          <ArtemPromises>
+            Доставим пиццу в течение часа или вернем деньги. Артем слов на ветер
+            не бросает.
+          </ArtemPromises>
+        </FormContent>
+        <OrderPayment className='payment'>
+          <OrderPaymentSection>
+            <span>Стоимость заказа</span> <span>{orderPrice} руб.</span>
+          </OrderPaymentSection>
+          <OrderPaymentSection>
+            Доставка <span>{PIZZA_DELIVERY.price} руб.</span>
+          </OrderPaymentSection>
+          <DividingLine />
+          <OrderPaymentSection toPay>
+            К оплате <span>{orderPrice + PIZZA_DELIVERY.price} руб.</span>
+          </OrderPaymentSection>
+          <CheckoutFormButton type='submit' onClick={onSubmit}>
+            Оплатить {orderPrice + PIZZA_DELIVERY.price} руб.
+          </CheckoutFormButton>
+        </OrderPayment>
+      </Form>
+    </Section>
   );
 };
