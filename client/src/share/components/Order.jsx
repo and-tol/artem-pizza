@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 // Icons
 import { ReactComponent as IconDelivery } from '../../asserts/icons/icn_delivery.svg';
+import { ImageIcon } from './ImageIcon';
 // Actions
 import { fetchIngredientsAsync } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsReducer';
 // Selectors
 import { getIngredients } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Data
 import { PIZZA_DELIVERY } from '../../pizzaData';
-// TODO: +++++++++
+
 import { calculateTotalPrice } from '../calculateTotalPrice';
 // Hooks
 import { useWindowDimensions } from '../hooks/useWindowDimentions';
@@ -42,6 +43,11 @@ const OrderTime = styled.span`
   color: var(--gray400);
 `;
 
+const LastDigitPaymentCard = styled.span`
+  font-size: 14px;
+  padding-left: 4px;
+`;
+
 const OrderPreviewFooter = styled.footer`
   width: 100%;
   display: flex;
@@ -64,10 +70,15 @@ const DeliveryText = styled.span`
   margin-left: 8px;
 `;
 
-export const Order = props => {
+export const Order = ({
+  order,
+  pizza,
+  cardImageName,
+  isPaymentIconView,
+  normalizedCardNumber,
+}) => {
   const { width: windowWidth } = useWindowDimensions();
   const dispatch = useDispatch();
-  const { order, pizza } = props;
 
   useEffect(() => {
     dispatch(fetchIngredientsAsync());
@@ -90,7 +101,19 @@ export const Order = props => {
 
       <OrderPreviewFooter>
         <Price>{totalPrice} руб</Price>
-        <span>{order && ` ${order.cardNumber?.slice(-4)} `}</span>
+        {isPaymentIconView && cardImageName && (
+          <ImageIcon cardImageName={cardImageName} width='30' />
+        )}
+        {order && (
+          <LastDigitPaymentCard>
+            {order.cardNumber?.slice(-4)}
+          </LastDigitPaymentCard>
+        )}
+        {normalizedCardNumber && normalizedCardNumber?.length >= 13 && (
+          <LastDigitPaymentCard>
+            {normalizedCardNumber?.slice(-4)}
+          </LastDigitPaymentCard>
+        )}
         <OrderPreviewFooterDelivery>
           <IconDelivery fill='var(--secondary)' />
           <DeliveryText>Доставляется</DeliveryText>

@@ -8,16 +8,14 @@ import styled from 'styled-components';
 // Hooks
 import { useWindowDimensions } from '../../../share/hooks/useWindowDimentions';
 // Data
-import { PIZZA_DELIVERY } from '../../../pizzaData';
-import { PAYMENT_CARD } from '../../../pizzaData';
+import { PIZZA_DELIVERY, PAYMENT_CARD } from '../../../pizzaData';
 // Helpers
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Actions
 import { checkoutReducer, sendOrderAsync } from '../state/checkoutReducer';
 import { getOrder } from '../state/checkoutSelectors';
 // Components
-import { Order } from '../../../share/components';
-import { ImageIcon } from './ImageIcon';
+import { Order, ImageIcon } from '../../../share/components';
 // Styles
 import { ButtonPrimary } from '../../../share/styled-components/Button';
 import {
@@ -98,7 +96,7 @@ const AddressDetails = styled.div`
     }
   }
 `;
-const CardDetails = styled.div`
+const PaymentCardDetails = styled.div`
   display: flex;
   justify-content: space-between;
 `;
@@ -163,6 +161,15 @@ const ErrorsMessage = styled.div`
   position: relative;
   bottom: 20px;
 `;
+const InputWrapper = styled.div`
+  position: relative;
+  img {
+    position: absolute;
+    right: 20px;
+    transform: translate3d(0, -50%, 0);
+    top: 50%;
+  }
+`;
 
 const valid = require('card-validator');
 
@@ -192,7 +199,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
   const dispatch = useDispatch();
   const order = useSelector(getOrder);
   const { width: windowWidth } = useWindowDimensions();
-  const [cardImage, setCardImage] = useState('');
+  const [cardImageName, setCardImageName] = useState('');
 
   const {
     register,
@@ -200,17 +207,18 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
     errors,
     setValue,
     watch,
-    formState: { isDirty, isSubmitting, touched, dirtyFields },
+    formState: { touched },
   } = useForm({
     mode: 'all',
     resolver: yupResolver(schema),
   });
 
   const сardNumber = watch('cardNumber');
+
   let CardNumberValidation = valid.number(сardNumber);
 
   useEffect(() => {
-    setCardImage(`${PAYMENT_CARD[CardNumberValidation.card?.type]}`);
+    setCardImageName(`${PAYMENT_CARD[CardNumberValidation.card?.type]}`);
   }, [CardNumberValidation]);
 
   const onSubmit = handleSubmit(data => {
@@ -229,14 +237,25 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
 
   const orderPrice = calculateTotalPrice(ingredients, pizza);
 
+  const [normalizedCardNumber, setSormalizedCardNumber] = useState('');
+
+  const handleNormalizeCardNumber = e => {
+    const { value } = e.target;
+    setValue('cardNumber', normalizeCardNumber(value));
+    setSormalizedCardNumber(normalizeCardNumber(value));
+  };
+
   return (
     <Section>
       <Form onSubmit={onSubmit}>
-        <OrderPreview order={order} pizza={pizza} />
+        <OrderPreview
+          order={order}
+          pizza={pizza}
+          isPaymentIconView={!!CardNumberValidation.card?.type}
+          cardImageName={cardImageName}
+          normalizedCardNumber={normalizedCardNumber}
+        />
         <FormContent className='form'>
-          {!!CardNumberValidation.card?.type && (
-            <ImageIcon img={cardImage} width='30' />
-          )}
           <FormSection>
             <Legend>Адрес доставки</Legend>
             <label htmlFor='address'>
@@ -292,27 +311,32 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
           <FormSection>
             <Legend>Данные для оплаты</Legend>
             <label htmlFor='cardNumber'>
-              <InputFieldwPlaceholder
-                ref={register}
-                name='cardNumber'
-                id='cardNumber'
-                type='tel'
-                inputMode='numeric'
-                autoComplete='cc-number'
-                placeholder='Номер карты'
-                onChange={e => {
-                  const { value } = e.target;
-                  setValue('cardNumber', normalizeCardNumber(value));
-                }}
-                invalid={!!errors.cardNumber && 'cardNumber'}
-                valid={!errors.cardNumber && touched.cardNumber && 'cardNumber'}
-              />
-              <ErrorsMessage>{errors.cardNumber?.message}</ErrorsMessage>
-              <span>
-                {CardNumberValidation.card && CardNumberValidation.card.type}
-              </span>
+              <InputWrapper>
+                <InputFieldwPlaceholder
+                  ref={register}
+                  name='cardNumber'
+                  id='cardNumber'
+                  type='tel'
+                  inputMode='numeric'
+                  autoComplete='cc-number'
+                  placeholder='Номер карты'
+                  onChange={handleNormalizeCardNumber}
+                  invalid={!!errors.cardNumber && 'cardNumber'}
+                  valid={
+                    !errors.cardNumber && touched.cardNumber && 'cardNumber'
+                  }
+                />
+
+                {!!CardNumberValidation.card?.type && (
+                  <ImageIcon cardImageName={cardImageName} width='30' />
+                )}
+
+                {errors.cardNumber?.message && (
+                  <ErrorsMessage>{errors.cardNumber?.message}</ErrorsMessage>
+                )}
+              </InputWrapper>
             </label>
-            <CardDetails>
+            <PaymentCardDetails>
               <label htmlFor='year'>
                 <InputFieldwPlaceholder
                   width={windowWidth >= 960 ? '128' : '102'}
@@ -335,7 +359,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                   valid={!errors['CVV'] && touched['CVV'] && 'CVV'}
                 />
               </label>
-            </CardDetails>
+            </PaymentCardDetails>
             <label htmlFor='cardName'>
               <InputFieldwPlaceholder
                 ref={register}

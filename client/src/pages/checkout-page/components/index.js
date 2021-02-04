@@ -1,2 +1,2 @@
 export * from './CheckoutForm';
-export * from './ImageIcon';
+export * from '../../../share/components';
