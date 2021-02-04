@@ -1,8 +1,4 @@
-import styled, { css } from 'styled-components';
-
-const Button = ({ children, ...args }) => {
-  return <button {...args}>{children}</button>;
-};
+import styled from 'styled-components';
 
 export const ButtonPrimary = styled.button`
   background-color: var(--primary);
@@ -30,14 +26,6 @@ export const ButtonPrimary = styled.button`
     background-color: var(--primary-dark);
     box-shadow: var(--shadow-inset);
   }
-
-  /* ${({ disabled }) =>
-    disabled &&
-    css`
-      background-color: var(--gray200);
-      color: var(--gray400);
-      cursor: not-allowed;
-    `} */
   &[disabled] {
     background-color: var(--gray200);
     color: var(--gray400);

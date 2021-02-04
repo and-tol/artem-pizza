@@ -7,10 +7,14 @@ import { NotFoundPage } from './pages/not-found-page';
 import { OrdersListPage } from './pages/orders-list-page';
 // Pages
 import { PizzaConfiguratorPage } from './pages/pizza-configurator-page';
-import { ReceiptPage } from './pages/receipt-page';
+import { ReceiptPage } from './pages/order-confirm-page';
 import { SignupPage } from './pages/signup-page';
 // Components
-import { Header } from './share/components/Header';
+import {
+  Header,
+  HeaderConfiguratorPage,
+  HeaderCheckoutPage,
+} from './share/components';
 // Styles
 const GlobWrapper = styled.div`
   display: flex;
@@ -45,8 +49,11 @@ function App() {
 
   return (
     <GlobWrapper pathname={pathname}>
-      <Header />
-      <Main pathname={pathname}>
+      <Header>
+        {pathname === '/' && <HeaderConfiguratorPage />}
+        {pathname === '/checkout' && <HeaderCheckoutPage />}
+      </Header>
+      <Main>
         <Switch>
           <Route exact path='/'>
             <PizzaConfiguratorPage />

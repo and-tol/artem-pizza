@@ -4,7 +4,7 @@ export const InputField = styled.input`
   display: flex;
   align-items: center;
   padding: 12px;
-  background-color: #fff;
+  background-color: #fff !important;
   border: 2px solid var(--gray200);
   border-radius: 8px;
   width: 100%;
@@ -34,18 +34,22 @@ export const InputField = styled.input`
 
   &:hover,
   &:focus {
+    background-color: #fff;
     outline: transparent;
     border-color: var(--gray400);
   }
   &[name=${({ invalid }) => invalid}] {
+    background-color: #fff !important;
     outline: transparent;
     border-color: var(--status-error);
     &:focus {
+      background-color: #fff !important;
       outline: transparent;
       border-color: var(--gray400);
     }
   }
   &[name=${({ valid }) => valid}] {
+    background-color: #fff !important;
     border-color: var(--primary);
   }
 `;

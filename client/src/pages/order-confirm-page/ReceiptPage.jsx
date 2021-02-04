@@ -15,7 +15,7 @@ import { getOrder } from '../checkout-page/state/checkoutSelectors'
  * Страница подтверждения заказа
  * Component Order confirmation page
  */
-export const ReceiptPage = () => {
+export const OrderConfirmPage = () => {
   const history = useHistory();
   const isAccepted = useSelector(getOrder);
 

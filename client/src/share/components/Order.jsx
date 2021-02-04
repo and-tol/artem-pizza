@@ -109,7 +109,7 @@ export const Order = ({
             {order.cardNumber?.slice(-4)}
           </LastDigitPaymentCard>
         )}
-        {normalizedCardNumber && normalizedCardNumber?.length >= 13 && (
+        {!order && normalizedCardNumber && normalizedCardNumber?.length >= 13 && (
           <LastDigitPaymentCard>
             {normalizedCardNumber?.slice(-4)}
           </LastDigitPaymentCard>

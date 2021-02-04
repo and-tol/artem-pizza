@@ -182,11 +182,32 @@ const normalizeCardNumber = value => {
       .substr(0, 19) || ''
   );
 };
+const normalizeCardCVV = value => {
+  return (
+    value
+      .replace(/\s/g, '')
+      .match(/.{1,3}/g)
+      ?.join('')
+      .substr(0, 3) || ''
+  );
+};
 
 const schema = yup.object().shape({
-  address: yup.string().required('Это обязательное поле'),
-  cardNumber: yup.string().required('Это обязательное поле'),
-  cardName: yup.string().required('Это обязательное поле'),
+  address: yup
+    .string()
+    .required('Это обязательное поле')
+    .min(5, 'Слишком короткий адрес'),
+  cardNumber: yup
+    .number()
+    .min(12, 'Недостаточно цифр')
+    .positive('Номер должен быть положительным числом')
+    .required('Это обязательное поле')
+    .typeError('Номер должен быть числом')
+    .integer('Номер не может содержать десятичную точку '),
+  cardName: yup
+    .string()
+    .required('Это обязательное поле')
+    .min('3', 'Слишком короткое имя'),
 });
 
 /**
@@ -207,7 +228,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
     errors,
     setValue,
     watch,
-    formState: { touched },
+    formState: { touched, isDirty },
   } = useForm({
     mode: 'all',
     resolver: yupResolver(schema),
@@ -227,7 +248,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
       pizza: pizza,
       address: data.address,
       cardName: data.cardName,
-      cardNumber: data.cardNumber,
+      cardNumber: data.cardNumber.toString(10),
     };
     if (order) {
       dispatch(checkoutReducer.actions.fillOrder(order));
@@ -243,6 +264,10 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
     const { value } = e.target;
     setValue('cardNumber', normalizeCardNumber(value));
     setSormalizedCardNumber(normalizeCardNumber(value));
+  };
+  const handleNormalizeCardCVV = e => {
+    const { value } = e.target;
+    setValue('cardNumber', normalizeCardCVV(value));
   };
 
   return (
@@ -356,6 +381,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                   id='CVV'
                   type='tel'
                   placeholder='CVV'
+                  onChange={handleNormalizeCardCVV}
                   valid={!errors['CVV'] && touched['CVV'] && 'CVV'}
                 />
               </label>
@@ -389,9 +415,15 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
           <OrderPaymentSection toPay>
             К оплате <span>{orderPrice + PIZZA_DELIVERY.price} руб.</span>
           </OrderPaymentSection>
-          <CheckoutFormButton type='submit' onClick={onSubmit}>
-            Оплатить {orderPrice + PIZZA_DELIVERY.price} руб.
-          </CheckoutFormButton>
+          {isDirty ? (
+            <CheckoutFormButton type='submit' onClick={onSubmit}>
+              Оплатить {orderPrice + PIZZA_DELIVERY.price} руб.
+            </CheckoutFormButton>
+          ) : (
+            <CheckoutFormButton disabled>
+              Заполните форму заказа
+            </CheckoutFormButton>
+          )}
         </OrderPayment>
       </Form>
     </Section>
