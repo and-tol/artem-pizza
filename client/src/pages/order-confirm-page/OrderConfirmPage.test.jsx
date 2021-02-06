@@ -4,7 +4,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { MemoryRouter, Router } from 'react-router-dom'
 import { store } from '../../init/store'
-import { ReceiptPage } from './ReceiptPage'
+import { ReceiptPage } from './OrderConfirmPage'
 
 describe('ReceiptPage', () => {
   const history = createMemoryHistory();

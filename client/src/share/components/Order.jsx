@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+// Helpers
+import { dateShow, dateTime } from '../helpers';
 // Icons
 import { ReactComponent as IconDelivery } from '../../asserts/icons/icn_delivery.svg';
+import { ReactComponent as IconRepeat } from '../../asserts/icons/icn_repeat.svg';
 import { ImageIcon } from './ImageIcon';
 // Actions
 import { fetchIngredientsAsync } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsReducer';
@@ -12,8 +15,7 @@ import { getIngredients } from '../../pages/pizza-configurator-page/state-ingred
 import { PIZZA_DELIVERY } from '../../pizzaData';
 
 import { calculateTotalPrice } from '../calculateTotalPrice';
-// Hooks
-import { useWindowDimensions } from '../hooks/useWindowDimentions';
+
 // Components
 import { OrderPreview } from './OrderPreview';
 // Styles
@@ -59,8 +61,8 @@ const Price = styled.span`
   font-weight: 800;
   margin-right: 15px;
 `;
-const OrderPreviewFooterDelivery = styled.span`
-  display: flex;
+const OrderPreviewFooterDelivery = styled.div`
+  display: inline-flex;
   align-items: center;
   margin-left: auto;
   font-weight: 500;
@@ -68,6 +70,17 @@ const OrderPreviewFooterDelivery = styled.span`
 `;
 const DeliveryText = styled.span`
   margin-left: 8px;
+`;
+const ButtonRepeat = styled.button`
+  white-space: nowrap;
+  color: var(--primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  &:hover,
+  &:active {
+    color: var(--primary-dark);
+  }
 `;
 
 export const Order = ({
@@ -77,7 +90,6 @@ export const Order = ({
   isPaymentIconView,
   normalizedCardNumber,
 }) => {
-  const { width: windowWidth } = useWindowDimensions();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -87,13 +99,17 @@ export const Order = ({
   const ingredients = useSelector(getIngredients);
   const totalPrice = calculateTotalPrice(ingredients, pizza);
 
+  const repeatPizza = () => {
+
+  }
+
   return (
     <Article>
       <OrderPreviewHeader>
         Заказ <span>2390</span>
         <OrderTime>
-          <time dateTime='2020-10-21 13:40'>21 октября 2020, 13:40</time>
-          {windowWidth >= 960 && <span> • {PIZZA_DELIVERY.status[0]}</span>}
+          <time dateTime={dateTime()}>{dateShow()}</time>
+          {false && <span> • {PIZZA_DELIVERY.status.in_work.case}</span>}
         </OrderTime>
       </OrderPreviewHeader>
 
@@ -109,15 +125,23 @@ export const Order = ({
             {order.cardNumber?.slice(-4)}
           </LastDigitPaymentCard>
         )}
-        {!order && normalizedCardNumber && normalizedCardNumber?.length >= 13 && (
-          <LastDigitPaymentCard>
-            {normalizedCardNumber?.slice(-4)}
-          </LastDigitPaymentCard>
-        )}
+        {!order &&
+          normalizedCardNumber &&
+          normalizedCardNumber?.length >= 13 && (
+            <LastDigitPaymentCard>
+              {normalizedCardNumber?.slice(-4)}
+            </LastDigitPaymentCard>
+          )}
         <OrderPreviewFooterDelivery>
           <IconDelivery fill='var(--secondary)' />
-          <DeliveryText>Доставляется</DeliveryText>
+          <DeliveryText>{PIZZA_DELIVERY.status.in_transit.case}</DeliveryText>
         </OrderPreviewFooterDelivery>
+        {/* <OrderPreviewFooterDelivery>
+          <ButtonRepeat type='button' onClick={repeatPizza}>
+            <IconRepeat fill='var(--primary)' />
+            <DeliveryText>{PIZZA_DELIVERY.status.repeat.case}</DeliveryText>
+          </ButtonRepeat>
+        </OrderPreviewFooterDelivery> */}
       </OrderPreviewFooter>
     </Article>
   );

@@ -4,7 +4,8 @@ import { api } from '../../../api';
 
 const initialState = {
   login: { password: '', email: '' },
-  isRegistered: null,
+  isUserRegistered: null,
+  isUserLogin: null,
   isLoading: false,
   error: null,
 };
@@ -32,7 +33,6 @@ export const loginReducer = createSlice({
   name: 'login',
   initialState,
   reducers: {
-
     stopFetching: state => {
       state.isLoading = true;
     },
@@ -46,7 +46,13 @@ export const loginReducer = createSlice({
       state.error = null;
     },
     setUserStatus: (state, action) => {
-      state.isRegistered = action.payload;
+      state.isUserRegistered = action.payload;
+      state.isLoading = false;
+      state.error = null;
+    },
+    userLogout: state => {
+      state.login = { password: '', email: '' };
+      state.isUserRegistered = null;
       state.isLoading = false;
       state.error = null;
     },

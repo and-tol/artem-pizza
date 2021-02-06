@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { CheckoutPage } from './pages/checkout-page';
 import { LoginPage } from './pages/login-page';
@@ -7,13 +7,14 @@ import { NotFoundPage } from './pages/not-found-page';
 import { OrdersListPage } from './pages/orders-list-page';
 // Pages
 import { PizzaConfiguratorPage } from './pages/pizza-configurator-page';
-import { ReceiptPage } from './pages/order-confirm-page';
+import { OrderConfirmPage } from './pages/order-confirm-page';
 import { SignupPage } from './pages/signup-page';
 // Components
 import {
   Header,
   HeaderConfiguratorPage,
   HeaderCheckoutPage,
+  HeaderGeneral,
 } from './share/components';
 // Styles
 const GlobWrapper = styled.div`
@@ -28,6 +29,7 @@ const GlobWrapper = styled.div`
 const Main = styled.main`
   width: 100%;
   display: flex;
+  align-items: center;
   flex-direction: column;
   padding: 16px 16px 72px;
 
@@ -39,19 +41,27 @@ const Main = styled.main`
   }
   @media (min-width: 960px) {
     width: 960px;
-    padding: 32px 72px 32px;
+    padding: 32px 40px 32px;
     padding: ${({ pathname }) => pathname === '/checkout' && '0'};
   }
 `;
 
 function App() {
   const { pathname } = useLocation();
+  const history = useHistory();
 
   return (
-    <GlobWrapper pathname={pathname}>
+    <GlobWrapper>
       <Header>
         {pathname === '/' && <HeaderConfiguratorPage />}
         {pathname === '/checkout' && <HeaderCheckoutPage />}
+        {pathname === '/order-confirm' && <HeaderCheckoutPage />}
+        {pathname === '/orders-list' && (
+          <HeaderGeneral history={history} title='Мои заказы' />
+        )}
+        {pathname === '/login' && (
+          <HeaderGeneral history={history} title='Авторизация' />
+        )}
       </Header>
       <Main>
         <Switch>
@@ -67,8 +77,8 @@ function App() {
           <Route path='/orders-list'>
             <OrdersListPage />
           </Route>
-          <Route path='/receipt'>
-            <ReceiptPage />
+          <Route path='/order-confirm'>
+            <OrderConfirmPage />
           </Route>
           <Route path='/signup'>
             <SignupPage />

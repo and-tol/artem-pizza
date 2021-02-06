@@ -31,7 +31,7 @@ export const HeaderCheckoutPage = () => {
   return (
     <Container>
       <H1>Оформление заказа</H1>
-      <LinkStyled href='/'>
+      <LinkStyled to='/'>
         <IncError />
       </LinkStyled>
     </Container>

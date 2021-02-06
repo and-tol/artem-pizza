@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Actions
 import { fetchOrdersListAsync } from './state/ordersListReducer';
-import {fetchIngredientsAsync} from '../pizza-configurator-page/state-ingredients/ingredientsReducer';
+import { fetchIngredientsAsync } from '../pizza-configurator-page/state-ingredients/ingredientsReducer';
 // Selectors
 import { getOrders, getLoadingStatus } from './state/ordersListSelectors';
 // Components
-import { Order } from '../../share/components';
+import { Order, Loader } from '../../share/components';
 
 export const OrdersListPage = () => {
   const dispatch = useDispatch();
@@ -21,13 +21,13 @@ export const OrdersListPage = () => {
 
   return (
     <>
-      <h1 data-testid='orders'>Заказы</h1>
-      {isLoading && <p>Загрузка данных...</p>}
-      {previousOrders.length ? (
+      {/* {false ? (
+        <Loader />
+      ) : previousOrders.length ? (
         previousOrders.map(order => <Order key={order.id} order={order} />)
       ) : (
         <span>Вы пока не сделали ни одного заказа</span>
-      )}
+      )} */}
     </>
   );
 };

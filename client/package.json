@@ -18,6 +18,7 @@
     "@types/redux-logger": "^3.0.8",
     "@types/yup": "^0.29.11",
     "card-validator": "^8.1.0",
+    "date-fns": "^2.16.1",
     "history": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

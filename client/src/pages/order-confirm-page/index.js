@@ -1,1 +1,1 @@
-export * from './ReceiptPage';
+export * from './OrderConfirmPage';
