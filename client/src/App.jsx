@@ -62,6 +62,9 @@ function App() {
         {pathname === '/login' && (
           <HeaderGeneral history={history} title='Авторизация' />
         )}
+        {pathname === '/signup' && (
+          <HeaderGeneral history={history} title='Регистрация' />
+        )}
       </Header>
       <Main>
         <Switch>

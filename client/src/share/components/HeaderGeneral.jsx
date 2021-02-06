@@ -27,6 +27,7 @@ const Button = styled.button`
   margin-left: 16px;
   text-decoration: none;
   color: var(--gray600);
+  font-weight: 800;
   cursor: pointer;
   :hover {
     color: var(--gray400);
@@ -35,18 +36,16 @@ const Button = styled.button`
     margin-right: 16px;
     margin-left: 16px;
 
-    font-weight: 800;
     font-size: 16px;
     line-height: 24px;
-    span {
-      margin-left: 10px;
-    }
+  }
+  span {
+    margin-left: 10px;
   }
 `;
 
 export const HeaderGeneral = ({ history, title }) => {
   const dispatch = useDispatch();
-  const isUserRegistered = useSelector(getUserStatus);
 
   const goBack = () => {
     history.goBack();

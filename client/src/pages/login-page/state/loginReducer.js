@@ -53,6 +53,7 @@ export const loginReducer = createSlice({
     userLogout: state => {
       state.login = { password: '', email: '' };
       state.isUserRegistered = null;
+      state.isUserLogin = null;
       state.isLoading = false;
       state.error = null;
     },
