@@ -1,8 +1,8 @@
-import { getAcceptedOrder } from './checkoutSelectors';
-import { mockState } from '../../../testUtils/mockState';
+import { mockState } from '../../../testUtils/mockState'
+import { getOrder } from './checkoutSelectors'
 
-describe('.getAcceptedOrder', () => {
+describe('.getOrder', () => {
   it('returns accepted status from state', () => {
-    expect(getAcceptedOrder(mockState)).toEqual(true);
+    expect(getOrder(mockState)).toEqual(true);
   });
 });

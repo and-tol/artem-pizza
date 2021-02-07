@@ -1,13 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 // Selectors
-import { getStatus } from './state/loginSelectors';
+import { getUserStatus } from './state';
 // Actions
-import { loginReducer } from './state/loginReducer';
+import { loginReducer } from './state';
+// Styles
+import { ButtonPrimary, InputField } from '../../share/styled-components';
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0px 8px 16px rgba(75, 75, 124, 0.05);
+  max-width: 600px;
+`;
+const Fieldset = styled.div`
+  display: flex;
+  flex-direction: column;
+  label input {
+    margin-top: 8px;
+  }
+`;
 
 const schema = yup.object().shape({
   email: yup.string().email('Неверный адрес электронной почты'),
@@ -18,9 +37,9 @@ const schema = yup.object().shape({
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
-  const isRegistered = useSelector(getStatus);
+  const isUserRegistered = useSelector(getUserStatus);
 
-  const { register, handleSubmit, errors, watch } = useForm({
+  const { register, handleSubmit, errors, watch, isDirty } = useForm({
     resolver: yupResolver(schema),
   });
   const [isDisabled, setIsDisabled] = useState(true);
@@ -45,19 +64,18 @@ export const LoginPage = () => {
 
   return (
     <>
-      <h1>Авторизация</h1>
-      {isRegistered && <section>Добро пожаловать!</section>}
-      {!isRegistered && (
-        <form onSubmit={onSubmit}>
-          <fieldset>
+      {isUserRegistered && <section>Добро пожаловать!</section>}
+      {!isUserRegistered && (
+        <Form onSubmit={onSubmit}>
+          <Fieldset>
             <label htmlFor='email'>
               Э-почта
-              <input id='email' ref={register} type='text' name='email' />
+              <InputField id='email' ref={register} type='text' name='email' />
               <div>{errors.email?.message}</div>
             </label>
             <label htmlFor='password'>
               Пароль
-              <input
+              <InputField
                 id='password'
                 ref={register}
                 type='password'
@@ -65,12 +83,11 @@ export const LoginPage = () => {
               />
               <div>{errors.password?.message}</div>
             </label>
-          </fieldset>
-          <button type='submit' disabled={isDisabled}>
+          </Fieldset>
+          <ButtonPrimary type='submit' disabled={isDisabled && !isDirty}>
             Войти
-          </button>
-          <Link to='/signup'>На страницу Регистрации </Link>
-        </form>
+          </ButtonPrimary>
+        </Form>
       )}
     </>
   );

@@ -47,7 +47,7 @@ yarn-error.log*
 admin/npm-debug.log*
 admin/yarn-debug.log*
 admin/yarn-error.log*
-admin/.eslintcache
+
 
 client/npm-debug.log*
 client/yarn-debug.log*
@@ -58,6 +58,13 @@ client/bug
 
 .gitignore
 admin/.gitignore
+admin/.eslintcache
 client/.eslintcache
-asserts/cheddеr.png
+client/.gitignore
+client/src/pages/pizza-configurator-page/components/RadioGroupWithRef.jsx
+client/src/pages/pizza-configurator-page/components/RadioGr.jsx
+client/src/pages/pizza-configurator-page/components/switch.jsx
+client/src/pages/pizza-configurator-page/context/
+client/src/TODO.js
+client/TODO.js
 asserts/

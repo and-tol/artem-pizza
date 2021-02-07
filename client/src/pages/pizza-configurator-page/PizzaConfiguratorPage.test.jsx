@@ -9,7 +9,7 @@ import { PizzaConfiguratorPage } from './PizzaConfiguratorPage';
 // Types
 import { PizzaFormProps } from './components/PizzaForm';
 
-import { OrderPreviewProps } from '../../share/components/OrderPreview';
+import { OrderPreviewProps } from '../../../temp/OrderPreview';
 
 const pizza = {
   size: 'test1',

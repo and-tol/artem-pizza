@@ -3,10 +3,10 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { api } from '../../../api';
 
 const initialState = {
+  login: { password: '', email: '' },
   error: null,
   isRegistered: null,
   isLoading: false,
-  login: { password: '', email: '' },
 };
 
 /**
@@ -36,9 +36,7 @@ export const signupReducer = createSlice({
   name: 'signup',
   initialState,
   reducers: {
-    startFetching: state => {
-      state.isLoading = true;
-    },
+
     stopFetching: state => {
       state.isLoading = true;
     },

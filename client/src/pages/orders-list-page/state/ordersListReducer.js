@@ -14,11 +14,11 @@ export const fetchOrdersListAsync = createAsyncThunk(
     const response = await api.orders.getAllOrders();
 
     if (response.status === 200) {
-      const results = await response.json();
+      const orders = await response.json();
 
-      thunkAPI.dispatch(ordersListReducer.actions.fillOrders(results));
+      // thunkAPI.dispatch(ordersListReducer.actions.fillOrders(orders));
 
-      return results;
+      return orders;
     } else {
       const error = {
         status: response.status,
@@ -42,19 +42,19 @@ export const ordersListReducer = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    ordersFill: (state, action) => {
+    // ordersFill: (state, action) => {
+    //   state.orders = action.payload;
+    //   state.isLoading = false;
+    //   state.error = null;
+    // },
+  },
+  extraReducers: {
+    [fetchOrdersListAsync.fulfilled]: (state, action) => {
       state.orders = action.payload;
       state.isLoading = false;
       state.error = null;
     },
-  },
-  extraReducers: {
-    [fetchOrdersListAsync.fulfilled]: (state, action) => {
-      state.order = action.payload;
-      state.isLoading = false;
-      state.error = null;
-    },
-    [fetchOrdersListAsync.rejected]: (state, action) => {
+    [fetchOrdersListAsync.rejected]: (state) => {
       state.isLoading = false;
       state.error = {
         status: 'fetching error',

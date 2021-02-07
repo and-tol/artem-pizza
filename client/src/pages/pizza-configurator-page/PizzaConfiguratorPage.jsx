@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // Components
-import { PizzaForm } from './components/PizzaForm';
+import { PizzaForm } from './components';
 // Actions
 import { fetchIngredientsAsync } from './state-ingredients/ingredientsReducer';
 import { pizzaReducer } from './state-pizza/pizzaReducer';
@@ -27,7 +27,6 @@ export const PizzaConfiguratorPage = () => {
   return (
     <>
       <h1>Страница кофигуратора пиццы</h1>
-      <h3>Маргарита</h3>
       <PizzaForm onPizzaOrder={onPizzaOrder} />
     </>
   );

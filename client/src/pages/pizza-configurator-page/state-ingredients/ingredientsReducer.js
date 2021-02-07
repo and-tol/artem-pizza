@@ -26,14 +26,14 @@ const initialState = {
       id: '2',
       name: 'Томатный',
       slug: 'tomato-sauce',
-      category: 'sauce',
+      category: 'sauces',
       price: 0,
       thumbnail: '',
       image: '',
     },
   ],
   error: null,
-  isLoading: false,
+  isLoading: true,
 };
 
 export const fetchIngredientsAsync = createAsyncThunk(
@@ -65,9 +65,6 @@ export const ingredientsReducer = createSlice({
   name: 'ingreddients',
   initialState,
   reducers: {
-    startFetching: state => {
-      state.isLoading = true;
-    },
     stopFetching: state => {
       state.isLoading = true;
     },

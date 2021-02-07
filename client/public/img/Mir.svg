@@ -1,0 +1,12 @@
+<svg width="34" height="24" xmlns="http://www.w3.org/2000/svg">
+  <rect x=".5" y=".5" width="33" height="23" rx="3.5" fill="#fff" stroke="#D9D9D9"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M23.032 11.162V15h2.155v-2.274h2.442a2.388 2.388 0 002.23-1.564h-6.827z" fill="#37A72E"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M22.744 8c.126 1.569 1.626 2.807 3.458 2.807h3.747c.028-.144.042-.292.042-.444 0-1.3-1.06-2.353-2.37-2.363h-4.877z" fill="url(#MIR__paint0_linear)"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M19.555 10.77l.001-.004a.13.13 0 01.113-.066.13.13 0 01.13.125v4.14h2.155V8h-2.155a.864.864 0 00-.697.45l-1.715 3.64a.142.142 0 01-.02.04v.002a.144.144 0 01-.262-.081V8H14.95v6.964h2.155c.27-.014.572-.21.685-.45l1.76-3.735a.1.1 0 01.005-.01zm-8.048.119l-1.26 4.075h-1.55l-1.26-4.078a.141.141 0 00-.14-.114.141.141 0 00-.142.14v4.052H5V8h2.4c.397 0 .813.304.929.68l1.049 3.393c.052.169.137.169.189 0l1.049-3.394c.116-.375.53-.679.928-.679h2.4v6.964h-2.155v-4.052a.141.141 0 00-.142-.14c-.07 0-.129.05-.14.117z" fill="#37A72E"/>
+  <defs>
+    <linearGradient id="MIR__paint0_linear" x1="22.744" y1="9.404" x2="29.991" y2="9.404" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00A0E5"/>
+      <stop offset="1" stop-color="#0077C3"/>
+    </linearGradient>
+  </defs>
+</svg>

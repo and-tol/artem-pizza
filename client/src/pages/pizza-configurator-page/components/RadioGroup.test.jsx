@@ -1,6 +1,6 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import { RadioGroup } from './RadioGroup';
+import { fireEvent, render } from '@testing-library/react'
+import React from 'react'
+import { RadioGroup } from './RadioGroup'
 
 const register = jest.fn();
 
@@ -26,12 +26,12 @@ describe('RadioGroup', () => {
         name='test'
         options={{
           thin: { name: 'Тонкое' },
-          puffy: { name: 'Пышное' },
+          thick: { name: 'Толстое' },
         }}
       />
     );
 
-    fireEvent.click(getByLabelText('Пышное'));
+    fireEvent.click(getByLabelText('Толстое'));
 
     expect(register).toHaveBeenCalled();
   });

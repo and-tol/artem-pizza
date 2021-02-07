@@ -1,23 +1,27 @@
+import { Fragment } from 'react';
+
 export const RadioGroup = props => {
   const { register, legend, name, options } = props;
 
   return (
     <>
-      <fieldset>
-        <legend>{legend}</legend>
+      <legend>{legend}</legend>
+      <div>
         {Object.entries(options).map(option => (
-          <label key={option[1].id}>
+          <Fragment>
             <input
               ref={register}
               type='radio'
               name={name}
               value={option[1].slug}
             />
-            {option[1].name}
-            {name === 'size' ? 'см' : null}
-          </label>
+            <label key={option[1].id}>
+              {option[1].name}
+              {name === 'size' ? 'см' : null}
+            </label>
+          </Fragment>
         ))}
-      </fieldset>
+      </div>
     </>
   );
 };

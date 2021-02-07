@@ -7,7 +7,7 @@ import { MemoryRouter } from 'react-router-dom';
 import {
   OrderPreview,
   OrderPreviewProps,
-} from '../../share/components/OrderPreview';
+} from '../../../temp/OrderPreview';
 import { CheckoutPage } from './CheckoutPage';
 // Components
 import { CheckoutForm } from './components';
