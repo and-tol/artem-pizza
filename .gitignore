@@ -59,3 +59,5 @@ client/bug
 .gitignore
 admin/.gitignore
 client/.eslintcache
+asserts/cheddеr.png
+asserts/
