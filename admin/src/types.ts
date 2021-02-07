@@ -38,7 +38,7 @@ export interface IngredientNameAndCaseState {
 export interface PizzaConfiguration {
   size: string;
   dough: string;
-  sauce: string;
+  sauces: string[];
   cheese: string[];
   vegetables: string[];
   meat: string[];
@@ -47,7 +47,7 @@ export interface PizzaConfiguration {
 export interface TotalPrice {
   size: string;
   dough?: string;
-  sauce?: string;
+  sauce?: string[];
   cheese: string[];
   vegetables: string[];
   meat: string[];

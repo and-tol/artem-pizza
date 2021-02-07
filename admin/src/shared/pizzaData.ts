@@ -8,7 +8,7 @@ import {
 export const categories = [
   { value: 'size', name: 'Размер' },
   { value: 'dough', name: 'Тесто' },
-  { value: 'sauce', name: 'Соус' },
+  { value: 'sauces', name: 'Соус' },
   { value: 'cheese', name: 'Сыр' },
   { value: 'vegetables', name: 'Овощ' },
   { value: 'meat', name: 'Мясо' },
@@ -17,7 +17,7 @@ export const categories = [
 export const DEFAULT_PIZZA: PizzaConfiguration = Object.freeze({
   size: '30',
   dough: 'thin',
-  sauce: 'tomato',
+  sauces: ['tomato'],
   cheese: [],
   vegetables: [],
   meat: [],
@@ -25,6 +25,7 @@ export const DEFAULT_PIZZA: PizzaConfiguration = Object.freeze({
 
 // Category
 /*
+sauces
 meets
 cheese
 vegs
@@ -39,10 +40,14 @@ export const DOUGH: IngredientNameAndCaseState = Object.freeze({
   thin: { name: 'Тонкое', case: 'тонком' },
   puffy: { name: 'Пышное', case: 'пышном' },
 });
-export const SAUCE: IngredientNameState = Object.freeze({
+export const SAUCES: IngredientNameState = Object.freeze({
   tomato: { name: 'Томатный' },
-  white: { name: 'Белый' },
+  mayo: { name: 'Майонез' },
   spicy: { name: 'Острый' },
+  mushroom: { name: 'Грибной' },
+  garlic: { name: 'Чесночный' },
+  'sweet-sour': { name: 'Кисло-сладкий' },
+  mustard: { name: 'Горчичный' },
 });
 export const CHEESE: IngredientNameAndPriceState = Object.freeze({
   mozarella: { name: 'Моцарелла', price: 29 },
