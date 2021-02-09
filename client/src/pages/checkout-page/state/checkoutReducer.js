@@ -6,7 +6,7 @@ export const initialState = {
   order: null,
   error: null,
   isLoading: false,
-  isAccepted: false,
+  isOrderAccepted: false,
 };
 
 export const sendOrderAsync = createAsyncThunk(

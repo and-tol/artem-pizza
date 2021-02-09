@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-// ---
-import {dateShow} from '../../share/helpers/dateShow'
-// ---
+// Helpers
+import { normalizeCardNumber } from '../../share/helpers';
+import { useValidCard } from '../../share/hooks';
+
 // Images
 import orderError from '../../asserts/icons/order-status_error.svg';
 import orderSuccess from '../../asserts/icons/order-status_ok.svg';
@@ -12,7 +13,10 @@ import { fakeOrder } from '../../pizzaData';
 // Components
 import { Order } from '../../share/components';
 // Selectors
-import { getOrder } from '../checkout-page/state/checkoutSelectors';
+import {
+  getOrder,
+  getOrderAcception,
+} from '../checkout-page/state/checkoutSelectors';
 // Styles
 import { ButtonPrimary } from '../../share/styled-components';
 const Section = styled.section`
@@ -24,9 +28,9 @@ const Section = styled.section`
   @media (min-width: 960) {
     padding-top: 72px;
   }
-  img {
-    margin-bottom: 24px;
-  }
+`;
+const OrderConfirmIcon = styled.img`
+  margin-bottom: 24px;
 `;
 const MainInfo = styled.h3`
   font-weight: 500;
@@ -49,6 +53,7 @@ const AdditionalInfo = styled.p`
     margin-bottom: 40px;
   }
 `;
+
 const Button = styled(ButtonPrimary)``;
 
 /**
@@ -57,38 +62,44 @@ const Button = styled(ButtonPrimary)``;
  */
 export const OrderConfirmPage = () => {
   const history = useHistory();
-  const isAccepted = useSelector(getOrder);
+  const isOrderAccepted = useSelector(getOrderAcception);
+  const order = useSelector(getOrder);
+
+  const { cardImageName, CardNumberValidation } = useValidCard(
+    normalizeCardNumber(order?.cardNumber)
+  );
 
   const tryOrderAgain = () => {
     history.push('/checkout');
   };
 
-  console.log(dateShow());
-
   return (
     <>
-      {!isAccepted && (
+      {isOrderAccepted && order ? (
         <Section>
-          <img src={orderSuccess} alt='success' />
+          <OrderConfirmIcon src={orderSuccess} alt='success' />
 
           <MainInfo>Спасибо за заказ!</MainInfo>
           <AdditionalInfo>
             Заказ успешно оплачен, ждите вашу пиццу уже через час
           </AdditionalInfo>
-          {/* FIXME: make it work  */}
-          {/* <Order order={fakeOrder} /> */}
+
+          <Order
+            order={order}
+            pizza={order?.pizza}
+            cardImageName={cardImageName}
+            normalizedCardNumber={normalizeCardNumber(order.cardNumber)}
+            isPaymentIconView={!!CardNumberValidation.card?.type}
+          />
         </Section>
-      )}
-      {isAccepted && (
+      ) : (
         <Section>
           <img src={orderError} alt='error' />
           <MainInfo>Оплата не прошла</MainInfo>
           <AdditionalInfo>
             Попробуйте еще раз или используйте другую карту
           </AdditionalInfo>
-          <Button onClick={tryOrderAgain}>
-            Попробовать еще раз
-          </Button>
+          <Button onClick={tryOrderAgain}>Попробовать еще раз</Button>
         </Section>
       )}
     </>

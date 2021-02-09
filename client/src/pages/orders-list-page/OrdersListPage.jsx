@@ -6,7 +6,8 @@ import { fetchIngredientsAsync } from '../pizza-configurator-page/state-ingredie
 // Selectors
 import { getOrders, getLoadingStatus } from './state/ordersListSelectors';
 // Components
-import { Order, Loader } from '../../share/components';
+import { Loader } from '../../share/components';
+import { PreviousOrder } from './components'
 
 export const OrdersListPage = () => {
   const dispatch = useDispatch();
@@ -16,18 +17,24 @@ export const OrdersListPage = () => {
     dispatch(fetchOrdersListAsync());
   }, [dispatch]);
 
-  const previousOrders = useSelector(getOrders);
+  const orders = useSelector(getOrders);
   const isLoading = useSelector(getLoadingStatus);
+
+  if (isLoading) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <>
-      {/* {false ? (
-        <Loader />
-      ) : previousOrders.length ? (
-        previousOrders.map(order => <Order key={order.id} order={order} />)
+      {orders.length ? (
+        orders.map(order => <PreviousOrder key={order.id} order={order} />)
       ) : (
         <span>Вы пока не сделали ни одного заказа</span>
-      )} */}
+      )}
     </>
   );
 };

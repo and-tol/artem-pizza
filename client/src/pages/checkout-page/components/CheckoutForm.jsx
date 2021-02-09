@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
 // Hooks
-import { useWindowDimensions } from '../../../share/hooks/useWindowDimentions';
+import { useWindowDimensions, useValidCard } from '../../../share/hooks';
 // Data
-import { PIZZA_DELIVERY, PAYMENT_CARD } from '../../../pizzaData';
+import { PIZZA_DELIVERY } from '../../../pizzaData';
 // Helpers
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Actions
@@ -171,8 +171,6 @@ const InputWrapper = styled.div`
   }
 `;
 
-const valid = require('card-validator');
-
 const normalizeCardNumber = value => {
   return (
     value
@@ -217,10 +215,10 @@ const schema = yup.object().shape({
  * @param ingredients
  */
 export const CheckoutForm = ({ pizza, ingredients }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const order = useSelector(getOrder);
   const { width: windowWidth } = useWindowDimensions();
-  const [cardImageName, setCardImageName] = useState('');
 
   const {
     register,
@@ -235,12 +233,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
   });
 
   const сardNumber = watch('cardNumber');
-
-  let CardNumberValidation = valid.number(сardNumber);
-
-  useEffect(() => {
-    setCardImageName(`${PAYMENT_CARD[CardNumberValidation.card?.type]}`);
-  }, [CardNumberValidation]);
+  const { cardImageName, CardNumberValidation } = useValidCard(сardNumber);
 
   const onSubmit = handleSubmit(data => {
     let order = null;
@@ -253,6 +246,8 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
     if (order) {
       dispatch(checkoutReducer.actions.fillOrder(order));
       dispatch(sendOrderAsync(order));
+
+      history.push('/order-confirm');
     }
   });
 
@@ -276,9 +271,9 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
         <OrderPreview
           order={order}
           pizza={pizza}
-          isPaymentIconView={!!CardNumberValidation.card?.type}
           cardImageName={cardImageName}
           normalizedCardNumber={normalizedCardNumber}
+          isPaymentIconView={!!CardNumberValidation.card?.type}
         />
         <FormContent className='form'>
           <FormSection>

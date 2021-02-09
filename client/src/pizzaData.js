@@ -12,7 +12,7 @@ export const DEFAULT_PIZZA = Object.freeze({
 export const PIZZA_DELIVERY = Object.freeze({
   price: 180,
   status: {
-    in_work: { kode: '0', case: 'В работе', icon: '' },
+    in_progress: { kode: '0', case: 'В работе', icon: '' },
     in_transit: { kode: '1', case: 'Доставляется', icon: 'icn_delivery' },
     delivered: { kode: '2', case: 'Доставлен', icon: '' },
     repeat: { kode: '3', case: 'Повторить заказ', icon: 'icn_repeat' },

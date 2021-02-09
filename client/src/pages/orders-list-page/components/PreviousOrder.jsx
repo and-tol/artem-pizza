@@ -1,23 +1,21 @@
-import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 // Helpers
-import { dateShow, dateTime } from '../helpers';
-import { calculateTotalPrice } from '../calculateTotalPrice';
+import { dateShow, dateTime } from '../../../share/helpers';
+import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Icons
-import { ReactComponent as IconDelivery } from '../../asserts/icons/icn_delivery.svg';
-import { ReactComponent as IconRepeat } from '../../asserts/icons/icn_repeat.svg';
-import { ReactComponent as IconProgress } from '../../asserts/icons/icn_in-progress.svg';
-import { ImageIcon } from './ImageIcon';
+import { ReactComponent as IconDelivery } from '../../../asserts/icons/icn_delivery.svg';
+import { ReactComponent as IconRepeat } from '../../../asserts/icons/icn_repeat.svg';
+import { ImageIcon } from '../../../share/components/ImageIcon';
 // Actions
-import { fetchIngredientsAsync } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsReducer';
+import { fetchIngredientsAsync } from '../../pizza-configurator-page/state-ingredients/ingredientsReducer';
 // Selectors
-import { getIngredients } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
+import { getIngredients } from '../../pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Data
-import { PIZZA_DELIVERY } from '../../pizzaData';
+import { PIZZA_DELIVERY } from '../../../pizzaData';
 // Components
-import { OrderPreview } from './OrderPreview';
+import { OrderPreview } from '../../../share/components/OrderPreview';
 // Styles
 const Article = styled.article`
   display: flex;
@@ -28,14 +26,7 @@ const Article = styled.article`
   border-radius: 16px;
   box-shadow: 0px 8px 16px rgba(75, 75, 124, 0.05);
   margin-bottom: 16px;
-
-  @media (max-width: 959.5px) {
-    width: 100%;
-  }
-  @media (min-width: 960px) {
-    width: 600px;
-    max-width: 100%;
-  }
+  max-width: 350px;
 `;
 
 const OrderPreviewHeader = styled.header`
@@ -74,10 +65,8 @@ const OrderPreviewFooterDelivery = styled.div`
   margin-left: auto;
   font-weight: 500;
   color: var(--secondary);
-  color: ${({color})=> color};
 `;
 const DeliveryText = styled.span`
-  white-space: nowrap;
   margin-left: 8px;
 `;
 const ButtonRepeat = styled.button`
@@ -92,7 +81,7 @@ const ButtonRepeat = styled.button`
   }
 `;
 
-export const Order = ({
+export const PreviousOrder = ({
   order,
   pizza,
   cardImageName,
@@ -100,7 +89,6 @@ export const Order = ({
   normalizedCardNumber,
 }) => {
   const dispatch = useDispatch();
-  const location = useLocation();
 
   useEffect(() => {
     dispatch(fetchIngredientsAsync());
@@ -109,7 +97,9 @@ export const Order = ({
   const ingredients = useSelector(getIngredients);
   const totalPrice = calculateTotalPrice(ingredients, pizza);
 
-  const repeatPizza = () => {};
+  const repeatPizza = () => {
+
+  }
 
   return (
     <Article>
@@ -128,7 +118,6 @@ export const Order = ({
         {isPaymentIconView && cardImageName && (
           <ImageIcon cardImageName={cardImageName} width='30' />
         )}
-
         {order && (
           <LastDigitPaymentCard>
             {order.cardNumber?.slice(-4)}
@@ -141,26 +130,16 @@ export const Order = ({
               {normalizedCardNumber?.slice(-4)}
             </LastDigitPaymentCard>
           )}
-        {location.pathname === '/checkout' && (
-          <OrderPreviewFooterDelivery color='var(--gray600)'>
-            <IconProgress width='16' fill='var(--gray600)' />
-            <DeliveryText>
-              {PIZZA_DELIVERY.status.in_progress.case}
-            </DeliveryText>
-          </OrderPreviewFooterDelivery>
-        )}
-        {location.pathname === '/order-confirm' && (
-          <OrderPreviewFooterDelivery>
-            <IconDelivery fill='var(--secondary)' />
-            <DeliveryText>{PIZZA_DELIVERY.status.in_transit.case}</DeliveryText>
-          </OrderPreviewFooterDelivery>
-        )}
-        {location.pathname==='/orders-list' && <OrderPreviewFooterDelivery>
+        <OrderPreviewFooterDelivery>
+          <IconDelivery fill='var(--secondary)' />
+          <DeliveryText>{PIZZA_DELIVERY.status.in_transit.case}</DeliveryText>
+        </OrderPreviewFooterDelivery>
+        {/* <OrderPreviewFooterDelivery>
           <ButtonRepeat type='button' onClick={repeatPizza}>
             <IconRepeat fill='var(--primary)' />
             <DeliveryText>{PIZZA_DELIVERY.status.repeat.case}</DeliveryText>
           </ButtonRepeat>
-        </OrderPreviewFooterDelivery>}
+        </OrderPreviewFooterDelivery> */}
       </OrderPreviewFooter>
     </Article>
   );
