@@ -37,6 +37,7 @@ const Preview = styled.div`
   justify-content: center;
   position: relative;
   margin-bottom: 16px;
+  margin-left: -30px;
 `;
 const Plate = styled.img`
   width: 300px;

@@ -1,4 +1,6 @@
-export const calculateTotalPrice = (ingredients, pizza) => {
+import { DEFAULT_PIZZA } from '../pizzaData';
+
+export const calculateTotalPrice = (ingredients, pizza = DEFAULT_PIZZA) => {
   const { size, cheese, vegetables, meat } = pizza;
 
   const SIZE = ingredients.filter(i => i.category === 'size');
@@ -14,7 +16,8 @@ export const calculateTotalPrice = (ingredients, pizza) => {
   let cheesePrice = 0;
   if (cheese !== undefined && CHEESE.length && cheese.length) {
     cheesePrice = cheese.reduce(
-      (price, cheese) => price + CHEESE.filter(i => i.slug === cheese)[0]?.price,
+      (price, cheese) =>
+        price + CHEESE.filter(i => i.slug === cheese)[0]?.price,
       0
     );
   }

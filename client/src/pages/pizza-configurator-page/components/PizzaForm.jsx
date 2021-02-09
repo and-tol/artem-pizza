@@ -1,28 +1,32 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
-import styled from 'styled-components'
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 // Data
-import { DEFAULT_PIZZA } from '../../../pizzaData'
+import { DEFAULT_PIZZA } from '../../../pizzaData';
 // Helpers
-import { calculateTotalPrice } from '../../../share/calculateTotalPrice'
+import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Components
-import { Loader } from '../../../share/components/loader'
+import { Loader } from '../../../share/components/loader';
 // Hooks
-import { useWindowDimensions } from '../../../share/hooks/useWindowDimentions'
+import { useWindowDimensions } from '../../../share/hooks/useWindowDimentions';
 // Styles
-import { ButtonPrimary, Footer } from '../../../share/styled-components'
+import { ButtonPrimary, Footer } from '../../../share/styled-components';
 // Selectors
 import {
   getIngredients,
   getIngredientsByCategory,
-  getLoadingStatus
-} from '../state-ingredients/ingredientsSelectors'
-import { CheckboxGroup } from './CheckboxGroup'
-import { PizzaPreview } from './PizzaPreview'
-import { RadioGroupSlider } from './RadioGroupSlider'
-import { RadioGroupSwitcher } from './RadioGroupSwitcher'
+  getLoadingStatus,
+} from '../state-ingredients/ingredientsSelectors';
+import { CheckboxGroup } from './CheckboxGroup';
+import { PizzaPreview } from './PizzaPreview';
+import { RadioGroupSlider } from './RadioGroupSlider';
+import { RadioGroupSwitcher } from './RadioGroupSwitcher';
+
 const Container = styled.section`
+  width: 100%;
+  padding-left: var(--padding-glob);
+  padding-right: var(--padding-glob);
   @media (min-width: 960px) {
     display: flex;
     flex-direction: row-reverse;

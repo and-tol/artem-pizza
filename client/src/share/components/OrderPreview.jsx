@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+// Date
+import { DEFAULT_PIZZA } from '../../pizzaData';
 // Selectors
 import { getIngredientsByCategory } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Helpers
@@ -23,7 +25,7 @@ const Title = styled.h3`
   margin-bottom: 8px;
 `;
 
-export const OrderPreview = ({ pizza, ingredients }) => {
+export const OrderPreview = ({ pizza = DEFAULT_PIZZA, ingredients }) => {
   const { pathname } = useLocation();
 
   const { size, dough, sauces, cheese, vegetables, meat } = pizza;

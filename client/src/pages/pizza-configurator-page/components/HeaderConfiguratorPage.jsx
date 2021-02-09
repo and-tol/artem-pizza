@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as IcnAccount } from '../../asserts/icons/icn_account.svg';
+import { ReactComponent as IcnAccount } from '../../../asserts/icons/icn_account.svg';
+
 // Images
-import { ReactComponent as NavbarBrand } from '../../asserts/NavbarBrand.svg';
+import { ReactComponent as NavbarBrand } from '../../../asserts/NavbarBrand.svg';
 // Hooks
-import { useWindowDimensions } from '../hooks/useWindowDimentions';
-import * as Button from '../styled-components/Button';
+import { useWindowDimensions } from '../../../share/hooks/useWindowDimentions';
+import * as Button from '../../../share/styled-components/Button';
 
 export const Styled = styled.header`
   width: 100%;

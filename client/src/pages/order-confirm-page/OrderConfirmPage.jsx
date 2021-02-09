@@ -4,12 +4,9 @@ import styled from 'styled-components';
 // Helpers
 import { normalizeCardNumber } from '../../share/helpers';
 import { useValidCard } from '../../share/hooks';
-
 // Images
 import orderError from '../../asserts/icons/order-status_error.svg';
 import orderSuccess from '../../asserts/icons/order-status_ok.svg';
-// Fake Data
-import { fakeOrder } from '../../pizzaData';
 // Components
 import { Order } from '../../share/components';
 // Selectors
@@ -78,12 +75,10 @@ export const OrderConfirmPage = () => {
       {isOrderAccepted && order ? (
         <Section>
           <OrderConfirmIcon src={orderSuccess} alt='success' />
-
           <MainInfo>Спасибо за заказ!</MainInfo>
           <AdditionalInfo>
             Заказ успешно оплачен, ждите вашу пиццу уже через час
           </AdditionalInfo>
-
           <Order
             order={order}
             pizza={order?.pizza}

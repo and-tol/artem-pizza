@@ -31,9 +31,6 @@ const Section = styled.section`
 
 const OrderPreview = styled(Order)`
   grid-area: order;
-  @media (min-width: 960px) {
-    max-width: 350px;
-  }
 `;
 const FormContent = styled.div`
   grid-area: form;

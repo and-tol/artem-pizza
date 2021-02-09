@@ -11,6 +11,6 @@ export const StyledWrapper = styled(Wrapper)`
   align-items: center;
 
   @media (min-width: 960px) {
-    width: 960px;
+    width: 1024px;
   }
 `;

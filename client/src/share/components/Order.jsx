@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 // Helpers
@@ -74,11 +74,12 @@ const OrderPreviewFooterDelivery = styled.div`
   margin-left: auto;
   font-weight: 500;
   color: var(--secondary);
-  color: ${({color})=> color};
+  color: ${({ color }) => color};
 `;
-const DeliveryText = styled.span`
+const DeliveryButtonText = styled.span`
   white-space: nowrap;
   margin-left: 8px;
+  color: ${({ color }) => color};
 `;
 const ButtonRepeat = styled.button`
   white-space: nowrap;
@@ -98,14 +99,10 @@ export const Order = ({
   cardImageName,
   isPaymentIconView,
   normalizedCardNumber,
+  sequence,
+  isInterval,
 }) => {
-  const dispatch = useDispatch();
   const location = useLocation();
-
-  useEffect(() => {
-    dispatch(fetchIngredientsAsync());
-  }, [dispatch]);
-
   const ingredients = useSelector(getIngredients);
   const totalPrice = calculateTotalPrice(ingredients, pizza);
 
@@ -144,23 +141,50 @@ export const Order = ({
         {location.pathname === '/checkout' && (
           <OrderPreviewFooterDelivery color='var(--gray600)'>
             <IconProgress width='16' fill='var(--gray600)' />
-            <DeliveryText>
+            <DeliveryButtonText>
               {PIZZA_DELIVERY.status.in_progress.case}
-            </DeliveryText>
+            </DeliveryButtonText>
           </OrderPreviewFooterDelivery>
         )}
         {location.pathname === '/order-confirm' && (
           <OrderPreviewFooterDelivery>
             <IconDelivery fill='var(--secondary)' />
-            <DeliveryText>{PIZZA_DELIVERY.status.in_transit.case}</DeliveryText>
+            <DeliveryButtonText>
+              {PIZZA_DELIVERY.status.in_transit.case}
+            </DeliveryButtonText>
           </OrderPreviewFooterDelivery>
         )}
-        {location.pathname==='/orders-list' && <OrderPreviewFooterDelivery>
-          <ButtonRepeat type='button' onClick={repeatPizza}>
-            <IconRepeat fill='var(--primary)' />
-            <DeliveryText>{PIZZA_DELIVERY.status.repeat.case}</DeliveryText>
-          </ButtonRepeat>
-        </OrderPreviewFooterDelivery>}
+        {location.pathname === '/orders-list' && sequence !== 0 && (
+          <OrderPreviewFooterDelivery>
+            <ButtonRepeat type='button' onClick={repeatPizza}>
+              <IconRepeat fill='var(--primary)' />
+              <DeliveryButtonText color='var(--primary)'>
+                {PIZZA_DELIVERY.status.repeat.case}
+              </DeliveryButtonText>
+            </ButtonRepeat>
+          </OrderPreviewFooterDelivery>
+        )}
+        {location.pathname === '/orders-list' && sequence === 0 && (
+          <OrderPreviewFooterDelivery>
+            {isInterval ? (
+              <>
+                <IconDelivery fill='var(--secondary)' />
+                <DeliveryButtonText color='var(--secondary)'>
+                  {PIZZA_DELIVERY.status.in_transit.case}
+                </DeliveryButtonText>
+              </>
+            ) : (
+              <>
+                <ButtonRepeat type='button' onClick={repeatPizza}>
+                  <IconRepeat fill='var(--primary)' />
+                  <DeliveryButtonText color='var(--primary)'>
+                    {PIZZA_DELIVERY.status.repeat.case}
+                  </DeliveryButtonText>
+                </ButtonRepeat>
+              </>
+            )}
+          </OrderPreviewFooterDelivery>
+        )}
       </OrderPreviewFooter>
     </Article>
   );

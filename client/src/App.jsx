@@ -40,7 +40,7 @@ const Main = styled.main`
     max-width: 960px;
   }
   @media (min-width: 960px) {
-    width: 960px;
+    width: 1024px;
     padding: 32px 40px 32px;
     padding: ${({ pathname }) => pathname === '/checkout' && '0'};
   }

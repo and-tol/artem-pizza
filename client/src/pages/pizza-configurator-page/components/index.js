@@ -4,4 +4,3 @@ export * from './PizzaPreview';
 export * from './PizzaSubmit';
 export * from './RadioGroup';
 export * from './RadioGroupSlider';
-export * from './RadioGroupSwitcher';

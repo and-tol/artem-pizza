@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as IncError } from '../../asserts/icons/icn_error.svg';
+import { ReactComponent as IncError } from '../../../asserts/icons/icn_error.svg';
 
 const Container = styled.div`
   width: 100%;
