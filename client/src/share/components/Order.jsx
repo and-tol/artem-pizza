@@ -98,12 +98,11 @@ export const Order = ({
   normalizedCardNumber,
   sequence,
   isInterval,
+  repeatPizzaOrder,
 }) => {
   const location = useLocation();
   const ingredients = useSelector(getIngredients);
   const totalPrice = calculateTotalPrice(ingredients, pizza);
-
-  const repeatPizza = () => {};
 
   return (
     <Article>
@@ -153,7 +152,10 @@ export const Order = ({
         )}
         {location.pathname === '/orders-list' && sequence !== 0 && (
           <OrderPreviewFooterDelivery>
-            <ButtonRepeat type='button' onClick={repeatPizza}>
+            <ButtonRepeat
+              type='button'
+              onClick={() => repeatPizzaOrder(sequence)}
+            >
               <IconRepeat fill='var(--primary)' />
               <DeliveryButtonText color='var(--primary)'>
                 {PIZZA_DELIVERY.status.repeat.case}
@@ -172,7 +174,10 @@ export const Order = ({
               </>
             ) : (
               <>
-                <ButtonRepeat type='button' onClick={repeatPizza}>
+                <ButtonRepeat
+                  type='button'
+                  onClick={() => repeatPizzaOrder(sequence)}
+                >
                   <IconRepeat fill='var(--primary)' />
                   <DeliveryButtonText color='var(--primary)'>
                     {PIZZA_DELIVERY.status.repeat.case}
