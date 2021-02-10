@@ -17,7 +17,7 @@ export const RadioGroup = props => {
             />
             <label key={option[1].id}>
               {option[1].name}
-              {name === 'size' ? 'см' : null}
+              {name === 'size' ? ' см' : null}
             </label>
           </Fragment>
         ))}

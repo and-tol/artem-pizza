@@ -144,7 +144,7 @@ export const PizzaPreview = ({ pizza, ingredients, totalPrice, onSubmit }) => {
       <H3>Маргарита</H3>
       <Composition>
         <CompositionItem>
-          <span>{!!size && ` ${renderIngredients(size, ingredients)}`}</span>
+          <span>{!!size && ` ${renderIngredients(size, ingredients)} `}</span>
           см на тесте
           <span>{!!dough && ` ${renderIngredients(dough, ingredients)}`}</span>
         </CompositionItem>
@@ -171,7 +171,7 @@ export const PizzaPreview = ({ pizza, ingredients, totalPrice, onSubmit }) => {
       </Composition>
       {windowWidth >= 960 ? (
         <Button type='submit' onClick={onSubmit}>
-          Заказать за {totalPrice}руб.
+          Заказать за {totalPrice} руб.
         </Button>
       ) : null}
     </Section>

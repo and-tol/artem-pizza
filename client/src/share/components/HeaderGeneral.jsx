@@ -61,8 +61,8 @@ export const HeaderGeneral = ({ history, title }) => {
         <IncArrowLeft /> <span>Назад</span>
       </Button>
       <H1>{title}</H1>
-      <Button>
-        <IncLogout onClick={logout} /> <span>Выйти</span>
+      <Button onClick={logout}>
+        <IncLogout /> <span>Выйти</span>
       </Button>
     </Container>
   );

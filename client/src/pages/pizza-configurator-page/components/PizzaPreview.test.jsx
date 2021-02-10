@@ -24,7 +24,7 @@ describe('OrderPreview', () => {
     );
 
     // FIXME: expect(screen.getByText:
-    // expect(screen.getByText(/Размер: 30см/i)).toBeInTheDocument();
+    // expect(screen.getByText(/Размер: 30 см/i)).toBeInTheDocument();
     // expect(screen.getByText('Тесто: тонкое')).toBeInTheDocument();
     // expect(screen.getByText('Соус: томатный')).toBeInTheDocument();
     // expect(screen.getByText('Сыр: моцарелла')).toBeInTheDocument();

@@ -128,30 +128,36 @@ export const PizzaForm = ({ onPizzaOrder }) => {
           options={SAUCES}
         />
 
-        <RadioGroupContainer>
-          <CheckboxGroup
-            legend='Добавьте сыр'
-            register={register}
-            name='cheese'
-            options={CHEESE}
-          />
-        </RadioGroupContainer>
+        {!!CHEESE.length && (
+          <RadioGroupContainer>
+            <CheckboxGroup
+              legend='Добавьте сыр'
+              register={register}
+              name='cheese'
+              options={CHEESE}
+            />
+          </RadioGroupContainer>
+        )}
 
-        <CheckboxGroup
-          legend='Добавьте овощи'
-          register={register}
-          name='vegetables'
-          options={VEGETABLES}
-        />
-        <CheckboxGroup
-          legend='Добавьте мясо'
-          register={register}
-          name='meat'
-          options={MEAT}
-        />
+        {!!VEGETABLES.length && (
+          <CheckboxGroup
+            legend='Добавьте овощи'
+            register={register}
+            name='vegetables'
+            options={VEGETABLES}
+          />
+        )}
+        {!!MEAT.length && (
+          <CheckboxGroup
+            legend='Добавьте мясо'
+            register={register}
+            name='meat'
+            options={MEAT}
+          />
+        )}
         {windowWidth < 960 && (
           <Footer>
-            <Button>Заказать за {totalPrice}руб.</Button>
+            <Button>Заказать за {totalPrice}  руб.</Button>
           </Footer>
         )}
       </FormStyled>

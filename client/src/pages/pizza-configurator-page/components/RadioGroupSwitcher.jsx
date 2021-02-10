@@ -65,7 +65,7 @@ export const RadioGroupSwitcher = props => {
             />
             <Label htmlFor={option[1].id}>
               {option[1].name}
-              {name === 'size' ? 'см' : null}
+              {name === 'size' ? ' см' : null}
             </Label>
           </Fragment>
         ))}
