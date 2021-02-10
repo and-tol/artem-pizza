@@ -1,7 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-// Selectors
-import { getUserStatus } from '../../pages/login-page/state/loginSelectors';
+
 // Actions
 import { loginReducer } from '../../pages/login-page/state';
 // Image
@@ -53,7 +52,7 @@ export const HeaderGeneral = ({ history, title }) => {
   const logout = () => {
     dispatch(loginReducer.actions.userLogout());
     history.push('/');
-  }
+  };
 
   return (
     <Container>

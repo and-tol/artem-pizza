@@ -1,6 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 // Helpers
 import { dateShow, dateTime } from '../helpers';
@@ -10,8 +9,6 @@ import { ReactComponent as IconDelivery } from '../../asserts/icons/icn_delivery
 import { ReactComponent as IconRepeat } from '../../asserts/icons/icn_repeat.svg';
 import { ReactComponent as IconProgress } from '../../asserts/icons/icn_in-progress.svg';
 import { ImageIcon } from './ImageIcon';
-// Actions
-import { fetchIngredientsAsync } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsReducer';
 // Selectors
 import { getIngredients } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Data
