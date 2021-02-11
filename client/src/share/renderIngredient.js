@@ -8,6 +8,9 @@ export const renderIngredients = (
   availableIngredients
 ) => {
 
+  console.log('selectedIngredients>>>', selectedIngredients);
+  console.log('availableIngredients>>>>', availableIngredients);
+
   if (
     selectedIngredients &&
     typeof selectedIngredients === 'string' &&

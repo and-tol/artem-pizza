@@ -40,10 +40,10 @@ export const fetchIngredientsAsync = createAsyncThunk(
   'ingredients/ingredientsFetchAsync',
   async (_, thunkAPI) => {
     const response = await api.ingredients.availableIngredients();
+    console.log('response>>>>', response);
 
     if (response.status === 200) {
       const results = await response.json();
-
       const resultsWithCorrectTypes = results.map(item => ({
         ...item,
         price: Number(item.price),

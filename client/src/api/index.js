@@ -4,13 +4,13 @@ import { root } from './config';
 export const api = Object.freeze({
   ingredients: {
     availableIngredients: () => {
-      return fetch(`${root}/ingredients`);
+      return fetch(`${root}ingredients`);
     },
   },
 
   orders: {
     createOrder: data => {
-      return fetch(`${root}/orders`, {
+      return fetch(`${root}orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -19,13 +19,13 @@ export const api = Object.freeze({
       });
     },
     getAllOrders: () => {
-      return fetch(`${root}/orders`);
+      return fetch(`${root}orders`);
     },
   },
 
   users: {
     create: data => {
-      return fetch(`${root}/users`, {
+      return fetch(`${root}users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export const api = Object.freeze({
       });
     },
     login: credentials => {
-      return fetch(`${root}/login`, {
+      return fetch(`${root}login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ export const api = Object.freeze({
       });
     },
     logout: () => {
-      return fetch(`${root}/logout`, {
+      return fetch(`${root}logout`, {
         method: 'POST',
         credentials: 'include',
       });
