@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import * as yup from 'yup';
@@ -48,12 +48,14 @@ export const LoginPage = () => {
 
   const onSubmit = handleSubmit(async data => {
     const result = await loginUser(data);
-    // TODO: если проверка успешна переход на страницу ингредиентов
-    if (true) {
+    const token = await loginUser(data).then(token => token.json());
+
+    if (result.status === 200) {
       history.push('/ingredients-list');
     }
     // TODO: если проверка не проходит повторная проверка
-    if (false) {
+    if (result.status !== 200) {
+      return <p>Попробуйте ещё раз</p>
     }
     // TODO: если пользователь не зарегистрирован -> переход на страницу регистрации
     if (false) {
@@ -61,20 +63,20 @@ export const LoginPage = () => {
     }
   });
 
-  useEffect(() => {
-    const id = setTimeout(() => {
-      history.push('/signup');
-      setIsSignup(false);
-    }, 1500);
+  // useEffect(() => {
+  //   const id = setTimeout(() => {
+  //     history.push('/signup');
+  //     setIsSignup(false);
+  //   }, 1500);
 
-    return () => {
-      clearTimeout(id);
-    };
-  });
+  //   return () => {
+  //     clearTimeout(id);
+  //   };
+  // });
 
-  const toRegistration = () => {
-    history.push('/signup')
-  }
+  // const toRegistration = () => {
+  //   history.push('/signup')
+  // }
 
   return (
     <Grid container component='section' justify='center'>
@@ -120,11 +122,11 @@ export const LoginPage = () => {
           </Grid>
         </form>
       </Grid>
-      <Grid container justify='center'>
+      {/* <Grid container justify='center'>
         <Button variant='outlined' onClick={toRegistration}>
           Зарегистрироваться
         </Button>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

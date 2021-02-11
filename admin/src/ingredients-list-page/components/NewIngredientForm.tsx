@@ -64,6 +64,8 @@ export const NewIngredientForm = (props: NewIngredientFormProps) => {
     formData.append('image', image[0]);
     formData.append('thumbnail', thumbnail[0]);
 
+    console.log('formData>>>', formData);
+
     await createIngredient(formData);
 
     await cancelCreatingNewIngredient();

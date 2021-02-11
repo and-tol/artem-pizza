@@ -4,8 +4,7 @@ import { api } from '../api';
 // Types
 import { Ingredient } from '../types';
 // Components
-import { EditIngredientForm } from './components/EditIngredientForm';
-import { NewIngredientForm } from './components/NewIngredientForm';
+import { EditIngredientForm, NewIngredientForm } from './components';
 // Styles
 import {
   makeStyles,
@@ -76,7 +75,7 @@ export const IngredientsListPage = () => {
   });
 
   /**
-   * Creating/CancelCreating New Ingredient
+   * Toggle Creating/CancelCreating New Ingredient
    */
   const createNewIngredient = () => {
     setIsCreating(true);
@@ -88,7 +87,7 @@ export const IngredientsListPage = () => {
   };
 
   /**
-   * Show/unshow ingredient
+   * Toggle Show/unshow ingredient
    */
   const [isShowing, setIsShowing] = useState(false);
   const showIngredient = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -104,7 +103,7 @@ export const IngredientsListPage = () => {
 
   /**
    * Ingredient is editing.
-   * Show/hide form to editing ingredients
+   * Toggle Show/hide form to editing ingredients
    */
   const [isCancel, setIsCancel] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
