@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 // Data
-import { DEFAULT_PIZZA } from '../../../pizzaData';
+import { DEFAULT_PIZZA, PIZZA_DATA_PRIMARY } from '../../../pizzaData';
 // Helpers
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Components
@@ -72,8 +72,9 @@ export const PizzaForm = ({ onPizzaOrder }) => {
 
   const ingredients = useSelector(getIngredients);
 
-  const SIZE = useSelector(getIngredientsByCategory('size'));
-  const DOUGH = useSelector(getIngredientsByCategory('dough'));
+  const SIZE = PIZZA_DATA_PRIMARY.size;
+  const DOUGH = PIZZA_DATA_PRIMARY.dough;
+
   const SAUCES = useSelector(getIngredientsByCategory('sauces'));
   const CHEESE = useSelector(getIngredientsByCategory('cheese'));
   const VEGETABLES = useSelector(getIngredientsByCategory('vegetables'));
@@ -157,7 +158,7 @@ export const PizzaForm = ({ onPizzaOrder }) => {
         )}
         {windowWidth < 960 && (
           <Footer>
-            <Button>Заказать за {totalPrice}  руб.</Button>
+            <Button>Заказать за {totalPrice} руб.</Button>
           </Footer>
         )}
       </FormStyled>

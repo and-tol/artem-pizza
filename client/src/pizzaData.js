@@ -7,15 +7,45 @@ export const DEFAULT_PIZZA = Object.freeze({
   meat: [],
 });
 
-// export const PIZZA_DELIVERY.price = 180;
-
-export const PIZZA_DELIVERY = Object.freeze({
-  price: 180,
-  status: {
-    in_progress: { kode: '0', case: 'В работе', icon: '' },
-    in_transit: { kode: '1', case: 'Доставляется', icon: 'icn_delivery' },
-    delivered: { kode: '2', case: 'Доставлен', icon: '' },
-    repeat: { kode: '3', case: 'Повторить заказ', icon: 'icn_repeat' },
+export const PIZZA_DATA_PRIMARY = Object.freeze({
+  size: [
+    {
+      category: 'size',
+      name: '30',
+      price: 200,
+      slug: '30',
+    },
+    {
+      category: 'size',
+      name: '35',
+      price: 250,
+      slug: '35',
+    },
+  ],
+  dough: [
+    {
+      category: 'dough',
+      name: 'тонкое',
+      price: 0,
+      slug: 'thin',
+      case: 'тонком',
+    },
+    {
+      category: 'dough',
+      name: 'толстое',
+      price: 0,
+      slug: 'thick',
+      case: 'толстом',
+    },
+  ],
+  delivery: {
+    price: 180,
+    status: {
+      in_progress: { code: '0', case: 'В работе', icon: 'icn_in-progress' },
+      in_transit: { code: '1', case: 'Доставляется', icon: 'icn_delivery' },
+      delivered: { code: '2', case: 'Доставлен', icon: 'icn_check' },
+      repeat: { code: '3', case: 'Повторить заказ', icon: 'icn_repeat' },
+    },
   },
 });
 
@@ -66,7 +96,7 @@ export const fakeOrder = {
   cardNumber: '4545454545454545',
 };
 
-export const IngredientsCases = [
+export const INGREDIENTS_CASES = [
   { slug: 'thin', case: 'тонком' },
   { slug: 'thick', case: 'толстом' },
 ];

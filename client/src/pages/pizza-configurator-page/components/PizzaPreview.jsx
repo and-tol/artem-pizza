@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { serverImgs } from '../../../api/config'
+// Data
+import { PIZZA_DATA_PRIMARY } from '../../../pizzaData';
 // Images
 import plate from '../../../asserts/plate.png'
 import thick from '../../../asserts/thick.png'
@@ -91,6 +93,9 @@ export const PizzaPreview = ({ pizza, ingredients, totalPrice, onSubmit }) => {
   const { width: windowWidth } = useWindowDimensions();
   const { size, dough, sauces, cheese, vegetables, meat } = pizza;
 
+  const SIZE = PIZZA_DATA_PRIMARY.size
+  const DOUGH = PIZZA_DATA_PRIMARY.dough
+
   const CHEESE = useSelector(getIngredientsByCategory('cheese'));
   const VEGETABLES = useSelector(getIngredientsByCategory('vegetables'));
   const MEAT = useSelector(getIngredientsByCategory('meat'));
@@ -144,9 +149,9 @@ export const PizzaPreview = ({ pizza, ingredients, totalPrice, onSubmit }) => {
       <H3>Маргарита</H3>
       <Composition>
         <CompositionItem>
-          <span>{!!size && ` ${renderIngredients(size, ingredients)} `}</span>
+          <span>{!!size && ` ${renderIngredients(size, SIZE)} `}</span>
           см на тесте
-          <span>{!!dough && ` ${renderIngredients(dough, ingredients)}`}</span>
+          <span>{!!dough && ` ${renderIngredients(dough, DOUGH)}`}</span>
         </CompositionItem>
         <CompositionItem>
           {sauces !== undefined && sauces.length && SAUCES.length

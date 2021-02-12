@@ -1,9 +1,8 @@
-import { Fragment } from 'react'
-import styled from 'styled-components'
-import { InputGroupContainer as SwitcherContainer } from '../../../share/styled-components/InputGroupContainer'
+import { Fragment } from 'react';
+import styled from 'styled-components';
+import { InputGroupContainer as SwitcherContainer } from '../../../share/styled-components/InputGroupContainer';
 // Styles
-import { Legend } from '../../../share/styled-components/Legend'
-
+import { Legend } from '../../../share/styled-components/Legend';
 
 const Fieldset = styled.div`
   display: inline-block;
@@ -46,24 +45,22 @@ const Input = styled.input`
   }
 `;
 
-export const RadioGroupSwitcher = props => {
-  const { legend, options, register, name } = props;
-
+export const RadioGroupSwitcher = ({ legend, options, register, name }) => {
   return (
     <Fieldset>
       <Legend>{legend}</Legend>
       <SwitcherContainer>
         {Object.entries(options).map(option => (
-          <Fragment key={option[1].id}>
+          <Fragment key={option[1].slug}>
             <Input
-              id={option[1].id}
+              id={option[1].slug}
               ref={register}
               type='radio'
               name={name}
               value={option[1].slug}
               hidden
             />
-            <Label htmlFor={option[1].id}>
+            <Label htmlFor={option[1].slug}>
               {option[1].name}
               {name === 'size' ? ' см' : null}
             </Label>
