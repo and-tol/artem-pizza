@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // Date
 import { DEFAULT_PIZZA, PIZZA_DATA_PRIMARY } from '../../pizzaData';
@@ -70,4 +71,9 @@ export const OrderPreview = ({ pizza = DEFAULT_PIZZA, ingredients }) => {
       </Composition>
     </>
   );
+};
+
+OrderPreview.propTypes = {
+  pizza: PropTypes.object.isRequired,
+  ingredients: PropTypes.arrayOf(PropTypes.object),
 };

@@ -1,8 +1,7 @@
-import { Fragment } from 'react';
+import PropTypes from 'prop-types'
+import { Fragment } from 'react'
 
-export const RadioGroup = props => {
-  const { register, legend, name, options } = props;
-
+export const RadioGroup = ({ register, legend, name, options }) => {
   return (
     <>
       <legend>{legend}</legend>
@@ -24,4 +23,11 @@ export const RadioGroup = props => {
       </div>
     </>
   );
+};
+
+RadioGroup.propTypes = {
+  register: PropTypes.object,
+  legend: PropTypes.string,
+  name: PropTypes.string,
+  options: PropTypes.object,
 };

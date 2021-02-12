@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import styled from 'styled-components'
-import { serverImgs } from '../../../api/config'
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { serverImgs } from '../../../api/config';
 // Data
 import { PIZZA_DATA_PRIMARY } from '../../../pizzaData';
 // Images
-import plate from '../../../asserts/plate.png'
-import thick from '../../../asserts/thick.png'
-import thin from '../../../asserts/thin.png'
+import plate from '../../../asserts/plate.png';
+import thick from '../../../asserts/thick.png';
+import thin from '../../../asserts/thin.png';
 // Hooks
-import { useWindowDimensions } from '../../../share/hooks/useWindowDimentions'
+import { useWindowDimensions } from '../../../share/hooks/useWindowDimentions';
 // Helpers
-import { renderIngredients } from '../../../share/renderIngredient'
+import { renderIngredients } from '../../../share/renderIngredient';
 // Components
-import { ButtonPrimary } from '../../../share/styled-components/Button'
+import { ButtonPrimary } from '../../../share/styled-components/Button';
 // Selectors
-import { getIngredientsByCategory } from '../state-ingredients/ingredientsSelectors'
-
+import { getIngredientsByCategory } from '../state-ingredients/ingredientsSelectors';
 
 // Styles
 const Section = styled.section`
@@ -93,8 +93,8 @@ export const PizzaPreview = ({ pizza, ingredients, totalPrice, onSubmit }) => {
   const { width: windowWidth } = useWindowDimensions();
   const { size, dough, sauces, cheese, vegetables, meat } = pizza;
 
-  const SIZE = PIZZA_DATA_PRIMARY.size
-  const DOUGH = PIZZA_DATA_PRIMARY.dough
+  const SIZE = PIZZA_DATA_PRIMARY.size;
+  const DOUGH = PIZZA_DATA_PRIMARY.dough;
 
   const CHEESE = useSelector(getIngredientsByCategory('cheese'));
   const VEGETABLES = useSelector(getIngredientsByCategory('vegetables'));
@@ -181,4 +181,18 @@ export const PizzaPreview = ({ pizza, ingredients, totalPrice, onSubmit }) => {
       ) : null}
     </Section>
   );
+};
+
+PizzaPreview.propTypes = {
+  pizza: PropTypes.shape({
+    size: PropTypes.string,
+    dough: PropTypes.string,
+    sauces: PropTypes.string,
+    cheese: PropTypes.array,
+    vegetables: PropTypes.array,
+    meat: PropTypes.array,
+  }),
+  totalPrice: PropTypes.number,
+  onSubmit: PropTypes.func,
+  ingredients: PropTypes.arrayOf(PropTypes.object),
 };

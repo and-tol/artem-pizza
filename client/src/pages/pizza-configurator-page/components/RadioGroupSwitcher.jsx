@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { InputGroupContainer as SwitcherContainer } from '../../../share/styled-components/InputGroupContainer';
 // Styles
@@ -69,4 +70,11 @@ export const RadioGroupSwitcher = ({ legend, options, register, name }) => {
       </SwitcherContainer>
     </Fieldset>
   );
+};
+
+RadioGroupSwitcher.propTypes = {
+  register: PropTypes.object,
+  legend: PropTypes.string,
+  name: PropTypes.string,
+  options: PropTypes.object,
 };

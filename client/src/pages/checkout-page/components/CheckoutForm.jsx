@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 // Hooks
 import { useWindowDimensions, useValidCard } from '../../../share/hooks';
 // Data
@@ -421,4 +422,16 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
       </Form>
     </Section>
   );
+};
+
+CheckoutForm.propTypes = {
+  pizza: PropTypes.shape({
+    size: PropTypes.string,
+    dough: PropTypes.string,
+    sauces: PropTypes.string,
+    cheese: PropTypes.array,
+    vegetables: PropTypes.array,
+    meat: PropTypes.array,
+  }),
+  ingredients: PropTypes.arrayOf(PropTypes.object),
 };

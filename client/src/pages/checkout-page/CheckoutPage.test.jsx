@@ -16,13 +16,13 @@ import { CheckoutFormProps } from './components/CheckoutForm';
 import { mockDefaultPizza } from '../../__mock__/defaulPizza';
 
 jest.mock('../../share/components/OrderPreview', () => ({
-  OrderPreview: ({ pizza, ingredients }: OrderPreviewProps) => {
+  OrderPreview: ({ pizza, ingredients }) => {
     return <div>Mocked Order Preview</div>;
   },
 }));
 
 jest.mock('./components', () => ({
-  CheckoutForm: ({ pizza, ingredients }: CheckoutFormProps) => {
+  CheckoutForm: ({ pizza, ingredients }) => {
     // CheckoutForm: () => {
     return <div>Mocked Checkout Form</div>;
   },

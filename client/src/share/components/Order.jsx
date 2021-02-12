@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // Helpers
 import { dateShow, dateTime } from '../helpers';
@@ -192,4 +193,22 @@ export const Order = ({
       </OrderPreviewFooter>
     </Article>
   );
+};
+
+Order.propTypes = {
+  order: PropTypes.object,
+  pizza: PropTypes.shape({
+    size: PropTypes.string,
+    dough: PropTypes.string,
+    sauces: PropTypes.string,
+    cheese: PropTypes.array,
+    vegetables: PropTypes.array,
+    meat: PropTypes.array,
+  }),
+  cardImageName: PropTypes.string,
+  isPaymentIconView: PropTypes.bool,
+  normalizedCardNumber: PropTypes.string,
+  sequence: PropTypes.number,
+  isInterval: PropTypes.bool,
+  repeatPizzaOrder: PropTypes.func,
 };

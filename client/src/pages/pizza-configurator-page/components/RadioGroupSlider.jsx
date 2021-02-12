@@ -1,8 +1,9 @@
-import { Fragment } from 'react'
-import styled from 'styled-components'
-import { InputGroupContainer } from '../../../share/styled-components/InputGroupContainer'
+import { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { InputGroupContainer } from '../../../share/styled-components/InputGroupContainer';
 // Styles
-import { Legend } from '../../../share/styled-components/Legend'
+import { Legend } from '../../../share/styled-components/Legend';
 
 const SliderContainer = styled(InputGroupContainer)`
   display: inline-flex;
@@ -57,14 +58,12 @@ const Input = styled.input`
     box-shadow: var(--shadow);
     cursor: default;
     @media (min-width: 960px) {
-      border-color: var(--primary)
+      border-color: var(--primary);
     }
   }
 `;
 
-export const RadioGroupSlider = props => {
-  const { register, legend, name, options } = props;
-
+export const RadioGroupSlider = ({ register, legend, name, options }) => {
   return (
     <>
       <Legend>{legend}</Legend>
@@ -90,4 +89,11 @@ export const RadioGroupSlider = props => {
       </SliderWrapper>
     </>
   );
+};
+
+RadioGroupSlider.propTypes = {
+  register: PropTypes.object,
+  legend: PropTypes.string,
+  name: PropTypes.string,
+  options: PropTypes.object,
 };
