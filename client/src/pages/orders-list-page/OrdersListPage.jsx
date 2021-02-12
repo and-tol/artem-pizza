@@ -39,7 +39,6 @@ export const OrdersListPage = () => {
   }, []);
 
   const repeatPizzaOrder = orderNumber => {
-    console.log('repeat');
     if (orders[orderNumber]) {
       dispatch(checkoutReducer.actions.fillOrder(orders[orderNumber]));
       dispatch(sendOrderAsync(orders[orderNumber]));
