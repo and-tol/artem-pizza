@@ -1,19 +1,20 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import styled from 'styled-components'
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 // Images
-import plate from '../../asserts/plate.png'
-import thick from '../../asserts/thick.png'
-import thin from '../../asserts/thin.png'
-import { serverImgs } from '../src/api/config'
+import plate from '../../asserts/plate.png';
+import thick from '../../asserts/thick.png';
+import thin from '../../asserts/thin.png';
+import { serverImgs } from '../src/api/config';
 // Selectors
-import { getIngredientsByCategory } from '../src/pages/pizza-configurator-page/state-ingredients/ingredientsSelectors'
+import { getIngredientsByCategory } from '../src/pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Hooks
-import { useWindowDimensions } from '../src/share/hooks/useWindowDimentions'
+import { useWindowDimensions } from '../src/share/hooks/useWindowDimentions';
 // Helpers
-import { renderIngredients } from '../src/share/renderIngredient'
+import { renderIngredients } from '../src/share/renderIngredient';
 // Components
-import { ButtonPrimary } from '../src/share/styled-components/Button'
+import { ButtonPrimary } from '../src/share/styled-components/Button';
 
 // Styles
 const Section = styled.section`
@@ -174,4 +175,18 @@ export const OrderPreview = ({ pizza, ingredients, totalPrice, onSubmit }) => {
       ) : null}
     </Section>
   );
+};
+
+OrderPreview.propTypes = {
+  pizza: PropTypes.shape({
+    size: PropTypes.string,
+    dough: PropTypes.string,
+    sauces: PropTypes.string,
+    cheese: PropTypes.array,
+    vegetables: PropTypes.array,
+    meat: PropTypes.array,
+  }),
+  ingredients: PropTypes.arrayOf(PropTypes.object),
+  totalPrice: PropTypes.number,
+  onSubmit: PropTypes.func,
 };

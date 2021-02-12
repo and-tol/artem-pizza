@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export const ImageIcon = ({ cardImageName, width }) => {
   return (
     <img
@@ -6,4 +8,9 @@ export const ImageIcon = ({ cardImageName, width }) => {
       alt={cardImageName}
     />
   );
+};
+
+ImageIcon.propTypes = {
+  cardImageName: PropTypes.string,
+  width: PropTypes.string,
 };

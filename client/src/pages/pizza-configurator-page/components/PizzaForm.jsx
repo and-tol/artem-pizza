@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // Data
 import { DEFAULT_PIZZA, PIZZA_DATA_PRIMARY } from '../../../pizzaData';
@@ -164,4 +165,8 @@ export const PizzaForm = ({ onPizzaOrder }) => {
       </FormStyled>
     </Container>
   );
+};
+
+PizzaForm.propTypes = {
+  onPizzaOrder: PropTypes.func,
 };

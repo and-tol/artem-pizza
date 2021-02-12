@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // Styles
 import { StyledWrapper } from '../styled-components/StyledWrapper';
@@ -26,4 +27,8 @@ export const Header = ({ children }) => {
       <Wrapper>{children}</Wrapper>
     </HeaderStyled>
   );
+};
+
+Header.propTypes = {
+  children: PropTypes.node,
 };

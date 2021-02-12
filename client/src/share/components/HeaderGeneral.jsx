@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-
+import PropTypes from 'prop-types';
 // Actions
 import { loginReducer } from '../../pages/login-page/state';
 // Image
@@ -65,4 +65,9 @@ export const HeaderGeneral = ({ history, title }) => {
       </Button>
     </Container>
   );
+};
+
+HeaderGeneral.propTypes = {
+  title: PropTypes.string,
+  history: PropTypes.object.isRequired,
 };

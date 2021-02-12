@@ -1,9 +1,10 @@
-import styled from 'styled-components'
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 // Images
-import { serverImgs } from '../../../api/config'
-import { ReactComponent as IconCheck } from '../../../asserts/icons/icn_check.svg'
+import { serverImgs } from '../../../api/config';
+import { ReactComponent as IconCheck } from '../../../asserts/icons/icn_check.svg';
 // Styles
-import { Legend } from '../../../share/styled-components/Legend'
+import { Legend } from '../../../share/styled-components/Legend';
 
 const Fieldset = styled.div`
   display: flex;
@@ -183,4 +184,11 @@ export const CheckboxGroup = ({ register, legend, options, name }) => {
       </Fieldset>
     </>
   );
+};
+
+CheckboxGroup.propTypes = {
+  register: PropTypes.object,
+  legend: PropTypes.string,
+  options: PropTypes.object,
+  name: PropTypes.string,
 };
