@@ -8,7 +8,7 @@ import styled from 'styled-components';
 // Hooks
 import { useWindowDimensions, useValidCard } from '../../../share/hooks';
 // Data
-import { PIZZA_DELIVERY } from '../../../pizzaData';
+import { PIZZA_DATA_PRIMARY } from '../../../pizzaData';
 // Helpers
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
 // Actions
@@ -401,15 +401,16 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
             <span>Стоимость заказа</span> <span>{orderPrice} руб.</span>
           </OrderPaymentSection>
           <OrderPaymentSection>
-            Доставка <span>{PIZZA_DELIVERY.price} руб.</span>
+            Доставка <span>{PIZZA_DATA_PRIMARY.delivery.price} руб.</span>
           </OrderPaymentSection>
           <DividingLine />
           <OrderPaymentSection toPay>
-            К оплате <span>{orderPrice + PIZZA_DELIVERY.price} руб.</span>
+            К оплате{' '}
+            <span>{orderPrice + PIZZA_DATA_PRIMARY.delivery.price} руб.</span>
           </OrderPaymentSection>
           {isDirty ? (
             <CheckoutFormButton type='submit' onClick={onSubmit}>
-              Оплатить {orderPrice + PIZZA_DELIVERY.price} руб.
+              Оплатить {orderPrice + PIZZA_DATA_PRIMARY.delivery.price} руб.
             </CheckoutFormButton>
           ) : (
             <CheckoutFormButton disabled>

@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 // Date
-import { DEFAULT_PIZZA } from '../../pizzaData';
+import { DEFAULT_PIZZA, PIZZA_DATA_PRIMARY } from '../../pizzaData';
 // Selectors
 import { getIngredientsByCategory } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Helpers
@@ -27,8 +27,10 @@ const Title = styled.h3`
 
 export const OrderPreview = ({ pizza = DEFAULT_PIZZA, ingredients }) => {
   const { pathname } = useLocation();
-
   const { size, dough, sauces, cheese, vegetables, meat } = pizza;
+
+  const SIZE = PIZZA_DATA_PRIMARY.size;
+  const DOUGH = PIZZA_DATA_PRIMARY.dough;
 
   const CHEESE = useSelector(getIngredientsByCategory('cheese'));
   const VEGETABLES = useSelector(getIngredientsByCategory('vegetables'));
@@ -39,9 +41,12 @@ export const OrderPreview = ({ pizza = DEFAULT_PIZZA, ingredients }) => {
     <>
       <Composition pathname={pathname}>
         <Title>Ленивая Маргарита</Title>
-        <span>{!!size && ` ${renderIngredients(size, ingredients)}`}</span>
-        см на тесте
-        <span>{!!dough && ` ${renderIngredients(dough, ingredients)}`}</span>
+        <span>{!!size && ` ${renderIngredients(size, SIZE)} `}</span>
+        см на
+        <span>
+          {!!dough && ` ${DOUGH.filter(f => dough === f.slug)[0].case} `}
+        </span>
+        тесте
         <span>
           {sauces !== undefined && sauces.length && SAUCES.length
             ? ` • Соус: ${renderIngredients(sauces, ingredients)}`

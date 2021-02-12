@@ -1,5 +1,5 @@
 export * from './Header'
-export * from '../../pages/checkout-page/components/HeaderCheckoutPage'
+export * from './HeaderCheckoutPage'
 export * from '../../pages/pizza-configurator-page/components/HeaderConfiguratorPage'
 export * from './HeaderGeneral'
 export * from './ImageIcon'

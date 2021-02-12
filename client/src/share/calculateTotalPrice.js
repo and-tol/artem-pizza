@@ -1,9 +1,9 @@
-import { DEFAULT_PIZZA } from '../pizzaData';
+import { DEFAULT_PIZZA, PIZZA_DATA_PRIMARY } from '../pizzaData'
 
 export const calculateTotalPrice = (ingredients, pizza = DEFAULT_PIZZA) => {
   const { size, cheese, vegetables, meat } = pizza;
 
-  const SIZE = ingredients.filter(i => i.category === 'size');
+  const SIZE = PIZZA_DATA_PRIMARY.size.filter(i => i.category === 'size');
   const CHEESE = ingredients.filter(i => i.category === 'cheese');
   const VEGETABLES = ingredients.filter(i => i.category === 'vegetables');
   const MEAT = ingredients.filter(i => i.category === 'meat');

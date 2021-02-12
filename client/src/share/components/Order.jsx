@@ -12,7 +12,7 @@ import { ImageIcon } from './ImageIcon';
 // Selectors
 import { getIngredients } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
 // Data
-import { PIZZA_DELIVERY } from '../../pizzaData';
+import { PIZZA_DATA_PRIMARY } from '../../pizzaData';
 // Components
 import { OrderPreview } from './OrderPreview';
 // Styles
@@ -110,7 +110,9 @@ export const Order = ({
         Заказ <span>2390</span>
         <OrderTime>
           <time dateTime={dateTime()}>{dateShow()}</time>
-          {false && <span> • {PIZZA_DELIVERY.status.in_work.case}</span>}
+          {false && (
+            <span> • {PIZZA_DATA_PRIMARY.delivery.status.in_work.case}</span>
+          )}
         </OrderTime>
       </OrderPreviewHeader>
 
@@ -138,7 +140,7 @@ export const Order = ({
           <OrderPreviewFooterDelivery color='var(--gray600)'>
             <IconProgress width='16' fill='var(--gray600)' />
             <DeliveryButtonText>
-              {PIZZA_DELIVERY.status.in_progress.case}
+              {PIZZA_DATA_PRIMARY.delivery.status.in_progress.case}
             </DeliveryButtonText>
           </OrderPreviewFooterDelivery>
         )}
@@ -146,7 +148,7 @@ export const Order = ({
           <OrderPreviewFooterDelivery>
             <IconDelivery fill='var(--secondary)' />
             <DeliveryButtonText>
-              {PIZZA_DELIVERY.status.in_transit.case}
+              {PIZZA_DATA_PRIMARY.delivery.status.in_transit.case}
             </DeliveryButtonText>
           </OrderPreviewFooterDelivery>
         )}
@@ -158,7 +160,7 @@ export const Order = ({
             >
               <IconRepeat fill='var(--primary)' />
               <DeliveryButtonText color='var(--primary)'>
-                {PIZZA_DELIVERY.status.repeat.case}
+                {PIZZA_DATA_PRIMARY.delivery.status.repeat.case}
               </DeliveryButtonText>
             </ButtonRepeat>
           </OrderPreviewFooterDelivery>
@@ -169,7 +171,7 @@ export const Order = ({
               <>
                 <IconDelivery fill='var(--secondary)' />
                 <DeliveryButtonText color='var(--secondary)'>
-                  {PIZZA_DELIVERY.status.in_transit.case}
+                  {PIZZA_DATA_PRIMARY.delivery.status.in_transit.case}
                 </DeliveryButtonText>
               </>
             ) : (
@@ -180,7 +182,7 @@ export const Order = ({
                 >
                   <IconRepeat fill='var(--primary)' />
                   <DeliveryButtonText color='var(--primary)'>
-                    {PIZZA_DELIVERY.status.repeat.case}
+                    {PIZZA_DATA_PRIMARY.delivery.status.repeat.case}
                   </DeliveryButtonText>
                 </ButtonRepeat>
               </>
