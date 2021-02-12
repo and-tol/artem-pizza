@@ -92,8 +92,8 @@ export const RadioGroupSlider = ({ register, legend, name, options }) => {
 };
 
 RadioGroupSlider.propTypes = {
-  register: PropTypes.object,
+  register: PropTypes.func,
   legend: PropTypes.string,
   name: PropTypes.string,
-  options: PropTypes.object,
+  options: PropTypes.array,
 };

@@ -187,7 +187,7 @@ export const CheckboxGroup = ({ register, legend, options, name }) => {
 };
 
 CheckboxGroup.propTypes = {
-  register: PropTypes.object,
+  register: PropTypes.func,
   legend: PropTypes.string,
   options: PropTypes.object,
   name: PropTypes.string,

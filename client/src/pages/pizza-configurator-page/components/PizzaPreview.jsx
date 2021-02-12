@@ -150,8 +150,11 @@ export const PizzaPreview = ({ pizza, ingredients, totalPrice, onSubmit }) => {
       <Composition>
         <CompositionItem>
           <span>{!!size && ` ${renderIngredients(size, SIZE)} `}</span>
-          см на тесте
-          <span>{!!dough && ` ${renderIngredients(dough, DOUGH)}`}</span>
+          см на
+          <span>
+            {!!dough && ` ${DOUGH.filter(f => dough === f.slug)[0].case} `}
+          </span>
+          тесте
         </CompositionItem>
         <CompositionItem>
           {sauces !== undefined && sauces.length && SAUCES.length

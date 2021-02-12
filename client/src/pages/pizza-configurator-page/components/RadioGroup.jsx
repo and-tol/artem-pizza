@@ -26,7 +26,7 @@ export const RadioGroup = ({ register, legend, name, options }) => {
 };
 
 RadioGroup.propTypes = {
-  register: PropTypes.object,
+  register: PropTypes.func,
   legend: PropTypes.string,
   name: PropTypes.string,
   options: PropTypes.object,

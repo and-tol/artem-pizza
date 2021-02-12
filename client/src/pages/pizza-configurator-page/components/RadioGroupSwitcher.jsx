@@ -73,8 +73,8 @@ export const RadioGroupSwitcher = ({ legend, options, register, name }) => {
 };
 
 RadioGroupSwitcher.propTypes = {
-  register: PropTypes.object,
+  register: PropTypes.func,
   legend: PropTypes.string,
   name: PropTypes.string,
-  options: PropTypes.object,
+  options: PropTypes.array,
 };
