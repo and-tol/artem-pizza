@@ -23,3 +23,4 @@
 // FIXME: HeaderOrdersList: при :hover должен меняться цвет иконки
 // TODO: Orders List: сделать логику - доставка становится выполненой через час после отсылки на сервер
 
+// TODO: merge to branch client-v1 branches client-check-tests & dev-prop-types
