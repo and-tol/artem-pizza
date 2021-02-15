@@ -1,4 +1,3 @@
-import { ordersListActionTypes } from './ordersListActionTypes';
 import { ordersListReducer } from './ordersListReducer';
 import { mockDefaultPizza as mockPizza } from '../../../testUtils/mockDefaultPizza';
 import { mockOrder } from './../../../testUtils';

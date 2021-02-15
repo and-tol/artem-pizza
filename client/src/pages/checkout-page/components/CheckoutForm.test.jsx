@@ -6,11 +6,11 @@ import { MemoryRouter } from 'react-router-dom';
 import { CheckoutForm } from './CheckoutForm';
 import { store } from '../../../init/store';
 
-import { mockDefaultPizza } from '../../../testUtils/mockDefaultPizza';
+import { mockDefaultPizza } from '../../../testUtils';
 
 describe('CheckoutForm', () => {
   it('renders correctly', () => {
-    const { getByLabelText, getByPlaceholderText, getByRole } = render(
+    const { getByLabelText, getByPlaceholderText, getByRole, getByText } = render(
       <Provider store={store}>
         <MemoryRouter>
           <CheckoutForm pizza={mockDefaultPizza} ingredients={[]} />
@@ -23,13 +23,13 @@ describe('CheckoutForm', () => {
     expect(getByLabelText('этаж')).toBeInTheDocument();
     expect(getByLabelText('квартира')).toBeInTheDocument();
 
-    expect(getByPlaceholderText('Данные для оплаты')).toBeInTheDocument();
+    expect(getByText('Данные для оплаты')).toBeInTheDocument();
     expect(getByPlaceholderText('Номер карты')).toBeInTheDocument();
     expect(getByPlaceholderText('MM/YYYY')).toBeInTheDocument();
     expect(getByPlaceholderText('CVV')).toBeInTheDocument();
     expect(getByPlaceholderText('Имя как на карте')).toBeInTheDocument();
 
-    expect(getByLabelText(/Доставим пиццу/i)).toBeInTheDocument();
+    expect(getByText(/Доставим пиццу/i)).toBeInTheDocument();
 
     expect(getByRole('button')).toBeInTheDocument();
   });

@@ -1,4 +1,3 @@
-import { loginActionTypes } from './loginActionTypes';
 import { loginReducer } from './loginReducer';
 
 import { initialStateMockLogin } from '../../../testUtils';
