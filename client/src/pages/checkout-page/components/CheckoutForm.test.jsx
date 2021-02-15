@@ -23,10 +23,13 @@ describe('CheckoutForm', () => {
     expect(getByLabelText('этаж')).toBeInTheDocument();
     expect(getByLabelText('квартира')).toBeInTheDocument();
 
+    expect(getByPlaceholderText('Данные для оплаты')).toBeInTheDocument();
     expect(getByPlaceholderText('Номер карты')).toBeInTheDocument();
     expect(getByPlaceholderText('MM/YYYY')).toBeInTheDocument();
     expect(getByPlaceholderText('CVV')).toBeInTheDocument();
     expect(getByPlaceholderText('Имя как на карте')).toBeInTheDocument();
+
+    expect(getByLabelText(/Доставим пиццу/i)).toBeInTheDocument();
 
     expect(getByRole('button')).toBeInTheDocument();
   });
@@ -50,6 +53,10 @@ describe('CheckoutForm', () => {
     });
   });
 
+  describe('on CVV change', () => {
+    it.todo('leaves only three digits');
+  })
+
   describe('with invalid input address', () => {
     it('renders the address validation error', async () => {
       const { getByRole, queryAllByText } = render(
@@ -68,7 +75,7 @@ describe('CheckoutForm', () => {
 
       expect(div[0]).toBeInTheDocument();
       expect(div[1]).toBeInTheDocument();
-      expect(div[2]).toBeInTheDocument();
+      // expect(div[2]).toBeInTheDocument();
     });
   });
 });

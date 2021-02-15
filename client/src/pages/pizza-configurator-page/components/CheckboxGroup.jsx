@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+// Helpers
+import { uincID } from '../../../share/helpers';
 // Images
 import { serverImgs } from '../../../api/config';
 import { ReactComponent as IconCheck } from '../../../asserts/icons/icn_check.svg';
@@ -146,6 +148,7 @@ const LegendCheckbox = styled(Legend)`
 `;
 
 export const CheckboxGroup = ({ register, legend, options, name }) => {
+  console.log('options>>>>', options)
   return (
     <>
       <LegendCheckbox>{legend}</LegendCheckbox>
@@ -154,6 +157,7 @@ export const CheckboxGroup = ({ register, legend, options, name }) => {
           return (
             <Article key={option[1].id}>
               <Input
+                key={option[1].id}
                 id={option[1].id}
                 ref={register}
                 type='checkbox'
@@ -161,11 +165,7 @@ export const CheckboxGroup = ({ register, legend, options, name }) => {
                 value={option[1].slug}
                 hidden
               />
-              <Label
-                htmlFor={option[1].id}
-                key={option[1].id}
-                className={option[1].slug}
-              >
+              <Label htmlFor={option[1].id} className={option[1].slug}>
                 <Image
                   src={`${serverImgs}${option[1].thumbnail}`}
                   alt={option[1].name}
@@ -189,6 +189,6 @@ export const CheckboxGroup = ({ register, legend, options, name }) => {
 CheckboxGroup.propTypes = {
   register: PropTypes.func,
   legend: PropTypes.string,
-  options: PropTypes.object,
+  options: PropTypes.arrayOf(PropTypes.object),
   name: PropTypes.string,
 };

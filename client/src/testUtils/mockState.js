@@ -28,14 +28,14 @@ export const mockState = {
     error: null,
     isLoading: false,
   },
-  orders: {
+  ordersList: {
     orders: [],
     isLoading: false,
     error: null,
   },
   login: {
     error: null,
-    isRegistered: false,
+    isUserRegistered: false,
     isLoading: false,
     login: {
       password: 'password',
@@ -44,7 +44,7 @@ export const mockState = {
   },
   signup: {
     error: null,
-    isRegistered: null,
+    isUserRegistered: null,
     isLoading: false,
     login: {
       password: 'password',

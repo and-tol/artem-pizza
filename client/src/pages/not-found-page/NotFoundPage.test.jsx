@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { NotFoundPage } from './NotFoundPage';
+import { NotFoundPage } from './notFoundPage';
 
 describe('NotFoundPage', () => {
   it('renders correctly', () => {

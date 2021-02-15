@@ -5,7 +5,7 @@ import { api } from '../../../api';
 const initialState = {
   login: { password: '', email: '' },
   error: null,
-  isRegistered: null,
+  isUserRegistered: null,
   isLoading: false,
 };
 
@@ -50,7 +50,7 @@ export const signupReducer = createSlice({
       state.error = null;
     },
     setUserStatus: (state, action) => {
-      state.isRegistered = action.payload;
+      state.isUserRegistered = action.payload;
       state.isLoading = false;
       state.error = null;
     },

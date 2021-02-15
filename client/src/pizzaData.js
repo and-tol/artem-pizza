@@ -38,6 +38,14 @@ export const PIZZA_DATA_PRIMARY = Object.freeze({
       case: 'толстом',
     },
   ],
+  sauces: [
+    {
+      category: 'sauces',
+      name: 'Томатный',
+      price: 0,
+      slug: 'tomato-sauce',
+    },
+  ],
   delivery: {
     price: 180,
     status: {

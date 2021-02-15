@@ -1,12 +1,11 @@
 import { render } from '@testing-library/react'
 import { createMemoryHistory } from 'history'
-import React from 'react'
 import { Provider } from 'react-redux'
 import { MemoryRouter, Router } from 'react-router-dom'
 import { store } from '../../init/store'
-import { ReceiptPage } from './OrderConfirmPage'
+import { OrderConfirmPage } from './OrderConfirmPage';
 
-describe('ReceiptPage', () => {
+describe('OrderConfirmPage', () => {
   const history = createMemoryHistory();
   it('renders if isAccepted true', async () => {
     const isAccepter = true;
@@ -15,7 +14,7 @@ describe('ReceiptPage', () => {
       <Provider store={store}>
         <MemoryRouter>
           <Router history={history}>
-            <ReceiptPage />
+            <OrderConfirmPage />
           </Router>
         </MemoryRouter>
       </Provider>

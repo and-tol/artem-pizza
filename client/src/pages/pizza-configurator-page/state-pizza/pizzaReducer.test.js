@@ -1,10 +1,9 @@
-import { pizzaActionTypes } from './pizzaActionsTypes';
 import { pizzaReducer } from './pizzaReducer';
 
 import { mockDefaultPizza as mockInitialState } from '../../../testUtils/mockDefaultPizza';
 
 describe('pizzaReducer', () => {
-  it.todo("fill data of pizza's configuration into state", () => {
+  it.skip("fill data of pizza's configuration into state", () => {
     const mockPizza = {
       size: 'test_size',
       dough: 'test_dough',

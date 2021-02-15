@@ -48,7 +48,7 @@ const Input = styled.input`
 
 export const RadioGroupSwitcher = ({ legend, options, register, name }) => {
   return (
-    <Fieldset>
+    <Fieldset role='radiogroup'>
       <Legend>{legend}</Legend>
       <SwitcherContainer>
         {Object.entries(options).map(option => (

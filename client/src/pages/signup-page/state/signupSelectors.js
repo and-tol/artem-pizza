@@ -1,1 +1,1 @@
-export const getStatus = state => state.signup.isRegistered;
+export const getStatus = state => state.signup.isUserRegistered;

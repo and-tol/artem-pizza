@@ -9,7 +9,7 @@ const Button = styled(ButtonPrimary)`
 `;
 
 export const PizzaSubmit = ({ totalPrice }) => {
-  return <Button>Заказать за {totalPrice}руб.</Button>;
+  return <Button>Заказать за {totalPrice} руб.</Button>;
 };
 
 PizzaSubmit.propTypes = {

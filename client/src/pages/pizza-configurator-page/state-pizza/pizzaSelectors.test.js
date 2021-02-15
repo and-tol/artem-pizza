@@ -6,7 +6,7 @@ describe('.getPizza', () => {
     expect(getPizza(mockState)).toEqual({
       size: '30',
       dough: 'thin',
-      sauce: 'tomato',
+      sauces: ['tomato'],
       cheese: [],
       vegetables: [],
       meat: [],

@@ -55,7 +55,6 @@ export const LoginPage = () => {
 
   const onSubmit = handleSubmit(data => {
     dispatch(loginReducer.actions.fillUserData(data));
-    // dispatch(loginActions.checkUserAsync(data));
     /**
      * Set user registered
      */

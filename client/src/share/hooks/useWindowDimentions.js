@@ -10,8 +10,6 @@ function getWindowDimensions(hasWindow) {
 }
 export const useWindowDimensions = () => {
   const hasWindow = typeof window !== 'undefined';
-
-
   const [windowDimensions, setWindowDimensions] = useState(
     getWindowDimensions(hasWindow)
   );

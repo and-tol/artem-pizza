@@ -57,11 +57,13 @@ export const HeaderGeneral = ({ history, title }) => {
   return (
     <Container>
       <Button onClick={goBack}>
-        <IncArrowLeft /> <span>Назад</span>
+        <IncArrowLeft />
+        <span>Назад</span>
       </Button>
       <H1>{title}</H1>
       <Button onClick={logout}>
-        <IncLogout /> <span>Выйти</span>
+        <IncLogout />
+        <span>Выйти</span>
       </Button>
     </Container>
   );

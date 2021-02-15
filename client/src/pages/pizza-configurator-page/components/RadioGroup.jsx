@@ -7,14 +7,15 @@ export const RadioGroup = ({ register, legend, name, options }) => {
       <legend>{legend}</legend>
       <div>
         {Object.entries(options).map(option => (
-          <Fragment>
+          <Fragment key={option[1].id}>
             <input
+              key={option[1].id}
               ref={register}
               type='radio'
               name={name}
               value={option[1].slug}
             />
-            <label key={option[1].id}>
+            <label>
               {option[1].name}
               {name === 'size' ? ' см' : null}
             </label>
@@ -29,5 +30,5 @@ RadioGroup.propTypes = {
   register: PropTypes.func,
   legend: PropTypes.string,
   name: PropTypes.string,
-  options: PropTypes.object,
+  options: PropTypes.array,
 };

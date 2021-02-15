@@ -1,8 +1,8 @@
-import { getStatus } from './loginSelectors';
-import { mockState } from '../../../testUtils/mockState';
+import { getUserStatus } from './loginSelectors';
+import { mockState } from '../../../testUtils';
 
-describe('.getStatus', () => {
+describe('.getUserStatus', () => {
   it('returns login status of user from state', () => {
-    expect(getStatus(mockState)).toEqual(false);
+    expect(getUserStatus(mockState)).toEqual(false);
   });
 });
