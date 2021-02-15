@@ -1,0 +1,3 @@
+Создал компоненты checkboxgroup и radioboxgroup для для компонента PizzaForm. создал страницы с начальной разметкой: checkout, login, 404 (not-foud), receipt,signup. создал навигацию (routing) для страниц. реализовал тесты для навигации со страницы PizzaConfiguratorPage, LOginPage,SignupPage.
+
+Created the CheckboxGroup and RadioboxGroup components for the PizzaForm component. Created a page with the initial markup: checkout, login, 404 (not-found), receipt, signup. created navigation (routing) for all pages. Implemented tests for navigation from the PizzaConfiguratorPage,LOginPage, SignupPage, and for all pages.
