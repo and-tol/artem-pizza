@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { serverImgs } from '../../../api/config';
-// Data
-import { PIZZA_DATA_PRIMARY } from '../../../pizzaData';
+import PropTypes from 'prop-types'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import styled from 'styled-components'
+import { serverImgs } from '../../../api/config'
 // Images
-import plate from '../../../asserts/plate.png';
-import thick from '../../../asserts/thick.png';
-import thin from '../../../asserts/thin.png';
+import plate from '../../../asserts/plate.png'
+import thick from '../../../asserts/thick.png'
+import thin from '../../../asserts/thin.png'
+// Data
+import { PIZZA_DATA_PRIMARY } from '../../../pizzaData'
 // Hooks
-import { useWindowDimensions } from '../../../share/hooks/useWindowDimentions';
+import { useWindowDimensions } from '../../../share/hooks/useWindowDimentions'
 // Helpers
-import { renderIngredients } from '../../../share/renderIngredient';
+import { renderIngredients } from '../../../share/'
 // Components
-import { ButtonPrimary } from '../../../share/styled-components/Button';
+import { ButtonPrimary } from '../../../share/styled-components/Button'
 // Selectors
-import { getIngredientsByCategory } from '../state-ingredients/ingredientsSelectors';
+import { getIngredientsByCategory } from '../state-ingredients/ingredientsSelectors'
 
 // Styles
 const Section = styled.section`

@@ -6,17 +6,23 @@ const register = jest.fn();
 
 describe('CheckboxGroup', () => {
   it('renders correctly', () => {
-    const { getByRole } = render(
+    const { getByText } = render(
       <CheckboxGroup
         legend='Добавьте мясо'
         register={register}
         name='test2'
-        options={{
-          bacon: { name: 'test1', price: 1 },
-        }}
+        options={[
+          {
+            id: 'test0',
+            category: 'test2',
+            name: 'test1',
+            price: 1,
+          },
+        ]}
       />
     );
 
-    expect(getByRole('checkbox')).toBeInTheDocument();
+    expect(getByText(/Добавьте мясо/i)).toBeInTheDocument();
   });
+  it.todo('renders  with options')
 });

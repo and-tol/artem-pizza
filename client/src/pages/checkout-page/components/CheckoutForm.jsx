@@ -23,6 +23,7 @@ import {
   InputFieldwPlaceholder,
   InputField,
 } from '../../../share/styled-components/InputField';
+
 const Section = styled.section`
   padding-bottom: 160px;
   @media (min-width: 960px) {

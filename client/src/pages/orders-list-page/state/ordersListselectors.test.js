@@ -1,4 +1,4 @@
-import { mockState } from '../../../testUtils/mockState';
+import { mockState } from '../../../testUtils';
 import { getOrders, getLoadingStatus } from './ordersListSelectors';
 
 describe('.getOrders', () => {

@@ -20,12 +20,12 @@ const ingredients = [
     thumbnail: '',
   },
   {
-    category: 'dough',
     id: '1',
-    image: '',
     name: 'Тонкое',
-    price: 0,
     slug: 'thin',
+    price: 0,
+    category: 'dough',
+    image: '',
     thumbnail: '',
   },
   {

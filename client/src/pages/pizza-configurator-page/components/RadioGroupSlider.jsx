@@ -68,7 +68,7 @@ export const RadioGroupSlider = ({ register, legend, name, options }) => {
     <>
       <Legend>{legend}</Legend>
       <SliderWrapper>
-        <SliderContainer>
+        <SliderContainer role='radiogroup'>
           {Object.entries(options).map(option => (
             <Fragment key={option[1].id}>
               <Input
@@ -79,9 +79,11 @@ export const RadioGroupSlider = ({ register, legend, name, options }) => {
                 value={option[1].slug}
                 hidden
               />
-              <Slide as='label' htmlFor={option[1].slug}>
-                {option[1].name}
-                {name === 'size' ? ' см' : null}
+              <Slide
+                as='label'
+                htmlFor={option[1].slug}>
+                  {option[1].name}
+                  {name === 'size' ? ' см' : null}
               </Slide>
             </Fragment>
           ))}

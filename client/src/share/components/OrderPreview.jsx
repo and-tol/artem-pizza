@@ -1,13 +1,13 @@
-import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-// Date
-import { DEFAULT_PIZZA, PIZZA_DATA_PRIMARY } from '../../pizzaData';
+import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import styled from 'styled-components'
 // Selectors
-import { getIngredientsByCategory } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
+import { getIngredientsByCategory } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors'
+// Date
+import { DEFAULT_PIZZA, PIZZA_DATA_PRIMARY } from '../../pizzaData'
 // Helpers
-import { renderIngredients } from '../renderIngredient';
+import { renderIngredients } from '../renderIngredients'
 
 // Styles
 const Composition = styled.div`

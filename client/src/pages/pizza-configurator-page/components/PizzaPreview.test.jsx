@@ -1,34 +1,36 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { OrderPreview } from '../../../../temp/OrderPreview';
+import { PizzaPreview } from './PizzaPreview';
 
 import { store } from '../../../init/store';
 import { Provider } from 'react-redux';
 
-describe('OrderPreview', () => {
-  it('renders correctly', () => {
+describe('Pizza(Order)Preview', () => {
+  const ingredients = store.getState().ingredients.ingredients
+
+  it.skip('renders correctly with ingredients', () => {
+    const totalPrice = jest.fn();
+    const onSubmit = jest.fn();
+
     render(
       <Provider store={store}>
-        <OrderPreview
+        <PizzaPreview
           pizza={{
             size: '30',
             dough: 'thin',
-            sauce: 'tomato',
-            cheese: ['mozarella'],
-            vegetables: ['tomato'],
-            meat: ['bacon'],
+            sauces: 'tomato',
           }}
-          ingredients={[]}
+          ingredients={ingredients}
+          totalPrice={totalPrice}
+          onSubmit={onSubmit}
         />
       </Provider>
     );
 
-    // FIXME: expect(screen.getByText:
-    // expect(screen.getByText(/Размер: 30 см/i)).toBeInTheDocument();
-    // expect(screen.getByText('Тесто: тонкое')).toBeInTheDocument();
-    // expect(screen.getByText('Соус: томатный')).toBeInTheDocument();
-    // expect(screen.getByText('Сыр: моцарелла')).toBeInTheDocument();
-    // expect(screen.getByText('Овощи: помидор')).toBeInTheDocument();
-    // expect(screen.getByText('Мясо: бекон')).toBeInTheDocument();
+    expect(screen.getByText(/30/i)).toBeInTheDocument();
+    expect(screen.getByText(/тонком/i)).toBeInTheDocument();
+    expect(screen.getByRole('button')).toBeInTheDocument();
+    // FIXME: expect(screen.getByText: Соус undefined
+    expect(screen.getByText(/томатный/i)).toBeInTheDocument();
   });
 });

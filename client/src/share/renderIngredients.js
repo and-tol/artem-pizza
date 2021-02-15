@@ -7,7 +7,6 @@ export const renderIngredients = (
   selectedIngredients,
   availableIngredients
 ) => {
-
   if (
     selectedIngredients &&
     typeof selectedIngredients === 'string' &&
@@ -17,7 +16,7 @@ export const renderIngredients = (
       .filter(i => {
         return i.slug === selectedIngredients;
       })[0]
-      .name?.toLowerCase();
+      ?.name?.toLowerCase();
   }
 
   if (Array.isArray(selectedIngredients)) {
@@ -26,7 +25,7 @@ export const renderIngredients = (
         ?.map(selectedIngredient => {
           return availableIngredients
             .filter(i => i.slug === selectedIngredient)[0]
-            .name?.toLowerCase();
+            ?.name?.toLowerCase();
         })
         .join(', ');
     }

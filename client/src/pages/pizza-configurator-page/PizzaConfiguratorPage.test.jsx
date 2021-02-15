@@ -6,33 +6,6 @@ import { store } from '../../init/store';
 import { Provider } from 'react-redux';
 
 import { PizzaConfiguratorPage } from './PizzaConfiguratorPage';
-// Types
-import { PizzaFormProps } from './components/PizzaForm';
-
-import { OrderPreviewProps } from '../../../temp/OrderPreview';
-
-const pizza = {
-  size: 'test1',
-  dough: 'test2',
-  sauce: 'test3',
-  cheese: ['test4'],
-  vegetables: ['test5'],
-  meat: ['test6'],
-};
-
-jest.mock('./components/PizzaForm', () => ({
-  PizzaForm: ({ onPizzaCreated }: PizzaFormProps) => {
-    if (onPizzaCreated) {
-      return <button onClick={() => onPizzaCreated(pizza)}>Сохранить</button>;
-    }
-  },
-}));
-
-jest.mock('../../share/components/OrderPreview', () => ({
-  OrderPreview: ({ pizza, ingredients }: OrderPreviewProps) => {
-    return <div>Mocked Order Preview</div>;
-  },
-}));
 
 describe('PizzaConfiguratorPage', () => {
   it('renders correctly', () => {
@@ -44,11 +17,15 @@ describe('PizzaConfiguratorPage', () => {
       </Provider>
     );
 
-    expect(getByText('Страница кофигуратора пиццы')).toBeInTheDocument();
+    expect(getByText('Собери свою пиццу')).toBeInTheDocument();
   });
 
-  describe('.onPizzaChange', () => {
-    it("navigates to '/order-preview'", () => {
+  describe('when was loaded data of ingredients', () => {
+    // TODO: when was loaded data of ingredients
+    it.todo('renders full form for configurate pizza');
+    // TODO: renders when change size or dough
+    it.todo('renders when change size or dough');
+    it.skip("navigates to '/checkout' when click button", () => {
       const history = createMemoryHistory();
 
       const { getByRole } = render(
@@ -61,7 +38,7 @@ describe('PizzaConfiguratorPage', () => {
 
       fireEvent.click(getByRole('button'));
 
-      expect(history.location.pathname).toEqual('/order-preview');
+      expect(history.location.pathname).toEqual('/checkout');
     });
   });
 });
