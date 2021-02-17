@@ -5,11 +5,20 @@
 /.pnp
 .pnp.js
 
+admin/node_modules
+admin/.pnp
+client/node_modules
+client/.pnp
+
 # testing
 /coverage
+admin/coverage
+client/coverage
 
 # production
 /build
+admin/build
+client/build
 
 # misc
 .DS_Store
@@ -18,11 +27,48 @@
 .env.test.local
 .env.production.local
 
+admin/.DS_Store
+admin/.env.local
+admin/.env.development.local
+admin/.env.test.local
+admin/.env.production.local
+
+client/.DS_Store
+client/.env.local
+client/.env.development.local
+client/.env.test.local
+client/.env.production.local
+
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/temp
+admin/npm-debug.log*
+admin/yarn-debug.log*
+admin/yarn-error.log*
 
-admin/node_modules
-client/node_modules
+
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+
+client/temp
+client/bug
+
+.gitignore
+admin/.gitignore
+admin/.eslintcache
+client/.eslintcache
+client/.gitignore
+client/src/pages/pizza-configurator-page/components/RadioGroupWithRef.jsx
+client/src/pages/pizza-configurator-page/components/RadioGr.jsx
+client/src/pages/pizza-configurator-page/components/switch.jsx
+client/src/pages/pizza-configurator-page/context/
+client/src/TODO.js
+asserts/
+client/TODO.js
+admin/temp/TODO.js
+admin/TODO.js
+TODO.js
+
