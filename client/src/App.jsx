@@ -90,7 +90,6 @@ function App() {
             <NotFoundPage />
           </Route>
         </Switch>
-        <button onClick={()=> {throw new Error('Error')} }>Break the world</button>;
       </Main>
     </GlobWrapper>
   );
