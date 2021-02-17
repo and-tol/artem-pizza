@@ -26,7 +26,7 @@ export const OrdersListPage = () => {
   const isLoading = useSelector(getLoadingStatus);
 
   /**
-   * Устанавливает время изменения иконки у последненго заказа
+   * Устанавливает время изменения иконки у последнего заказа
    * Sets the change time for the icon for the last order
    */
   const [isInterval, setIsInterval] = useState(true);
