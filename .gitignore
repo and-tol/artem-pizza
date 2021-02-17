@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 /temp
+
+admin/node_modules
+client/node_modules
