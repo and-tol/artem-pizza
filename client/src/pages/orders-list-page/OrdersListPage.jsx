@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-// Actions
-import { fetchOrdersListAsync } from './state/ordersListReducer';
-import { fetchIngredientsAsync } from '../pizza-configurator-page/state-ingredients/ingredientsReducer';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+// Components
+import { Loader, Order } from '../../share/components'
 import {
   checkoutReducer,
-  sendOrderAsync,
-} from '../checkout-page/state/checkoutReducer';
+  sendOrderAsync
+} from '../checkout-page/state/checkoutReducer'
+import { fetchIngredientsAsync } from '../pizza-configurator-page/state-ingredients/ingredientsReducer'
+// Actions
+import { fetchOrdersListAsync } from './state/ordersListReducer'
 // Selectors
-import { getOrders, getLoadingStatus } from './state/ordersListSelectors';
-// Components
-import { Loader } from '../../share/components';
-import { Order } from '../../share/components';
+import { getLoadingStatus, getOrders } from './state/ordersListSelectors'
 
 export const OrdersListPage = () => {
   const dispatch = useDispatch();

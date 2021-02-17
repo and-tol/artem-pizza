@@ -56,7 +56,7 @@ client/yarn-error.log*
 client/temp
 client/bug
 
-.gitignore
+
 admin/.gitignore
 admin/.eslintcache
 client/.eslintcache
@@ -66,9 +66,18 @@ client/src/pages/pizza-configurator-page/components/RadioGr.jsx
 client/src/pages/pizza-configurator-page/components/switch.jsx
 client/src/pages/pizza-configurator-page/context/
 client/src/TODO.js
-asserts/
+/asserts
 client/TODO.js
-admin/temp/TODO.js
+client/source
+admin/temp
 admin/TODO.js
 TODO.js
 
+.vscode
+.eslintcache
+.editorconfig
+*.code-workspace
+/images
+
+node_modules/.cache/.eslintcache
+client/node_modules/.cache/.eslintcache
