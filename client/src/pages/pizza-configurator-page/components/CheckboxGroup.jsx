@@ -21,8 +21,8 @@ const Fieldset = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  margin-right: calc(var(--padding-glob) * (-1));
-  margin-left: calc(var(--padding-glob) * (-1));
+  margin-right: calc(var(--padding-glob) * (-2));
+  margin-left: calc(var(--padding-glob) * (-2));
   &:first-child {
     margin-left: var(--padding-glob);
     @media (min-width: 960px) {
@@ -148,7 +148,6 @@ const LegendCheckbox = styled(Legend)`
 `;
 
 export const CheckboxGroup = ({ register, legend, options, name }) => {
-  console.log('options>>>>', options)
   return (
     <>
       <LegendCheckbox>{legend}</LegendCheckbox>

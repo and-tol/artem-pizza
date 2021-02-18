@@ -13,7 +13,7 @@ const StyledFooter = styled.footer`
   @media (min-width: 960px) {
     display: none;
   }
-  margin: 0 calc(var(--padding-glob) * -1) calc(var(--padding-glob) * -1);
+  margin: 0 calc(var(--padding-glob) * -2) calc(var(--padding-glob) * -1);
   position: fixed;
   z-index: 100;
   bottom: 16px;
