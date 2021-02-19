@@ -14,7 +14,7 @@ import { store } from './init/store';
 
 Sentry.init({
   dsn:
-    'https://ddae50184a5c43fb883e96e9fd7e550c@o526096.ingest.sentry.io/5641236',
+    "https://87e20ec37c7b437b8650c5c5d5c899fb@o526096.ingest.sentry.io/5644613",
   release: process.env.REACT_APP_SENTRY_RELEASE,
   autoSessionTracking: true,
   integrations: [new Integrations.BrowserTracing()],
