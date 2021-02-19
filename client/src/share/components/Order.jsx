@@ -7,7 +7,7 @@ import { ReactComponent as IconDelivery } from '../../asserts/icons/icn_delivery
 import { ReactComponent as IconProgress } from '../../asserts/icons/icn_in-progress.svg';
 import { ReactComponent as IconRepeat } from '../../asserts/icons/icn_repeat.svg';
 // Selectors
-import { getIngredients } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
+import { getIngredients } from '../../pages/PizzaConfiguratorPage/state-ingredients/ingredientsSelectors';
 // Data
 import { PIZZA_DATA_PRIMARY } from '../../pizzaData';
 import { calculateTotalPrice } from '../calculateTotalPrice';

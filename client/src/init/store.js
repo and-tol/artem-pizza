@@ -3,8 +3,8 @@ import logger from 'redux-logger'
 import { checkoutReducer } from '../pages/CheckoutPage/state/checkoutReducer'
 import { loginReducer } from '../pages/LoginPage/state/loginReducer'
 import { ordersListReducer } from '../pages/OrdersListPage/state/ordersListReducer'
-import { ingredientsReducer } from '../pages/pizza-configurator-page/state-ingredients/ingredientsReducer'
-import { pizzaReducer } from '../pages/pizza-configurator-page/state-pizza/pizzaReducer'
+import { ingredientsReducer } from '../pages/PizzaConfiguratorPage/state-ingredients/ingredientsReducer'
+import { pizzaReducer } from '../pages/PizzaConfiguratorPage/state-pizza/pizzaReducer'
 import { signupReducer } from '../pages/signup-page/state/signupReducer'
 
 

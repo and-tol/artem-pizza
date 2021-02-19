@@ -7,7 +7,7 @@ import {
     checkoutReducer,
     sendOrderAsync
 } from '../CheckoutPage/state/checkoutReducer'
-import { fetchIngredientsAsync } from '../pizza-configurator-page/state-ingredients/ingredientsReducer'
+import { fetchIngredientsAsync } from '../PizzaConfiguratorPage/state-ingredients/ingredientsReducer'
 // Actions
 import { fetchOrdersListAsync } from './state/ordersListReducer'
 // Selectors

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 // Selectors
-import { getIngredients } from '../pizza-configurator-page/state-ingredients/ingredientsSelectors';
-import { getPizza } from '../pizza-configurator-page/state-pizza/pizzaSelectors';
+import { getIngredients } from '../PizzaConfiguratorPage/state-ingredients/ingredientsSelectors';
+import { getPizza } from '../PizzaConfiguratorPage/state-pizza/pizzaSelectors';
 
 // Components
 import { CheckoutForm } from './components';

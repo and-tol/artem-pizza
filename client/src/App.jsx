@@ -7,7 +7,7 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { OrderConfirmPage } from './pages/OrderConfirmPage';
 import { OrdersListPage } from './pages/OrdersListPage';
 // Pages
-import { PizzaConfiguratorPage } from './pages/pizza-configurator-page';
+import { PizzaConfiguratorPage } from './pages/PizzaConfiguratorPage';
 import { SignupPage } from './pages/signup-page';
 // Components
 import {

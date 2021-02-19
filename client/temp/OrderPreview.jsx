@@ -1,20 +1,19 @@
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-// Hooks
-import { useWindowDimensions } from '../src/share/hooks/useWindowDimentions';
-// Components
-import { ButtonPrimary } from '../src/share/styled-components/Button';
-import { Footer } from '../src/share/styled-components/Footer';
 // Images
 import plate from '../../asserts/plate.png';
-import thin from '../../asserts/thin.png';
 import thick from '../../asserts/thick.png';
+import thin from '../../asserts/thin.png';
 import { serverImgs } from '../src/api/config';
 // Selectors
-import { getIngredientsByCategory } from '../src/pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
+import { getIngredientsByCategory } from '../src/pages/PizzaConfiguratorPage/state-ingredients/ingredientsSelectors';
+// Hooks
+import { useWindowDimensions } from '../src/share/hooks/useWindowDimentions';
 // Helpers
 import { renderIngredients } from '../src/share/renderIngredient';
-import { useEffect, useState } from 'react';
+// Components
+import { ButtonPrimary } from '../src/share/styled-components/Button';
 
 // Styles
 const Section = styled.section`
