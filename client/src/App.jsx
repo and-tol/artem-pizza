@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { CheckoutPage } from './pages/CheckoutPage';
 import { LoginPage } from './pages/LoginPage';
 import { NotFoundPage } from './pages/NotFoundPage';
-import { OrderConfirmPage } from './pages/order-confirm-page';
+import { OrderConfirmPage } from './pages/OrderConfirmPage';
 import { OrdersListPage } from './pages/OrdersListPage';
 // Pages
 import { PizzaConfiguratorPage } from './pages/pizza-configurator-page';

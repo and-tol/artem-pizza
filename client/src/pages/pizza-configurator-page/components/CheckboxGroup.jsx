@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// Helpers
-import { uincID } from '../../../share/helpers';
 // Images
 import { serverImgs } from '../../../api/config';
 import { ReactComponent as IconCheck } from '../../../asserts/icons/icn_check.svg';

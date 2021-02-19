@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-
 import { Order } from '../../../share/components';
 import { ButtonPrimary } from '../../../share/styled-components/Button';
+
 
 export const Section = styled.section`
   padding-bottom: 160px;
