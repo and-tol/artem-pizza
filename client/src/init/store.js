@@ -5,7 +5,7 @@ import { loginReducer } from '../pages/LoginPage/state/loginReducer'
 import { ordersListReducer } from '../pages/OrdersListPage/state/ordersListReducer'
 import { ingredientsReducer } from '../pages/PizzaConfiguratorPage/state-ingredients/ingredientsReducer'
 import { pizzaReducer } from '../pages/PizzaConfiguratorPage/state-pizza/pizzaReducer'
-import { signupReducer } from '../pages/signup-page/state/signupReducer'
+import { signupReducer } from '../pages/SignupPage/state/signupReducer'
 
 
 // Store

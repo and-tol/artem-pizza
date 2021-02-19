@@ -8,7 +8,7 @@ import { OrderConfirmPage } from './pages/OrderConfirmPage';
 import { OrdersListPage } from './pages/OrdersListPage';
 // Pages
 import { PizzaConfiguratorPage } from './pages/PizzaConfiguratorPage';
-import { SignupPage } from './pages/signup-page';
+import { SignupPage } from './pages/SignupPage';
 // Components
 import {
     Header,
