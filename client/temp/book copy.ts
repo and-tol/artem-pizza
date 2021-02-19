@@ -1,5 +1,5 @@
 import * as H from "history";
-import { CheckoutPage } from '../src/pages/checkout-page/CheckoutPage';
+import { CheckoutPage } from '../src/pages/CheckoutPage/CheckoutPage';
 import { LoginPage } from '../src/pages/login-page/LoginPage';
 import { OrdersListPage } from '../src/pages/OrdersListPage/OrdersListPage';
 import { PizzaConfiguratorPage } from '../src/pages/pizza-configurator-page/PizzaConfiguratorPage';

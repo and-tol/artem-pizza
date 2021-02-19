@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import logger from 'redux-logger'
-import { checkoutReducer } from '../pages/checkout-page/state/checkoutReducer'
+import { checkoutReducer } from '../pages/CheckoutPage/state/checkoutReducer'
 import { loginReducer } from '../pages/login-page/state/loginReducer'
 import { ordersListReducer } from '../pages/OrdersListPage/state/ordersListReducer'
 import { ingredientsReducer } from '../pages/pizza-configurator-page/state-ingredients/ingredientsReducer'

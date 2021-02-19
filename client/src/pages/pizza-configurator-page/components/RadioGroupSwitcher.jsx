@@ -1,5 +1,5 @@
-import { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Fragment } from 'react';
 import styled from 'styled-components';
 import { InputGroupContainer as SwitcherContainer } from '../../../share/styled-components/InputGroupContainer';
 // Styles

@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
-import { CheckoutPage } from '../src/pages/checkout-page/CheckoutPage';
+import { CheckoutPage } from '../src/pages/CheckoutPage/CheckoutPage';
 
 describe('CheckoutPage', () => {
   it('renders correctly', () => {
@@ -26,6 +26,6 @@ describe('CheckoutPage', () => {
   });
 
   describe('on submit', () => {
-  
+
   });
 });

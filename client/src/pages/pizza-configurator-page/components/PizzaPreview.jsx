@@ -9,10 +9,10 @@ import thick from '../../../asserts/thick.png'
 import thin from '../../../asserts/thin.png'
 // Data
 import { PIZZA_DATA_PRIMARY } from '../../../pizzaData'
-// Hooks
-import { useWindowDimensions } from '../../../share/hooks/useWindowDimentions'
 // Helpers
 import { renderIngredients } from '../../../share/'
+// Hooks
+import { useWindowDimensions } from '../../../share/hooks/useWindowDimentions'
 // Components
 import { ButtonPrimary } from '../../../share/styled-components/Button'
 // Selectors

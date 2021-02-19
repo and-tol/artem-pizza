@@ -4,9 +4,9 @@ import { useHistory } from 'react-router-dom'
 // Components
 import { Loader, Order } from '../../share/components'
 import {
-  checkoutReducer,
-  sendOrderAsync
-} from '../checkout-page/state/checkoutReducer'
+    checkoutReducer,
+    sendOrderAsync
+} from '../CheckoutPage/state/checkoutReducer'
 import { fetchIngredientsAsync } from '../pizza-configurator-page/state-ingredients/ingredientsReducer'
 // Actions
 import { fetchOrdersListAsync } from './state/ordersListReducer'

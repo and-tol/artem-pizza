@@ -1,21 +1,21 @@
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-// Helpers
-import { normalizeCardNumber } from '../../share/helpers';
-import { useValidCard } from '../../share/hooks';
 // Images
 import orderError from '../../asserts/icons/order-status_error.svg';
 import orderSuccess from '../../asserts/icons/order-status_ok.svg';
 // Components
 import { Order } from '../../share/components';
-// Selectors
-import {
-  getOrder,
-  getOrderAcception,
-} from '../checkout-page/state/checkoutSelectors';
+// Helpers
+import { normalizeCardNumber } from '../../share/helpers';
+import { useValidCard } from '../../share/hooks';
 // Styles
 import { ButtonPrimary } from '../../share/styled-components';
+// Selectors
+import {
+    getOrder,
+    getOrderAcception
+} from '../CheckoutPage/state/checkoutSelectors';
 const Section = styled.section`
   display: flex;
   flex-direction: column;

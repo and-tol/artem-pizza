@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // Data
 import { DEFAULT_PIZZA, PIZZA_DATA_PRIMARY } from '../../../pizzaData';
@@ -15,9 +15,9 @@ import { useWindowDimensions } from '../../../share/hooks/useWindowDimentions';
 import { ButtonPrimary, Footer } from '../../../share/styled-components';
 // Selectors
 import {
-  getIngredients,
-  getIngredientsByCategory,
-  getLoadingStatus,
+    getIngredients,
+    getIngredientsByCategory,
+    getLoadingStatus
 } from '../state-ingredients/ingredientsSelectors';
 import { CheckboxGroup } from './CheckboxGroup';
 import { PizzaPreview } from './PizzaPreview';

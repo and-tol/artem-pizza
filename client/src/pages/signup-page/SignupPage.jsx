@@ -3,15 +3,15 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import * as yup from 'yup';
 import styled from 'styled-components';
+import * as yup from 'yup';
+// Styles
+import { ButtonPrimary, InputField } from '../../share/styled-components';
 // Actions
 import { loginReducer } from '../login-page/state/loginReducer';
 import { signupReducer } from './state/signupReducer';
 // Selectors
 import { getStatus } from './state/signupSelectors';
-// Styles
-import { ButtonPrimary, InputField } from '../../share/styled-components';
 const Form = styled.form`
   display: flex;
   flex-direction: column;
