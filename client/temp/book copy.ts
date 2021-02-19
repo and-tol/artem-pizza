@@ -1,6 +1,6 @@
 import * as H from "history";
 import { CheckoutPage } from '../src/pages/CheckoutPage/CheckoutPage';
-import { LoginPage } from '../src/pages/login-page/LoginPage';
+import { LoginPage } from '../src/pages/LoginPage/LoginPage';
 import { OrdersListPage } from '../src/pages/OrdersListPage/OrdersListPage';
 import { PizzaConfiguratorPage } from '../src/pages/pizza-configurator-page/PizzaConfiguratorPage';
 import { ReceiptPage } from '../src/pages/receipt-page/ReceiptPage';

@@ -5,7 +5,7 @@ import { ReactComponent as IncArrowLeft } from '../../asserts/icons/icn_arrow-le
 // Image
 import { ReactComponent as IncLogout } from '../../asserts/icons/icn_logout.svg';
 // Actions
-import { loginReducer } from '../../pages/login-page/state';
+import { loginReducer } from '../../pages/LoginPage/state';
 
 const Container = styled.div`
   width: 100%;

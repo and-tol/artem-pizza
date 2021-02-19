@@ -1,10 +1,10 @@
-import React, { SyntheticEvent, BaseSyntheticEvent } from 'react';
-import { fireEvent, render, waitFor, screen } from '@testing-library/react';
-import { MemoryRouter, Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
-import { LoginPage } from '../src/pages/login-page/LoginPage';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 // import { act } from 'react-dom/test-utils';
 import { act } from '@testing-library/react-hooks';
+import { createMemoryHistory } from 'history';
+import React from 'react';
+import { MemoryRouter, Router } from 'react-router-dom';
+import { LoginPage } from '../src/pages/LoginPage/LoginPage';
 
 // const mockLogin = jest.fn((email, password) => {
 //   return Promise.resolve({ email, password });

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { CheckoutPage } from './pages/CheckoutPage';
-import { LoginPage } from './pages/login-page';
+import { LoginPage } from './pages/LoginPage';
 import { NotFoundPage } from './pages/not-found-page';
 import { OrderConfirmPage } from './pages/order-confirm-page';
 import { OrdersListPage } from './pages/OrdersListPage';

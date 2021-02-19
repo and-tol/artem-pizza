@@ -8,7 +8,7 @@ import * as yup from 'yup';
 // Styles
 import { ButtonPrimary, InputField } from '../../share/styled-components';
 // Actions
-import { loginReducer } from '../login-page/state/loginReducer';
+import { loginReducer } from '../LoginPage/state/loginReducer';
 import { signupReducer } from './state/signupReducer';
 // Selectors
 import { getStatus } from './state/signupSelectors';
