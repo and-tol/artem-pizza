@@ -4,17 +4,18 @@ import styled from 'styled-components';
 import { CheckoutPage } from './pages/checkout-page';
 import { LoginPage } from './pages/login-page';
 import { NotFoundPage } from './pages/not-found-page';
-import { OrdersListPage } from './pages/orders-list-page';
+import { OrderConfirmPage } from './pages/order-confirm-page';
+import { OrdersListPage } from './pages/OrdersListPage';
 // Pages
 import { PizzaConfiguratorPage } from './pages/pizza-configurator-page';
-import { OrderConfirmPage } from './pages/order-confirm-page';
 import { SignupPage } from './pages/signup-page';
 // Components
 import {
-  Header,
-  HeaderConfiguratorPage,
-  HeaderCheckoutPage,
-  HeaderGeneral,
+    Header,
+
+    HeaderCheckoutPage, HeaderConfiguratorPage,
+
+    HeaderGeneral
 } from './share/components';
 // Styles
 const GlobWrapper = styled.div`
