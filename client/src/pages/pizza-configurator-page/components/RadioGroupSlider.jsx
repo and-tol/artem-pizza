@@ -13,7 +13,8 @@ const SliderContainer = styled(InputGroupContainer)`
   &::-webkit-scrollbar {
     display: none;
   }
-  margin-right: -(var(--padding-glob));
+  margin-right: calc(var(--padding-glob) * (-2));
+
   margin-bottom: 24px;
 
   @media (min-width: 960px) {
@@ -28,7 +29,9 @@ const SliderWrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  margin-right: -(var(--padding-glob));
+  margin-right: calc(var(--padding-glob) * (-2));
+  margin-left: calc(var(--padding-glob) * (-2));
+  padding-left: calc(var(--padding-glob) * 2);
 `;
 
 const Slide = styled.label`
@@ -79,11 +82,9 @@ export const RadioGroupSlider = ({ register, legend, name, options }) => {
                 value={option[1].slug}
                 hidden
               />
-              <Slide
-                as='label'
-                htmlFor={option[1].slug}>
-                  {option[1].name}
-                  {name === 'size' ? ' см' : null}
+              <Slide as='label' htmlFor={option[1].slug}>
+                {option[1].name}
+                {name === 'size' ? ' см' : null}
               </Slide>
             </Fragment>
           ))}
