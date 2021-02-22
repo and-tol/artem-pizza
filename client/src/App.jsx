@@ -11,11 +11,10 @@ import { PizzaConfiguratorPage } from './pages/PizzaConfiguratorPage';
 import { SignupPage } from './pages/SignupPage';
 // Components
 import {
-    Header,
-
-    HeaderCheckoutPage, HeaderConfiguratorPage,
-
-    HeaderGeneral
+  Header,
+  HeaderCheckoutPage,
+  HeaderConfiguratorPage,
+  HeaderGeneral,
 } from './share/components';
 // Styles
 const GlobWrapper = styled.div`
@@ -91,7 +90,6 @@ function App() {
             <NotFoundPage />
           </Route>
         </Switch>
-        <button onClick={()=> {throw new Error('Error')}}>Break the world</button>;
       </Main>
     </GlobWrapper>
   );
