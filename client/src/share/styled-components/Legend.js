@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 export const Legend = styled.legend`
   font-weight: 500;
   font-size: 14px;

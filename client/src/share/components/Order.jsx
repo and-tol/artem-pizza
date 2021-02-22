@@ -1,19 +1,19 @@
-import { useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-// Helpers
-import { dateShow, dateTime } from '../helpers';
-import { calculateTotalPrice } from '../calculateTotalPrice';
 // Icons
 import { ReactComponent as IconDelivery } from '../../asserts/icons/icn_delivery.svg';
-import { ReactComponent as IconRepeat } from '../../asserts/icons/icn_repeat.svg';
 import { ReactComponent as IconProgress } from '../../asserts/icons/icn_in-progress.svg';
-import { ImageIcon } from './ImageIcon';
+import { ReactComponent as IconRepeat } from '../../asserts/icons/icn_repeat.svg';
 // Selectors
-import { getIngredients } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors';
+import { getIngredients } from '../../pages/PizzaConfiguratorPage/state-ingredients/ingredientsSelectors';
 // Data
 import { PIZZA_DATA_PRIMARY } from '../../pizzaData';
+import { calculateTotalPrice } from '../calculateTotalPrice';
+// Helpers
+import { dateShow, dateTime } from '../helpers';
+import { ImageIcon } from './ImageIcon';
 // Components
 import { OrderPreview } from './OrderPreview';
 // Styles

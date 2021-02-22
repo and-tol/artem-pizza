@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 // Selectors
-import { getIngredientsByCategory } from '../../pages/pizza-configurator-page/state-ingredients/ingredientsSelectors'
+import { getIngredientsByCategory } from '../../pages/PizzaConfiguratorPage/state-ingredients/ingredientsSelectors'
 // Date
 import { DEFAULT_PIZZA, PIZZA_DATA_PRIMARY } from '../../pizzaData'
 // Helpers

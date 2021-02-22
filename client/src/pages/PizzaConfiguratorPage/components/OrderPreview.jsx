@@ -1,23 +1,24 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
+import PropTypes from 'prop-types'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import styled from 'styled-components'
 // Images
-import plate from '../../asserts/plate.png';
-import thick from '../../asserts/thick.png';
-import thin from '../../asserts/thin.png';
-import { serverImgs } from '../src/api/config';
+import plate from '../../asserts/plate.png'
+import thick from '../../asserts/thick.png'
+import thin from '../../asserts/thin.png'
+import { serverImgs } from '../src/api/config'
 // Selectors
-import { getIngredientsByCategory } from '../src/pages/PizzaConfiguratorPage/state-ingredients/ingredientsSelectors';
+import { getIngredientsByCategory } from '../src/pages/PizzaConfiguratorPage/state-ingredients/ingredientsSelectors'
 // Hooks
-import { useWindowDimensions } from '../src/share/hooks/useWindowDimentions';
+import { useWindowDimensions } from '../src/share/hooks/useWindowDimentions'
 // Helpers
-import { renderIngredients } from '../src/share/renderIngredient';
+import { renderIngredients } from '../src/share/renderIngredients'
 // Components
-import { ButtonPrimary } from '../src/share/styled-components/Button';
+import { ButtonPrimary } from '../src/share/styled-components/Button'
 
 // Styles
 const Section = styled.section`
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     width: 350px;
     max-width: 350px;
   }
@@ -41,7 +42,7 @@ const Plate = styled.img`
   width: 300px;
   right: -16px;
   position: relative;
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     width: 350px;
   }
 `;
@@ -54,7 +55,7 @@ const Image = styled.img`
 const DoughImage = styled(Image)`
   ${({ size }) => (size === '30' ? 'width: 230px;' : 'width: 255px;')};
   transition: all var(--transition);
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     ${({ size }) => (size === '30' ? 'width: 255px;' : 'width: 300px;')};
   }
 `;
@@ -62,14 +63,14 @@ const IngredientsImage = styled(Image)`
   ${({ size }) => (size === '30' ? 'width: 194px' : 'width: 218px')};
   left: 49%;
   transition: all var(--transition);
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     ${({ size }) => (size === '30' ? 'width: 235px' : 'width: 266px')};
     left: 49.6%;
   } ;
 `;
 const Composition = styled.div`
   margin-bottom: 24px;
-  @media (min-width: 960.5px) {
+  @media (min-width: 960px) {
     margin-bottom: 32px;
   } ;
 `;
@@ -142,7 +143,7 @@ export const OrderPreview = ({ pizza, ingredients, totalPrice, onSubmit }) => {
       <H3>Маргарита</H3>
       <Composition>
         <CompositionItem>
-          <span>{!!size && ` ${renderIngredients(size, ingredients)}`}</span>
+          <span>{!!size && ` ${renderIngredients(size, ingredients)} `}</span>
           см на тесте
           <span>{!!dough && ` ${renderIngredients(dough, ingredients)}`}</span>
         </CompositionItem>
@@ -169,9 +170,23 @@ export const OrderPreview = ({ pizza, ingredients, totalPrice, onSubmit }) => {
       </Composition>
       {windowWidth >= 960 ? (
         <Button type='submit' onClick={onSubmit}>
-          Заказать за {totalPrice}руб.
+          Заказать за {totalPrice} руб.
         </Button>
       ) : null}
     </Section>
   );
+};
+
+OrderPreview.propTypes = {
+  pizza: PropTypes.shape({
+    size: PropTypes.string,
+    dough: PropTypes.string,
+    sauces: PropTypes.string,
+    cheese: PropTypes.array,
+    vegetables: PropTypes.array,
+    meat: PropTypes.array,
+  }),
+  ingredients: PropTypes.arrayOf(PropTypes.object),
+  totalPrice: PropTypes.number,
+  onSubmit: PropTypes.func,
 };

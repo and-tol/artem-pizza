@@ -1,13 +1,12 @@
-import * as H from "history"
-
-import { PizzaConfiguratorPage } from '../src/pages/pizza-configurator-page/PizzaConfiguratorPage';
-PizzaConfiguratorPage;
-import { OrderPreviewPage } from '../src/pages/order-preview-page/OrderPreviewPage';
-import { CheckoutPage } from '../src/pages/checkout-page/CheckoutPage';
-import { LoginPage } from '../src/pages/login-page/LoginPage';
-import { OrdersListPage } from '../src/pages/orders-list-page/OrdersListPage';
+import * as H from "history";
+import { CheckoutPage } from '../src/pages/CheckoutPage/CheckoutPage';
+import { LoginPage } from '../src/pages/LoginPage/LoginPage';
+import { OrdersListPage } from '../src/pages/OrdersListPage/OrdersListPage';
+import { PizzaConfiguratorPage } from '../src/pages/PizzaConfiguratorPage/PizzaConfiguratorPage';
 import { ReceiptPage } from '../src/pages/receipt-page/ReceiptPage';
 import { SignupPage } from '../src/pages/signup-page/SignupPage';
+
+PizzaConfiguratorPage;
 // import { Book } from '../src/types';
 // +++++++++
 export type Page = {

@@ -1,19 +1,19 @@
 import React from 'react';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { CheckoutPage } from './pages/checkout-page';
-import { LoginPage } from './pages/login-page';
-import { NotFoundPage } from './pages/not-found-page';
-import { OrdersListPage } from './pages/orders-list-page';
+import { CheckoutPage } from './pages/CheckoutPage';
+import { LoginPage } from './pages/LoginPage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { OrderConfirmPage } from './pages/OrderConfirmPage';
+import { OrdersListPage } from './pages/OrdersListPage';
 // Pages
-import { PizzaConfiguratorPage } from './pages/pizza-configurator-page';
-import { OrderConfirmPage } from './pages/order-confirm-page';
-import { SignupPage } from './pages/signup-page';
+import { PizzaConfiguratorPage } from './pages/PizzaConfiguratorPage';
+import { SignupPage } from './pages/SignupPage';
 // Components
 import {
   Header,
-  HeaderConfiguratorPage,
   HeaderCheckoutPage,
+  HeaderConfiguratorPage,
   HeaderGeneral,
 } from './share/components';
 // Styles

@@ -1,11 +1,11 @@
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import { MemoryRouter, Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { store } from '../src/init/store';
+import React from 'react';
 import { Provider } from 'react-redux';
+import { MemoryRouter, Router } from 'react-router-dom';
+import { store } from '../src/init/store';
+import { PizzaConfiguratorPage } from '../src/pages/PizzaConfiguratorPage/PizzaConfiguratorPage';
 
-import { PizzaConfiguratorPage } from '../src/pages/pizza-configurator-page/PizzaConfiguratorPage';
 
 
 const pizza = {

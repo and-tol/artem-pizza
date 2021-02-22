@@ -1,11 +1,11 @@
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-// Actions
-import { loginReducer } from '../../pages/login-page/state';
+import { ReactComponent as IncArrowLeft } from '../../asserts/icons/icn_arrow-left.svg';
 // Image
 import { ReactComponent as IncLogout } from '../../asserts/icons/icn_logout.svg';
-import { ReactComponent as IncArrowLeft } from '../../asserts/icons/icn_arrow-left.svg';
+// Actions
+import { loginReducer } from '../../pages/LoginPage/state';
 
 const Container = styled.div`
   width: 100%;
