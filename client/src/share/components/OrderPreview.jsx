@@ -74,6 +74,6 @@ export const OrderPreview = ({ pizza = DEFAULT_PIZZA, ingredients }) => {
 };
 
 OrderPreview.propTypes = {
-  pizza: PropTypes.object.isRequired,
+  pizza: PropTypes.object,
   ingredients: PropTypes.arrayOf(PropTypes.object),
 };

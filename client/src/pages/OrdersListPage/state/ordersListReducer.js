@@ -12,9 +12,9 @@ export const fetchOrdersListAsync = createAsyncThunk(
   'orders/fetchOrdersListAsync',
   async (_, thunkAPI) => {
     const response = await api.orders.getAllOrders();
-
     if (response.status === 200) {
       const orders = await response.json();
+      console.log('fetchOrdersListAsync>>>', orders);
 
       // thunkAPI.dispatch(ordersListReducer.actions.fillOrders(orders));
 
@@ -42,11 +42,11 @@ export const ordersListReducer = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    // ordersFill: (state, action) => {
-    //   state.orders = action.payload;
-    //   state.isLoading = false;
-    //   state.error = null;
-    // },
+    ordersClear: (state) => {
+      state.orders = [];
+      state.isLoading = false;
+      state.error = null;
+    },
   },
   extraReducers: {
     [fetchOrdersListAsync.fulfilled]: (state, action) => {
