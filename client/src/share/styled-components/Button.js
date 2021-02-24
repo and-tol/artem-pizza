@@ -22,6 +22,9 @@ export const ButtonPrimary = styled.button`
     background-color: var(--primary-dark);
     box-shadow: var(--shadow);
   }
+  &:hover svg {
+    fill: var(--gray400);
+  }
   &:active {
     background-color: var(--primary-dark);
     box-shadow: var(--shadow-inset);

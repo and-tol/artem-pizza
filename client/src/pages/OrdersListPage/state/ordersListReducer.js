@@ -14,7 +14,6 @@ export const fetchOrdersListAsync = createAsyncThunk(
     const response = await api.orders.getAllOrders();
     if (response.status === 200) {
       const orders = await response.json();
-      console.log('fetchOrdersListAsync>>>', orders);
 
       // thunkAPI.dispatch(ordersListReducer.actions.fillOrders(orders));
 
@@ -42,7 +41,7 @@ export const ordersListReducer = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    ordersClear: (state) => {
+    ordersClear: state => {
       state.orders = [];
       state.isLoading = false;
       state.error = null;
@@ -50,11 +49,37 @@ export const ordersListReducer = createSlice({
   },
   extraReducers: {
     [fetchOrdersListAsync.fulfilled]: (state, action) => {
-      state.orders = action.payload;
+      state.orders = action.payload.map(order => {
+        order.pizza = {
+          size: order.size.toString(),
+          dough: order.dough,
+          sauces: order.sauces[0],
+          cheese: order.ingredients
+            .filter(i => i.category === 'cheese')
+            .reduce((acc, curr) => {
+              acc.push(curr.slug);
+              return acc;
+            }, []),
+          vegetables: order.ingredients
+            .filter(i => i.category === 'vegetables')
+            .reduce((acc, curr) => {
+              acc.push(curr.slug);
+              return acc;
+            }, []),
+          meat: order.ingredients
+            .filter(i => i.category === 'meat')
+            .reduce((acc, curr) => {
+              acc.push(curr.slug);
+              return acc;
+            }, []),
+        };
+
+        return order;
+      });
       state.isLoading = false;
       state.error = null;
     },
-    [fetchOrdersListAsync.rejected]: (state) => {
+    [fetchOrdersListAsync.rejected]: state => {
       state.isLoading = false;
       state.error = {
         status: 'fetching error',

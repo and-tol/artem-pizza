@@ -34,6 +34,7 @@ const ButtonLeft = styled.button`
   :hover {
     color: var(--gray400);
   }
+
   @media (min-width: 960px) {
     margin-right: 16px;
     margin-left: 16px;
@@ -54,7 +55,10 @@ const ButtonLeft = styled.button`
 const ButtonRight = styled(ButtonLeft)`
   margin-right: 8px;
   margin-left: 16px;
+
 `;
+
+const IncLogoutStyled = styled(IncLogout)``;
 
 export const HeaderGeneral = ({ history, title }) => {
   const dispatch = useDispatch();
@@ -76,7 +80,7 @@ export const HeaderGeneral = ({ history, title }) => {
       </ButtonLeft>
       <H1>{title}</H1>
       <ButtonRight onClick={logout}>
-        <IncLogout />
+        <IncLogoutStyled />
         <span>Выйти</span>
       </ButtonRight>
     </Container>

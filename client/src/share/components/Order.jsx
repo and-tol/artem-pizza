@@ -111,6 +111,7 @@ export const Order = ({
         Заказ <span>2390</span>
         <OrderTime>
           <time dateTime={dateTime()}>{dateShow()}</time>
+          {/* Delivery status goes from server  */}
           {false && (
             <span> • {PIZZA_DATA_PRIMARY.delivery.status.in_work.case}</span>
           )}
