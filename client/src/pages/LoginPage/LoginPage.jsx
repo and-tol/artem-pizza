@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +11,12 @@ import { getUserStatus } from './state';
 import { loginReducer } from './state';
 // Styles
 import { ButtonPrimary, InputField } from '../../share/styled-components';
+
+const Paragraf = styled.p`
+  text-align: center;
+  margin-bottom: 24px;
+  margin-top: 24px;
+`;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -38,6 +45,7 @@ const schema = yup.object().shape({
 export const LoginPage = () => {
   const dispatch = useDispatch();
   const isUserRegistered = useSelector(getUserStatus);
+  const history = useHistory();
 
   const { register, handleSubmit, errors, watch, isDirty } = useForm({
     resolver: yupResolver(schema),
@@ -63,7 +71,14 @@ export const LoginPage = () => {
 
   return (
     <>
-      {isUserRegistered && <section>Добро пожаловать!</section>}
+      {isUserRegistered && (
+        <section>
+          <Paragraf>Добро пожаловать!</Paragraf>
+          <ButtonPrimary type='button' onClick={()=>{history.push('/orders-list')}}>
+            Посмотреть мои заказы
+          </ButtonPrimary>
+        </section>
+      )}
       {!isUserRegistered && (
         <Form onSubmit={onSubmit}>
           <Fieldset>
