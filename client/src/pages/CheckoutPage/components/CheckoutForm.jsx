@@ -11,18 +11,23 @@ import { useWindowDimensions, useValidCard } from '../../../share/hooks';
 // Data
 import { PIZZA_DATA_PRIMARY } from '../../../pizzaData';
 // Helpers
-import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
+import { calculateTotalPrice } from '../../../share';
+import {
+  normalizeCardNumber,
+  normalizeCardDate,
+  normalizeCardCVV,
+} from '../../../share/helpers';
 // Actions
 import { checkoutReducer, sendOrderAsync } from '../state/checkoutReducer';
 import { getOrder } from '../state/checkoutSelectors';
 // Components
 import { Order, ImageIcon } from '../../../share/components';
 // Styles
-import { ButtonPrimary } from '../../../share/styled-components/Button';
 import {
+  ButtonPrimary,
   InputFieldwPlaceholder,
   InputField,
-} from '../../../share/styled-components/InputField';
+} from '../../../share/styled-components';
 
 const Section = styled.section`
   padding-bottom: 160px;
@@ -169,25 +174,9 @@ const InputWrapper = styled.div`
     top: 50%;
   }
 `;
-
-const normalizeCardNumber = value => {
-  return (
-    value
-      .replace(/\s/g, '')
-      .match(/.{1,4}/g)
-      ?.join(' ')
-      .substr(0, 19) || ''
-  );
-};
-const normalizeCardCVV = value => {
-  return (
-    value
-      .replace(/\s/g, '')
-      .match(/.{1,3}/g)
-      ?.join('')
-      .substr(0, 3) || ''
-  );
-};
+const InputCentredValue = styled(InputFieldwPlaceholder)`
+  text-align: center;
+`;
 
 const schema = yup.object().shape({
   address: yup
@@ -259,9 +248,13 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
     setValue('cardNumber', normalizeCardNumber(value));
     setSormalizedCardNumber(normalizeCardNumber(value));
   };
+  const handleNormalizeCardDate = e => {
+    const { value } = e.target;
+    setValue('cardDate', normalizeCardDate(value));
+  };
   const handleNormalizeCardCVV = e => {
     const { value } = e.target;
-    setValue('cardNumber', normalizeCardCVV(value));
+    setValue('CVV', normalizeCardCVV(value));
   };
 
   return (
@@ -356,19 +349,21 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
               </InputWrapper>
             </label>
             <PaymentCardDetails>
-              <label htmlFor='year'>
-                <InputFieldwPlaceholder
+              <label htmlFor='cardDate'>
+                <InputCentredValue
                   width={windowWidth >= 960 ? '128' : '102'}
                   ref={register}
-                  name='year'
-                  id='year'
+                  name='cardDate'
+                  id='cardDate'
                   type='tel'
                   placeholder='MM/YYYY'
-                  valid={!errors.year && touched.year && 'year'}
+                  pattern='\d\d?'
+                  onChange={handleNormalizeCardDate}
+                  valid={!errors.cardDate && touched.cardDate && 'cardDate'}
                 />
               </label>
               <label htmlFor='CVV'>
-                <InputFieldwPlaceholder
+                <InputCentredValue
                   width={windowWidth >= 960 ? '76' : '64'}
                   ref={register}
                   name='CVV'
