@@ -19,6 +19,7 @@ import { getOrder } from '../state/checkoutSelectors';
 // Components
 import { Order, ImageIcon } from '../../../share/components';
 import { InputMaskStyled } from './InputMaskStyled';
+
 // Styles
 import {
   ButtonPrimary,

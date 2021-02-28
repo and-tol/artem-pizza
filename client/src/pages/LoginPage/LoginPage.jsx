@@ -11,6 +11,48 @@ import { getUserStatus } from './state';
 import { loginReducer } from './state';
 // Styles
 import { ButtonPrimary, InputField } from '../../share/styled-components';
+import { ReactComponent as IconCheck } from '../../asserts/icons/icn_check.svg';
+// ! -----------
+const StyledIconCheck = styled(IconCheck)`
+  display: none;
+  position: relative;
+  left: 1px;
+`;
+const Label = styled.label`
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 24px;
+
+  div input:checked {
+    border-color: var(--primary);
+  }
+`;
+
+const Checkbox = styled.div`
+  display: flex;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 2px solid var(--gray200);
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-right: var(--padding-glob);
+`;
+const Input = styled.input`
+  &:hover + ${Label} ${Checkbox} {
+    border: 2px solid var(--primary);
+    background-color: #fff;
+  }
+  &:checked + ${Label} ${Checkbox} {
+    border: 2px solid transparent;
+    background-color: var(--primary);
+  }
+  &:checked + ${Label} ${StyledIconCheck} {
+    display: block;
+  }
+`;
+// ! ---------------
 
 const Paragraf = styled.p`
   text-align: center;
@@ -47,7 +89,7 @@ export const LoginPage = () => {
   const isUserRegistered = useSelector(getUserStatus);
   const history = useHistory();
 
-  const { register, handleSubmit, errors, watch, isDirty } = useForm({
+  const { register, handleSubmit, errors, watch, isDirty, setValue } = useForm({
     resolver: yupResolver(schema),
   });
   const [isDisabled, setIsDisabled] = useState(true);
@@ -64,17 +106,43 @@ export const LoginPage = () => {
   const onSubmit = handleSubmit(data => {
     dispatch(loginReducer.actions.fillUserData(data));
     /**
-     * Set user registered
+     * Set user registered for demostration
      */
     dispatch(loginReducer.actions.setUserStatus(true));
+    /**
+     * Write flag, user & password to localStorage
+     */
+    localStorage.setItem('rememberMe', rememberMe);
+    localStorage.setItem('email', rememberMe ? email : '');
+    localStorage.setItem('password', rememberMe ? password : '');
   });
+
+  /**
+   * Remember email & password for next input into personal cabinet
+   */
+  const [rememberMe, setRememberMe] = useState(false);
+  const handleChangeRemember = () => {
+    setRememberMe(!rememberMe);
+  };
+  useEffect(() => {
+    const rememberMe = localStorage.getItem('rememberMe') === 'true';
+    const email = rememberMe ? localStorage.getItem('email') : '';
+    const password = rememberMe ? localStorage.getItem('password') : '';
+    setValue('email', email);
+    setValue('password', password);
+  }, [setValue]);
 
   return (
     <>
       {isUserRegistered && (
         <section>
           <Paragraf>Добро пожаловать!</Paragraf>
-          <ButtonPrimary type='button' onClick={()=>{history.push('/orders-list')}}>
+          <ButtonPrimary
+            type='button'
+            onClick={() => {
+              history.push('/orders-list');
+            }}
+          >
             Посмотреть мои заказы
           </ButtonPrimary>
         </section>
@@ -97,6 +165,23 @@ export const LoginPage = () => {
               />
               <div>{errors.password?.message}</div>
             </label>
+            <div>
+              <Input
+                id='rememberMe'
+                // ref={register}
+                onChange={handleChangeRemember}
+                type='checkbox'
+                name='rememberMe'
+                // value='{option[1].slug}'
+                hidden
+              />
+              <Label htmlFor='rememberMe'>
+                <Checkbox>
+                  <StyledIconCheck fill='#fff' width='14' />
+                </Checkbox>
+                Запомнить вас?
+              </Label>
+            </div>
           </Fieldset>
           <ButtonPrimary type='submit' disabled={isDisabled && !isDirty}>
             Войти
