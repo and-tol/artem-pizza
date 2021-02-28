@@ -21,3 +21,9 @@ export const normalizeCardDate = value => {
 export const normalizeCardCVV = value =>
   value.replace(/[^0-9]/g, '').substr(0, 4) || '';
 
+/*
+  const handleNormalizeCardDate = e => {
+    const { value } = e.target;
+    setValue('cardDate', normalizeCardDate(value));
+  };
+*/

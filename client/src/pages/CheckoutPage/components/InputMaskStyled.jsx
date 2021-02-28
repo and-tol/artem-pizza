@@ -1,6 +1,7 @@
+import InputMask from 'react-input-mask';
 import styled from 'styled-components';
 
-export const InputField = styled.input`
+export const InputMaskStyled = styled(InputMask)`
   display: flex;
   align-items: center;
   padding: 12px;
@@ -22,6 +23,12 @@ export const InputField = styled.input`
   outline: transparent;
   &[placeholder] {
     text-overflow: ellipsis;
+    color: var(--gray400);
+    font-size: 16px;
+    line-height: 24px;
+    @media (min-width: 960px) {
+      font-size: 20px;
+    }
   }
   @media (min-width: 960px) {
     padding: 16px;
@@ -52,10 +59,19 @@ export const InputField = styled.input`
     background-color: #fff !important;
     border-color: var(--primary);
   }
-`;
-export const InputFieldwPlaceholder = styled(InputField)`
-  ::placeholder {
-    color: var(--gray400);
+
+  text-align: center;
+
+  /* &::placeholder {
+    color: var(--gray100);
+    font-size: 16px;
+    line-height: 24px;
+    @media (min-width: 960px) {
+      font-size: 20px;
+    }
+  } */
+  [maskPlaceholder] {
+    color: var(--gray100);
     font-size: 16px;
     line-height: 24px;
     @media (min-width: 960px) {

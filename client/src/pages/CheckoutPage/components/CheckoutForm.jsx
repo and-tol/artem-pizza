@@ -12,22 +12,20 @@ import { useWindowDimensions, useValidCard } from '../../../share/hooks';
 import { PIZZA_DATA_PRIMARY } from '../../../pizzaData';
 // Helpers
 import { calculateTotalPrice } from '../../../share';
-import {
-  normalizeCardNumber,
-  normalizeCardDate,
-  normalizeCardCVV,
-} from '../../../share/helpers';
+import { normalizeCardNumber, normalizeCardCVV } from '../../../share/helpers';
 // Actions
 import { checkoutReducer, sendOrderAsync } from '../state/checkoutReducer';
 import { getOrder } from '../state/checkoutSelectors';
 // Components
 import { Order, ImageIcon } from '../../../share/components';
+import { InputMaskStyled } from './InputMaskStyled';
 // Styles
 import {
   ButtonPrimary,
   InputFieldwPlaceholder,
   InputField,
 } from '../../../share/styled-components';
+import { CardDatePlaceholder } from './CardDatePlaceholder';
 
 const Section = styled.section`
   padding-bottom: 160px;
@@ -248,10 +246,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
     setValue('cardNumber', normalizeCardNumber(value));
     setSormalizedCardNumber(normalizeCardNumber(value));
   };
-  const handleNormalizeCardDate = e => {
-    const { value } = e.target;
-    setValue('cardDate', normalizeCardDate(value));
-  };
+
   const handleNormalizeCardCVV = e => {
     const { value } = e.target;
     setValue('CVV', normalizeCardCVV(value));
@@ -350,15 +345,15 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
             </label>
             <PaymentCardDetails>
               <label htmlFor='cardDate'>
-                <InputCentredValue
+                <InputMaskStyled
+                  mask='99/9999'
+                  maskPlaceholder='MM/YYYY'
                   width={windowWidth >= 960 ? '128' : '102'}
                   ref={register}
                   name='cardDate'
                   id='cardDate'
                   type='tel'
                   placeholder='MM/YYYY'
-                  pattern='\d\d?'
-                  onChange={handleNormalizeCardDate}
                   valid={!errors.cardDate && touched.cardDate && 'cardDate'}
                 />
               </label>
