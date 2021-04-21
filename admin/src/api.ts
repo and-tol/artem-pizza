@@ -1,7 +1,8 @@
 export {};
 
 // export const root = 'http://localhost:4000/';
-export const root = 'https://5fm19.sse.codesandbox.io';
+// export const root = 'https://5fm19.sse.codesandbox.io';
+export const root = 'https://artem-pizza--server.herokuapp.com';
 
 export const api = Object.freeze({
   ingredients: {
@@ -10,7 +11,6 @@ export const api = Object.freeze({
     },
 
     createNewIngredient: (data: any) => {
-
       return fetch(`${root}/ingredients`, {
         method: 'POST',
         body: data,
@@ -59,7 +59,6 @@ export const api = Object.freeze({
     //   }).then(token => token.json());
     // },
     login: (credentials: any) => {
-
       return fetch(`${root}/admin-auth/login`, {
         method: 'POST',
         headers: {

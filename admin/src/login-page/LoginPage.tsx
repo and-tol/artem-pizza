@@ -81,7 +81,7 @@ export const LoginPage = () => {
   return (
     <Grid container component='section' justify='center'>
       {isSignup && <div>Вы не зарегистрированы. Пройдите регистрацию</div>}
-      <Typography variant='h3'>Регистрация пользователя</Typography>
+      <Typography variant='h3'>Авторизация пользователя</Typography>
       <Grid container justify='center'>
         <form onSubmit={onSubmit}>
           <Grid container justify='center' direction='column'>
