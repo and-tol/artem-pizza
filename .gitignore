@@ -6,8 +6,10 @@
 .pnp.js
 
 admin/node_modules
+/admin/node_modules
 admin/.pnp
 client/node_modules
+/client/node_modules
 client/.pnp
 
 # testing
