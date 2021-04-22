@@ -16,7 +16,6 @@ const Fieldset = styled.div`
     }
   }
 `;
-
 const Label = styled.label`
   display: flex;
   flex-direction: row;
@@ -56,7 +55,6 @@ export const RadioGroupSwitcher = ({ legend, options, register, name }) => {
             <Input
               id={option[1].slug}
               name={name}
-              // ref={register}
               {...register(`${name}`)}
               type='radio'
               value={option[1].slug}

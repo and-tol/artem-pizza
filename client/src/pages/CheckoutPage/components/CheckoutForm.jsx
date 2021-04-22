@@ -2,6 +2,7 @@ import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
@@ -12,6 +13,7 @@ import { useWindowDimensions, useValidCard } from '../../../share/hooks';
 import { PIZZA_DATA_PRIMARY } from '../../../pizzaData';
 // Helpers
 import { calculateTotalPrice } from '../../../share/calculateTotalPrice';
+import { normalizeCardNumber, normalizeCardCVV } from '../../../share/helpers';
 // Actions
 import { checkoutReducer, sendOrderAsync } from '../state/checkoutReducer';
 import { getOrder } from '../state/checkoutSelectors';
@@ -30,7 +32,6 @@ const Section = styled.section`
     padding-bottom: 0px;
   }
 `;
-
 const OrderPreview = styled(Order)`
   grid-area: order;
 `;
@@ -170,21 +171,6 @@ const InputWrapper = styled.div`
   }
 `;
 
-const normalizeCardNumber = value => {
-  return value
-    .replace(/\s/g, '')
-    .match(/.{1,4}/g)
-    ?.join(' ')
-    .substr(0, 19) || '';
-};
-const normalizeCardCVV = value => {
-  return value
-    .replace(/\s/g, '')
-    .match(/.{1,3}/g)
-    ?.join('')
-    .substr(0, 3) || '';
-};
-
 const schema = yup.object().shape({
   address: yup
     .string()
@@ -192,11 +178,13 @@ const schema = yup.object().shape({
     .min(5, 'Слишком короткий адрес'),
   cardNumber: yup
     .number()
-    .min(12, 'Недостаточно цифр')
-    .positive('Номер должен быть положительным числом')
+    .transform((ov, cv) => (ov === '' ? undefined : cv))
     .required('Это обязательное поле')
-    .typeError('Номер должен быть числом')
-    .integer('Номер не может содержать десятичную точку '),
+  // .min(12, 'Недостаточно цифр')
+  // .positive('Номер должен быть положительным числом')
+  .typeError('Номер должен быть числом')
+  // .integer('Номер не может содержать десятичную точку ')
+  ,
   cardName: yup
     .string()
     .required('Это обязательное поле')
@@ -216,16 +204,22 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
   const { width: windowWidth } = useWindowDimensions();
 
   const {
+    control,
     register,
     handleSubmit,
-    errors,
     setValue,
     watch,
-    formState: { touched, isDirty },
+    formState,
+    formState: { errors, touched, isDirty },
   } = useForm({
     mode: 'all',
     resolver: yupResolver(schema),
   });
+
+  // console.log('!!errors', !!errors.address);
+  // console.log('touched', touched);
+  // console.log('formState>>>', formState);
+  // console.log('control>>>', control);
 
   const сardNumber = watch('cardNumber');
   const { cardImageName, CardNumberValidation } = useValidCard(сardNumber);
@@ -257,7 +251,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
   };
   const handleNormalizeCardCVV = e => {
     const { value } = e.target;
-    setValue('cardNumber', normalizeCardCVV(value));
+    setValue('CVV', normalizeCardCVV(value));
   };
 
   return (
@@ -279,8 +273,9 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                 id='address'
                 type='text'
                 placeholder='Введите адрес'
-                invalid={!!errors.address && 'address'}
-                valid={!errors.address && touched.address && 'address'} />
+                // invalid={!!errors.address && 'address'}
+                // valid={!errors.address && touched.address && 'address'}
+              />
               <ErrorsMessage>{errors.address?.message}</ErrorsMessage>
             </label>
             <AddressDetails>
@@ -292,7 +287,8 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                   {...register('porch')}
                   id='porch'
                   type='tel'
-                  valid={!errors.porch && touched.porch && 'porch'} />
+                  // valid={!errors.porch && touched.porch && 'porch'}
+                />
               </label>
               <label htmlFor='flow'>
                 этаж
@@ -302,7 +298,8 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                   {...register('flow')}
                   id='flow'
                   type='tel'
-                  valid={!errors.flow && touched.flow && 'flow'} />
+                  // valid={!errors.flow && touched.flow && 'flow'}
+                />
               </label>
               <label htmlFor='flat'>
                 квартира
@@ -311,7 +308,8 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                   {...register('flat')}
                   id='flat'
                   type='tel'
-                  valid={!errors.flat && touched.flat && 'flat'} />
+                  // valid={!errors.flat && touched.flat && 'flat'}
+                />
               </label>
             </AddressDetails>
           </FormSection>
@@ -327,10 +325,12 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                   autoComplete='cc-number'
                   placeholder='Номер карты'
                   onChange={handleNormalizeCardNumber}
-                  invalid={!!errors.cardNumber && 'cardNumber'}
-                  valid={
-                    !errors.cardNumber && touched.cardNumber && 'cardNumber'
-                  } />
+                  // FIXME: нажимая кнопку ОПЛАТИТЬ, ошибка должна быть "Это обязательное поле"
+                  // invalid={!!errors.cardNumber && 'cardNumber'}
+                  // valid={
+                  //   !errors.cardNumber && touched.cardNumber && 'cardNumber'
+                  // }
+                />
 
                 {!!CardNumberValidation.card?.type && (
                   <ImageIcon cardImageName={cardImageName} width='30' />
@@ -349,17 +349,20 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                   id='year'
                   type='tel'
                   placeholder='MM/YYYY'
-                  valid={!errors.year && touched.year && 'year'} />
+                  // valid={!errors.year && touched.year && 'year'}
+                />
               </label>
               <label htmlFor='CVV'>
                 <InputFieldwPlaceholder
                   width={windowWidth >= 960 ? '76' : '64'}
+                  style={{ textAlign: 'center' }}
                   {...register('CVV')}
                   id='CVV'
                   type='tel'
                   placeholder='CVV'
                   onChange={handleNormalizeCardCVV}
-                  valid={!errors['CVV'] && touched['CVV'] && 'CVV'} />
+                  // valid={!errors['CVV'] && touched['CVV'] && 'CVV'}
+                />
               </label>
             </PaymentCardDetails>
             <label htmlFor='cardName'>
@@ -368,8 +371,9 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                 id='cardName'
                 type='text'
                 placeholder='Имя как на карте'
-                invalid={!!errors.cardName && 'cardName'}
-                valid={!errors.cardName && touched.cardName && 'cardName'} />
+                // invalid={!!errors.cardName && 'cardName'}
+                // valid={!errors.cardName && touched.cardName && 'cardName'}
+              />
               <ErrorsMessage>{errors.cardName?.message}</ErrorsMessage>
             </label>
           </FormSection>
@@ -378,6 +382,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
             не бросает.
           </ArtemPromises>
         </FormContent>
+
         <OrderPayment className='payment'>
           <OrderPaymentSection>
             <span>Стоимость заказа</span> <span>{orderPrice} руб.</span>
@@ -401,6 +406,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
           )}
         </OrderPayment>
       </Form>
+      {/* <DevTool control={control} /> */}
     </Section>
   );
 };

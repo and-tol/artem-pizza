@@ -11,9 +11,5 @@ export const CheckoutPage = () => {
   const pizza = useSelector(getPizza);
   const ingredients = useSelector(getIngredients);
 
-  return (
-    <>
-      <CheckoutForm pizza={pizza} ingredients={ingredients} />
-    </>
-  );
+  return <CheckoutForm pizza={pizza} ingredients={ingredients} />;
 };

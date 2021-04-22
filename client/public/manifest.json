@@ -3,11 +3,10 @@
   "name": "Order pizza after self-creation from ready-made ingredients",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "favicon.svg",
       "sizes": "any",
       "type": "image/smg+xml"
-    },
-
+    }
   ],
   "start_url": ".",
   "display": "standalone",

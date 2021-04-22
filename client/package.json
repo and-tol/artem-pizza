@@ -64,6 +64,7 @@
     ]
   },
   "devDependencies": {
+    "@hookform/devtools": "^3.0.0-rc.2",
     "@testing-library/react-hooks": "^5.1.2"
   }
 }
