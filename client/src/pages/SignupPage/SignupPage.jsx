@@ -81,48 +81,36 @@ export const SignupPage = () => {
 
   const isRegistered = useSelector(getStatus);
 
-  return (
-    <>
-      {isRegistered && <p>Регистрация прошла успешно</p>}
-      {!isRegistered && (
-        <Form onSubmit={onSubmit}>
-          <Fieldset>
-            <label htmlFor='email'>
-              Э-почта
-              <InputField ref={register} id='email' type='text' name='email' />
-              <div>{errors.email?.message}</div>
-            </label>
-            <label htmlFor='password'>
-              Придумайте пароль
-              <InputField
-                ref={register}
-                id='password'
-                type='password'
-                name='password'
-              />
-              <div>{errors.password?.message}</div>
-            </label>
-            <label htmlFor='password'>
-              Повторите пароль
-              <InputField
-                ref={register}
-                id='passwordRepeat'
-                type='password'
-                name='passwordRepeat'
-              />
-              {errors.passwordRepeat && (
-                <div>{errors.passwordRepeat?.message}</div>
-              )}
-            </label>
-          </Fieldset>
-          <ButtonPrimary
-            type='submit'
-            disabled={isDisabled || !matchPasswords }
-          >
-            Зарегистрироваться
-          </ButtonPrimary>
-        </Form>
-      )}
-    </>
-  );
+  return <>
+    {isRegistered && <p>Регистрация прошла успешно</p>}
+    {!isRegistered && (
+      <Form onSubmit={onSubmit}>
+        <Fieldset>
+          <label htmlFor='email'>
+            Э-почта
+            <InputField id='email' type='text' {...register('email')} />
+            <div>{errors.email?.message}</div>
+          </label>
+          <label htmlFor='password'>
+            Придумайте пароль
+            <InputField id='password' type='password' {...register('password')} />
+            <div>{errors.password?.message}</div>
+          </label>
+          <label htmlFor='password'>
+            Повторите пароль
+            <InputField id='passwordRepeat' type='password' {...register('passwordRepeat')} />
+            {errors.passwordRepeat && (
+              <div>{errors.passwordRepeat?.message}</div>
+            )}
+          </label>
+        </Fieldset>
+        <ButtonPrimary
+          type='submit'
+          disabled={isDisabled || !matchPasswords }
+        >
+          Зарегистрироваться
+        </ButtonPrimary>
+      </Form>
+    )}
+  </>;
 };

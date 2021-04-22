@@ -61,33 +61,26 @@ export const LoginPage = () => {
     dispatch(loginReducer.actions.setUserStatus(true));
   });
 
-  return (
-    <>
-      {isUserRegistered && <section>Добро пожаловать!</section>}
-      {!isUserRegistered && (
-        <Form onSubmit={onSubmit}>
-          <Fieldset>
-            <label htmlFor='email'>
-              Э-почта
-              <InputField id='email' ref={register} type='text' name='email' />
-              <div>{errors.email?.message}</div>
-            </label>
-            <label htmlFor='password'>
-              Пароль
-              <InputField
-                id='password'
-                ref={register}
-                type='password'
-                name='password'
-              />
-              <div>{errors.password?.message}</div>
-            </label>
-          </Fieldset>
-          <ButtonPrimary type='submit' disabled={isDisabled && !isDirty}>
-            Войти
-          </ButtonPrimary>
-        </Form>
-      )}
-    </>
-  );
+  return <>
+    {isUserRegistered && <section>Добро пожаловать!</section>}
+    {!isUserRegistered && (
+      <Form onSubmit={onSubmit}>
+        <Fieldset>
+          <label htmlFor='email'>
+            Э-почта
+            <InputField id='email' type='text' {...register('email')} />
+            <div>{errors.email?.message}</div>
+          </label>
+          <label htmlFor='password'>
+            Пароль
+            <InputField id='password' type='password' {...register('password')} />
+            <div>{errors.password?.message}</div>
+          </label>
+        </Fieldset>
+        <ButtonPrimary type='submit' disabled={isDisabled && !isDirty}>
+          Войти
+        </ButtonPrimary>
+      </Form>
+    )}
+  </>;
 };

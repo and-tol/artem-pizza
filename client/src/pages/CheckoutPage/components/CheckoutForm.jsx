@@ -171,22 +171,18 @@ const InputWrapper = styled.div`
 `;
 
 const normalizeCardNumber = value => {
-  return (
-    value
-      .replace(/\s/g, '')
-      .match(/.{1,4}/g)
-      ?.join(' ')
-      .substr(0, 19) || ''
-  );
+  return value
+    .replace(/\s/g, '')
+    .match(/.{1,4}/g)
+    ?.join(' ')
+    .substr(0, 19) || '';
 };
 const normalizeCardCVV = value => {
-  return (
-    value
-      .replace(/\s/g, '')
-      .match(/.{1,3}/g)
-      ?.join('')
-      .substr(0, 3) || ''
-  );
+  return value
+    .replace(/\s/g, '')
+    .match(/.{1,3}/g)
+    ?.join('')
+    .substr(0, 3) || '';
 };
 
 const schema = yup.object().shape({
@@ -279,14 +275,12 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
             <Legend>Адрес доставки</Legend>
             <label htmlFor='address'>
               <InputFieldwPlaceholder
-                ref={register}
-                name='address'
+                {...register('address')}
                 id='address'
                 type='text'
                 placeholder='Введите адрес'
                 invalid={!!errors.address && 'address'}
-                valid={!errors.address && touched.address && 'address'}
-              />
+                valid={!errors.address && touched.address && 'address'} />
               <ErrorsMessage>{errors.address?.message}</ErrorsMessage>
             </label>
             <AddressDetails>
@@ -295,35 +289,29 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                 <InputField
                   width='104'
                   margin='8'
-                  ref={register}
-                  name='porch'
+                  {...register('porch')}
                   id='porch'
                   type='tel'
-                  valid={!errors.porch && touched.porch && 'porch'}
-                />
+                  valid={!errors.porch && touched.porch && 'porch'} />
               </label>
               <label htmlFor='flow'>
                 этаж
                 <InputField
                   width='104'
                   margin='8'
-                  ref={register}
-                  name='flow'
+                  {...register('flow')}
                   id='flow'
                   type='tel'
-                  valid={!errors.flow && touched.flow && 'flow'}
-                />
+                  valid={!errors.flow && touched.flow && 'flow'} />
               </label>
               <label htmlFor='flat'>
                 квартира
                 <InputField
                   width='104'
-                  ref={register}
-                  name='flat'
+                  {...register('flat')}
                   id='flat'
                   type='tel'
-                  valid={!errors.flat && touched.flat && 'flat'}
-                />
+                  valid={!errors.flat && touched.flat && 'flat'} />
               </label>
             </AddressDetails>
           </FormSection>
@@ -332,8 +320,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
             <label htmlFor='cardNumber'>
               <InputWrapper>
                 <InputFieldwPlaceholder
-                  ref={register}
-                  name='cardNumber'
+                  {...register('cardNumber')}
                   id='cardNumber'
                   type='tel'
                   inputMode='numeric'
@@ -343,8 +330,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                   invalid={!!errors.cardNumber && 'cardNumber'}
                   valid={
                     !errors.cardNumber && touched.cardNumber && 'cardNumber'
-                  }
-                />
+                  } />
 
                 {!!CardNumberValidation.card?.type && (
                   <ImageIcon cardImageName={cardImageName} width='30' />
@@ -359,37 +345,31 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
               <label htmlFor='year'>
                 <InputFieldwPlaceholder
                   width={windowWidth >= 960 ? '128' : '102'}
-                  ref={register}
-                  name='year'
+                  {...register('year')}
                   id='year'
                   type='tel'
                   placeholder='MM/YYYY'
-                  valid={!errors.year && touched.year && 'year'}
-                />
+                  valid={!errors.year && touched.year && 'year'} />
               </label>
               <label htmlFor='CVV'>
                 <InputFieldwPlaceholder
                   width={windowWidth >= 960 ? '76' : '64'}
-                  ref={register}
-                  name='CVV'
+                  {...register('CVV')}
                   id='CVV'
                   type='tel'
                   placeholder='CVV'
                   onChange={handleNormalizeCardCVV}
-                  valid={!errors['CVV'] && touched['CVV'] && 'CVV'}
-                />
+                  valid={!errors['CVV'] && touched['CVV'] && 'CVV'} />
               </label>
             </PaymentCardDetails>
             <label htmlFor='cardName'>
               <InputFieldwPlaceholder
-                ref={register}
-                name='cardName'
+                {...register('cardName')}
                 id='cardName'
                 type='text'
                 placeholder='Имя как на карте'
                 invalid={!!errors.cardName && 'cardName'}
-                valid={!errors.cardName && touched.cardName && 'cardName'}
-              />
+                valid={!errors.cardName && touched.cardName && 'cardName'} />
               <ErrorsMessage>{errors.cardName?.message}</ErrorsMessage>
             </label>
           </FormSection>
