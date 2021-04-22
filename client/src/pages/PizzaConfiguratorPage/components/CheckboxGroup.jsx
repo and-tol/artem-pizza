@@ -156,9 +156,10 @@ export const CheckboxGroup = ({ register, legend, options, name }) => {
               <Input
                 key={option[1].id}
                 id={option[1].id}
-                ref={register}
-                type='checkbox'
                 name={name}
+                // ref={register}
+                {...register(`${name}`)}
+                type='checkbox'
                 value={option[1].slug}
                 hidden
               />

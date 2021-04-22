@@ -10,9 +10,10 @@ export const RadioGroup = ({ register, legend, name, options }) => {
           <Fragment key={option[1].id}>
             <input
               key={option[1].id}
-              ref={register}
-              type='radio'
               name={name}
+              // ref={register}
+              {...register(`${name}`)}
+              type='radio'
               value={option[1].slug}
             />
             <label>

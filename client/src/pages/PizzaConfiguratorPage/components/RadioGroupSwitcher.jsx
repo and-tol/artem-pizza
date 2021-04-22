@@ -55,9 +55,10 @@ export const RadioGroupSwitcher = ({ legend, options, register, name }) => {
           <Fragment key={option[1].slug}>
             <Input
               id={option[1].slug}
-              ref={register}
-              type='radio'
               name={name}
+              // ref={register}
+              {...register(`${name}`)}
+              type='radio'
               value={option[1].slug}
               hidden
             />

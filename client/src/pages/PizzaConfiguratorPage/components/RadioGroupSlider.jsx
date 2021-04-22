@@ -76,9 +76,10 @@ export const RadioGroupSlider = ({ register, legend, name, options }) => {
             <Fragment key={option[1].id}>
               <Input
                 id={option[1].slug}
-                ref={register}
-                type='radio'
                 name={name}
+                // ref={register}
+                {...register(`${name}`)}
+                type='radio'
                 value={option[1].slug}
                 hidden
               />
