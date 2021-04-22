@@ -1,3 +1,4 @@
+import React from 'react';
 import { Message, Validate, ValidationRule } from 'react-hook-form';
 
 export type NameAndPrice = { name: string; price: number };
@@ -35,7 +36,8 @@ export type RegisterOptions = Partial<{
   maxLength: ValidationRule<number | string>;
   minLength: ValidationRule<number | string>;
   pattern: ValidationRule<RegExp>;
-  validate: Validate | Record<string, Validate>;
+  // validate: Validate | Record<string, Validate>;
+  validate: ValidationRule<string>;
 }>;
 
 export type refType =
