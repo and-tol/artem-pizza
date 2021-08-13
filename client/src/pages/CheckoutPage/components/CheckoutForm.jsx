@@ -2,7 +2,6 @@ import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
@@ -167,7 +166,7 @@ const InputWrapper = styled.div`
     position: absolute;
     right: 20px;
     transform: translate3d(0, -50%, 0);
-    top: 50%;
+    top: 29px;
   }
 `;
 
@@ -178,13 +177,11 @@ const schema = yup.object().shape({
     .min(5, 'Слишком короткий адрес'),
   cardNumber: yup
     .number()
-    .transform((ov, cv) => (ov === '' ? undefined : cv))
     .required('Это обязательное поле')
-  // .min(12, 'Недостаточно цифр')
-  // .positive('Номер должен быть положительным числом')
-  .typeError('Номер должен быть числом')
-  // .integer('Номер не может содержать десятичную точку ')
-  ,
+    .min(12, 'Недостаточно цифр')
+    .positive('Номер должен быть положительным числом')
+    .typeError('Номер должен быть числом')
+    .integer('Номер не может содержать десятичную точку '),
   cardName: yup
     .string()
     .required('Это обязательное поле')
@@ -204,22 +201,19 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
   const { width: windowWidth } = useWindowDimensions();
 
   const {
-    control,
     register,
     handleSubmit,
     setValue,
     watch,
     formState,
-    formState: { errors, touched, isDirty },
+    formState: { errors, touchedFields, isDirty, isValid },
   } = useForm({
     mode: 'all',
     resolver: yupResolver(schema),
   });
 
-  // console.log('!!errors', !!errors.address);
-  // console.log('touched', touched);
-  // console.log('formState>>>', formState);
-  // console.log('control>>>', control);
+  console.log('touchedFields', touchedFields);
+  console.log('formState isValid>>>', formState.isValid);
 
   const сardNumber = watch('cardNumber');
   const { cardImageName, CardNumberValidation } = useValidCard(сardNumber);
@@ -273,8 +267,8 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                 id='address'
                 type='text'
                 placeholder='Введите адрес'
-                // invalid={!!errors.address && 'address'}
-                // valid={!errors.address && touched.address && 'address'}
+                invalid={!!errors.address && 'address'}
+                valid={!errors.address && touchedFields.address && 'address'}
               />
               <ErrorsMessage>{errors.address?.message}</ErrorsMessage>
             </label>
@@ -287,7 +281,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                   {...register('porch')}
                   id='porch'
                   type='tel'
-                  // valid={!errors.porch && touched.porch && 'porch'}
+                  // valid={!errors.porch && touchedFields.porch && 'porch'}
                 />
               </label>
               <label htmlFor='flow'>
@@ -298,7 +292,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                   {...register('flow')}
                   id='flow'
                   type='tel'
-                  // valid={!errors.flow && touched.flow && 'flow'}
+                  // valid={!errors.flow && touchedFields.flow && 'flow'}
                 />
               </label>
               <label htmlFor='flat'>
@@ -308,7 +302,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                   {...register('flat')}
                   id='flat'
                   type='tel'
-                  // valid={!errors.flat && touched.flat && 'flat'}
+                  // valid={!errors.flat && touchedFields.flat && 'flat'}
                 />
               </label>
             </AddressDetails>
@@ -326,10 +320,12 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                   placeholder='Номер карты'
                   onChange={handleNormalizeCardNumber}
                   // FIXME: нажимая кнопку ОПЛАТИТЬ, ошибка должна быть "Это обязательное поле"
-                  // invalid={!!errors.cardNumber && 'cardNumber'}
-                  // valid={
-                  //   !errors.cardNumber && touched.cardNumber && 'cardNumber'
-                  // }
+                  invalid={!!errors.cardNumber && 'cardNumber'}
+                  valid={
+                    !errors.cardNumber &&
+                    touchedFields.cardNumber &&
+                    'cardNumber'
+                  }
                 />
 
                 {!!CardNumberValidation.card?.type && (
@@ -349,7 +345,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                   id='year'
                   type='tel'
                   placeholder='MM/YYYY'
-                  // valid={!errors.year && touched.year && 'year'}
+                  // valid={!errors.year && touchedFields.year && 'year'}
                 />
               </label>
               <label htmlFor='CVV'>
@@ -371,8 +367,8 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
                 id='cardName'
                 type='text'
                 placeholder='Имя как на карте'
-                // invalid={!!errors.cardName && 'cardName'}
-                // valid={!errors.cardName && touched.cardName && 'cardName'}
+                invalid={!!errors.cardName && 'cardName'}
+                valid={!errors.cardName && touchedFields.cardName && 'cardName'}
               />
               <ErrorsMessage>{errors.cardName?.message}</ErrorsMessage>
             </label>
@@ -395,7 +391,7 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
             К оплате{' '}
             <span>{orderPrice + PIZZA_DATA_PRIMARY.delivery.price} руб.</span>
           </OrderPaymentSection>
-          {isDirty ? (
+          {isDirty && isValid ? (
             <CheckoutFormButton type='submit' onClick={onSubmit}>
               Оплатить {orderPrice + PIZZA_DATA_PRIMARY.delivery.price} руб.
             </CheckoutFormButton>
@@ -406,7 +402,6 @@ export const CheckoutForm = ({ pizza, ingredients }) => {
           )}
         </OrderPayment>
       </Form>
-      {/* <DevTool control={control} /> */}
     </Section>
   );
 };
