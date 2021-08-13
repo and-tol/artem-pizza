@@ -1,0 +1,43 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+# branch auth-firebase
+
+name: staging-auth-firebase.js CI
+
+on:
+  push:
+    branches: [ auth-firebase ]
+  pull_request:
+    branches: [ auth-firebase ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+      working-directory: ./client
+    - run: npm run build --if-present
+      working-directory: ./client
+    # - run: npm test
+
+    # - name: Deploy to Netlify
+    #   uses: netlify/actions/cli@master
+    #   env:
+    #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+    #     NETLIFY_SITE_ID: ${{ secrets.DEV_NETLIFY_SITE_ID }}
+    #   with:
+    #     args: deploy --dir=build --prod
+    #     secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+
