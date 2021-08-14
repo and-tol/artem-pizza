@@ -42,4 +42,4 @@ jobs:
 #         args: deploy --dir=build --functions=functions
 #         args: deploy --dir=site --functions=functions
 #         args: deploy --dir=build --prod
-#         secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+        secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
